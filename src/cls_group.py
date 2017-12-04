@@ -1,2 +1,2 @@
 
-cls_group_namelist=list(["infantry","knight"])
+cls_group_namelist=list(["Infantry","Knight"])
