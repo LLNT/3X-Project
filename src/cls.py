@@ -35,3 +35,5 @@ class Main:
         ability_limit["Cavalier"] = {"LV": 20, "MHP": 60, "STR": 20, "MGC": 5, "SPD": 20, "SKL": 20,
                                  "DEF": 20, "RES": 20, "LUK": 50, "BLD": 20, "MOV": 20, "HP": 120, "CRY": 20}
         self.cls_bank=ClsBank(typenamelist,weapon_ranks,cls_group,skills,ability_limit).cls_bank
+    def __init__(self,data):
+        self.cls_bank=ClsBank(data.cls_typenames,data.cls_weapon_rank,data.cls_clsgroup,data.cls_skills,data.cls_ability_limit).cls_bank

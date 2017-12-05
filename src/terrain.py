@@ -47,4 +47,6 @@ class Main:
         move_decay["Fort"] = {"Infantry": 1, "Knight": 1}
         move_decay["Throne"] = {"Infantry": 1, "Knight": 1}
         self.terrain_bank=TerrainBank(typenamelist,battle_enhance,move_decay).terrain_bank
+    def __init__(self,data):
+        self.terrain_bank=TerrainBank(data.terrain_typenames,data.terrain_battle_enhance,data.move_decay).terrain_bank
 
