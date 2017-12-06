@@ -16,3 +16,5 @@ class Main:
         self.cls_clsgroup=json.load(open(path+"cls_clsgroup.json","r"))
         self.cls_skills=json.load(open(path+"cls_skills.json","r"))
         self.cls_ability_limit=json.load(open(path+"cls_ability_limit.json","r"))
+        self.persondata=json.load(open(path+"person.json","r"))
+        self.pidlist=self.persondata.keys()
