@@ -1,0 +1,54 @@
+{
+  "1":
+  {
+    "Id": 1,
+    "Name": "Lyn",
+    "Cls":"Lord",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":15,
+      "STR":4,
+      "MGC":0,
+      "SPD":5,
+      "SKL":6,
+      "DEF":2,
+      "RES":0,
+      "LUK":14,
+      "BLD":7,
+      "MOV":5,
+      "HP":15,
+      "CRY":6
+    },
+    "Skills":
+    [
+
+    ]
+  },
+  "2":
+  {
+    "Id": 2,
+    "Name": "Kent",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":18,
+      "STR":6,
+      "MGC":0,
+      "SPD":4,
+      "SKL":2,
+      "DEF":4,
+      "RES":0,
+      "LUK":9,
+      "BLD":8,
+      "MOV":7,
+      "HP":24,
+      "CRY":12
+    },
+    "Skills":
+    [
+
+    ]
+  }
+}
