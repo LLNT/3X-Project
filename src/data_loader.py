@@ -1,10 +1,15 @@
 import os
+import platform
 import json
 class Main:
     def __init__(self):
+        ostype=platform.platform()
         path=os.getcwd()
         path=path[:-3]
-        path=path+"data\\"
+        if ostype[:7]=="Windows":
+            path=path+"data\\"
+        else:
+            path=path+"data/"
         print(path)
         self.terrain_typenames=json.load(open(path+"terrain_typenames.json","r"))
         self.cls_group_typenames=json.load(open(path+"cls_group_typenames.json","r"))
@@ -18,3 +23,4 @@ class Main:
         self.cls_ability_limit=json.load(open(path+"cls_ability_limit.json","r"))
         self.persondata=json.load(open(path+"person.json","r"))
         self.pidlist=self.persondata.keys()
+
