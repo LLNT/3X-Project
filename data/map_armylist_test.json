@@ -1,0 +1,15 @@
+{
+  "Name":"Test",
+  "Armies":[
+    {
+      "Name": "Lyn's Army",
+      "Member": [{"Id":"1","X":5,"Y":4}],
+      "Controller": 0
+    },
+    {
+      "Name": "Kent's Army",
+      "Member":[{"Id":"2","X":0,"Y":2}],
+      "Controller":1
+    }
+  ]
+}

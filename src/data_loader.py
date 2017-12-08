@@ -23,4 +23,6 @@ class Main:
         self.cls_ability_limit=json.load(open(path+"cls_ability_limit.json","r"))
         self.persondata=json.load(open(path+"person.json","r"))
         self.pidlist=self.persondata.keys()
+        self.terrain_map=json.load(open(path+"terrain_map_test.json","r"))
+        self.map_armylist=json.load(open(path+"map_armylist_test.json","r"))
 

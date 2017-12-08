@@ -1,0 +1,13 @@
+{
+  "Name":"Test",
+  "M":6,
+  "N":5,
+  "Map":[
+    ["Plain","Plain","Gate","Plain","Plain"],
+    ["Fort","Wood","Avenue","Avenue","Plain"],
+    ["Wood","River","Mountain","Avenue","Mountain"],
+    ["Wood","River","Grass","Plain","Mountain"],
+    ["Wood","Bridge","Plain","Plain","Plain"],
+    ["Village","River","Plain","Plain","Fort"]
+  ]
+}
