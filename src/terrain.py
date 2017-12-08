@@ -1,9 +1,11 @@
-
+from typing import Dict,List
 
 
 class Terrain:
     def __init__(self):
-        pass
+        self.typename=""   #type:str
+        self.enhance={}    #type:Dict[str,Dict[str,int]]
+        self.decay={}      #type:Dict[str,int]
     def __init__(self,typename,enhance,decay):
         self.typename=typename
         self.enhance=enhance#battle_enhance[self.typename]
@@ -11,7 +13,7 @@ class Terrain:
 
 class TerrainBank:
     def __init__(self):
-        pass
+        self.terrain_bank={} #type:Dict[str,Terrain]
     def __init__(self,typenamelist,enhance,decay):
         self.terrain_bank={}
         for typename in typenamelist:
@@ -20,7 +22,7 @@ class TerrainBank:
 
 class Main:
     def __init__(self):
-        pass
+        self.terrain_bank={} #type:Dict[str,Terrain]
     def __init__(self,data):
         self.terrain_bank=TerrainBank(data.terrain_typenames,data.terrain_battle_enhance,data.move_decay).terrain_bank
 

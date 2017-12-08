@@ -1,10 +1,13 @@
-from terrain import Main as Terrain
-from cls import Main as Cls
-from person import Main as Person
+from typing import Dict
+import terrain
+import cls
+import person
 class Main:
     def __init__(self):
-        pass
+        self.terrainBank={}                 #type:Dict[str,terrain.Terrain]
+        self.clsBank={}                     #type:Dict[str,cls.Cls]
+        self.personBank={}                  #type:Dict[str,person.Person]
     def __init__(self,data):
-        self.terrainBank=Terrain(data).terrain_bank
-        self.clsBank=Cls(data).cls_bank
-        self.personBank=Person(data).person_bank
+        self.terrainBank=terrain.Main(data).terrain_bank
+        self.clsBank=cls.Main(data).cls_bank
+        self.personBank=person.Main(data).person_bank

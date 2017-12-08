@@ -1,6 +1,11 @@
+from typing import Dict,List
 class Cls:
     def __init__(self):
-        pass
+        self.name=""                                              #type:str
+        self.weapon_rank={}                                       #type:Dict[str,int]
+        self.cls_group=""                                         #type:str
+        self.cls_skills=[]                                        #type:List[str]
+        self.ability_limit={}                                     #type:Dict[str,int]
     def __init__(self,name,weapon_rank,group,skills,ability_limit):
         self.name=name                                             #"Lord"
         self.weapon_rank=weapon_rank                               #{"Sword":1,"Lance":-65536",}
@@ -10,7 +15,7 @@ class Cls:
 
 class ClsBank:
     def __init__(self):
-        pass
+        self.cls_bank={} #type:Dict[str,Cls]
     def __init__(self,typenamelist,weapon_ranks,cls_group,skills,ability_limit):
         self.cls_bank={}
         for name in typenamelist:
@@ -19,6 +24,6 @@ class ClsBank:
 
 class Main:
     def __init__(self):
-        pass
+        self.cls_bank={}  #type:Dict[str,Cls]
     def __init__(self,data):
         self.cls_bank=ClsBank(data.cls_typenames,data.cls_weapon_rank,data.cls_clsgroup,data.cls_skills,data.cls_ability_limit).cls_bank
