@@ -19,4 +19,5 @@ print(global_vars.personBank["1"].ability)
 terrain_container_test=Terrain_Container(data.terrain_map,global_vars.terrainBank)
 person_container_test=Person_Container(data.map_armylist,global_vars.personBank)
 map1=map_controller.Main(terrain_container_test,person_container_test,global_vars)
+
 map1.drive_map()

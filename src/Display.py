@@ -1,9 +1,11 @@
 import cocos
 from cocos.sprite import Sprite
 from cocos.director import director
-from cocos.actions import MoveTo
-from data_loader import Main as Data
+from cocos.actions import MoveTo, Delay, sequence
+import move_range_person as mrp
+import numpy
 from global_vars import Main as Global
+from data_loader import Main as Data
 from terrain_container import Main as Terrain_Container
 from person_container import Main as Person_Container
 import map_controller
@@ -19,9 +21,9 @@ class Arena(cocos.layer.ColorLayer):
         global_vars = Global(data)
         terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)
         person_container_test = Person_Container(data.map_armylist, global_vars.personBank)
-        map1 = map_controller.Main(terrain_container_test, person_container_test, data)
-        self.w = terrain_container_test.N
-        self.h = terrain_container_test.M
+        map1 = map_controller.Main(terrain_container_test, person_container_test, global_vars)
+        self.w = terrain_container_test.M
+        self.h = terrain_container_test.N
 
         super(Arena, self).__init__(r=0,g=0,b=0,a=255,width=self.w*self.size,height=self.h*self.size)
         self.tiles = []
@@ -33,38 +35,68 @@ class Arena(cocos.layer.ColorLayer):
                 tl_x.append(tile)
             self.tiles.append(tl_x)
         self.repaint(map1)
+        self.map = map1
 
-    def move(self, id, x, y):
-        s = self.person[id]
-        mov = MoveTo((s.position[0], s.position[1]), 2) + MoveTo((x * self.size+self.size//2, y * self.size+self.size//2), 2)
+    def move(self, id, i, j):
+        obj = self.person[id]
+        print(obj)
+        mov = MoveTo(coordinate(i, j, self.size), 2)
+        obj.do(Delay(0.5)+ mov + cocos.actions.CallFunc(self.take_turn))
 
-        s.do(mov)
+
+    def take_turn(self): #according to the controller, take turn of next charactor
+        map = self.map
+        if map.controller == 1:
+            map.player_turn(self)
+        else:
+            map.ai_turn(self)
+
+    def next_round(self):
+        self.map.turn += 1
+        if self.map.turn > 6 :
+            director.pop()
+        else:
+            self.take_turn()
+
 
 
     def repaint(self, map_controller):
         position = map_controller.person_container.position
-        army = map_controller.person_container.army
+        controller = map_controller.person_container.controller
         self.person = {}
         for id in position:
-            (y, x) = position[id]
-            if army[id] == "Lyn's Army" :
+            (x, y) = position[id]
+            if controller[id] == 1 :
                 color = ORANGE
             else:
                 color = SKY_BLUE
-            self.person[id] = Ally(pos=(x * self.size+self.size//2, y * self.size+self.size//2), color=color, size=self.size)
+            self.person[id] = Ally(pos=coordinate(x, y, self.size), color=color, size=self.size)
             self.add(self.person[id])
-        self.move('1', 3, 3)
 
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
         i, j = coordinate_t(x, y, self.size)
-        print(i, j)
         if i in range(0, self.w) and j in range(0, self.h):
             i0, j0 = self.select
             self.tiles[i0][j0].color = self.origin_color
             self.origin_color = self.tiles[i][j].color
             self.tiles[i][j].color = LIGHT_PINK
             self.select = i, j
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        i, j = coordinate_t(x, y, self.size)
+        map = self.map
+        map.controller = 0
+        if i in range(0, self.w) and j in range(0, self.h):
+            map.person_container.position['2'] = i, j
+            map.person_container.movable['2'] = False
+
+            self.move('2', i, j)
+        else:
+            self.next_round()
+
+
+
 
 
 class Tile(Sprite):
@@ -85,6 +117,26 @@ class Ally(Sprite):
 
     def on_mouse_press(self, x, y, buttons, modfiers):
         print(x, y)
+
+class Check_state(Delay):
+    def start(self):
+        arena = self.target.parent     #type:Arena
+        map = arena.map
+        map.turn += 1
+        if map.turn <= 5:
+            if map.check_states():
+                self.target.do(sequence(MoveTo(coordinate(map.i, map.j, arena.size), 2), Check_state(1)))
+            else:
+                self.target.do(Check_state(1))
+        else:
+            print('gg')
+
+
+    def stop(self):
+        arena = self.target     #type:Arena
+        arena.is_event_handler = True
+
+
 
 if __name__ == '__main__':
     director.init(caption='3X')
