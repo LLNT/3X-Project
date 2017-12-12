@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import (QWidget, QToolTip,
     QPushButton, QApplication, QMessageBox)
 from PyQt5.QtGui import *
-
-from PyQt5.QtCore import QCoreApplication, Qt, QPropertyAnimation
+from PyQt5.QtCore import QCoreApplication, Qt, QPropertyAnimation, QPoint, QTimer
 import sys
 import PyQt5
 from global_vars import Main as Global
@@ -42,33 +41,40 @@ class Arena(QWidget):
         self.show()
         self.select = (-1, -1)
         self.on_mouse = (-1, -1)
-        self.setMouseTracking(True)
+        # self.setMouseTracking(True)
 
     def paintEvent(self, QPaintEvent):
         position = self.map.person_container.position
         controller = self.map.person_container.controller
-        painter = QPainter()
-        painter.begin(self)
-        painter.setRenderHint(QPainter.Antialiasing)
+        tiles = []
         for i in range(self.w):
+            til = []
             for j in range(self.h):
                 x, y = i * self.size, j * self.size
+                painter = QPainter()
+                painter.begin(self)
                 if (i, j) != self.select:
                     painter.setBrush(WHITE)
                 else:
                     painter.setBrush(PINK)
                 painter.drawEllipse(x, y, self.size, self.size)
-                print(painter)
+                til.append(painter)
+                painter.end()
+            tiles.append(til)
+        self.tiles = tiles
         self.person = {}
         for id in position:
             (x, y) = position[id]
+            painter = QPainter()
+            painter.begin(self)
             if controller[id] == 1:
                 painter.setBrush(BLUE)
             else:
                 painter.setBrush(ORANGE)
             painter.drawEllipse(x*self.size, y*self.size, self.size, self.size)
-        painter.end()
 
+            self.person[id] = painter
+            painter.end()
 
     def closeEvent(self, event):
         pass
@@ -80,8 +86,6 @@ class Arena(QWidget):
             event.accept()
         else:
             event.ignore()'''
-
-
 
     def mouseMoveEvent(self, QMouseEvent):
 
@@ -96,6 +100,11 @@ class Arena(QWidget):
         print(1)
 
     def mousePressEvent(self, QMouseEvent):
+        x, y = QMouseEvent.x(), QMouseEvent.y()
+        i, j = x // self.size, y // self.size
+        if (i, j) != self.select:
+            QTimer(self).start(5)
+            print(1)
         pass
 
 if __name__ == '__main__':
