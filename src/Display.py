@@ -2,8 +2,6 @@ import cocos
 from cocos.sprite import Sprite
 from cocos.director import director
 from cocos.actions import MoveTo, Delay, sequence
-import move_range_person as mrp
-import numpy
 from global_vars import Main as Global
 from data_loader import Main as Data
 from terrain_container import Main as Terrain_Container
