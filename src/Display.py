@@ -8,10 +8,14 @@ from terrain_container import Main as Terrain_Container
 from person_container import Main as Person_Container
 import map_controller
 from utility import *
+import pyglet
+import os
 class Arena(cocos.layer.ColorLayer):
     is_event_handler = True
 
     def __init__(self):
+        pyglet.resource.path = ['../img']
+        pyglet.resource.reindex()
         self.size = 80
         self.select = (0, 0)
         self.origin_color = WHITE
@@ -34,6 +38,11 @@ class Arena(cocos.layer.ColorLayer):
             self.tiles.append(tl_x)
         self.repaint(map1)
         self.map = map1
+
+    def move_per(self,id,i,j):
+        per = self.person[id]
+        mov = MoveTo(coordinate(i, j, self.size), 2)
+        obj.do(Delay(0.5) + mov + cocos.actions.CallFunc(self.take_turn))
 
     def move(self, id, i, j):
         obj = self.person[id]
@@ -99,7 +108,8 @@ class Arena(cocos.layer.ColorLayer):
 
 class Tile(Sprite):
     def __init__(self, size=50,pos=None):
-        super(Tile, self).__init__(image='img/circle.png')
+        path = 'circle.png'
+        super(Tile, self).__init__(image=path)
         self.scale = size/self.height
         self.color = (255, 255, 255)
         self.position = pos
@@ -108,7 +118,8 @@ class Tile(Sprite):
 
 class Ally(Sprite):
     def __init__(self, size=50,pos=None, color=(135, 206, 235)):
-        super(Ally, self).__init__(image='img/circle.png')
+        path = 'circle.png'
+        super(Ally, self).__init__(image=path)
         self.scale = size/self.height
         self.color = color
         self.position = pos
