@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import (QWidget, QToolTip,
     QPushButton, QApplication, QMessageBox)
 from PyQt5.QtGui import *
-from PyQt5.QtCore import QCoreApplication, Qt
+
+from PyQt5.QtCore import QCoreApplication, Qt, QPropertyAnimation
 import sys
 import PyQt5
 from global_vars import Main as Global
@@ -14,12 +15,14 @@ BLUE = QColor(70, 130, 180)
 WHITE = QColor(255, 255, 255)
 BLACK = QColor(0, 0, 0)
 PINK = QColor(255, 182, 193)
+ORANGE = QColor(255, 165, 0)
 
 class Arena(QWidget):
-    def __init__(self):
+    def __init__(self, size=80):
         super().__init__()
-
+        self.size = size
         self.initUI()
+
 
     def initUI(self):
         self.palette = QPalette()
@@ -33,20 +36,20 @@ class Arena(QWidget):
         global_vars = Global(data)
         terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)
         person_container_test = Person_Container(data.map_armylist, global_vars.personBank)
-        map1 = map_controller.Main(terrain_container_test, person_container_test, global_vars)
+        self.map = map_controller.Main(terrain_container_test, person_container_test, global_vars)
         self.w = terrain_container_test.M
         self.h = terrain_container_test.N
-        self.size = 80
         self.show()
         self.select = (-1, -1)
         self.on_mouse = (-1, -1)
         self.setMouseTracking(True)
 
     def paintEvent(self, QPaintEvent):
+        position = self.map.person_container.position
+        controller = self.map.person_container.controller
         painter = QPainter()
         painter.begin(self)
         painter.setRenderHint(QPainter.Antialiasing)
-
         for i in range(self.w):
             for j in range(self.h):
                 x, y = i * self.size, j * self.size
@@ -55,11 +58,16 @@ class Arena(QWidget):
                 else:
                     painter.setBrush(PINK)
                 painter.drawEllipse(x, y, self.size, self.size)
-
+                print(painter)
+        self.person = {}
+        for id in position:
+            (x, y) = position[id]
+            if controller[id] == 1:
+                painter.setBrush(BLUE)
+            else:
+                painter.setBrush(ORANGE)
+            painter.drawEllipse(x*self.size, y*self.size, self.size, self.size)
         painter.end()
-        self.painter = QPainter()
-        self.painter.begin(self)
-
 
 
     def closeEvent(self, event):
@@ -93,7 +101,7 @@ class Arena(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    w = Arena()
+    w = Arena(size=100)
     w.show()
 
     sys.exit(app.exec_())
