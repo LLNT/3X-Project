@@ -179,7 +179,8 @@ class Main:
                     pos_to_move=command[2]
                     self.person_container.position[person_to_move.pid]=pos_to_move
                     self.person_container.movable[person_to_move.pid]=False
-                    print(person_to_move.pid)
+
+
                 elif command_type=="E":
                     if self.controller==0:
                         self.reset_state(0)
@@ -208,10 +209,10 @@ class Main:
             self.person_container.movable[person_to_move.pid] = False
             arena.move(person_to_move.pid, pos_to_move[0], pos_to_move[1])
         elif command_type == "E":
-            self.reset_state(0)
-            self.controller = 1
-            print('player')
-            arena.next_round()
+            self.reset_state(1)
+            self.controller = 0
+            print('player phase')
+            arena.take_turn()
 
 
     def player_turn(self, arena):
