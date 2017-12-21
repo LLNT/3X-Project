@@ -10,7 +10,7 @@ class Main:
             path=path+"data\\"
         else:
             path=path+"data/"
-        print(path)
+        #print(path)
         self.terrain_typenames=json.load(open(path+"terrain_typenames.json","r"))
         self.cls_group_typenames=json.load(open(path+"cls_group_typenames.json","r"))
         self.battle_enhance_typenames=json.load(open(path+"battle_enhance_typenames.json","r"))
@@ -25,4 +25,6 @@ class Main:
         self.pidlist=self.persondata.keys()
         self.terrain_map=json.load(open(path+"terrain_map_test.json","r"))
         self.map_armylist=json.load(open(path+"map_armylist_test.json","r"))
+        self.item_type_list=json.load(open(path+"item_type_list.json","r"))
+        self.init_item_list=json.load(open(path+"init_item_list.json","r"))
 

@@ -19,5 +19,6 @@ print(global_vars.personBank["1"].ability)
 terrain_container_test=Terrain_Container(data.terrain_map,global_vars.terrainBank)
 person_container_test=Person_Container(data.map_armylist,global_vars.personBank)
 map1=map_controller.Main(terrain_container_test,person_container_test,global_vars)
-
+print(global_vars.itemtypeBank["Iron Lance"].ability_bonus)
+print(global_vars.itemBank[1].itemtype.weapontype)
 map1.drive_map()

@@ -1,0 +1,12 @@
+[
+  {
+    "Id":1,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":2,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  }
+]
