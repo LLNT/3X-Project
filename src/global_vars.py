@@ -19,7 +19,7 @@ class Main:
         self.clsBank=cls.Main(data).cls_bank
         self.itemtypeBank = itemtype.Main(data).itemtype_bank
         self.itemBank=item.Main(data,self.itemtypeBank).item_bank
-        self.personBank=person.Main(data).person_bank
+        self.personBank=person.Main(data,self.itemBank).person_bank
         self.cls_clsgroup=data.cls_clsgroup
         self.AIcontroller=ai_controller.AI_Controller()
 
