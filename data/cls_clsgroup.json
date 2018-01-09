@@ -1,4 +1,15 @@
 {
   "Lord":"Infantry",
-  "Cavalier":"Knight"
+  "Swordman":"Infantry",
+  "Lancer":"Infantry",
+  "Warrior":"Infantry", 
+  "Archer":"Infantry",
+  "Cavalier":"Knight",
+  "Nomad":"Knight",
+  "Pegasus Rider":"Pegasus",
+  "Dragon Rider":"Dragoon" ,
+  "Magician":"Infantry",
+  "Summoner":"Infantry",
+  "Rhymist":"Infantry",
+  "Monk":"Infantry" 
 }
