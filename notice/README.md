@@ -2,7 +2,7 @@
 ##Discussion and Ideas
 
 - *YYYY/MM/DD-hh:mm* <br> Your content <br> Signature
-- *2018/01/17-21:23* **MEETING**<br>CXY: Read the whole abstract and find logistic ambiguouty and the way to balance female & male characters. LXD: Finish the second character(Tanya). LC: Try FE8 and make out the detailed script of one chapter. NXZ: Program skills and battle. <br> Niu Xingzhi
+- *2018/01/17-21:23* **MEETING**<br>CXY: Read the whole abstract and find logistic ambiguouty and the way to balance female & male characters. LXD: Finish the second character(Tanya). LC: Try FE8 and make out the detailed script of one chapter. NXZ: Program skills and battle. <br>Add a female summonner. Advanced class branches.<br> Niu Xingzhi
 - *2018/01/12-21:42* **MEETING**<br>ALL: Read the abstract. LXD: Continue on character sketch. CXY: Fix the display with thread and mutex. LC: Thinking about how to add female characters and branch stories. NXY: Detail data for enemy characters. <br> Niu Xingzhi
 - *2017/12/29-21:04* **MEETING**<br>LXD: Finished a sketch. Proceed another. CXY: Seperate logic and interface. LC: Read plan B. NXZ: complete plan B. <br> Chen Xinyun
 - *2017/12/26-21:18* **MEETING**<br>LXD: To correct, add more class groups. Separate classes like Magician from Infantry.<br> Niu Xingzhi
