@@ -198,7 +198,6 @@ class Main:
 
 
     def ai_turn(self, arena):
-        arena.is_event_handler = False
         command = self.send_mapstate()
         print(command)
         command_type = command[0]

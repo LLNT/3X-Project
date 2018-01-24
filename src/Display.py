@@ -78,9 +78,6 @@ class Arena(cocos.layer.ColorLayer):
             print('enemy phase')
             self.take_turn()
 
-
-
-
     def repaint(self, map_controller):
         position = map_controller.person_container.position
         controller = map_controller.person_container.controller
@@ -110,23 +107,20 @@ class Arena(cocos.layer.ColorLayer):
 
 
     def on_mouse_press(self, x, y, buttons, modifiers):
-        i, j = coordinate_t(x, y, self.size)
-        map = self.map
-        if self.end_turn.color == list(GOLD):
-            map.controller = 1
-            map.reset_state(0)
-            self.next_round()
-        else:
-            if i in range(0, self.w) and j in range(0, self.h):
-                if map.person_container.movable['1']:
-                    map.person_container.position['1'] = i, j
-                    map.person_container.movable['1'] = False
-                    self.move('1', i, j)
-
-
-
-
-
+        if self.is_event_handler:
+            i, j = coordinate_t(x, y, self.size)
+            map = self.map
+            if self.end_turn.color == list(GOLD):
+                map.controller = 1
+                map.reset_state(0)
+                self.is_event_handler = False
+                self.next_round()
+            else:
+                if i in range(0, self.w) and j in range(0, self.h):
+                    if map.person_container.movable['1']:
+                        map.person_container.position['1'] = i, j
+                        map.person_container.movable['1'] = False
+                        self.move('1', i, j)
 
 class Tile(Sprite):
     def __init__(self, size=50,pos=None):
