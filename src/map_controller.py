@@ -171,28 +171,24 @@ class Main:
         ally = []
         enemy = []
         for p in self.person_container.people:
-            if self.person_container.controller[p.pid] == 0:
-                if self.person_container.movable[p.pid]:
-                    unstable = []
-                    uncross = []
-                    pos = self.person_container.position[p.pid]
-                    mov = p.ability["MOV"]
-                    for other in self.person_container.people:
-                        if not (p == other):
-                            if self.person_container.controller[other.pid] == 0:
-                                unstable.append(self.person_container.position[other.pid])
-                            elif self.person_container.controller[other.pid] == 1:
-                                uncross.append(self.person_container.position[other.pid])
-                            else:
-                                unstable.append(self.person_container.position[other.pid])
-                    movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
-                    for i in range(self.terrain_container.M):
-                        for j in range(self.terrain_container.N):
-                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-                    dstlist = list(move_range_person.calc_move(unstable, uncross, movmap, pos, mov))
-                    valid[p]=dstlist
-                else:
-                    invalid.append((p, [self.person_container.position[p.pid]]))
+            unstable = []
+            uncross = []
+            pos = self.person_container.position[p.pid]
+            mov = p.ability["MOV"]
+            for other in self.person_container.people:
+                if not (p == other):
+                    if self.person_container.controller[other.pid] == 0:
+                        unstable.append(self.person_container.position[other.pid])
+                    elif self.person_container.controller[other.pid] == 1:
+                        uncross.append(self.person_container.position[other.pid])
+                    else:
+                        unstable.append(self.person_container.position[other.pid])
+            movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
+            for i in range(self.terrain_container.M):
+                for j in range(self.terrain_container.N):
+                    movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+            dstlist = list(move_range_person.calc_move(unstable, uncross, movmap, pos, mov))
+            valid[p]=dstlist
         return valid
 
     def drive_map(self):

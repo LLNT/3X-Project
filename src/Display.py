@@ -1,11 +1,12 @@
 import cocos
 from cocos.sprite import Sprite
 from cocos.director import director
-from cocos.actions import MoveTo, Delay, sequence
+from cocos.actions import MoveTo, Delay, sequence, CallFunc
 from global_vars import Main as Global
 from data_loader import Main as Data
 from terrain_container import Main as Terrain_Container
 from person_container import Main as Person_Container
+from person import Person
 import map_controller
 from utility import *
 import pyglet
@@ -63,7 +64,7 @@ class Arena(cocos.layer.ColorLayer):
         obj = self.person[person.pid]
         self.map2per[(i, j)] = person
         mov = MoveTo(coordinate(i, j, self.size), 2)
-        obj.do(Delay(0.5)+ mov + cocos.actions.CallFunc(self.clear_map) + cocos.actions.CallFunc(self.take_turn))
+        obj.do(Delay(0.5)+ mov  + CallFunc(self.mark_role) + CallFunc(self.clear_map)+ CallFunc(self.take_turn))
 
 
     def take_turn(self): #according to the controller, take turn of next charactor
@@ -73,10 +74,23 @@ class Arena(cocos.layer.ColorLayer):
         else:
             map.ai_turn(self)
 
+    def mark_role(self):
+        if self.select is not None: #选中的是自己角色
+            id = self.select.pid
+            self.person[id].color = OLIVE
+
+
     def next_round(self):
         self.map.turn += 1
         self.text.element.text = 'ROUND '+str(self.map.turn)
         self.map.controller = 1
+
+        for p in self.person:
+            if self.map.person_container.controller[p] == 1:
+                self.person[p].color = ORANGE
+            else:
+                self.person[p].color = SKY_BLUE
+
         if self.map.turn > 6 :
             director.pop()
         else:
@@ -96,7 +110,7 @@ class Arena(cocos.layer.ColorLayer):
                 color = ORANGE
             else:
                 color = SKY_BLUE
-                self.map2per[(x, y)] = p
+            self.map2per[(x, y)] = p
             self.person[id] = Ally(pos=coordinate(x, y, self.size), color=color, size=self.size)
             self.add(self.person[id])
 
@@ -112,7 +126,10 @@ class Arena(cocos.layer.ColorLayer):
             if self.mouse_select is not None: #之前有 则先修改先前的颜色
                 i0, j0 = self.mouse_select
                 if (i0, j0) in self.highlight:
-                    self.tiles[i0][j0].color = STEEL_BLUE
+                    if self.state == 1:
+                        self.tiles[i0][j0].color = STEEL_BLUE
+                    elif self.state == 2:
+                        self.tiles[i0][j0].color = CORAL
                 else:
                     self.tiles[i0][j0].color = WHITE
             if (i, j) in self.highlight:
@@ -128,7 +145,10 @@ class Arena(cocos.layer.ColorLayer):
             i, j = coordinate_t(x, y, self.size)
             map = self.map
             valid = map.move_range()
-            if buttons == 1:
+            if self.state == 2:  # 选中一个敌军 不管如何都是clear
+                self.clear_map()
+
+            elif buttons == 1:
                 if self.end_turn.color == list(GOLD):
                     map.controller = 1
                     map.reset_state(0)
@@ -140,15 +160,23 @@ class Arena(cocos.layer.ColorLayer):
                     # 现在只有一个人
 
                     if (i, j) in self.map2per.keys(): #选中的是玩家角色
-                        select = self.map2per[(i, j)]
+                        select = self.map2per[(i, j)] # type:Person
                         if select in valid.keys():
                             # 显示移动范围
-                            self.select = select
+
+                            ctl = map.person_container.controller[select.pid]
+                            if ctl == 0:    #选中友军
+                                color = STEEL_BLUE
+                                self.select = select
+                                self.state = 1
+                            elif ctl == 1:
+                                color = CORAL
+                                self.state = 2
                             for x0, y0 in valid[select]:
-                                self.tiles[x0][y0].color = STEEL_BLUE
-                            self.tiles[i][j].color = STEEL_BLUE
+                                self.tiles[x0][y0].color = color
+                            self.tiles[i][j].color = color
                             self.highlight = valid[select]
-                            self.state = 1
+
                         else:
                             # 已经移动或其他原因
                             pass
@@ -156,9 +184,12 @@ class Arena(cocos.layer.ColorLayer):
                         # 显示其他信息，不处理
                         return
 
-                elif self.state == 1:  # 已经选中一个人，即select有人
+                elif self.state == 1:  # 已经选中一个友方的人
+                    id = self.select.pid
+                    if not map.person_container.movable[id]: # 该角色已行动完成
+                        self.clear_map()
+
                     if (i, j) in self.highlight:
-                        id = self.select.pid
                         map.person_container.position[id] = i, j
                         map.person_container.movable[id] = False
                         self.move(self.select, i, j)
@@ -166,6 +197,7 @@ class Arena(cocos.layer.ColorLayer):
                         # 显示移动确定选项
                     else:
                         self.clear_map()
+
             elif  buttons == 4:
                 if self.state == 1: # 已经选中一个人，改操作为取消
                     self.clear_map()
@@ -195,6 +227,7 @@ class Arena(cocos.layer.ColorLayer):
             for i, j in self.highlight:
                 self.tiles[i][j].color = WHITE
         self.highlight = set()
+        self.select = None
 
 
 class Tile(Sprite):
