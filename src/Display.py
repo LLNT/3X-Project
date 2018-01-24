@@ -21,7 +21,8 @@ class Arena(cocos.layer.ColorLayer):
         pyglet.resource.path = ['../img']
         pyglet.resource.reindex()
         self.size = 80
-        self.select = (0, 0)
+        self.select = None #当前选中的角色
+        self.state = 0 #什么状态都不是
         self.origin_color = WHITE
         data = Data()
         global_vars = Global(data)
@@ -54,12 +55,15 @@ class Arena(cocos.layer.ColorLayer):
         self.add(self.end_turn)
         self.add(cocos.text.RichLabel(text='END', position=(520, 190), font_size=30))
 
+        self.highlight = set()
+        self.mouse_select = None
         self.next_round()
 
-    def move(self, id, i, j):
-        obj = self.person[id]
+    def move(self, person, i, j):
+        obj = self.person[person.pid]
+        self.map2per[(i, j)] = person
         mov = MoveTo(coordinate(i, j, self.size), 2)
-        obj.do(Delay(0.5)+ mov + cocos.actions.CallFunc(self.take_turn))
+        obj.do(Delay(0.5)+ mov + cocos.actions.CallFunc(self.clear_map) + cocos.actions.CallFunc(self.take_turn))
 
 
     def take_turn(self): #according to the controller, take turn of next charactor
@@ -72,6 +76,7 @@ class Arena(cocos.layer.ColorLayer):
     def next_round(self):
         self.map.turn += 1
         self.text.element.text = 'ROUND '+str(self.map.turn)
+        self.map.controller = 1
         if self.map.turn > 6 :
             director.pop()
         else:
@@ -81,35 +86,95 @@ class Arena(cocos.layer.ColorLayer):
     def repaint(self, map_controller):
         position = map_controller.person_container.position
         controller = map_controller.person_container.controller
+        people = map_controller.person_container.people
         self.person = {}
-        for id in position:
+        self.map2per = {}
+        for p in people:
+            id = p.pid
             (x, y) = position[id]
             if controller[id] == 1 :
                 color = ORANGE
             else:
                 color = SKY_BLUE
+                self.map2per[(x, y)] = p
             self.person[id] = Ally(pos=coordinate(x, y, self.size), color=color, size=self.size)
             self.add(self.person[id])
 
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
+
         i, j = coordinate_t(x, y, self.size)
         if (x-560)**2 + (y-200)**2 < 80**2:
             self.end_turn.color = GOLD
         else:
             self.end_turn.color = MAROON
         if i in range(0, self.w) and j in range(0, self.h):
-            i0, j0 = self.select
-            self.tiles[i0][j0].color = self.origin_color
-            self.origin_color = self.tiles[i][j].color
-            self.tiles[i][j].color = LIGHT_PINK
-            self.select = i, j
+            if self.mouse_select is not None: #之前有 则先修改先前的颜色
+                i0, j0 = self.mouse_select
+                if (i0, j0) in self.highlight:
+                    self.tiles[i0][j0].color = STEEL_BLUE
+                else:
+                    self.tiles[i0][j0].color = WHITE
+            if (i, j) in self.highlight:
+                self.tiles[i][j].color = VIOLET
+            else:
+                self.tiles[i][j].color = LIGHT_PINK
+            self.mouse_select = i, j
 
+        pass
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if self.is_event_handler:
             i, j = coordinate_t(x, y, self.size)
             map = self.map
+            valid = map.move_range()
+            if buttons == 1:
+                if self.end_turn.color == list(GOLD):
+                    map.controller = 1
+                    map.reset_state(0)
+                    self.is_event_handler = False
+                    self.clear_map()
+                    self.next_round()
+                    return
+                if self.state == 0: #谁都没被选中，判断点击位置是否是人，标准状态
+                    # 现在只有一个人
+
+                    if (i, j) in self.map2per.keys(): #选中的是玩家角色
+                        select = self.map2per[(i, j)]
+                        if select in valid.keys():
+                            # 显示移动范围
+                            self.select = select
+                            for x0, y0 in valid[select]:
+                                self.tiles[x0][y0].color = STEEL_BLUE
+                            self.tiles[i][j].color = STEEL_BLUE
+                            self.highlight = valid[select]
+                            self.state = 1
+                        else:
+                            # 已经移动或其他原因
+                            pass
+                    else:
+                        # 显示其他信息，不处理
+                        return
+
+                elif self.state == 1:  # 已经选中一个人，即select有人
+                    if (i, j) in self.highlight:
+                        id = self.select.pid
+                        map.person_container.position[id] = i, j
+                        map.person_container.movable[id] = False
+                        self.move(self.select, i, j)
+
+                        # 显示移动确定选项
+                    else:
+                        self.clear_map()
+            elif  buttons == 4:
+                if self.state == 1: # 已经选中一个人，改操作为取消
+                    self.clear_map()
+                else:
+                    pass
+                pass
+            '''
+            
+
             if self.end_turn.color == list(GOLD):
                 map.controller = 1
                 map.reset_state(0)
@@ -122,6 +187,16 @@ class Arena(cocos.layer.ColorLayer):
                         map.person_container.movable['1'] = False
                         self.move('1', i, j)
 
+            '''
+
+    def clear_map(self):
+        self.state = 0
+        if self.highlight is not None:
+            for i, j in self.highlight:
+                self.tiles[i][j].color = WHITE
+        self.highlight = set()
+
+
 class Tile(Sprite):
     def __init__(self, size=50,pos=None):
         path = 'ring.png'
@@ -131,6 +206,7 @@ class Tile(Sprite):
         self.position = pos
 
 class Ally(Sprite):
+    select = False
     def __init__(self, size=50,pos=None, color=(135, 206, 235)):
         path = 'ring.png'
         super(Ally, self).__init__(image=path)
