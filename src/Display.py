@@ -12,6 +12,7 @@ from utility import *
 import pyglet
 from person_info import Info
 from battle_scene import Battlescene
+from menu import Menu
 
 def test_print(self):
     print('hello')
@@ -25,7 +26,7 @@ class Arena(cocos.layer.ColorLayer):
         pyglet.resource.reindex()
         self.size = 80
         self.select = None #当前选中的角色
-        self.state = 0 # 0：默认 什么都没选中； 1：选中一个友军 左击移动右击取消 2：选中一个敌军 任何操作都取消 3： 正在显示某个人的信息 任何操作返回
+        self.state = 'none' # 0：默认 什么都没选中； 1：选中一个友军 左击移动右击取消 2：选中一个敌军 任何操作都取消 3： 正在显示某个人的信息 任何操作返回
         self.origin_color = WHITE
         data = Data()
         global_vars = Global(data)
@@ -63,7 +64,7 @@ class Arena(cocos.layer.ColorLayer):
         self.highlight = set()
         self.mouse_select = None
         self.add(self.info)
-
+        self.mapstate = self.map.send_mapstate()
         self.next_round()
 
     def move(self, person, i, j):
@@ -71,6 +72,14 @@ class Arena(cocos.layer.ColorLayer):
         self.map2per[(i, j)] = person
         mov = MoveTo(coordinate(i, j, self.size), 2)
         obj.do(Delay(0.5)+ mov  + CallFunc(self.mark_role) + CallFunc(self.clear_map)+ CallFunc(self.take_turn))
+
+    def sequential_move(self, person, dst): #传入前先修改位置
+        obj = self.person[person.pid]
+        self.map2per[dst[-1]] = person
+        action = Delay(0.5)
+        for x,y in dst:
+            action = action + MoveTo(coordinate(x, y, self.size), 0.5)
+        obj.do(action + CallFunc(self.mark_role) + CallFunc(self.clear_map)+ CallFunc(self.take_turn))
 
 
     def take_turn(self): #according to the controller, take turn of next charactor
@@ -84,13 +93,13 @@ class Arena(cocos.layer.ColorLayer):
         if self.select is not None: #选中的是自己角色
             id = self.select.pid
             self.person[id].color = OLIVE
-
+            self.mapstate = self.map.send_mapstate()
 
     def next_round(self):
         self.map.turn += 1
         self.text.element.text = 'ROUND '+str(self.map.turn)
         self.map.controller = 0
-
+        self.mapstate = self.map.send_mapstate()
         for p in self.person:
             if self.map.person_container.controller[p] == 1:
                 self.person[p].color = ORANGE
@@ -131,9 +140,9 @@ class Arena(cocos.layer.ColorLayer):
             if self.mouse_select is not None: #之前有 则先修改先前的颜色
                 i0, j0 = self.mouse_select
                 if (i0, j0) in self.highlight:
-                    if self.state == 1:
+                    if self.state == 'valid_select':
                         self.tiles[i0][j0].color = STEEL_BLUE
-                    elif self.state == 2:
+                    elif self.state == 'enemy_select':
                         self.tiles[i0][j0].color = CORAL
                 else:
                     self.tiles[i0][j0].color = WHITE
@@ -149,70 +158,75 @@ class Arena(cocos.layer.ColorLayer):
         if self.is_event_handler:
             i, j = coordinate_t(x, y, self.size)
             map = self.map
-            valid = map.move_range()
-            if self.state == 3: #显示信息界面 任何操作都返回
+            valid, invalid, ally, enemy = self.mapstate
+            if self.state == 'info': #显示信息界面 任何操作都返回
                 self.info.info_clear()
                 self.clear_map()
-            elif self.state == 2: #选中一个敌军 任何操作都返回
+            elif self.state == 'invalid_select' or self.state == 'enemy_select' \
+                    or self.state == 'ally_select': #选中一个敌军或友军 任何操作都返回
                 self.clear_map()
             else: #其他情况 进行判断左击或右击
                 if buttons == 1:
-                    if self.end_turn.color == list(GOLD):
+                    if self.end_turn.color == list(GOLD): #判断是否结束回合
                         map.controller = 1
                         map.reset_state(0)
                         self.is_event_handler = False
                         self.clear_map()
                         self.take_turn()
                         return
-                    if self.state == 0: #谁都没被选中，判断点击位置是否是人，标准状态
+                    if self.state == 'none': #谁都没被选中，判断点击位置是否是人，标准状态
                         # 现在只有一个人
                         if (i, j) in self.map2per.keys(): #选中的是玩家角色
                             select = self.map2per[(i, j)] # type:Person
-                            if select in valid.keys():
+                            pid = select.pid
+                            if pid in valid.keys(): #选中的是可移动角色
                                 # 显示移动范围
-                                ctl = map.person_container.controller[select.pid]
-                                if ctl == 0:    #选中友军
-                                    color = STEEL_BLUE
-                                    self.select = select
-                                    self.state = 1
-                                elif ctl == 1:
-                                    color = CORAL
-                                    self.state = 2
-                                for x0, y0 in valid[select]:
-                                    self.tiles[x0][y0].color = color
-                                self.tiles[i][j].color = color
-                                self.highlight = valid[select]
+                                self.select = select
+                                self.state = 'valid_select'
+                                color = STEEL_BLUE
+                                area = valid[pid]
 
+                            elif pid in invalid.keys(): #选中的是已行动的本方角色
+                                self.state = 'invalid_select'
+
+                            elif pid in enemy.keys():
+                                self.state = 'enemy_select'
+                                color = CORAL
+                                area = enemy[pid]
+                            elif pid in ally.keys():
+                                self.state = 'ally_select'
                             else:
                                 # 已经移动或其他原因
                                 pass
+                            self.highlighting(area, color)
                         else:
                             # 显示其他信息，不处理
                             return
 
-                    elif self.state == 1:  # 已经选中一个友方的人
+                    elif self.state == 'valid_select':  # 已经选中一个可移动的人
                         id = self.select.pid
-                        if not map.person_container.movable[id]: # 该角色已行动完成
-                            self.clear_map()
-                            return
 
                         if (i, j) in self.highlight:
+                            # self.state = 'menu_display'
+                            # self.add(Menu(i, j))
+
                             map.person_container.position[id] = i, j
                             map.person_container.movable[id] = False
+                            dst = valid[id][(i,j)][1]
                             self.is_event_handler = False
-                            self.move(self.select, i, j)
-
+                            # self.move(self.select, i, j)
+                            self.sequential_move(self.select, dst)
                             # 显示移动确定选项
                         else:
                             self.clear_map()
 
                 elif  buttons == 4: #右击
-                    if self.state == 1: # 已经选中一个人，改操作为取消
+                    if self.state == 'valid_select': # 已经选中一个人，改操作为取消
                         self.clear_map()
-                    elif self.state == 0: # 谁都没选中 显示选中者的信息
+                    elif self.state == 'none': # 谁都没选中 显示选中者的信息
                         if (i, j) in self.map2per.keys(): #选中的是玩家角色
                             select = self.map2per[(i, j)] # type:Person
-                            self.state = 3 # 选中信息的界面状态
+                            self.state = 'info' # 选中信息的界面状态
                             self.info.info_display(select)
                         else:
                             pass # 显示地图信息？
@@ -236,11 +250,16 @@ class Arena(cocos.layer.ColorLayer):
 
             '''
 
+    def highlighting(self, area, color):
+        for x0, y0 in area:
+            self.tiles[x0][y0].color = color
+        self.highlight = area
+
     def exit(self, scene):
         director.push(scene)
 
     def clear_map(self):
-        self.state = 0
+        self.state = 'none'
         if self.highlight is not None:
             for i, j in self.highlight:
                 self.tiles[i][j].color = WHITE
