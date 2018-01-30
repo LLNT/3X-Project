@@ -15,4 +15,5 @@ class AI_Controller:
         person_to_move=tomove[0]
         dst_to_move_list=tomove[1]
         dst_to_move=random.choice(list(dst_to_move_list.keys()))
-        return ["M",person_to_move,dst_to_move]
+        track_to_move=dst_to_move_list[dst_to_move][1]
+        return ["M",person_to_move,dst_to_move,track_to_move]
