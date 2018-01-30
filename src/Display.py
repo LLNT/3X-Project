@@ -10,6 +10,7 @@ from person import Person
 import map_controller
 from utility import *
 import pyglet
+from person_info import Info
 
 def test_print(self):
     print('hello')
@@ -23,7 +24,7 @@ class Arena(cocos.layer.ColorLayer):
         pyglet.resource.reindex()
         self.size = 80
         self.select = None #当前选中的角色
-        self.state = 0 #什么状态都不是
+        self.state = 0 # 0：默认 什么都没选中； 1：选中一个友军 左击移动右击取消 2：选中一个敌军 任何操作都取消 3： 正在显示某个人的信息 任何操作返回
         self.origin_color = WHITE
         data = Data()
         global_vars = Global(data)
@@ -34,6 +35,8 @@ class Arena(cocos.layer.ColorLayer):
         self.h = terrain_container_test.N
 
         super(Arena, self).__init__(r=0,g=0,b=0,a=255,width=self.w*self.size,height=self.h*self.size)
+        self.info = Info()
+
         self.tiles = []
         for x in range(self.w):
             tl_x = []
@@ -58,6 +61,8 @@ class Arena(cocos.layer.ColorLayer):
 
         self.highlight = set()
         self.mouse_select = None
+        self.add(self.info)
+
         self.next_round()
 
     def move(self, person, i, j):
@@ -145,65 +150,73 @@ class Arena(cocos.layer.ColorLayer):
             i, j = coordinate_t(x, y, self.size)
             map = self.map
             valid = map.move_range()
-            if self.state == 2:  # 选中一个敌军 不管如何都是clear
+            if self.state == 3: #显示信息界面 任何操作都返回
+                self.info.info_clear()
                 self.clear_map()
-
-            elif buttons == 1:
-                if self.end_turn.color == list(GOLD):
-                    map.controller = 1
-                    map.reset_state(0)
-                    self.is_event_handler = False
-                    self.clear_map()
-                    self.next_round()
-                    return
-                if self.state == 0: #谁都没被选中，判断点击位置是否是人，标准状态
-                    # 现在只有一个人
-
-                    if (i, j) in self.map2per.keys(): #选中的是玩家角色
-                        select = self.map2per[(i, j)] # type:Person
-                        if select in valid.keys():
-                            # 显示移动范围
-
-                            ctl = map.person_container.controller[select.pid]
-                            if ctl == 0:    #选中友军
-                                color = STEEL_BLUE
-                                self.select = select
-                                self.state = 1
-                            elif ctl == 1:
-                                color = CORAL
-                                self.state = 2
-                            for x0, y0 in valid[select]:
-                                self.tiles[x0][y0].color = color
-                            self.tiles[i][j].color = color
-                            self.highlight = valid[select]
-
-                        else:
-                            # 已经移动或其他原因
-                            pass
-                    else:
-                        # 显示其他信息，不处理
+            elif self.state == 2: #选中一个敌军 任何操作都返回
+                self.clear_map()
+            else: #其他情况 进行判断左击或右击
+                if buttons == 1:
+                    if self.end_turn.color == list(GOLD):
+                        map.controller = 1
+                        map.reset_state(0)
+                        self.is_event_handler = False
+                        self.clear_map()
+                        self.next_round()
                         return
+                    if self.state == 0: #谁都没被选中，判断点击位置是否是人，标准状态
+                        # 现在只有一个人
+                        if (i, j) in self.map2per.keys(): #选中的是玩家角色
+                            select = self.map2per[(i, j)] # type:Person
+                            if select in valid.keys():
+                                # 显示移动范围
+                                ctl = map.person_container.controller[select.pid]
+                                if ctl == 0:    #选中友军
+                                    color = STEEL_BLUE
+                                    self.select = select
+                                    self.state = 1
+                                elif ctl == 1:
+                                    color = CORAL
+                                    self.state = 2
+                                for x0, y0 in valid[select]:
+                                    self.tiles[x0][y0].color = color
+                                self.tiles[i][j].color = color
+                                self.highlight = valid[select]
 
-                elif self.state == 1:  # 已经选中一个友方的人
-                    id = self.select.pid
-                    if not map.person_container.movable[id]: # 该角色已行动完成
+                            else:
+                                # 已经移动或其他原因
+                                pass
+                        else:
+                            # 显示其他信息，不处理
+                            return
+
+                    elif self.state == 1:  # 已经选中一个友方的人
+                        id = self.select.pid
+                        if not map.person_container.movable[id]: # 该角色已行动完成
+                            self.clear_map()
+
+                        if (i, j) in self.highlight:
+                            map.person_container.position[id] = i, j
+                            map.person_container.movable[id] = False
+                            self.move(self.select, i, j)
+
+                            # 显示移动确定选项
+                        else:
+                            self.clear_map()
+
+                elif  buttons == 4: #右击
+                    if self.state == 1: # 已经选中一个人，改操作为取消
                         self.clear_map()
-
-                    if (i, j) in self.highlight:
-                        map.person_container.position[id] = i, j
-                        map.person_container.movable[id] = False
-                        self.move(self.select, i, j)
-
-                        # 显示移动确定选项
+                    elif self.state == 0: # 谁都没选中 显示选中者的信息
+                        if (i, j) in self.map2per.keys(): #选中的是玩家角色
+                            select = self.map2per[(i, j)] # type:Person
+                            self.state = 3 # 选中信息的界面状态
+                            self.info.info_display(select)
+                        else:
+                            pass # 显示地图信息？
                     else:
-                        self.clear_map()
-
-            elif  buttons == 4:
-                if self.state == 1: # 已经选中一个人，改操作为取消
-                    self.clear_map()
-                else:
+                        pass
                     pass
-                pass
             '''
             
 

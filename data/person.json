@@ -20,6 +20,7 @@
       "HP":15,
       "CRY":6
     },
+    "Picture":"lin.png",
     "Skills":
     [
 
@@ -34,7 +35,7 @@
     "Ability":
     {
       "LV":1,
-      "MHP":18,
+      "MHP":24,
       "STR":6,
       "MGC":0,
       "SPD":4,
@@ -49,8 +50,8 @@
     },
     "Skills":
     [
-
     ],
+    "Picture":"kent.png",
     "Init_item":[2]
   }
 }

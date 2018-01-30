@@ -12,61 +12,71 @@ def calc_move(unstable,uncross,mov_map,pos,mov):
     #mov = 10
     #unstable=set([(1,2),(5,6)])
     #uncross=set([(4,5),(2,2)])
-    wait = {}
-    dst = {}
-    wait[pos] = mov
+    wait={}
+    dst={}
     (M,N)=mov_map.shape
+    wait[pos]=(mov,[pos,])
     for item in uncross:
         mov_map[item]=255
-    while len(wait) > 0:
-        (tpos, r) = max(wait.items(), key=lambda x: x[1])
-        dst[tpos] = r
+    while len(wait)>0:
+        (tpos,movtuple)=max(wait.items(),key=lambda x:x[1][0])
+        r=movtuple[0]
+        track=movtuple[1]
+        dst[tpos]=(r,track)
         wait.pop(tpos)
-        if tpos[0] > 0:
-            npos = (tpos[0] - 1, tpos[1])
-            if not (npos in dst):
-                tr = r - mov_map[npos]
-                if (tr >= 0):
+        if tpos[0]>0:
+            npos=(tpos[0]-1,tpos[1])
+            if not(npos in dst):
+                tr=r-mov_map[npos]
+                newtrack=track.copy()
+                newtrack.append(npos)
+                if (tr>=0):
                     if npos in wait:
-                        r0 = wait[npos]
-                        if tr > r0:
-                            wait[npos] = tr
+                        r0=wait[npos][0]
+                        if tr>r0:
+                            wait[npos]=(tr,newtrack)
                     else:
-                        wait[npos] = tr
-        if tpos[0] < M-1:
-            npos = (tpos[0] + 1, tpos[1])
-            if not (npos in dst):
-                tr = r - mov_map[npos]
-                if tr >= 0:
+                        wait[npos]=(tr,newtrack)
+        if tpos[0]<M-1:
+            npos=(tpos[0]+1,tpos[1])
+            if not(npos in dst):
+                tr=r-mov_map[npos]
+                newtrack=track.copy()
+                newtrack.append(npos)
+                if (tr>=0):
                     if npos in wait:
-                        r0 = wait[npos]
-                        if tr > r0:
-                            wait[npos] = tr
+                        r0=wait[npos][0]
+                        if tr>r0:
+                            wait[npos]=(tr,newtrack)
                     else:
-                        wait[npos] = tr
-        if tpos[1] > 0:
-            npos = (tpos[0], tpos[1] - 1)
-            if not (npos in dst):
-                tr = r - mov_map[npos]
-                if tr >= 0:
+                        wait[npos]=(tr,newtrack)
+        if tpos[1]>0:
+            npos=(tpos[0],tpos[1]-1)
+            if not(npos in dst):
+                tr=r-mov_map[npos]
+                newtrack=track.copy()
+                newtrack.append(npos)
+                if (tr>=0):
                     if npos in wait:
-                        r0 = wait[npos]
-                        if tr > r0:
-                            wait[npos] = tr
+                        r0=wait[npos][0]
+                        if tr>r0:
+                            wait[npos]=(tr,newtrack)
                     else:
-                        wait[npos] = tr
-        if tpos[1] < N-1:
-            npos = (tpos[0], tpos[1] + 1)
-            if not (npos in dst):
-                tr = r - mov_map[npos]
-                if tr >= 0:
+                        wait[npos]=(tr,newtrack)
+        if tpos[1]<N-1:
+            npos=(tpos[0],tpos[1]+1)
+            if not(npos in dst):
+                tr=r-mov_map[npos]
+                newtrack=track.copy()
+                newtrack.append(npos)
+                if (tr>=0):
                     if npos in wait:
-                        r0 = wait[npos]
-                        if tr > r0:
-                            wait[npos] = tr
+                        r0=wait[npos][0]
+                        if tr>r0:
+                            wait[npos]=(tr,newtrack)
                     else:
-                        wait[npos] = tr
+                        wait[npos]=(tr,newtrack)
     for item in unstable:
         if item in dst:
             dst.pop(item)
-    return dst.keys()
+    return dst

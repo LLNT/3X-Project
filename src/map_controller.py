@@ -52,7 +52,7 @@ class Main:
                         for i in range(self.terrain_container.M):
                             for j in range(self.terrain_container.N):
                                 movmap[i,j]=self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-                        dstlist=list(move_range_person.calc_move(unstable,uncross,movmap,pos,mov))
+                        dstlist=move_range_person.calc_move(unstable,uncross,movmap,pos,mov)
                         valid.append((p,dstlist))
                     else:
                         invalid.append((p,[self.person_container.position[p.pid]]))
@@ -73,7 +73,7 @@ class Main:
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
                             movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-                    dstlist = list(move_range_person.calc_move(unstable, uncross, movmap, pos, mov))
+                    dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy.append((p,dstlist))
                 else:
                     unstable = []
@@ -92,7 +92,7 @@ class Main:
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
                             movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-                    dstlist = list(move_range_person.calc_move(unstable, uncross, movmap, pos, mov))
+                    dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     ally.append((p,dstlist))
             return ["E"]
         if self.controller==1:
@@ -115,7 +115,7 @@ class Main:
                         for i in range(self.terrain_container.M):
                             for j in range(self.terrain_container.N):
                                 movmap[i,j]=self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-                        dstlist=list(move_range_person.calc_move(unstable,uncross,movmap,pos,mov))
+                        dstlist=move_range_person.calc_move(unstable,uncross,movmap,pos,mov)
                         valid.append((p,dstlist))
                     else:
                         invalid.append((p,[self.person_container.position[p.pid]]))
@@ -136,7 +136,7 @@ class Main:
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
                             movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-                    dstlist = list(move_range_person.calc_move(unstable, uncross, movmap, pos, mov))
+                    dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy.append((p,dstlist))
                 else:
                     unstable = []
@@ -155,7 +155,7 @@ class Main:
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
                             movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-                    dstlist = list(move_range_person.calc_move(unstable, uncross, movmap, pos, mov))
+                    dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy.append((p,dstlist))
             return self.global_vars.AIcontroller.enemy_single_movement((valid,invalid,ally,enemy))
 
@@ -187,7 +187,7 @@ class Main:
             for i in range(self.terrain_container.M):
                 for j in range(self.terrain_container.N):
                     movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
-            dstlist = list(move_range_person.calc_move(unstable, uncross, movmap, pos, mov))
+            dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
             valid[p]=dstlist
         return valid
 
