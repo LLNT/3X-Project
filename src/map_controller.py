@@ -236,10 +236,9 @@ class Main:
             self.reset_state(1)
             self.controller = 0
             print('player phase')
-            self.player_turn(arena)
+            arena.next_round()
 
     def player_turn(self, arena):
-
         arena.is_event_handler = True
 
 

@@ -89,7 +89,7 @@ class Arena(cocos.layer.ColorLayer):
     def next_round(self):
         self.map.turn += 1
         self.text.element.text = 'ROUND '+str(self.map.turn)
-        self.map.controller = 1
+        self.map.controller = 0
 
         for p in self.person:
             if self.map.person_container.controller[p] == 1:
@@ -100,7 +100,6 @@ class Arena(cocos.layer.ColorLayer):
         if self.map.turn > 6 :
             director.pop()
         else:
-            print('enemy phase')
             self.take_turn()
 
     def repaint(self, map_controller):
@@ -163,7 +162,7 @@ class Arena(cocos.layer.ColorLayer):
                         map.reset_state(0)
                         self.is_event_handler = False
                         self.clear_map()
-                        self.next_round()
+                        self.take_turn()
                         return
                     if self.state == 0: #谁都没被选中，判断点击位置是否是人，标准状态
                         # 现在只有一个人
@@ -195,10 +194,12 @@ class Arena(cocos.layer.ColorLayer):
                         id = self.select.pid
                         if not map.person_container.movable[id]: # 该角色已行动完成
                             self.clear_map()
+                            return
 
                         if (i, j) in self.highlight:
                             map.person_container.position[id] = i, j
                             map.person_container.movable[id] = False
+                            self.is_event_handler = False
                             self.move(self.select, i, j)
 
                             # 显示移动确定选项
@@ -234,6 +235,7 @@ class Arena(cocos.layer.ColorLayer):
                         self.move('1', i, j)
 
             '''
+
     def exit(self, scene):
         director.push(scene)
 
