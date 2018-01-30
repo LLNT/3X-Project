@@ -11,6 +11,7 @@ import map_controller
 from utility import *
 import pyglet
 from person_info import Info
+from battle_scene import Battlescene
 
 def test_print(self):
     print('hello')
@@ -233,6 +234,8 @@ class Arena(cocos.layer.ColorLayer):
                         self.move('1', i, j)
 
             '''
+    def exit(self, scene):
+        director.push(scene)
 
     def clear_map(self):
         self.state = 0
@@ -260,15 +263,6 @@ class Ally(Sprite):
         self.color = color
         self.position = pos
 
-    def on_enter(self):
-        super(Ally, self).on_enter()
-        director.window.push_handlers(self.on_mouse_press)
-
-    def on_exit(self):
-        director.window.pop_handlers(self.on_mouse_press)
-
-    def on_mouse_press(self, x, y, buttons, modfiers):
-        pass
 
 class Check_state(Delay):
     def start(self):
