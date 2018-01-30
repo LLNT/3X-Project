@@ -1,0 +1,19 @@
+*.pyc
+__pycache__/
+*.so
+*.exe
+*.log
+*.pyx~
+*.lyx#
+*.lyx~
+*.DS_Store
+*.swn
+*.swo
+*.swp
+*.xml
+.idea/
+
+# Setup files
+build/
+dist/
+*.egg-info/
