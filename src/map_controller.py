@@ -204,9 +204,6 @@ class Main:
         command_type = command[0]
         if command_type == "M":
             person_to_move = command[1]  # type:person.Person
-            pos_to_move = command[2]
-            self.person_container.position[person_to_move.pid] = pos_to_move
-            self.person_container.movable[person_to_move.pid] = False
             arena.highlighting(valid[person_to_move.pid], CORAL)
             arena.sequential_move(command[1], command[3])
 

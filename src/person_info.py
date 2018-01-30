@@ -36,7 +36,6 @@ class Info(cocos.layer.ColorLayer):
         self.visible = False
 
 class Text(cocos.text.RichLabel):
-
     def __init__(self, content, position, color=(127, 255, 170, 255),
                  font_name='times new roman',font_size=36):
         super(Text, self).__init__(text=content,

@@ -9,6 +9,8 @@ def coordinate_t(x, y, size):
     j = y // size
     return i, j
 
+state = ['none', 'valid_select', 'invalid_select', 'ally_select', 'enemy_select', 'menu_display', 'info']
+
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 LIGHT_PINK = (255, 182, 193)

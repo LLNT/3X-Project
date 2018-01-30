@@ -3,13 +3,26 @@
 @author: Antastsy
 @time: 2018/1/30 20:10
 '''
-from cocos.layer import ColorLayer
+from cocos.menu import Menu, MenuItem, zoom_in, zoom_out
 
-class Menu(ColorLayer):
+
+class Optionmenu(Menu):
     is_event_handler = True
-    def __init__(self,w,h):
-        super(Menu, self).__init__(0, 0, 0, 0, width=100, height=400)
-        self.position = w/2, h/2
+    def __init__(self, person, dst):
+        super(Optionmenu, self).__init__(title='options')
+        l = []
+        l.append(MenuItem('Confirm', self.confirm))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.person = person
+        self.dst = dst
 
-    def on_mouse_press(self, x, y, buttons, modifiers):
-        print(1)
+
+    def confirm(self):
+        self.parent.confirm(self.person, self.dst)
+        self.parent.remove(self)
+
+    def cancel(self):
+        self.parent.clear_map()
+        self.parent.remove(self)
+

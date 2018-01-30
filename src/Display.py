@@ -12,7 +12,7 @@ from utility import *
 import pyglet
 from person_info import Info
 from battle_scene import Battlescene
-from menu import Menu
+from menu import Optionmenu
 
 def test_print(self):
     print('hello')
@@ -74,12 +74,19 @@ class Arena(cocos.layer.ColorLayer):
         obj.do(Delay(0.5)+ mov  + CallFunc(self.mark_role) + CallFunc(self.clear_map)+ CallFunc(self.take_turn))
 
     def sequential_move(self, person, dst): #传入前先修改位置
+        map = self.map
+        i, j = dst[-1]
+        id = person.pid
+        map.person_container.position[id] = i, j
+        map.person_container.movable[id] = False
+        self.is_event_handler = False
         obj = self.person[person.pid]
         self.map2per[dst[-1]] = person
-        action = Delay(0.5)
+        action = Delay(0.1)
         for x,y in dst:
             action = action + MoveTo(coordinate(x, y, self.size), 0.5)
-        obj.do(action + CallFunc(self.mark_role) + CallFunc(self.clear_map)+ CallFunc(self.take_turn))
+        obj.do(action + CallFunc(self.mark_role) + CallFunc(self.clear_map)
+               + CallFunc(self.take_turn))
 
 
     def take_turn(self): #according to the controller, take turn of next charactor
@@ -130,7 +137,8 @@ class Arena(cocos.layer.ColorLayer):
 
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
-
+        if self.state == 'menu_display':
+            return
         i, j = coordinate_t(x, y, self.size)
         if (x-560)**2 + (y-200)**2 < 80**2:
             self.end_turn.color = GOLD
@@ -140,7 +148,7 @@ class Arena(cocos.layer.ColorLayer):
             if self.mouse_select is not None: #之前有 则先修改先前的颜色
                 i0, j0 = self.mouse_select
                 if (i0, j0) in self.highlight:
-                    if self.state == 'valid_select':
+                    if self.state == 'valid_select' :
                         self.tiles[i0][j0].color = STEEL_BLUE
                     elif self.state == 'enemy_select':
                         self.tiles[i0][j0].color = CORAL
@@ -207,16 +215,19 @@ class Arena(cocos.layer.ColorLayer):
                         id = self.select.pid
 
                         if (i, j) in self.highlight:
-                            # self.state = 'menu_display'
-                            # self.add(Menu(i, j))
 
-                            map.person_container.position[id] = i, j
-                            map.person_container.movable[id] = False
-                            dst = valid[id][(i,j)][1]
-                            self.is_event_handler = False
+                            dst = valid[id][(i, j)][1]
+                            self.state = 'menu_display'
+                            self.menu = Optionmenu(self.select, dst)
+                            self.add(self.menu)
+                            '''
                             # self.move(self.select, i, j)
                             self.sequential_move(self.select, dst)
                             # 显示移动确定选项
+                            
+                            
+                            self.sequential_move(self.select, dst)
+                            '''
                         else:
                             self.clear_map()
 
@@ -249,6 +260,10 @@ class Arena(cocos.layer.ColorLayer):
                         self.move('1', i, j)
 
             '''
+
+    def confirm(self, person, dst):
+        self.sequential_move(person, dst)
+        pass
 
     def highlighting(self, area, color):
         for x0, y0 in area:
