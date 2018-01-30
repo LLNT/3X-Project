@@ -20,6 +20,7 @@
       "HP":15,
       "CRY":6
     },
+    "Picture":"lin.png",
     "Skills":
     [
 
@@ -49,8 +50,8 @@
     },
     "Skills":
     [
-
     ],
+    "Picture":"kent.png",
     "Init_item":[2]
   }
 }

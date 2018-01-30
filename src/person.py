@@ -5,15 +5,17 @@ class Person:
         self.pid = ""        #type:str
         self.name = ""       #type:str
         self.cls = ""        #type:str
+        self.pic = ""        #type:str
         self.ability = []    #type:List[Dict[str,int]]
         self.skills = []     #type:List[str]
         self.item=[]         #type:List[item.Item]
-    def __init__(self,pid,name,cls,ability,skills,items):
+    def __init__(self,pid,name,cls,ability,skills,pic,items):
         self.pid=pid
         self.name=name
         self.cls=cls
         self.ability=ability
         self.skills=skills
+        self.pic=pic
         self.item=items
 
 
@@ -28,7 +30,7 @@ class PersonBank:
             for item in persondict[pid]["Init_item"]:
                 items.append(itembank[item])
             person=Person(pid,persondict[pid]["Name"],persondict[pid]["Cls"],persondict[pid]["Ability"],
-                          persondict[pid]["Skills"],items)
+                          persondict[pid]["Skills"],persondict[pid]["Picture"],items)
             self.person_bank[pid]=person
 
 
