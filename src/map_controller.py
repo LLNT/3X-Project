@@ -205,7 +205,7 @@ class Main:
         if command_type == "M":
             person_to_move = command[1]  # type:person.Person
             arena.highlighting(valid[person_to_move.pid], CORAL)
-            arena.sequential_move(command[1], command[3])
+            arena.move(command[1], command[3])
 
         elif command_type == "E":
             self.reset_state(1)

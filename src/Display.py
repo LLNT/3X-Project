@@ -1,7 +1,10 @@
+import pyglet
 import cocos
 from cocos.sprite import Sprite
 from cocos.director import director
 from cocos.actions import MoveTo, Delay, sequence, CallFunc
+from cocos.scene import Scene
+
 from global_vars import Main as Global
 from data_loader import Main as Data
 from terrain_container import Main as Terrain_Container
@@ -9,14 +12,9 @@ from person_container import Main as Person_Container
 from person import Person
 import map_controller
 from utility import *
-import pyglet
 from person_info import Info
-from battle_scene import Battlescene
 from menu import Optionmenu
-
-def test_print(self):
-    print('hello')
-
+from battle_scene import Battle
 
 class Arena(cocos.layer.ColorLayer):
     is_event_handler = True
@@ -67,27 +65,34 @@ class Arena(cocos.layer.ColorLayer):
         self.mapstate = self.map.send_mapstate()
         self.next_round()
 
-    def move(self, person, i, j):
+    def move(self, person, dst):
         obj = self.person[person.pid]
-        self.map2per[(i, j)] = person
-        mov = MoveTo(coordinate(i, j, self.size), 2)
-        obj.do(Delay(0.5)+ mov  + CallFunc(self.mark_role) + CallFunc(self.clear_map)+ CallFunc(self.take_turn))
+        action = self._sequential_move(person, dst)
+        obj.do(action + CallFunc(self.mark_role) + CallFunc(self.clear_map)
+               + CallFunc(self.take_turn))
 
-    def sequential_move(self, person, dst): #传入前先修改位置
+    def _sequential_move(self, person, dst): #传入人物对象和移动轨迹
         map = self.map
         i, j = dst[-1]
         id = person.pid
         map.person_container.position[id] = i, j
         map.person_container.movable[id] = False
         self.is_event_handler = False
-        obj = self.person[person.pid]
         self.map2per[dst[-1]] = person
         action = Delay(0.1)
         for x,y in dst:
             action = action + MoveTo(coordinate(x, y, self.size), 0.5)
-        obj.do(action + CallFunc(self.mark_role) + CallFunc(self.clear_map)
+        return action
+
+
+    def attack(self, person, dst):
+        obj = self.person[person.pid]
+        action = self._sequential_move(person, dst)
+        obj.do(action + CallFunc(self._battle_scene) + CallFunc(self.mark_role) + CallFunc(self.clear_map)
                + CallFunc(self.take_turn))
 
+    def _battle_scene(self):
+        director.push(Scene(Battle()))
 
     def take_turn(self): #according to the controller, take turn of next charactor
         map = self.map
@@ -261,10 +266,6 @@ class Arena(cocos.layer.ColorLayer):
 
             '''
 
-    def confirm(self, person, dst):
-        self.sequential_move(person, dst)
-        pass
-
     def highlighting(self, area, color):
         for x0, y0 in area:
             self.tiles[x0][y0].color = color
@@ -298,28 +299,6 @@ class Ally(Sprite):
         self.scale = size/self.height * 0.8
         self.color = color
         self.position = pos
-
-
-class Check_state(Delay):
-    def start(self):
-        arena = self.target.parent     #type:Arena
-        map = arena.map
-        map.turn += 1
-        if map.turn <= 5:
-            if map.check_states():
-                self.target.do(sequence(MoveTo(coordinate(map.i, map.j, arena.size), 2), Check_state(1)))
-            else:
-                self.target.do(Check_state(1))
-        else:
-            print('gg')
-
-
-
-    def stop(self):
-        arena = self.target     #type:Arena
-        arena.is_event_handler = True
-
-
 
 if __name__ == '__main__':
     director.init(caption='3X-Project')
