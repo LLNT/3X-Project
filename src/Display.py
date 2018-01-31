@@ -4,6 +4,7 @@ from cocos.sprite import Sprite
 from cocos.director import director
 from cocos.actions import MoveTo, Delay, sequence, CallFunc
 from cocos.scene import Scene
+from cocos.scenes import ShuffleTransition
 
 from global_vars import Main as Global
 from data_loader import Main as Data
@@ -85,6 +86,7 @@ class Arena(cocos.layer.ColorLayer):
         return action
 
 
+
     def attack(self, person, dst):
         obj = self.person[person.pid]
         action = self._sequential_move(person, dst)
@@ -92,7 +94,7 @@ class Arena(cocos.layer.ColorLayer):
                + CallFunc(self.take_turn))
 
     def _battle_scene(self):
-        director.push(Scene(Battle()))
+        director.push(ShuffleTransition(Scene(Battle()), duration=1.5))
 
     def take_turn(self): #according to the controller, take turn of next charactor
         map = self.map
