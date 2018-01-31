@@ -18,8 +18,20 @@
       "BLD":7,
       "MOV":5,
       "HP":15,
-      "CRY":6
+      "CRY":6,
+      "EXP":0
     },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
     "Picture":"lin.png",
     "Skills":
     [
@@ -46,8 +58,20 @@
       "BLD":8,
       "MOV":7,
       "HP":24,
-      "CRY":12
+      "CRY":12,
+      "EXP":0
     },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
     "Skills":
     [
     ],
