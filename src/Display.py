@@ -5,6 +5,8 @@ from cocos.director import director
 from cocos.actions import MoveTo, Delay, sequence, CallFunc
 from cocos.scene import Scene
 from cocos.scenes import ShuffleTransition
+from cocos.audio.pygame import mixer
+
 
 from global_vars import Main as Global
 from data_loader import Main as Data
@@ -16,6 +18,7 @@ from utility import *
 from person_info import Info
 from menu import Optionmenu
 from battle_scene import Battle
+from audio import Audiolayer
 
 class Arena(cocos.layer.ColorLayer):
     is_event_handler = True
@@ -42,12 +45,12 @@ class Arena(cocos.layer.ColorLayer):
         for x in range(self.w):
             tl_x = []
             for y in range(self.h):
-                tile = Tile(pos=coordinate(x, y, self.size), size=self.size)
+                tile = MapCell(pos=coordinate(x, y, self.size), size=self.size)
                 self.add(tile)
                 tl_x.append(tile)
             self.tiles.append(tl_x)
 
-        self.repaint(map1)
+        self._repaint(map1)
         self.map = map1
         self.text = cocos.text.RichLabel('ROUND 1' ,
                                      font_name='times new roman',
@@ -64,7 +67,10 @@ class Arena(cocos.layer.ColorLayer):
         self.mouse_select = None
         self.add(self.info)
         self.mapstate = self.map.send_mapstate()
+
+        self.add(Audiolayer())
         self.next_round()
+
 
     def move(self, person, dst):
         obj = self.person[person.pid]
@@ -125,7 +131,7 @@ class Arena(cocos.layer.ColorLayer):
         else:
             self.take_turn()
 
-    def repaint(self, map_controller):
+    def _repaint(self, map_controller):
         position = map_controller.person_container.position
         controller = map_controller.person_container.controller
         people = map_controller.person_container.people
@@ -139,9 +145,8 @@ class Arena(cocos.layer.ColorLayer):
             else:
                 color = SKY_BLUE
             self.map2per[(x, y)] = p
-            self.person[id] = Ally(pos=coordinate(x, y, self.size), color=color, size=self.size)
+            self.person[id] = MapPer(pos=coordinate(x, y, self.size), color=color, size=self.size)
             self.add(self.person[id])
-
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
         if self.state == 'menu_display':
@@ -273,7 +278,7 @@ class Arena(cocos.layer.ColorLayer):
             self.tiles[x0][y0].color = color
         self.highlight = area
 
-    def exit(self, scene):
+    def _exit(self, scene):
         director.push(scene)
 
     def clear_map(self):
@@ -285,22 +290,22 @@ class Arena(cocos.layer.ColorLayer):
         self.select = None
 
 
-class Tile(Sprite):
+class MapCell(Sprite):
     def __init__(self, size=50,pos=None):
         path = 'ring.png'
-        super(Tile, self).__init__(image=path)
+        super(MapCell, self).__init__(image=path)
         self.scale = size/self.height
         self.color = (255, 255, 255)
         self.position = pos
 
-class Ally(Sprite):
-    select = False
+class MapPer(Sprite):
     def __init__(self, size=50,pos=None, color=(135, 206, 235)):
         path = 'ring.png'
-        super(Ally, self).__init__(image=path)
+        super(MapPer, self).__init__(image=path)
         self.scale = size/self.height * 0.8
         self.color = color
         self.position = pos
+
 
 if __name__ == '__main__':
     director.init(caption='3X-Project')
