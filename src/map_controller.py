@@ -204,7 +204,7 @@ class Main:
         command_type = command[0]
         if command_type == "M":
             person_to_move = command[1]  # type:person.Person
-            arena.highlighting(valid[person_to_move.pid], CORAL)
+            arena.set_mapstate(valid[person_to_move.pid], 'in_enemy_moverange')
             arena.move(command[1], command[3])
 
         elif command_type == "E":

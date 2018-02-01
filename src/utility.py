@@ -29,3 +29,31 @@ CORAL = (255, 127, 80)
 SKY_BLUE = (135, 206, 235)
 GOLD = (255, 215, 0)
 MAROON = (128, 0, 0)
+RED = (255, 0, 0)
+
+map_state2color = {
+    'none': WHITE,
+    'in_self_moverange': STEEL_BLUE,
+    'in_enemy_moverange': CORAL,
+    'in_ally_moverange': SLATEBLUE,
+    'in_self_attackrange': LIME,
+    'target': RED,
+}
+
+map_state2color_motion = {
+    'none': LIGHT_PINK,
+    'in_self_moverange': VIOLET,
+    'in_enemy_moverange': YELLOW,
+    'in_ally_moverange': SLATEBLUE,
+    'in_self_attackrange': GOLD,
+    'target': RED,
+}
+
+per_state2color = {
+    'none': WHITE,
+    'self': SKY_BLUE,
+    'enemy': ORANGE,
+    'ally': CORNISLK,
+    'moved': OLIVE,
+    'selected': CYAN
+}

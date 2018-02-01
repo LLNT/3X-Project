@@ -318,6 +318,13 @@ class Battle:
             purd=0
         sup_d=self.wp_buf_d
         return (b_r,sup_a,pura,hita,crta,dmga,sup_d,purd,hitd,crtd,dmgd)
+        # b_r    0: 有反击 1: 没反击
+        # sup_a  0: 普通  1: 有利  -1:不利
+        # pura   0: 不能追击 1: 可以追击
+        # hita   命中率
+        # crta   必杀率
+        # dmga   伤害
+
 
 
 

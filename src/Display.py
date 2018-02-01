@@ -1,35 +1,36 @@
-import pyglet
 import cocos
-from cocos.sprite import Sprite
+import pyglet
+from cocos.actions import MoveTo, Delay, CallFunc
 from cocos.director import director
-from cocos.actions import MoveTo, Delay, sequence, CallFunc
 from cocos.scene import Scene
 from cocos.scenes import ShuffleTransition
-from cocos.audio.pygame import mixer
+from cocos.sprite import Sprite
 
+import map_controller
+from audio import Audiolayer
+from data_loader import Main as Data
+from display_item.battle_scene import Battle
+from display_item.menu import Optionmenu, Weaponselect
+from display_item.info import Personinfo, Battleinfo
+from display_item.loading import Loading
 
 from global_vars import Main as Global
-from data_loader import Main as Data
-from terrain_container import Main as Terrain_Container
-from person_container import Main as Person_Container
 from person import Person
-import map_controller
+from person_container import Main as Person_Container
+from terrain_container import Main as Terrain_Container
 from utility import *
-from person_info import Info
-from menu import Optionmenu
-from battle_scene import Battle
-from audio import Audiolayer
+import time
 
 class Arena(cocos.layer.ColorLayer):
     is_event_handler = True
 
     def __init__(self):
+
         pyglet.resource.path = ['../img']
         pyglet.resource.reindex()
         self.size = 80
         self.select = None #当前选中的角色
         self.state = 'none' # 0：默认 什么都没选中； 1：选中一个友军 左击移动右击取消 2：选中一个敌军 任何操作都取消 3： 正在显示某个人的信息 任何操作返回
-        self.origin_color = WHITE
         data = Data()
         global_vars = Global(data)
         terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)
@@ -39,7 +40,6 @@ class Arena(cocos.layer.ColorLayer):
         self.h = terrain_container_test.N
 
         super(Arena, self).__init__(r=0,g=0,b=0,a=255,width=self.w*self.size,height=self.h*self.size)
-        self.info = Info()
 
         self.tiles = []
         for x in range(self.w):
@@ -50,8 +50,23 @@ class Arena(cocos.layer.ColorLayer):
                 tl_x.append(tile)
             self.tiles.append(tl_x)
 
-        self._repaint(map1)
         self.map = map1
+        position = map1.person_container.position
+        controller = map1.person_container.controller
+        people = map1.person_container.people
+        self.person = {}
+        self.map2per = {}
+        for p in people:
+            id = p.pid
+            (x, y) = position[id]
+            if controller[id] == 1:
+                state = 'enemy'
+            else:
+                state = 'self'
+            self.map2per[(x, y)] = p
+            self.person[id] = MapPer(person=p, pos=coordinate(x, y, self.size), size=self.size, state=state)
+            self.add(self.person[id])
+
         self.text = cocos.text.RichLabel('ROUND 1' ,
                                      font_name='times new roman',
                                      font_size=36,
@@ -62,21 +77,23 @@ class Arena(cocos.layer.ColorLayer):
 
         self.add(self.end_turn)
         self.add(cocos.text.RichLabel(text='END', position=(520, 190), font_size=30))
+        self.mapstate = self.map.send_mapstate()
 
         self.highlight = set()
         self.mouse_select = None
-        self.add(self.info)
-        self.mapstate = self.map.send_mapstate()
-
+        self.target = None
+        self.item = None
+        self.origin_color = None
+        self.mark = set()
         self.add(Audiolayer())
+
         self.next_round()
 
 
     def move(self, person, dst):
         obj = self.person[person.pid]
         action = self._sequential_move(person, dst)
-        obj.do(action + CallFunc(self.mark_role) + CallFunc(self.clear_map)
-               + CallFunc(self.take_turn))
+        obj.do(action + CallFunc(self.clear_map) + CallFunc(self.take_turn))
 
     def _sequential_move(self, person, dst): #传入人物对象和移动轨迹
         map = self.map
@@ -84,6 +101,9 @@ class Arena(cocos.layer.ColorLayer):
         id = person.pid
         map.person_container.position[id] = i, j
         map.person_container.movable[id] = False
+        self.mapstate = self.map.send_mapstate()
+        if map.person_container.controller[id] == 0:
+            self.person[id].state = 'moved'
         self.is_event_handler = False
         self.map2per[dst[-1]] = person
         action = Delay(0.1)
@@ -91,7 +111,24 @@ class Arena(cocos.layer.ColorLayer):
             action = action + MoveTo(coordinate(x, y, self.size), 0.5)
         return action
 
+    def select_attack(self, person, dst, item):
+        area = []
+        max_range = item.itemtype.max_range
+        min_range = item.itemtype.min_range
+        i, j = dst[-1]
+        for distance in range(min_range, max_range+1):
+            for dx in range(distance+1):
+                dy = distance - dx
+                for x, y in [(i+dx, j+dy),(i+dx, j-dy),(i-dx, j+dy),(i-dx, j-dy)]:
+                    if x in range(self.w) and y in range(self.h):
+                        area.append((x, y))
 
+        self.set_mapstate(area, 'in_self_attackrange')
+        self.set_mapstate([self.target], 'target')
+        self.state = 'wait_attack'
+        self.dst = dst
+        self._repaint()
+        self.item = item
 
     def attack(self, person, dst):
         obj = self.person[person.pid]
@@ -109,11 +146,23 @@ class Arena(cocos.layer.ColorLayer):
         else:
             map.ai_turn(self)
 
-    def mark_role(self):
-        if self.select is not None: #选中的是自己角色
-            id = self.select.pid
-            self.person[id].color = OLIVE
-            self.mapstate = self.map.send_mapstate()
+    def return_to_notdecide(self):
+        select = self.select
+        self.clear_map()
+        self.select = select
+        self.person[self.select.pid].state = 'selected'
+        area = self.mapstate[0][select.pid]
+        self.set_mapstate(area, 'in_self_moverange')
+        self.set_mapstate([self.target], 'target')
+        self.info.info_clear()
+        self.menu = Weaponselect(self.select, self.dst)
+        self.add(self.menu)
+
+    def choose_new_target(self):
+        self.set_mapstate([self.target], 'in_self_moverange')
+        self.target = None
+        self._repaint()
+        self.state = 'valid_select'
 
     def next_round(self):
         self.map.turn += 1
@@ -122,56 +171,38 @@ class Arena(cocos.layer.ColorLayer):
         self.mapstate = self.map.send_mapstate()
         for p in self.person:
             if self.map.person_container.controller[p] == 1:
-                self.person[p].color = ORANGE
+                self.person[p].state = 'enemy'
             else:
-                self.person[p].color = SKY_BLUE
-
+                self.person[p].state = 'self'
+        self._repaint()
         if self.map.turn > 6 :
             director.pop()
         else:
             self.take_turn()
 
-    def _repaint(self, map_controller):
-        position = map_controller.person_container.position
-        controller = map_controller.person_container.controller
-        people = map_controller.person_container.people
-        self.person = {}
-        self.map2per = {}
-        for p in people:
-            id = p.pid
-            (x, y) = position[id]
-            if controller[id] == 1 :
-                color = ORANGE
-            else:
-                color = SKY_BLUE
-            self.map2per[(x, y)] = p
-            self.person[id] = MapPer(pos=coordinate(x, y, self.size), color=color, size=self.size)
-            self.add(self.person[id])
+    def _repaint(self):
+        for i in range(self.w):
+            for j in range(self.h):
+                self.tiles[i][j].color = map_state2color[self.tiles[i][j].state]
+        for p in self.person:
+            self.person[p].color = per_state2color[self.person[p].state]
+        pass
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
-        if self.state == 'menu_display':
+        if self.state == 'menu_display' or self.state == 'battle_info':
             return
         i, j = coordinate_t(x, y, self.size)
         if (x-560)**2 + (y-200)**2 < 80**2:
             self.end_turn.color = GOLD
         else:
             self.end_turn.color = MAROON
-        if i in range(0, self.w) and j in range(0, self.h):
-            if self.mouse_select is not None: #之前有 则先修改先前的颜色
-                i0, j0 = self.mouse_select
-                if (i0, j0) in self.highlight:
-                    if self.state == 'valid_select' :
-                        self.tiles[i0][j0].color = STEEL_BLUE
-                    elif self.state == 'enemy_select':
-                        self.tiles[i0][j0].color = CORAL
-                else:
-                    self.tiles[i0][j0].color = WHITE
-            if (i, j) in self.highlight:
-                self.tiles[i][j].color = VIOLET
-            else:
-                self.tiles[i][j].color = LIGHT_PINK
-            self.mouse_select = i, j
 
+        if i in range(0, self.w) and j in range(0, self.h):
+            self._repaint()
+            cell = self.tiles[i][j]
+            cell.color = map_state2color_motion[cell.state]
+        else:
+            pass
         pass
 
     def on_mouse_press(self, x, y, buttons, modifiers):
@@ -185,6 +216,39 @@ class Arena(cocos.layer.ColorLayer):
             elif self.state == 'invalid_select' or self.state == 'enemy_select' \
                     or self.state == 'ally_select': #选中一个敌军或友军 任何操作都返回
                 self.clear_map()
+            elif self.state == 'wait_attack': #等待下一步指令中，选中一个有效对象则进行战斗
+                if buttons == 4:
+                    self.return_to_notdecide()
+                elif buttons == 1:
+                    if (i, j) in self.map2per.keys(): #选中的是人
+                        if self.tiles[i][j].state is 'in_self_attackrange':
+
+                            self.info.info_clear()
+                            self.info = Battleinfo(self.select, self.map2per[(i, j)], self.item, self.map)
+                            self.add(self.info)
+                            self.state = 'battle_info'
+                        else:
+                            print('cannot attack')
+                            self.return_to_notdecide()
+                    else:
+                        if self.tiles[i][j].state is 'in_self_attackrange':
+                            print('not a person')
+
+                        else:
+                            print('not valid')
+                        self.return_to_notdecide()
+                        pass
+
+
+                    pass
+
+            elif self.state == 'battle_info':
+                if buttons == 1:
+                    print("attaking")
+                    self.move(self.select, self.dst)
+                    self.info.info_clear()
+                elif buttons == 4:
+                    self.return_to_notdecide()
             else: #其他情况 进行判断左击或右击
                 if buttons == 1:
                     if self.end_turn.color == list(GOLD): #判断是否结束回合
@@ -199,35 +263,40 @@ class Arena(cocos.layer.ColorLayer):
                         if (i, j) in self.map2per.keys(): #选中的是玩家角色
                             select = self.map2per[(i, j)] # type:Person
                             pid = select.pid
+                            area, state = None, None
                             if pid in valid.keys(): #选中的是可移动角色
                                 # 显示移动范围
                                 self.select = select
                                 self.state = 'valid_select'
-                                color = STEEL_BLUE
+                                state = 'in_self_moverange'
                                 area = valid[pid]
+                                self.person[pid].state = 'selected'
 
                             elif pid in invalid.keys(): #选中的是已行动的本方角色
                                 self.state = 'invalid_select'
 
                             elif pid in enemy.keys():
                                 self.state = 'enemy_select'
-                                color = CORAL
+                                state = 'in_enemy_moverange'
                                 area = enemy[pid]
                             elif pid in ally.keys():
                                 self.state = 'ally_select'
                             else:
                                 # 已经移动或其他原因
                                 pass
-                            self.highlighting(area, color)
+                            if area is None or state is None:
+                                return
+                            self.set_mapstate(area, state)
                         else:
                             # 显示其他信息，不处理
                             return
 
                     elif self.state == 'valid_select':  # 已经选中一个可移动的人
                         id = self.select.pid
-
-                        if (i, j) in self.highlight:
-
+                        cell = self.tiles[i][j]
+                        if cell.state is 'in_self_moverange':
+                            self.target = (i, j)
+                            self.set_mapstate([self.target], 'target')
                             dst = valid[id][(i, j)][1]
                             self.state = 'menu_display'
                             self.menu = Optionmenu(self.select, dst)
@@ -250,7 +319,9 @@ class Arena(cocos.layer.ColorLayer):
                         if (i, j) in self.map2per.keys(): #选中的是玩家角色
                             select = self.map2per[(i, j)] # type:Person
                             self.state = 'info' # 选中信息的界面状态
-                            self.info.info_display(select)
+                            self.info = Personinfo(select)
+                            self.add(self.info)
+
                         else:
                             pass # 显示地图信息？
                     else:
@@ -273,40 +344,47 @@ class Arena(cocos.layer.ColorLayer):
 
             '''
 
-    def highlighting(self, area, color):
-        for x0, y0 in area:
-            self.tiles[x0][y0].color = color
-        self.highlight = area
+    def set_mapstate(self, area, state):
+        for i, j in area:
+            self.tiles[i][j].state = state
+        self._repaint()
+
 
     def _exit(self, scene):
         director.push(scene)
 
     def clear_map(self):
         self.state = 'none'
-        if self.highlight is not None:
-            for i, j in self.highlight:
-                self.tiles[i][j].color = WHITE
-        self.highlight = set()
-        self.select = None
+        for i in range(self.w):
+            for j in range(self.h):
+                self.tiles[i][j].state = 'none'
+        if self.select is not None and self.person[self.select.pid].state is 'selected':
+            self.person[self.select.pid].state = 'self'
+            self.select = None
+
+        self._repaint()
 
 
 class MapCell(Sprite):
-    def __init__(self, size=50,pos=None):
+    def __init__(self, size=50,pos=None,state='none'):
         path = 'ring.png'
         super(MapCell, self).__init__(image=path)
         self.scale = size/self.height
         self.color = (255, 255, 255)
         self.position = pos
+        self.state = state
 
 class MapPer(Sprite):
-    def __init__(self, size=50,pos=None, color=(135, 206, 235)):
+    def __init__(self, person, size=50,pos=None, color=(135, 206, 235),state='none'):
         path = 'ring.png'
         super(MapPer, self).__init__(image=path)
+        self.person = person
         self.scale = size/self.height * 0.8
         self.color = color
         self.position = pos
+        self.state = state
 
 
 if __name__ == '__main__':
     director.init(caption='3X-Project')
-    director.run(cocos.scene.Scene(Arena()))
+    director.run(Scene(Arena()))
