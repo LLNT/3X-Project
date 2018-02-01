@@ -2,6 +2,7 @@ import collections
 import person
 import item
 import map_controller
+import random
 from typing import List,Set,Dict
 
 def wp_buf_count(wpa,wpd):
@@ -64,15 +65,13 @@ class Attack:
         self.shootingstar_attack=0   #type:int
         self.sky_ecl_attack=0        #type:int
         self.moonlight_attack=0      #type:int
-        self.combo_bonus=1           #type:int
-    def __init__(self,a,cn,wd,sh,se,ml,cb):
+    def __init__(self,a,cn,wd,sh,se,ml):
         self.AorD=a
         self.continued_attack=cn
         self.wea_dup_attack=wd
         self.shootingstar_attack=sh
         self.sky_ecl_attack=se
         self.moonlight_attack=ml
-        self.combo_bonus=cb
 
 class Battle:
     def __init__(self):
@@ -86,7 +85,6 @@ class Battle:
         self.att_sun=0                    #type:int
         self.att_moon=0                   #type:int
         self.att_wrath=0                  #type:int
-        self.att_sup_eff=0                #type:int
         self.att_promised=0               #type:int
         self.att_crt=0                    #type:int
         self.att_shield=0                 #type:int
@@ -105,6 +103,12 @@ class Battle:
         self.su_d={}                      #type:Dict[str,int]
         self.a=None                      #type:person.Person
         self.d=None                      #type:person.Person
+        self.sup_eff_a=0                  #type:int
+        self.sup_eff_d=0                  #type:int
+        self.redseala=0                   #type:int
+        self.redseald=0                   #type:int
+        self.combo_bonusa=0               #type:int
+        self.combo_bonusd=0               #type:int
         self.hita=0                       #type:int
         self.hitd=0                       #type:int
         self.crta=0                       #type:int
@@ -117,8 +121,12 @@ class Battle:
         self.avod=0                       #type:int
         self.defa=0                       #type:int
         self.defd=0                       #type:int
+        self.immortala=0                  #type:int
+        self.immortald=0                  #type:int
+        self.log=[]                       #type:List[Tuple[int,str]]
     def __init__(self,_a,_d,_wpa,_wpd,_map):
         self.queue = collections.deque([])  # type:collections.deque[Attack]
+        self.log = []                    #type:List[Tuple[int,str]]
         self.a=_a                        #type:person.Person
         self.d=_d                        #type:person.Person
         map=_map                         #type:map_controller.Main
@@ -135,7 +143,6 @@ class Battle:
         self.att_sun=0
         self.att_moon=0
         self.att_wrath=0
-        self.att_sup_eff=0
         self.att_promised=0
         self.crt=0
         self.att_shield=0
@@ -177,10 +184,18 @@ class Battle:
                 self.skills_d.add(item)
         aw_a=0
         aw_d=0
+        self.immortala = 0
+        self.immortald = 0
+        if ("Immortal" in self.skills_a):
+            self.immortala=0
+        if ("Immortal" in self.skills_d):
+            self.immortald=0
         if ("Awareness" in self.skills_a):
             aw_a=1
+            self.log.append((-1,"Awareness"))
         if ("Awareness" in self.skills_d):
             aw_d=1
+            self.log.append((-2,"Awareness"))
         if (aw_a==1):
             self.skills_d.clear()
         if (aw_d==1):
@@ -196,10 +211,26 @@ class Battle:
         self.su_d=[]
         self.su_a=map.terrain_container.map[posa[0]][posa[1]].enhance[map.global_vars.cls_clsgroup[self.a.cls]].copy()
         self.su_d=map.terrain_container.map[posd[0]][posd[1]].enhance[map.global_vars.cls_clsgroup[self.d.cls]].copy()
-        (self.hita,self.hitd,self.avoa,self.avod,self.crta,self.crtd,
-         self.craa,self.crad,self.atka,self.atkd,self.defa,self.defd)=self.calc_param()
+        self.sup_eff_a=0
+        self.sup_eff_d=0
+        if (map.global_vars.cls_clsgroup[self.d.cls] in self.weapon_a.itemtype.special_effect):
+            self.sup_eff_a=1
+        if (self.battleround==0):
+            if (map.global_vars.cls_clsgroup[self.a.cls] in self.weapon_d.itemtype.special_effect):
+                self.sup_eff_d=1
+        self.redseala=0
+        self.redseald=0
+        self.combo_bonusa=1
+        self.combo_bonusd=1
+        if ("Redseal" in self.skills_a):
+            self.log.append((-1,"Redseal"))
+            self.redseala=1
+        if ("Redseal" in self.skills_d):
+            self.redseald=1
+            self.log.append((-2,"Redseal"))
+        self.calc_param(turns=0)
 
-    def calc_param(self):
+    def calc_param(self,turns=1):
         self.hita=0
         self.hitd=0
         self.avod=0
@@ -229,6 +260,7 @@ class Battle:
             self.atka=self.a.ability["MGC"]
             self.defd=self.d.ability["RES"]
         self.atka+=(self.weapon_a.itemtype.power+self.su_a["ATK"]+self.wp_buf_a)
+        self.atka=self.atka*(1+self.sup_eff_a)
         self.defd+=self.su_d["DEF"]
         if self.battleround==0:
             self.hitd = self.d.ability["SKL"] * 2 + self.d.ability["LUK"] + self.weapon_d.itemtype.hit + \
@@ -248,34 +280,54 @@ class Battle:
                 self.atkd = self.d.ability["MGC"]
                 self.defa = self.a.ability["RES"]
             self.atkd += (self.weapon_d.itemtype.power + self.su_d["ATK"] + self.wp_buf_d)
+            self.atkd=self.atkd*(1+self.sup_eff_d)
             self.defa += self.su_a["DEF"]
         if ("Promised" in self.skills_d):
+            if turns==0:
+                self.log.append((-2,"Promised"))
             self.crta=-65536
         if ("Whiteseal" in self.skills_a):
             self.hita=65536
             self.defd=int(self.defd/2)
+            if turns==0:
+                self.log.append((-1,"Whiteseal"))
         if ("Blackseal" in self.skills_d):
             self.atka=int(self.atka/2)
+            if turns == 0:
+                self.log.append((-2,"Blackseal"))
         if ("Greenseal" in self.skills_d):
             self.hita=int(self.hita/2)
+            if turns == 0:
+                self.log.append((-2,"Greenseal"))
         if ("Blueseal" in self.skills_a):
             self.crad=0
             self.crta=2*self.crta
+            if turns == 0:
+                self.log.append((-1,"Blueseal"))
         if (self.battleround==0):
             if ("Promised" in self.skills_a):
                 self.crtd=-65536
+                if turns == 0:
+                    self.log.append((-1,"Promised"))
             if ("Whiteseal" in self.skills_d):
                 self.hitd=65536
                 self.defa=int(self.defa/2)
+                if turns == 0:
+                    self.log.append((-2,"Whiteseal"))
             if ("Blackseal" in self.skills_a):
                 self.atkd=int(self.atkd/2)
+                if turns == 0:
+                    self.log.append((-1,"Blackseal"))
             if ("Greenseal" in self.skills_a):
                 self.hitd=int(self.hitd/2)
+                if turns == 0:
+                    self.log.append((-1,"Greenseal"))
             if ("Blueseal" in self.skills_d):
                 self.craa=0
                 self.crtd=2*self.crtd
-        return (self.hita,self.hitd,self.avoa,self.avod,self.crta,self.crtd,
-                 self.craa,self.crad,self.atka,self.atkd,self.defa,self.defd)
+                if turns == 0:
+                    self.log.append((-2,"Blueseal"))
+        return
 
     def simulate(self):
         hita=self.hita-self.avod
@@ -318,12 +370,590 @@ class Battle:
             purd=0
         sup_d=self.wp_buf_d
         return (b_r,sup_a,pura,hita,crta,dmga,sup_d,purd,hitd,crtd,dmgd)
-        # b_r    0: 有反击 1: 没反击
-        # sup_a  0: 普通  1: 有利  -1:不利
-        # pura   0: 不能追击 1: 可以追击
-        # hita   命中率
-        # crta   必杀率
-        # dmga   伤害
+
+    def battle(self):
+        if (self.battleround==0):
+            r=self.battlea()
+        else:
+            r=self.battleb()
+        return self.log
+
+    def ambush_a(self):
+        if not("Ambush" in self.skills_a):
+            return 0
+        if (self.a.ability["HP"]>int(self.a.ability["MHP"]/2)):
+            return 0
+        if (self.bspd_a*1.5<self.bspd_d):
+            return 0
+        return 1
+
+    def ambush_d(self):
+        if not("Ambush" in self.skills_d):
+            return 0
+        if (self.d.ability["HP"]>int(self.d.ability["MHP"]/2)):
+            return 0
+        if (self.bspd_d*1.5<self.bspd_a):
+            return 0
+        return 1
+
+    def charge_a(self):
+        if (self.charged_combat==1):
+            return 0
+        if not("Charge" in self.skills_a):
+            return 0
+        if (self.bspd_a<=self.bspd_d):
+            return 0
+        return 1
+
+    def charge_d(self):
+        if (self.charged_combat==1):
+            return 0
+        if not("Charge" in self.skills_d):
+            return 0
+        if (self.bspd_d<=self.bspd_a):
+            return 0
+        return 1
+
+    def continue_a(self,ca):
+        if (ca==1):
+            return 0
+        if not("Continue" in self.skills_a):
+            return 0
+        p=self.a.ability["SPD"]*2
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def continue_d(self,ca):
+        if (ca==1):
+            return 0
+        if not("Continue" in self.skills_d):
+            return 0
+        p=self.d.ability["SPD"]*2
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def weapon_duplicate_a(self,wd):
+        if (wd==1):
+            return 0
+        if not("Weaponduplicate" in self.skills_a):
+            return 0
+        return 1
+
+    def weapon_duplicate_d(self,wd):
+        if (wd==1):
+            return 0
+        if not("Weaponduplicate" in self.skills_d):
+            return 0
+        return 1
+
+    def shootingstar_a(self,sh):
+        if (sh==1):
+            return 0
+        if not("Shootingstar" in self.skills_a):
+            return 0
+        p=self.a.ability["SKL"]
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def shootingstar_d(self,sh):
+        if (sh==1):
+            return 0
+        if not("Shootingstar" in self.skills_d):
+            return 0
+        p=self.d.ability["SKL"]
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def skylight_a(self,se):
+        if (se==1):
+            return 0
+        if not("Skylight" in self.skills_a):
+            return 0
+        p=int(float(self.a.ability["SKL"])*0.8)
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def skylight_d(self,se):
+        if (se==1):
+            return 0
+        if not("Skylight" in self.skills_d):
+            return 0
+        p=int(float(self.d.ability["SKL"])*0.8)
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def eclipse_a(self,se):
+        if (se==1):
+            return 0
+        if not("Eclipse" in self.skills_a):
+            return 0
+        p=int(float(self.a.ability["SKL"])*0.8)
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def eclipse_d(self,se):
+        if (se==1):
+            return 0
+        if not("Eclipse" in self.skills_d):
+            return 0
+        p=int(float(self.d.ability["SKL"])*0.8)
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def moonlight_a(self):
+        if not("Moonlight" in self.skills_a):
+            return 0
+        p=self.a.ability["SKL"]
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def moonlight_d(self):
+        if not("Moonlight" in self.skills_d):
+            return 0
+        p=self.d.ability["SKL"]
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def wrath_a(self):
+        if not("Wrath" in self.skills_a):
+            return 0
+        if (self.a.ability["HP"]>(self.a.ability["MHP"]/2)):
+            return 0
+        return 1
+
+    def wrath_d(self):
+        if not("Wrath" in self.skills_d):
+            return 0
+        if (self.d.ability["HP"]>(self.d.ability["MHP"]/2)):
+            return 0
+        return 1
+
+    def sunlight_a(self):
+        if not("Sunlight" in self.skills_a):
+            return 0
+        p=self.a.ability["SKL"]
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def sunlight_d(self):
+        if not("Sunlight" in self.skills_d):
+            return 0
+        p=self.d.ability["SKL"]
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def shield_a(self):
+        if not("Shield" in self.skills_a):
+            return 0
+        p=self.a.ability["LV"]*2
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def shield_d(self):
+        if not("Shield" in self.skills_d):
+            return 0
+        p=self.d.ability["LV"]*2
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def prayer_a(self):
+        if not("Prayer" in self.skills_a):
+            return 0
+        p=self.a.ability["LUK"]*2
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def prayer_d(self):
+        if not("Prayer" in self.skills_d):
+            return 0
+        p=self.d.ability["LUK"]*2
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def bane_a(self):
+        if not("Bane" in self.skills_a):
+            return 0
+        if ("Resbane" in self.skills_d):
+            return 0
+        p=int(self.a.ability["SKL"]/2)
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def bane_d(self):
+        if not("Bane" in self.skills_d):
+            return 0
+        if ("Resbane" in self.skills_a):
+            return 0
+        p=int(self.d.ability["SKL"]/2)
+        q=random.randint(0,99)
+        if (q>=p):
+            return 0
+        return 1
+
+    def battlea(self):
+        self.queue.append(Attack(0,0,0,0,0,0))
+        self.queue.append(Attack(1,0,0,0,0,0))
+        if (self.ambush_d()==1):
+            self.queue.pop()
+            self.queue.pop()
+            self.queue.append(Attack(1,0,0,0,0,0))
+            self.queue.append(Attack(0,0,0,0,0,0))
+            self.log.append((-2,"Ambush"))
+        if (self.ambush_a()==1):
+            self.queue.pop()
+            self.queue.pop()
+            self.queue.append(Attack(0,0,0,0,0,0))
+            self.queue.append(Attack(1,0,0,0,0,0))
+            self.log.append((-1,"Ambush"))
+        if (self.bspd_a-self.bspd_d>=4):
+            self.queue.append(Attack(0,0,0,0,0,0))
+            self.log.append((-1,"Pursue"))
+        if (self.bspd_d-self.bspd_a>=4):
+            self.queue.append(Attack(1,0,0,0,0,0))
+            self.log.append((-2,"Pursue"))
+        while (True):
+            if len(self.queue)==0:
+                if (self.charge_a()==1):
+                    self.charged_combat=1
+                    self.queue.append(Attack(0,0,0,0,0,0))
+                    self.queue.append(Attack(1,0,0,0,0,0))
+                    self.log.append((-1,"Charge"))
+                    if (self.bspd_a-self.bspd_d>=4):
+                        self.queue.append(Attack(0,0,0,0,0,0))
+                        self.log.append((-1, "Pursue"))
+                    if (self.bspd_d-self.bspd_a>=4):
+                        self.queue.append(Attack(1,0,0,0,0,0))
+                        self.log.append((-2, "Pursue"))
+                elif (self.charge_d()==1):
+                    self.charged_combat=1
+                    self.queue.append(Attack(0,0,0,0,0,0))
+                    self.queue.append(Attack(1,0,0,0,0,0))
+                    self.log.append((-1,"Charge"))
+                    if (self.bspd_a-self.bspd_d>=4):
+                        self.queue.append(Attack(0,0,0,0,0,0))
+                        self.log.append((-1, "Pursue"))
+                    if (self.bspd_d-self.bspd_a>=4):
+                        self.queue.append(Attack(1,0,0,0,0,0))
+                        self.log.append((-2, "Pursue"))
+                else:
+                    break
+            att=self.queue.popleft()       #type:Attack
+            r=self.execute(att)
+            if (r==0):
+                if att.AorD==0:
+                    self.log.append((-1,"Brokenweapon"))
+                else:
+                    self.log.append((-2,"Brokenweapon"))
+            if (r==2):
+                if att.AorD==0:
+                    self.log.append((-1,"Defeatenemy"))
+                    return 1   #D defeated
+                else:
+                    self.log.append((-2,"Defeatenemy"))
+                    return 2   #A defeated
+        return 0
+
+    def battleb(self):
+        self.queue.append(Attack(0, 0, 0, 0, 0, 0))
+        if (self.bspd_a - self.bspd_d >= 4):
+            self.queue.append(Attack(0, 0, 0, 0, 0, 0))
+            self.log.append((-1, "Pursue"))
+        while (True):
+            if len(self.queue) == 0:
+                if (self.charge_a() == 1):
+                    self.charged_combat = 1
+                    self.queue.append(Attack(0, 0, 0, 0, 0, 0))
+                    self.log.append((-1, "Charge"))
+                    if (self.bspd_a - self.bspd_d >= 4):
+                        self.queue.append(Attack(0, 0, 0, 0, 0, 0))
+                        self.log.append((-1, "Pursue"))
+                elif (self.charge_d() == 1):
+                    self.charged_combat = 1
+                    self.queue.append(Attack(0, 0, 0, 0, 0, 0))
+                    self.log.append((-1, "Charge"))
+                    if (self.bspd_a - self.bspd_d >= 4):
+                        self.queue.append(Attack(0, 0, 0, 0, 0, 0))
+                        self.log.append((-1, "Pursue"))
+                else:
+                    break
+            att = self.queue.popleft()  # type:Attack
+            r = self.execute(att)
+            if (r == 0):
+                if att.AorD == 0:
+                    self.log.append((-1, "Brokenweapon"))
+                else:
+                    self.log.append((-2, "Brokenweapon"))
+            if (r == 2):
+                if att.AorD == 0:
+                    self.log.append((-1, "Defeatenemy"))
+                    return 1  # D defeated
+                else:
+                    self.log.append((-2, "Defeatenemy"))
+                    return 2  # A defeated
+        return 0
+
+    def execute(self,_a):
+        if (_a.AorD==0):
+            return self.executea(_a)
+        else:
+            return self.executed(_a)
+
+    def executea(self,_a):
+        att=_a       #type:Attack
+        if (self.wear_buf_a==0):
+            return 0   #run out of weapon
+        if (self.continue_a(att.continued_attack)==1):
+            self.queue.append(Attack(0,1,0,0,0,0))
+            self.log.append((-1,"Continue"))
+        if (self.weapon_duplicate_a(att.wea_dup_attack)==1):
+            self.queue.append(Attack(0,att.continued_attack,1,0,0,0))
+            self.log.append((-1,"Weaponduplicate"))
+        if (self.shootingstar_a(att.shootingstar_attack)==1):
+            self.queue.append(Attack(0,att.continued_attack,att.wea_dup_attack,1,0,0))
+            self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.log.append((-1,"Shootingstar"))
+        if (self.skylight_a(att.sky_ecl_attack)==1):
+            self.att_sun=1
+            self.queue.append(Attack(0,att.continued_attack,att.wea_dup_attack,1,1,1))
+            self.log.append((-1,"Skylight"))
+        else:
+            if (self.eclipse_a(att.sky_ecl_attack)==1):
+                self.att_sun=1
+                self.queue.append(Attack(0,att.continued_attack,att.wea_dup_attack,1,1,0))
+                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.log.append((-1,"Eclipse"))
+        if (att.moonlight_attack==1):
+            self.att_moon=1
+        elif (self.moonlight_a()==1):
+            self.log.append((-1,"Moonlight"))
+            self.att_moon=1
+        if (self.wrath_a()==1):
+            self.log.append((-1,"Wrath"))
+            self.att_wrath=1
+        self.calc_param()
+        if (self.att_wrath==1):
+            self.crta=int(float(self.crta)*1.5)
+        crtb=self.crta-self.crad
+        q=random.randint(0,99)
+        if (q<crtb):
+            self.att_crt=1
+        if (self.sunlight_a()==1):
+            self.att_sun=1
+            self.log.append((-1,"Sunlight"))
+        hitb=self.hita-self.avod
+        if (self.bane_a()==1):
+            self.atka+=65536
+            self.log.append((-1,"Bane"))
+        if (self.shield_d()==1):
+            self.att_shield=1
+            self.log.append((-2,"Shield"))
+        dmg=(self.atka-self.defd)*(1-self.att_shield)*(1+2*self.att_crt)*self.combo_bonusa
+        self.combo_bonusa = self.combo_bonusa * (1 + self.redseala)
+        if (dmg<0):
+            dmg=0
+        if (dmg>self.d.ability["HP"]):
+            dmg=self.d.ability["HP"]
+        if (dmg==self.d.ability["HP"]):
+            if (self.prayer_d()==1):
+                hitb=0
+                self.log.append((-2,"Prayer"))
+            elif (self.immortald==1):
+                hitb=0
+                self.log.append((-2,"Immortal"))
+        q=random.randint(0,99)
+        if (q<hitb):
+            s=""
+            if (self.att_crt==1):
+                s+="C,"     #critical
+            elif (dmg==0):
+                s+="N,"     #no damage
+            else:
+                s+="H,"     #normal hit
+            s+=str(dmg)
+            s+=","
+            hpadd=0
+            if (self.att_sun==1):
+                hpadd=dmg
+                if (hpadd>self.a.ability["MHP"]-self.a.ability["HP"]):
+                    hpadd=self.a.ability["MHP"]-self.a.ability["HP"]
+            s+=str(hpadd)
+            self.log.append((1,s))
+            self.weapon_rank_buf_a+=1
+            self.wear_buf_a-=1
+            self.exp_buf_a+=1
+            self.exp_buf_d+=1
+            self.att_sun=0
+            self.att_moon=0
+            self.att_wrath=0
+            self.att_crt=0
+            self.att_shield=0
+            self.d.ability["HP"]-=dmg
+            if (self.d.ability["HP"]<=0):
+                return 2
+            return 1
+        else:
+            self.weapon_rank_buf_a+=1
+            self.exp_buf_a+=1
+            self.exp_buf_d+=1
+            self.att_sun=0
+            self.att_moon=0
+            self.att_wrath = 0
+            self.att_crt = 0
+            self.att_shield = 0
+            self.log.append((1,"M,0,0")) #miss
+            return 3
+        return 0
+
+
+    def executed(self,_a):
+        att=_a       #type:Attack
+        if (self.wear_buf_d==0):
+            return 0   #run out of weapon
+        if (self.continue_d(att.continued_attack)==1):
+            self.queue.append(Attack(1,1,0,0,0,0))
+            self.log.append((-2,"Continue"))
+        if (self.weapon_duplicate_d(att.wea_dup_attack)==1):
+            self.queue.append(Attack(1,att.continued_attack,1,0,0,0))
+            self.log.append((-2,"Weaponduplicate"))
+        if (self.shootingstar_d(att.shootingstar_attack)==1):
+            self.queue.append(Attack(1,att.continued_attack,att.wea_dup_attack,1,0,0))
+            self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.log.append((-2,"Shootingstar"))
+        if (self.skylight_d(att.sky_ecl_attack)==1):
+            self.att_sun=1
+            self.queue.append(Attack(1,att.continued_attack,att.wea_dup_attack,1,1,1))
+            self.log.append((-2,"Skylight"))
+        else:
+            if (self.eclipse_d(att.sky_ecl_attack)==1):
+                self.att_sun=1
+                self.queue.append(Attack(1,att.continued_attack,att.wea_dup_attack,1,1,0))
+                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.log.append((-2,"Eclipse"))
+        if (att.moonlight_attack==1):
+            self.att_moon=1
+        elif (self.moonlight_d()==1):
+            self.log.append((-2,"Moonlight"))
+            self.att_moon=1
+        if (self.wrath_d()==1):
+            self.log.append((-2,"Wrath"))
+            self.att_wrath=1
+        self.calc_param()
+        if (self.att_wrath==1):
+            self.crtd=int(float(self.crtd)*1.5)
+        crtb=self.crtd-self.craa
+        q=random.randint(0,99)
+        if (q<crtb):
+            self.att_crt=1
+        if (self.sunlight_d()==1):
+            self.att_sun=1
+            self.log.append((-2,"Sunlight"))
+        hitb=self.hitd-self.avoa
+        if (self.bane_d()==1):
+            self.atkd+=65536
+            self.log.append((-2,"Bane"))
+        if (self.shield_a()==1):
+            self.att_shield=1
+            self.log.append((-1,"Shield"))
+        dmg=(self.atkd-self.defa)*(1-self.att_shield)*(1+2*self.att_crt)*self.combo_bonusd
+        self.combo_bonusd = self.combo_bonusd * (1 + self.redseald)
+        if (dmg<0):
+            dmg=0
+        if (dmg>self.a.ability["HP"]):
+            dmg=self.a.ability["HP"]
+        if (dmg==self.a.ability["HP"]):
+            if (self.prayer_a()==1):
+                hitb=0
+                self.log.append((-1,"Prayer"))
+            elif (self.immortala==1):
+                hitb=0
+                self.log.append((-1,"Immortal"))
+        q=random.randint(0,99)
+        if (q<hitb):
+            s=""
+            if (self.att_crt==1):
+                s+="C,"     #critical
+            elif (dmg==0):
+                s+="N,"     #no damage
+            else:
+                s+="H,"     #normal hit
+            s+=str(dmg)
+            s+=","
+            hpadd=0
+            if (self.att_sun==1):
+                hpadd=dmg
+                if (hpadd>self.d.ability["MHP"]-self.d.ability["HP"]):
+                    hpadd=self.d.ability["MHP"]-self.d.ability["HP"]
+            s+=str(hpadd)
+            self.log.append((2,s))
+            self.weapon_rank_buf_d+=1
+            self.wear_buf_d-=1
+            self.exp_buf_d+=1
+            self.exp_buf_a+=1
+            self.att_sun=0
+            self.att_moon=0
+            self.att_wrath=0
+            self.att_crt=0
+            self.att_shield=0
+            self.a.ability["HP"]-=dmg
+            if (self.a.ability["HP"]<=0):
+                return 2
+            return 1
+        else:
+            self.weapon_rank_buf_d += 1
+            self.exp_buf_d += 1
+            self.exp_buf_a += 1
+            self.att_sun = 0
+            self.att_moon = 0
+            self.att_wrath = 0
+            self.att_crt = 0
+            self.att_shield = 0
+            self.log.append((2,"M,0,0"))
+            return 3
+        return 0
 
 
 
