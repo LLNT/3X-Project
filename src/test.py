@@ -5,6 +5,7 @@ from data_loader import Main as Data
 from terrain_container import Main as Terrain_Container
 from person_container import Main as Person_Container
 import map_controller
+import battle
 if __name__ == '__main__':
     mov_map = numpy.random.randint(1,5,(15, 15))
     pos = (2, 3)
@@ -24,4 +25,7 @@ if __name__ == '__main__':
     print(global_vars.itemBank[1].itemtype.weapontype)
     print(global_vars.personBank["1"].item[1].itemtype.name)
     print(global_vars.personBank["1"].weapon_rank)
+    print(battle.Battle(global_vars.personBank["1"],global_vars.personBank["2"],
+                        global_vars.personBank["1"].item[0],global_vars.personBank["2"].item[0],
+                        map1,(0,3)).battle())
     #map1.drive_map()

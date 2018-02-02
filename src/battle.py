@@ -124,7 +124,7 @@ class Battle:
         self.immortala=0                  #type:int
         self.immortald=0                  #type:int
         self.log=[]                       #type:List[Tuple[int,str]]
-    def __init__(self,_a,_d,_wpa,_wpd,_map):
+    def __init__(self,_a,_d,_wpa,_wpd,_map,posa):
         self.queue = collections.deque([])  # type:collections.deque[Attack]
         self.log = []                    #type:List[Tuple[int,str]]
         self.a=_a                        #type:person.Person
@@ -132,7 +132,7 @@ class Battle:
         map=_map                         #type:map_controller.Main
         self.weapon_a=_wpa               #type:item.Item
         self.weapon_d=_wpd               #type:item.Item
-        posa=map.person_container.position[self.a.pid]
+        #posa=map.person_container.position[self.a.pid]
         posd=map.person_container.position[self.d.pid]
         self.dist=abs(posa[0]-posd[0])+abs(posa[1]-posd[1])
         self.exp_buf_a=self.a.ability["EXP"]
@@ -141,6 +141,7 @@ class Battle:
         self.wp_buf_d=0
         self.battleround=0
         self.att_sun=0
+        self.att_crt=0
         self.att_moon=0
         self.att_wrath=0
         self.att_promised=0
@@ -376,6 +377,16 @@ class Battle:
             r=self.battlea()
         else:
             r=self.battleb()
+        self.weapon_a.use=self.wear_buf_a
+        if self.weapon_a.use==0:
+            print("WARNING A RUNS OUT OF WEAPON")
+        self.weapon_d.use=self.wear_buf_d
+        if self.weapon_d.use==0:
+            print("WARNING D RUNS OUT OF WEAPON")
+        if (r==1):
+            print("WARNING D IS DEFEATED")
+        if (r==2):
+            print("WARNING A IS DEFEATED")
         return self.log
 
     def ambush_a(self):
