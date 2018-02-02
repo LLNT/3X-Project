@@ -6,15 +6,17 @@ from cocos.scene import Scene
 from cocos.scenes import ShuffleTransition
 from cocos.sprite import Sprite
 
-import map_controller
 from audio import Audiolayer
-from data_loader import Main as Data
+
 from display_item.battle_scene import Battlescene
 from display_item.menu import Optionmenu, Weaponselect
 from display_item.info import Personinfo, Battleinfo
 from display_item.loading import Loading
 
 from battle import Battle
+
+from data_loader import Main as Data
+import map_controller
 from global_vars import Main as Global
 from person import Person
 from person_container import Main as Person_Container
@@ -25,7 +27,7 @@ import time
 class Arena(cocos.layer.ColorLayer):
     is_event_handler = True
 
-    def __init__(self):
+    def  __init__(self):
 
         pyglet.resource.path = ['../img']
         pyglet.resource.reindex()

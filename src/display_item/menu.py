@@ -20,9 +20,6 @@ class Optionmenu(Menu):
         self.person = person
         self.dst = dst
 
-
-
-
     def move(self):
         self.parent.move(self.person, self.dst)
         self.parent.remove(self)
@@ -35,6 +32,38 @@ class Optionmenu(Menu):
         self.parent.add(Weaponselect(self.person, self.dst))
         self.parent.remove(self)
 
+class Ordermenu(Menu):
+    is_event_handler = True
+
+    def __init__(self):
+        super(Ordermenu, self).__init__(title='Order')
+        l = []
+        l.append(MenuItem('Move', self.move))
+        l.append(MenuItem('Attack', self.attack))
+        l.append(MenuItem('Cancel', self.cancel))
+
+        self.create_menu(l, zoom_in(), zoom_out())
+
+
+
+    def move(self):
+        self.parent.move()
+        self.parent.remove(self)
+        del self
+
+    def cancel(self):
+        self.parent.cancel()
+        self.parent.remove(self)
+        del self
+
+    def attack(self):
+        self.parent.attack()
+        self.parent.remove(self)
+        del self
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
 
 
 class Weaponselect(Menu):

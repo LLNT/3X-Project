@@ -40,6 +40,8 @@ map_state2color = {
     'target': RED,
 }
 
+
+
 map_state2color_motion = {
     'none': LIGHT_PINK,
     'in_self_moverange': VIOLET,
@@ -57,3 +59,5 @@ per_state2color = {
     'moved': OLIVE,
     'selected': CYAN
 }
+
+
