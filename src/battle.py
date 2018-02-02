@@ -375,19 +375,28 @@ class Battle:
     def battle(self):
         if (self.battleround==0):
             r=self.battlea()
+            self.weapon_a.use = self.wear_buf_a
+            if self.weapon_a.use == 0:
+                print("WARNING A RUNS OUT OF WEAPON")
+            self.weapon_d.use = self.wear_buf_d
+            if self.weapon_d.use == 0:
+                print("WARNING D RUNS OUT OF WEAPON")
+            if (r == 1):
+                print("WARNING D IS DEFEATED")
+            if (r == 2):
+                print("WARNING A IS DEFEATED")
+            return self.log
         else:
             r=self.battleb()
-        self.weapon_a.use=self.wear_buf_a
-        if self.weapon_a.use==0:
-            print("WARNING A RUNS OUT OF WEAPON")
-        self.weapon_d.use=self.wear_buf_d
-        if self.weapon_d.use==0:
-            print("WARNING D RUNS OUT OF WEAPON")
-        if (r==1):
-            print("WARNING D IS DEFEATED")
-        if (r==2):
-            print("WARNING A IS DEFEATED")
-        return self.log
+            self.weapon_a.use=self.wear_buf_a
+            if self.weapon_a.use==0:
+                print("WARNING A RUNS OUT OF WEAPON")
+            if (r==1):
+                print("WARNING D IS DEFEATED")
+            if (r==2):
+                print("WARNING A IS DEFEATED")
+            return self.log
+
 
     def ambush_a(self):
         if not("Ambush" in self.skills_a):
