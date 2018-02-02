@@ -1,70 +1,87 @@
 {
   "Plain":{
     "Infantry":1,
-    "Knight":1
+    "Knight":1,
+    "Bower":1
   },
   "Wood":{
     "Infantry":2,
-    "Knight":3
+    "Knight":3,
+    "Bower":2
   },
   "River":{
     "Infantry":5,
-    "Knight":255
+    "Knight":255,
+    "Bower":255
   },
   "Mountain":{
     "Infantry":3,
-    "Knight":255
+    "Knight":255,
+    "Bower":3
   },
   "High Mountain":{
     "Infantry":255,
-    "Knight":255
+    "Knight":255,
+    "Bower":255
   },
   "Sea":{
     "Infantry":255,
-    "Knight":255
+    "Knight":255,
+    "Bower":255
   },
   "Forest":{
     "Infantry":5,
-    "Knight":255
+    "Knight":255,
+    "Bower":3
   },
   "Grass":{
     "Infantry":1,
-    "Knight":1.5
+    "Knight":1.5,
+    "Bower":1
   },
   "Bridge":{
     "Infantry":1,
-    "Knight":1
+    "Knight":1,
+    "Bower":1
   },
   "Column":{
     "Infantry":1,
-    "Knight":1.5
+    "Knight":1.5,
+    "Bower":1
   },
   "Wall":{
     "Infantry":255,
-    "Knight":255
+    "Knight":255,
+    "Bower":255
   },
   "Avenue":{
     "Infantry":1,
-    "Knight":0.8
+    "Knight":0.8,
+    "Bower":1
   },
   "Cliff":{
     "Infantry":255,
-    "Knight":255
+    "Knight":255,
+    "Bower":255
   },
   "Gate":{
     "Infantry":1,
-    "Knight":1
+    "Knight":1,
+    "Bower":1
   },
   "Village":{
     "Infantry":1,
-    "Knight":1
+    "Knight":1,
+    "Bower":1
   },
   "Fort":{
     "Infantry":1,
-    "Knight":1
+    "Knight":1,
+    "Bower":1
   },
   "Throne":{
     "Infantry":1,
-    "Knight":1
+    "Knight":1,
+    "Bower":1
   }
 }

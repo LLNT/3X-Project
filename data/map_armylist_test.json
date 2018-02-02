@@ -3,7 +3,7 @@
   "Armies":[
     {
       "Name": "Lyn's Army",
-      "Member": [{"Id":"1","X":5,"Y":4}],
+      "Member": [{"Id":"1","X":5,"Y":4},{"Id":"3","X":5,"Y":0}],
       "Controller": 0
     },
     {

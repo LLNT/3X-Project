@@ -13,5 +13,15 @@
     "Id":3,
     "Itemtype":"Vulnerary",
     "Use":6
+  },
+  {
+    "Id":4,
+    "Itemtype":"Iron Bow",
+    "Use":45
+  },
+  {
+    "Id":5,
+    "Itemtype":"Vulnerary",
+    "Use":6
   }
 ]
