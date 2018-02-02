@@ -751,26 +751,26 @@ class Battle:
             self.queue.append(Attack(0,1,0,0,0,0))
             self.log.append((-1,"Continue"))
         if (self.weapon_duplicate_a(att.wea_dup_attack)==1):
-            self.queue.append(Attack(0,att.continued_attack,1,0,0,0))
-            self.log.append((-1,"Weaponduplicate"))
+            self.queue.appendleft(Attack(0,att.continued_attack,1,0,0,0))
+            self.log.appendleft((-1,"Weaponduplicate"))
         if (self.shootingstar_a(att.shootingstar_attack)==1):
-            self.queue.append(Attack(0,att.continued_attack,att.wea_dup_attack,1,0,0))
-            self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
-            self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
-            self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.appendleft(Attack(0,att.continued_attack,att.wea_dup_attack,1,0,0))
+            self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
             self.log.append((-1,"Shootingstar"))
         if (self.skylight_a(att.sky_ecl_attack)==1):
             self.att_sun=1
-            self.queue.append(Attack(0,att.continued_attack,att.wea_dup_attack,1,1,1))
+            self.queue.appendleft(Attack(0,att.continued_attack,att.wea_dup_attack,1,1,1))
             self.log.append((-1,"Skylight"))
         else:
             if (self.eclipse_a(att.sky_ecl_attack)==1):
                 self.att_sun=1
-                self.queue.append(Attack(0,att.continued_attack,att.wea_dup_attack,1,1,0))
-                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
-                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
-                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
-                self.queue.append(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(0,att.continued_attack,att.wea_dup_attack,1,1,0))
+                self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
                 self.log.append((-1,"Eclipse"))
         if (att.moonlight_attack==1):
             self.att_moon=1
@@ -861,28 +861,28 @@ class Battle:
             return 0   #run out of weapon
         if (self.continue_d(att.continued_attack)==1):
             self.queue.append(Attack(1,1,0,0,0,0))
-            self.log.append((-2,"Continue"))
+            self.log.appendleft((-2,"Continue"))
         if (self.weapon_duplicate_d(att.wea_dup_attack)==1):
             self.queue.append(Attack(1,att.continued_attack,1,0,0,0))
-            self.log.append((-2,"Weaponduplicate"))
+            self.log.appendleft((-2,"Weaponduplicate"))
         if (self.shootingstar_d(att.shootingstar_attack)==1):
-            self.queue.append(Attack(1,att.continued_attack,att.wea_dup_attack,1,0,0))
-            self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
-            self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
-            self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.appendleft(Attack(1,att.continued_attack,att.wea_dup_attack,1,0,0))
+            self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
+            self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
             self.log.append((-2,"Shootingstar"))
         if (self.skylight_d(att.sky_ecl_attack)==1):
             self.att_sun=1
-            self.queue.append(Attack(1,att.continued_attack,att.wea_dup_attack,1,1,1))
+            self.queue.appendleft(Attack(1,att.continued_attack,att.wea_dup_attack,1,1,1))
             self.log.append((-2,"Skylight"))
         else:
             if (self.eclipse_d(att.sky_ecl_attack)==1):
                 self.att_sun=1
-                self.queue.append(Attack(1,att.continued_attack,att.wea_dup_attack,1,1,0))
-                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
-                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
-                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
-                self.queue.append(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(1,att.continued_attack,att.wea_dup_attack,1,1,0))
+                self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
+                self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 1, 0))
                 self.log.append((-2,"Eclipse"))
         if (att.moonlight_attack==1):
             self.att_moon=1
