@@ -9,11 +9,12 @@ from cocos.sprite import Sprite
 import map_controller
 from audio import Audiolayer
 from data_loader import Main as Data
-from display_item.battle_scene import Battle
+from display_item.battle_scene import Battlescene
 from display_item.menu import Optionmenu, Weaponselect
 from display_item.info import Personinfo, Battleinfo
 from display_item.loading import Loading
 
+from battle import Battle
 from global_vars import Main as Global
 from person import Person
 from person_container import Main as Person_Container
@@ -130,14 +131,18 @@ class Arena(cocos.layer.ColorLayer):
         self._repaint()
         self.item = item
 
-    def attack(self, person, dst):
-        obj = self.person[person.pid]
-        action = self._sequential_move(person, dst)
-        obj.do(action + CallFunc(self._battle_scene) + CallFunc(self.mark_role) + CallFunc(self.clear_map)
+    def attack(self, battle_element):
+        at, df, wp, map, pos = battle_element
+        battle = Battle(at, df, wp, df.item[0], map, pos)
+        res = battle.battle()
+        del battle
+        obj = self.person[at.pid]
+        action = self._sequential_move(self.select, self.dst)
+        obj.do(action + CallFunc(self._battle_scene, res) + CallFunc(self.clear_map)
                + CallFunc(self.take_turn))
 
-    def _battle_scene(self):
-        director.push(ShuffleTransition(Scene(Battle()), duration=1.5))
+    def _battle_scene(self, res):
+        director.push(ShuffleTransition(Scene(Battlescene(res)), duration=1.5))
 
     def take_turn(self): #according to the controller, take turn of next charactor
         map = self.map
@@ -224,7 +229,7 @@ class Arena(cocos.layer.ColorLayer):
                         if self.tiles[i][j].state is 'in_self_attackrange':
 
                             self.info.info_clear()
-                            self.info = Battleinfo(self.select, self.map2per[(i, j)], self.item, self.map)
+                            self.info = Battleinfo(self.select, self.map2per[(i, j)], self.item, self.map, self.target)
                             self.add(self.info)
                             self.state = 'battle_info'
                         else:
@@ -245,7 +250,9 @@ class Arena(cocos.layer.ColorLayer):
             elif self.state == 'battle_info':
                 if buttons == 1:
                     print("attaking")
-                    self.move(self.select, self.dst)
+                    # self.move(self.select, self.dst)
+
+                    self.attack(self.info.battle_element)
                     self.info.info_clear()
                 elif buttons == 4:
                     self.return_to_notdecide()

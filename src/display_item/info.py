@@ -41,9 +41,8 @@ class Info(ColorLayer):
             self.add(item)
 
     def info_clear(self):
-        for item in self.items:
-            self.remove(item)
         self.parent.remove(self)
+        del self
 
 class Personinfo(Info):
     # 显示个人的信息
@@ -66,14 +65,16 @@ class Personinfo(Info):
         self.display(content, ((0, 0), (self.width/2, self.height/2)))
 
 class Battleinfo(Info):
-    def __init__(self, at, df, wp, map):
+    def __init__(self, at, df, wp, map, pos):
         super(Battleinfo, self).__init__()
-        self.info_display(at, df, wp, map)
+        self.info_display(at, df, wp, map, pos)
+        self.battle_element = [at, df, wp, map, pos]
 
-    def info_display(self, at, df, wp, map):
+
+    def info_display(self, at, df, wp, map, pos):
         wp_d = df.item[0]
-        battle = Battle(at, df, wp, wp_d, map)
-        res = battle.simulate()
+        self.battle = Battle(at, df, wp, wp_d, map, pos)
+        res = self.battle.simulate()
         content = []
         content.append('sup: ' + str(res[1]))
         content.append('pur: ' + str(res[2]))
@@ -93,3 +94,5 @@ class Battleinfo(Info):
 
         else:
             self.display(['No reflection'], ((self.width / 2, self.height / 2), (self.width, self.height)))
+
+
