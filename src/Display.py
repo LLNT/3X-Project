@@ -226,7 +226,9 @@ class Arena(cocos.layer.ColorLayer):
                     self.return_to_notdecide()
                 elif buttons == 1:
                     if (i, j) in self.map2per.keys(): #选中的是人
-                        if self.tiles[i][j].state is 'in_self_attackrange':
+                        pid = self.map2per[(i, j)].pid
+                        if self.tiles[i][j].state is 'in_self_attackrange' \
+                                and self.map.person_container.controller[pid] == 1:
 
                             self.info.info_clear()
                             self.info = Battleinfo(self.select, self.map2per[(i, j)], self.item, self.map, self.target)
