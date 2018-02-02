@@ -2,6 +2,7 @@
 ##Discussion and Ideas
 
 - *YYYY/MM/DD-hh:mm* <br> Your content <br> Signature
+- *2018/02/02-21:24* **MEETING**<br>CXY: fix minor buges and item status. NXZ: program. LXD: continue on character settings. LC: continue on adding stories to minor characters.<br> Niu Xingzhi
 - *2018/01/23-22:12* **MEETING**<br>CXY: map driver UI. LC: Add stories to Lucia, construct 2nd route, play an FE game. NXZ/LXD: Suspended. <br> Niu Xingzhi
 - *2018/01/17-21:23* **MEETING**<br>CXY: Read the whole abstract and find logistic ambiguouty and the way to balance female & male characters. LXD: Finish the second character(Tanya). LC: Try FE8 and make out the detailed script of one chapter. NXZ: Program skills and battle. <br>Add a female summonner. Advanced class branches.<br> Niu Xingzhi
 - *2018/01/12-21:42* **MEETING**<br>ALL: Read the abstract. LXD: Continue on character sketch. CXY: Fix the display with thread and mutex. LC: Thinking about how to add female characters and branch stories. NXY: Detail data for enemy characters. <br> Niu Xingzhi
