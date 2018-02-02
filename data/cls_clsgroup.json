@@ -3,7 +3,7 @@
   "Swordman":"Infantry",
   "Lancer":"Infantry",
   "Warrior":"Infantry", 
-  "Archer":"Infantry",
+  "Archer":"Bower",
   "Cavalier":"Knight",
   "Nomad":"Knight",
   "Pegasus Rider":"Pegasus",

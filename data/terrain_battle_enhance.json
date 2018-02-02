@@ -15,6 +15,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Wood":{
@@ -27,6 +35,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -51,6 +67,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":5,
+      "AVO":-10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Mountain":{
@@ -63,6 +87,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -87,6 +119,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Sea":{
@@ -105,6 +145,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":10,
+      "AVO":-10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Forest":{
@@ -117,6 +165,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":20,
       "CRT":0,
@@ -141,6 +197,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Bridge":{
@@ -153,6 +217,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":-5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":-5,
       "CRT":0,
@@ -177,6 +249,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Wall":{
@@ -189,6 +269,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -213,6 +301,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":-5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Cliff":{
@@ -225,6 +321,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -249,6 +353,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Village":{
@@ -261,6 +373,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":5,
       "CRT":0,
@@ -285,6 +405,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Throne":{
@@ -297,6 +425,14 @@
       "DEF":0
     },
     "Knight":{
+      "HIT":0,
+      "AVO":30,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
       "HIT":0,
       "AVO":30,
       "CRT":0,
