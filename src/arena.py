@@ -10,7 +10,7 @@ from cocos.director import director
 from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay
 from cocos.scenes import FadeTransition
-from display_item.sprite import Charactor, Cell
+from display_item.sprite import Charactor, Cell, Endturn
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo, Info
 from display_item.menu import Ordermenu, Weaponmenu
@@ -55,10 +55,27 @@ class Arena(Layer):
         controller = map.person_container.controller
         for person in people:
             pid = person.pid
-            self.people[pid] = Charactor(person, size, position[pid], controller[pid])
+            self.people[pid] = Charactor(person, 0.35, size, position[pid], controller[pid])
             self.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
         self._clear_map()
+        button = Endturn(label='END',size=(160, 160),pos=(560,200),color=MAROON, font_size=30)
+        self.add(button)
+
+        self.next_round()
+
+    def next_round(self):
+        self.map.turn += 1
+        self.set_turn(self.map.turn)
+        self.map.controller = 0
+        self._mapstate = self.map.send_mapstate()
+        for p in self.people.values():
+            p.state = 'unmoved'
+        self._repaint()
+        if self.map.turn > 6:
+            director.pop()
+        else:
+            self.map.take_turn(self)
 
     def _sequential_move(self, pid, dst):
         # move person of pid through the trace dst
@@ -86,7 +103,20 @@ class Arena(Layer):
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
         # use _repaint
-        pass
+        if self.is_event_handler:
+            i, j = coordinate_t(x, y, self.size)
+            if i < self.w and j < self.h:
+                self._repaint()
+                cell = self.cells[(i, j)]
+                cell.color = mapstate2color_motion[cell.state]
+            pass
+
+    def _in_arena(self):
+        i, j = self.mouse_pos
+        if i < self.w and j < self.h:
+            return True
+        else:
+            return False
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         # according to the state link to correct function
@@ -166,7 +196,9 @@ class Arena(Layer):
         # event handler should be true to wait for commands
         # consider end_turn only under this state
         if self.mouse_btn == 1:
-            if self.cells[self.mouse_pos].person_on is not None: # just select a person
+            if not self._in_arena():
+                pass
+            elif self.cells[self.mouse_pos].person_on is not None: # just select a person
                 pid = self.cells[self.mouse_pos].person_on
                 self.people[pid].state = 'selected'
                 self.selected = pid
@@ -249,6 +281,8 @@ class Arena(Layer):
         if self.mouse_btn == 4:
             self._reset()
         elif self.mouse_btn == 1:
+            if not self._in_arena():
+                return
             cell = self.cells[self.mouse_pos]
             if cell.state is 'in_self_attackrange' and cell.person_on is not None\
                 and self.people[cell.person_on].controller is 1:
@@ -319,6 +353,13 @@ class Arena(Layer):
         self.add(Weaponmenu(items))
         pass
 
+    def end_turn(self):
+        self._clear_map()
+        self.map.controller = 1
+        self.map.reset_state(0)
+        self.is_event_handler = False
+        self.map.ai_turn2(self)
+
     def move(self):
         valid = self._mapstate[0]
         action = self._sequential_move(self.selected, valid[self.selected][self.target][1])
@@ -326,11 +367,24 @@ class Arena(Layer):
         obj.do(action + CallFunc(self._clear_map))
         pass
 
+    def enemy_move(self, pid, dst, rng):
+        self._set_areastate(rng, 'in_enemy_moverange')
+        action = self._sequential_move(pid, dst)
+        obj = self.people[pid]
+
+        obj.do(action + CallFunc(self._clear_map) + CallFunc(self.map.take_turn, self))
+        pass
+
+
     def cancel(self):
         self.is_event_handler = True
         self._set_areastate([self.target], 'in_self_moverange')
         self.state = 'valid_select'
         self.target = None
+        pass
+
+    def set_turn(self, turn):
+        # change the turn over the arena
         pass
 
     def remove(self, obj):

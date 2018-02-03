@@ -166,8 +166,6 @@ class Main:
                 self.person_container.movable[p.pid]=True
         return
 
-
-
     def drive_map(self):
         while self.turn<=5:
             self.turn+=1
@@ -217,5 +215,22 @@ class Main:
 
         arena.is_event_handler = True
 
+    def take_turn(self, arena):
+        if self.controller == 0:
+            self.player_turn(arena)
+        else:
+            self.ai_turn2(arena)
 
+    def ai_turn2(self, arena):
+        valid, command = self.send_mapstate()
+        print(command)
+        command_type = command[0]
+        if command_type == "M":
+            person_to_move = command[1].pid  # type:person.Person
+            arena.enemy_move(person_to_move, command[3], valid[person_to_move])
 
+        elif command_type == "E":
+            self.reset_state(1)
+            self.controller = 0
+            print('player phase')
+            arena.next_round()

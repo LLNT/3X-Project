@@ -8,7 +8,7 @@ from battle import Battle
 
 class Info(ColorLayer):
 
-    def __init__(self, size=None, position=None, center=False):
+    def __init__(self, size=None, position=None, center=False, color=(200,200,200), alpha=200):
         '''
 
         :param size: the size of info layer, equals to the director if none
@@ -21,7 +21,7 @@ class Info(ColorLayer):
         else:
             w, h = size
 
-        super(Info, self).__init__(200,200,200,200,w, h)
+        super(Info, self).__init__(r=color[0],g=color[1],b=color[2],a=alpha,width=w, height=h)
         if center:
             self.position = (width - w) / 2, (height - h) / 2
         else:
