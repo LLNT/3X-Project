@@ -6,6 +6,8 @@
 from cocos.menu import Menu, MenuItem, zoom_in, zoom_out, verticalMenuLayout
 from display_item.info import Info
 from cocos.director import director
+from cocos.actions import Delay
+from pyglet.window import key
 
 class Optionmenu(Menu):
     is_event_handler = True
@@ -44,7 +46,9 @@ class Ordermenu(Menu):
 
         self.create_menu(l, zoom_in(), zoom_out())
 
-
+    def on_mouse_release(self, x, y, buttons, modifiers):
+        if buttons == 1:
+            super().on_mouse_release(x, y, buttons, modifiers)
 
     def move(self):
         self.parent.move()
@@ -114,3 +118,55 @@ class Weaponselect(Menu):
         self.parent.remove(self)
         self.parent.item = None
         self.parent.add(Optionmenu(self.person, self.dst))
+
+
+class Weaponmenu(Menu):
+    is_event_handler = True
+
+    def __init__(self, items):
+        super(Weaponmenu, self).__init__(title='Weapons')
+        w, h = director.get_window_size()
+        self.w, self.h = w, h
+        l = []
+        for item in items:
+            l.append(MenuItem(item.itemtype.name, self.iteminfo, item))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.info = None
+        # self.position = (-w // 4, 0)
+
+    def on_mouse_release(self, x, y, buttons, modifiers):
+        if buttons == 1:
+            super().on_mouse_release(x, y, buttons, modifiers)
+
+    def iteminfo(self, item):
+        content = []
+        it = item.itemtype
+        content.append('name: ' + it.name)
+        content.append('max_use: ' + str(it.max_use))
+        content.append('use:' + str(item.use))
+        content.append('type: ' + it.weapontype)
+        content.append('power: ' + str(it.power))
+        content.append('weight: ' + str(it.weight))
+        content.append('hit: ' + str(it.hit))
+        content.append('critical: ' + str(it.critical))
+        content.append('max_range: ' + str(it.max_range))
+        content.append('min_range: ' + str(it.min_range))
+        info = Info(size=(self.w // 2, self.h), position=(self.w // 2, 0))
+        self.parent.add(info)
+        info.display(content)
+        self.parent.remove(self)
+        self.parent.wpinfo = info
+        self.parent.select_target(item)
+
+
+    def cancel(self):
+        self.parent.state = 'valid_dst'
+        self.parent.menu = Ordermenu()
+        self.parent.add(self.parent.menu)
+        self.parent.remove(self)
+        del self
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()

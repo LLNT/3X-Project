@@ -9,16 +9,19 @@ from cocos.layer import Layer, ColorLayer
 from cocos.director import director
 from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay
+from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
-from display_item.info import Personinfo
-from display_item.menu import Ordermenu
+from display_item.info import Personinfo, Battleinfo, Info
+from display_item.menu import Ordermenu, Weaponmenu
+from display_item.battle_scene import Battlescene
 
 import map_controller
 from global_vars import Main as Global
 from data_loader import Main as Data
 from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
+from battle import Battle
 
 
 class Arena(Layer):
@@ -34,6 +37,7 @@ class Arena(Layer):
 
         self.map = map  # type:map_controller.Main
         self.size = size
+        self.w, self.h = w, h
         # initialize arena attributes
         self._state_control = self._get_state_control()
 
@@ -94,7 +98,23 @@ class Arena(Layer):
         pass
 
     def _reset(self):
-        # reset to initial state
+        # reset to last state
+        # specificlly handle with choose_attack
+        if self.state is 'choose_attack':
+            self.remove(self.wpinfo)
+            self.attack()
+            pid = self.selected
+            valid = self._mapstate[0]
+            for (i, j) in self.cells.keys():
+                cell = self.cells[(i, j)]
+                if cell.state is 'in_self_attackrange':
+                    if (i, j) in valid[pid]:
+                        cell.state = 'in_self_moverange'
+                    else:
+                        cell.state = 'default'
+            self.state = 'valid_dst'
+            self.item = None
+        self._repaint()
         pass
 
     def _set_areastate(self, area, state):
@@ -109,9 +129,13 @@ class Arena(Layer):
         self.target = None
         self.mouse_pos = None
         self.mouse_btn = 0
-        if hasattr(self, 'info'):
+        self.item = None
+        try:
             self.remove(self.info)
-            del self.info
+            self.remove(self.wpinfo)
+        except:
+            pass
+
         self._mapstate = self.map.send_mapstate()
         for cell in self.cells.values():
             cell.state = 'default'
@@ -121,18 +145,6 @@ class Arena(Layer):
         self._repaint()
 
     def _get_state_control(self):
-
-
-
-
-
-
-        # 5   choose_attack
-        # has selected a weapon. highlight the attack range
-        # if valid target, turn to 6, else show the menu again
-        # 6   confirm_attack
-        # show battle_simulate info
-        # if confirm, push battle scene and then return to 1, else turn to 5
         '''
         :return: dictionary in self._state_control
         :usage: self._state_control[state].__call__()
@@ -144,7 +156,8 @@ class Arena(Layer):
             'person_info': self._person_info,3: self._person_info,
             'valid_dst': self._valid_dst,4: self._valid_dst,
             'choose_attack': self._choose_attack,5: self._choose_attack,
-            'confirm_attack': self._confirm_attack,6: self._confirm_attack
+            'confirm_attack': self._confirm_attack,6: self._confirm_attack,
+            'show_battle_result': self._show_battle_result, 7 : self._show_battle_result
         }
 
     def _default(self):
@@ -198,6 +211,7 @@ class Arena(Layer):
                 self.menu = Ordermenu()
                 self.add(self.menu)
                 self.is_event_handler = False
+                self.state = 'valid_dst'
             else:
                 pass
         elif self.mouse_btn == 4:
@@ -219,26 +233,95 @@ class Arena(Layer):
         pass
 
     def _valid_dst(self):
-
         # 4   valid_dst
-        # show menu of move/attack/cancel
+        # is showing menu of move/attack/cancel
         # move: execute action and turn to 0
         # cancel: turn to 1
         # attack: show menu of weapon select
+
+        # at present has nothing to do
         pass
 
     def _choose_attack(self):
+        # 5   choose_attack
+        # has selected a weapon. highlight the attack range
+        # if valid target, turn to 6, else show the menu again, clear the attack_range and reshow the move_range
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_attackrange' and cell.person_on is not None\
+                and self.people[cell.person_on].controller is 1:
+                self.wpinfo.visible = False
+                at = self.people[self.selected].person
+                df = self.people[cell.person_on].person
+                wp = self.item
+                self.info = Battleinfo(at, df, wp, self.map, self.target)
+                self.battlelist = [at, df, wp, self.map, self.target]
+                self.add(self.info)
+                self.state = 'confirm_attack'
+            else:
+                self._reset()
+            pass
         pass
 
     def _confirm_attack(self):
+        # 6   confirm_attack
+        # showing battle_simulate info
+        # if confirm, push battle scene and then return to 1, else turn to 5
+        self.remove(self.info)
+        if self.mouse_btn is 4:
+            self.state = 'choose_attack'
+            self.wpinfo.visible = True
+        elif self.mouse_btn is 1:
+            at, df, wp, map, pos = self.battlelist
+            battle = Battle(at, df, wp, df.item[0], map, pos)
+            res = battle.battle()
+            del battle
+            valid = self._mapstate[0]
+            action = self._sequential_move(self.selected, valid[self.selected][self.target][1])
+            obj = self.people[self.selected]
+            obj.do(action + CallFunc(self._push_battle_scene, res) + CallFunc(self._clear_map))
+            self.state = 'show_battle_result'
+            pass
+
         pass
 
+    def _push_battle_scene(self, res):
+        director.push(FadeTransition(Scene(Battlescene(res)), duration=1.5))
+
+    def _show_battle_result(self):
+        # 7   show_battle_result
+        # showing battle result, push to another scene
+        # if confirm, push battle scene and then return to 1, else turn to 5
+        pass
+
+    def select_target(self, item):
+        area = []
+        max_range = item.itemtype.max_range
+        min_range = item.itemtype.min_range
+        (i, j) = self.target
+        for distance in range(min_range, max_range + 1):
+            for dx in range(distance + 1):
+                dy = distance - dx
+                for x, y in [(i + dx, j + dy), (i + dx, j - dy), (i - dx, j + dy), (i - dx, j - dy)]:
+                    if x in range(self.w) and y in range(self.h):
+                        area.append((x, y))
+        self._set_areastate(area, 'in_self_attackrange')
+        self.state = 'choose_attack'
+        self.item = item
+        self.is_event_handler = True
+
     def attack(self):
+        self.is_event_handler = False
+        self._set_areastate([self.target], 'target')
+        items = self.people[self.selected].person.item
+        self.add(Weaponmenu(items))
         pass
 
     def move(self):
         valid = self._mapstate[0]
-        action = self._sequential_move(self.selected, valid[self.selected][self.mouse_pos][1])
+        action = self._sequential_move(self.selected, valid[self.selected][self.target][1])
         obj = self.people[self.selected]
         obj.do(action + CallFunc(self._clear_map))
         pass
@@ -246,8 +329,13 @@ class Arena(Layer):
     def cancel(self):
         self.is_event_handler = True
         self._set_areastate([self.target], 'in_self_moverange')
+        self.state = 'valid_select'
         self.target = None
         pass
+
+    def remove(self, obj):
+        super().remove(obj)
+        del obj
 
 def map_init():
     data = Data()

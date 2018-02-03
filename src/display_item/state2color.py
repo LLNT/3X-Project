@@ -39,7 +39,7 @@ mapstate2color_motion = {
     'in_self_moverange': VIOLET,
     'in_enemy_moverange': YELLOW,
     'in_ally_moverange': SLATEBLUE,
-    'in_self_attackrange': GOLD,
+    'in_self_attackrange': LIME,
     'target': RED,
 }
 
