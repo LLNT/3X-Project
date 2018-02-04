@@ -39,14 +39,13 @@ class Battlescene(ColorLayer):
         self.w = w
         self.h = h
         print(res)
-        action = Delay(0.5)
+        action1 = action2 = Delay(0.5)
         for event in res:
             if event[0] < 0:
                 continue
             hit,dmg,amg = event[1].split(',')
             dmg = int(dmg)
             amg = int(amg)
-            print(hp1, hp2)
             if hit is 'H':
                 if event[0] is 1:
                     hp2 -= dmg
@@ -54,11 +53,20 @@ class Battlescene(ColorLayer):
                 elif event[0] is 2:
                     hp1 -= dmg
                     hp2 += amg
-                print(hp1, hp2)
-                p1.set_angle(hp1 / mhp1)
-                p2.set_angle(hp2 / mhp2)
+
+                # p1.set_angle(hp1 / mhp1)
+                # p2.set_angle(hp2 / mhp2)
+
+                _, a1 = p1.set_angle_action(hp1 / mhp1)
+                _, a2 = p2.set_angle_action(hp2 / mhp2)
+                action1 = action1 + a1
+                action2 = action2 + a2
             else:
                 continue
+        t1 = p1.right_ring
+        t2 = p2.right_ring
+        t1.do(action1)
+        t2.do(action2)
 
         '''info = Info()
         self.add(info)
@@ -144,14 +152,46 @@ class Ring(Layer):
                 self.right_ring.do(Delay(0.5) + RotateBy(180 - self.angles, d1) + CallFunc(self.mask_visible)
                                    + RotateTo(angle, d2) + CallFunc(self.change_angle, angle))
 
+    def set_angle_action(self, proportion, duration=4):
+        angle = 360 - proportion * 360
+        delta = abs(self.angles - angle)
+        if delta <= 10:
+            return self.right_ring, Delay(0.5)
+        duration = min(1, delta/90) * duration
+        if self.angles > angle: # right rotation
+            if angle >= 180:
+                return self.right_ring, (Delay(0.5) + RotateTo(180, duration) + CallFunc(self.change_angle, angle))
+            elif self.angles <= 180:
+                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration) + CallFunc(self.change_angle, angle))
+            else:
+                d1 = duration * (self.angles - 180) / delta
+                d2 = duration - d1
+                return self.right_ring, (Delay(0.5) + RotateTo(180, d1)
+                                   + RotateTo(angle, d2) + CallFunc(self.change_angle, angle))
+        else: #
+            if angle <= 180:
+                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration) + CallFunc(self.change_angle, angle))
+            elif self.angles >= 180:
+                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration) + CallFunc(self.change_angle, angle))
+            else:
+                d1 = duration * (180 - self.angles) / delta
+                d2 = duration - d1
+                return self.right_ring, (Delay(0.5) + RotateBy(180 - self.angles, d1)
+                                   + RotateTo(angle, d2) + CallFunc(self.change_angle, angle))
+
     def update(self, dt):
         r = (self.right_ring.rotation) / 360
+        if r > 0.5:
+            self.mask_visible()
+        else:
+            self.left_visible()
         color = [0, 0, 0]
         for i in range(3):
-            color[i] = r * self.delta[i] + self.start_color[i]
+            color[i] = int(r * self.delta[i] + self.start_color[i])
         self.right_ring.color = color
         self.left_ring.color = color
         self.hp.element.text = str(self.mhp - int(r * self.mhp))
+        self.hp.element.color = color[0], color[1],color[2], 255
 
     def _diff(self, color1, color2):
         color = [0, 0, 0]
