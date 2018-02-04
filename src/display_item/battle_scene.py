@@ -8,7 +8,7 @@ from cocos.director import director
 from cocos.layer import ColorLayer
 from cocos.scenes import ShuffleTransition
 from cocos.scene import Scene
-from display_item.info import Info
+from display_item.text import Text
 from battle import Battle
 from cocos.sprite import Sprite
 from cocos.layer import Layer
@@ -27,10 +27,10 @@ class Battlescene(ColorLayer):
         battle = Battle(at, df, wp, df.item[0], map, pos)
         pos1 = w // 4, h // 3
         hp1, mhp1 = at.ability['HP'], at.ability['MHP']
-        p1 = Ring(pos1, 0.4, prop=hp1 / mhp1, back_color = WHITE)
+        p1 = Ring(pos1, 0.4, prop=hp1 / mhp1, back_color = WHITE, hp=hp1, mhp=mhp1)
         pos2 = w  *6 // 11, h // 3
         hp2, mhp2 = df.ability['HP'], df.ability['MHP']
-        p2 = Ring(pos2, 0.4, prop=hp2 / mhp2,back_color = WHITE)
+        p2 = Ring(pos2, 0.4, prop=hp2 / mhp2,back_color = WHITE, hp=hp2, mhp=mhp2)
         self.add(p1)
         self.add(p2)
 
@@ -82,7 +82,7 @@ class Battlescene(ColorLayer):
 
 class Ring(Layer):
 
-    def __init__(self, postion, scale, start_color=GREEN, end_color=RED, prop=1,back_color = BLACK):
+    def __init__(self, postion, scale, start_color=GREEN, end_color=RED, prop=1,back_color = BLACK, hp=20, mhp=20):
         super().__init__()
         self.start_color = start_color
         self.end_color = end_color
@@ -98,9 +98,9 @@ class Ring(Layer):
         self.mask_ring = Sprite(image='ring_right.png', position=postion, scale=scale,
                                              color=back_color)
 
-
-
-
+        self.hp = Text(str(hp), postion,color=(0,0,0,255))
+        self.add(self.hp)
+        self.mhp = mhp
         self.add(self.left_ring)
         self.add(self.right_ring)
         self.add(self.mask_ring)
@@ -151,7 +151,7 @@ class Ring(Layer):
             color[i] = r * self.delta[i] + self.start_color[i]
         self.right_ring.color = color
         self.left_ring.color = color
-
+        self.hp.element.text = str(self.mhp - int(r * self.mhp))
 
     def _diff(self, color1, color2):
         color = [0, 0, 0]
