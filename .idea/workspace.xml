@@ -5,11 +5,13 @@
     <list id="8ff8da34-212e-400e-bbc8-88f215881b81" name="display" comment="on mouse motion" />
     <list id="a32817b5-57da-4971-bfb6-0f92957fd656" name="New changelist" comment="" />
     <list default="true" id="39a02d60-74f4-416d-b1dc-3c640f70ad2c" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/circle.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img/ring.png" afterPath="$PROJECT_DIR$/img/ring.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/person.json" afterPath="$PROJECT_DIR$/data/person.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/arena.py" afterPath="$PROJECT_DIR$/src/arena.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/info.py" afterPath="$PROJECT_DIR$/src/display_item/info.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/battle_scene.py" afterPath="$PROJECT_DIR$/src/display_item/battle_scene.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/sprite.py" afterPath="$PROJECT_DIR$/src/display_item/sprite.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/map_controller.py" afterPath="$PROJECT_DIR$/src/map_controller.py" />
     </list>
     <ignored path="C:\Users\hasee\git\3X-Project\.idea\shelf/" />
     <ignored mask="*.xml" />
@@ -25,81 +27,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Display.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Display.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2611">
-              <caret line="209" column="59" lean-forward="true" selection-start-line="209" selection-start-column="12" selection-end-line="209" selection-end-column="59" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map_controller.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/map_controller.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="198" column="29" lean-forward="false" selection-start-line="198" selection-start-column="29" selection-end-line="198" selection-end-column="29" />
-              <folding>
-                <element signature="e#9965#10138#0" expanded="false" />
-                <element signature="e#10173#11233#0" expanded="false" />
-                <element signature="e#11273#11752#0" expanded="false" />
-                <element signature="e#11797#11826#0" expanded="false" />
-                <element signature="e#11868#11975#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="arena.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/arena.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="111" column="16" lean-forward="true" selection-start-line="111" selection-start-column="16" selection-end-line="111" selection-end-column="16" />
+            <state relative-caret-position="203">
+              <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
               <folding>
                 <element signature="e#63#76#0" expanded="true" />
-                <element signature="e#3129#3454#0" expanded="false" />
-                <element signature="e#4346#5011#0" expanded="false" />
-                <element signature="e#5841#6554#0" expanded="false" />
-                <element signature="e#8314#9019#0" expanded="false" />
-                <element signature="e#9060#9261#0" expanded="false" />
-                <element signature="e#9299#9425#0" expanded="false" />
-                <element signature="e#9461#9695#0" expanded="false" />
-                <element signature="e#9735#10763#0" expanded="false" />
-                <element signature="e#10804#11639#0" expanded="false" />
-                <element signature="e#11688#11756#0" expanded="false" />
-                <element signature="e#11801#11970#0" expanded="false" />
-                <element signature="e#12015#12644#0" expanded="false" />
-                <element signature="e#12676#12862#0" expanded="false" />
-                <element signature="e#13611#13779#0" expanded="false" />
-                <element signature="e#13819#13864#0" expanded="false" />
-                <element signature="e#13901#13936#0" expanded="false" />
-                <element signature="e#13958#14357#0" expanded="false" />
+                <element signature="e#3235#3560#0" expanded="false" />
+                <element signature="e#4452#5117#0" expanded="false" />
+                <element signature="e#5947#6660#0" expanded="false" />
+                <element signature="e#8420#9125#0" expanded="false" />
+                <element signature="e#9166#9367#0" expanded="false" />
+                <element signature="e#9405#9531#0" expanded="false" />
+                <element signature="e#9567#9801#0" expanded="false" />
+                <element signature="e#9841#10869#0" expanded="false" />
+                <element signature="e#11963#12592#0" expanded="false" />
+                <element signature="e#12624#12810#0" expanded="false" />
+                <element signature="e#13559#13727#0" expanded="false" />
+                <element signature="e#13767#13812#0" expanded="false" />
+                <element signature="e#13849#13884#0" expanded="false" />
+                <element signature="e#13906#14305#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="state2color.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/display_item/state2color.py">
+      <file leaf-file-name="Display.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Display.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="57" selection-end-column="30" />
+            <state relative-caret-position="400">
+              <caret line="211" column="16" lean-forward="true" selection-start-line="211" selection-start-column="16" selection-end-line="211" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sprite.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/display_item/sprite.py">
+      <file leaf-file-name="battle_scene.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+            <state relative-caret-position="250">
+              <caret line="112" column="31" lean-forward="true" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
               <folding>
-                <element signature="e#63#94#0" expanded="true" />
+                <element signature="e#65#100#0" expanded="true" />
+                <element signature="e#3794#4409#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="person.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/person.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="49" column="15" lean-forward="true" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,31 +89,35 @@
       <file leaf-file-name="info.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/info.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="560">
+              <caret line="63" column="54" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="63" selection-end-column="54" />
               <folding>
-                <element signature="e#1410#2082#0" expanded="false" />
+                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#335#978#0" expanded="false" />
+                <element signature="e#1037#1303#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="text.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/display_item/text.py">
+      <file leaf-file-name="person.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/person.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="44" />
+            <state relative-caret-position="375">
+              <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="text.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/text.py">
+      <file leaf-file-name="Display_Qt.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/history/Display_Qt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="1550">
+              <caret line="73" column="27" lean-forward="true" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#91#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -158,7 +144,6 @@
       <find>self.parentWidget().size</find>
       <find>QColor</find>
       <find>AIC</find>
-      <find>return</find>
       <find>getcwd</find>
       <find>self</find>
       <find>(it.</find>
@@ -169,6 +154,10 @@
       <find>remove</find>
       <find>battle</find>
       <find>is_event</find>
+      <find>self.right_ring.do(</find>
+      <find>return (self.right_ring,</find>
+      <find>return</find>
+      <find>return self.right_ring, (</find>
     </findStrings>
     <replaceStrings>
       <replace>j</replace>
@@ -180,6 +169,9 @@
       <replace>content.append(it.</replace>
       <replace>: ' +</replace>
       <replace>info.info_clear</replace>
+      <replace>return (self.right_ring,</replace>
+      <replace>sel</replace>
+      <replace>self.right_ring.do(</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -216,24 +208,28 @@
         <option value="$PROJECT_DIR$/src/display_item/text.py" />
         <option value="$PROJECT_DIR$/src/person.py" />
         <option value="$PROJECT_DIR$/src/battle.py" />
-        <option value="$PROJECT_DIR$/src/display_item/battle_scene.py" />
         <option value="$PROJECT_DIR$/src/utility.py" />
         <option value="$PROJECT_DIR$/src/Display.py" />
         <option value="$PROJECT_DIR$/src/display_item/state2color.py" />
-        <option value="$PROJECT_DIR$/data/person.json" />
         <option value="$PROJECT_DIR$/src/display_item/menu.py" />
         <option value="$PROJECT_DIR$/src/display_item/info.py" />
         <option value="$PROJECT_DIR$/src/map_controller.py" />
+        <option value="$PROJECT_DIR$/src/display_item/pygdrawing.py" />
+        <option value="$PROJECT_DIR$/src/display_item/matplotlib.py" />
+        <option value="$PROJECT_DIR$/src/display_item/draw.py" />
         <option value="$PROJECT_DIR$/src/display_item/sprite.py" />
+        <option value="$PROJECT_DIR$/src/pygdrawing.py" />
         <option value="$PROJECT_DIR$/src/arena.py" />
+        <option value="$PROJECT_DIR$/src/display_item/battle_scene.py" />
+        <option value="$PROJECT_DIR$/data/person.json" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
-    <option name="y" value="-11" />
-    <option name="width" value="1922" />
-    <option name="height" value="1029" />
+    <option name="x" value="117" />
+    <option name="y" value="125" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -264,6 +260,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -274,7 +271,7 @@
             <path>
               <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
@@ -287,17 +284,22 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="display_item" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="history" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Behavior_Labels" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$USER_HOME$/git/gluttonous" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -312,11 +314,11 @@
       <recent name="C:\Users\hasee\git\3X-Project\audio" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hasee\Downloads\code\3X-Project\img" />
       <recent name="C:\Users\hasee\Downloads\code\3X-Project\src" />
       <recent name="C:\Users\hasee\git\3X-Project\src\display_item" />
       <recent name="C:\Users\hasee\git\3X-Project\src" />
       <recent name="C:\Users\hasee\git\3X-Project\src\history" />
-      <recent name="C:\Users\hasee\git\3X-Project\audio" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -332,23 +334,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.arena">
-    <configuration name="Display" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="3XProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/Display.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -430,7 +415,41 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="loading (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="draw" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/display_item" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="3XProject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/display_item/draw.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="matplotlib" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/display_item" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="3XProject" />
+      <option name="SCRIPT_NAME" value="C:\Users\hasee\Downloads\code\3X-Project\src\display_item\draw.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="pygdrawing (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -442,12 +461,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="3XProject" />
-      <option name="SCRIPT_NAME" value="C:\Users\hasee\git\3X-Project\src\display_item\loading.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/pygdrawing.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="loading (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="pygdrawing" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -459,42 +478,25 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="3XProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/display_item/loading.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="sprite" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/display_item" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="3XProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/display_item/sprite.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\hasee\Downloads\code\3X-Project\src\pygdrawing.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.Display" />
-      <item index="1" class="java.lang.String" itemvalue="Python.loading (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.loading (2)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.arena" />
-      <item index="4" class="java.lang.String" itemvalue="Python.sprite" />
+      <item index="0" class="java.lang.String" itemvalue="Python.arena" />
+      <item index="1" class="java.lang.String" itemvalue="Python.pygdrawing" />
+      <item index="2" class="java.lang.String" itemvalue="Python.pygdrawing (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.matplotlib" />
+      <item index="4" class="java.lang.String" itemvalue="Python.draw" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.arena" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Display" />
-        <item index="2" class="java.lang.String" itemvalue="Python.sprite" />
-        <item index="3" class="java.lang.String" itemvalue="Python.loading (2)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.loading (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.pygdrawing (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.draw" />
+        <item index="3" class="java.lang.String" itemvalue="Python.matplotlib" />
+        <item index="4" class="java.lang.String" itemvalue="Python.pygdrawing" />
       </list>
     </recent_temporary>
   </component>
@@ -502,7 +504,7 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_FIELDS,SHOW_INHERITED" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED,SHOW_FIELDS" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -748,21 +750,29 @@
       <option name="project" value="LOCAL" />
       <updated>1517625270231</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="new version of arena 0.2">
+      <created>1517667548897</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1517667548897</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18736617" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25503355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18903804" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39932886" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19379015" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19057816" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22965738" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43288592" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12955032" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -776,9 +786,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Log Manager" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -866,7 +874,8 @@
     <MESSAGE value="cannot attack self" />
     <MESSAGE value="new version of arena" />
     <MESSAGE value="new version of arena 0.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="new version of arena 0.1" />
+    <MESSAGE value="new version of arena 0.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="new version of arena 0.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -877,7 +886,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="56" />
+      <option name="time" value="58" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -886,273 +895,10 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/graphics/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="175" column="4" lean-forward="false" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/SDL/dll.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="260" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/SDL/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/pygame/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/music.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="48" column="29" lean-forward="true" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pygame/midi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14880">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/media/player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="78" column="20" lean-forward="false" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/media/sources/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1452">
-          <caret line="221" column="6" lean-forward="false" selection-start-line="221" selection-start-column="6" selection-end-line="221" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/effect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="59" column="33" lean-forward="true" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/compat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/SDL/mixer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="154" column="33" lean-forward="true" selection-start-line="154" selection-start-column="33" selection-end-line="154" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2017.2/system/python_stubs/-570142175/nt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="211" column="4" lean-forward="false" selection-start-line="211" selection-start-column="4" selection-end-line="211" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ai_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="16" column="51" lean-forward="false" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/audio/pygame/mixer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10550">
-          <caret line="558" column="0" lean-forward="false" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scroll_test.py" />
-    <entry file="file://$PROJECT_DIR$/src/audio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/loading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/layer/python_interpreter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/itemtype.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="11" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utility.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/notice/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/person_container.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/item.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/person.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="11" column="47" lean-forward="true" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/window/key.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/chapter_plot.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/person.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="18" column="14" lean-forward="false" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="131" column="20" lean-forward="false" selection-start-line="131" selection-start-column="20" selection-end-line="131" selection-end-column="20" />
-          <folding>
-            <element signature="e#9170#14061#0" expanded="false" />
-            <element signature="e#14095#15124#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/director.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="296" column="37" lean-forward="true" selection-start-line="296" selection-start-column="37" selection-end-line="296" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/layer/base_layers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="80" column="49" lean-forward="true" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/lin.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/ring.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/cocosnode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="630" column="30" lean-forward="true" selection-start-line="630" selection-start-column="30" selection-end-line="630" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/rect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="145" column="8" lean-forward="false" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/display_item/menu.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="122" column="18" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
-          <folding>
-            <element signature="e#64#140#0" expanded="false" />
-            <element signature="e#1936#3562#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1168,15 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="209" column="38" lean-forward="true" selection-start-line="209" selection-start-column="38" selection-end-line="209" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1192,58 +929,256 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/actions/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="37" column="13" lean-forward="true" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/actions/camera_actions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/actions/instant_actions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="57" column="6" lean-forward="false" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/graphics/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="205" column="13" lean-forward="true" selection-start-line="205" selection-start-column="13" selection-end-line="205" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2017.2/system/python_stubs/-570142175/PyQt5/QtWidgets/QStylePainter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2017.2/system/python_stubs/-570142175/PyQt5/QtGui/QPainter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="107" column="32" lean-forward="false" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="410" column="4" lean-forward="false" selection-start-line="410" selection-start-column="4" selection-end-line="410" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/draw.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="348" column="8" lean-forward="false" selection-start-line="348" selection-start-column="8" selection-end-line="348" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/gl/lib_glx.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="62" column="4" lean-forward="false" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/gl/gl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="634" column="0" lean-forward="false" selection-start-line="634" selection-start-column="0" selection-end-line="634" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/actions/base_actions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="422" column="11" lean-forward="true" selection-start-line="422" selection-start-column="11" selection-end-line="422" selection-end-column="11" />
+          <folding>
+            <element signature="e#17927#18435#0" expanded="false" />
+            <element signature="e#18470#18825#0" expanded="false" />
+            <element signature="e#18855#19230#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="652" column="8" lean-forward="true" selection-start-line="652" selection-start-column="8" selection-end-line="652" selection-end-column="8" />
+        <state relative-caret-position="410">
+          <caret line="681" column="13" lean-forward="false" selection-start-line="681" selection-start-column="13" selection-end-line="681" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/history/Display_Qt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1550">
+          <caret line="73" column="27" lean-forward="true" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#91#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/cocosnode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="327" column="56" lean-forward="true" selection-start-line="273" selection-start-column="20" selection-end-line="327" selection-end-column="56" />
+          <folding>
+            <element signature="e#1882#1947#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/director.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="326" column="13" lean-forward="false" selection-start-line="326" selection-start-column="13" selection-end-line="326" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="1059" column="0" lean-forward="false" selection-start-line="1059" selection-start-column="0" selection-end-line="1059" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/20160924090422576.png" />
+    <entry file="file://$PROJECT_DIR$/src/display_item/circle">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="1407" column="4" lean-forward="false" selection-start-line="1407" selection-start-column="4" selection-end-line="1407" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/fig.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/kent.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/ring.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/patches.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="1005" column="6" lean-forward="false" selection-start-line="1005" selection-start-column="6" selection-end-line="1005" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/axes/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="2688" column="24" lean-forward="true" selection-start-line="2688" selection-start-column="24" selection-end-line="2688" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/artist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="979" column="49" lean-forward="false" selection-start-line="959" selection-start-column="0" selection-end-line="979" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/figure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="999" column="43" lean-forward="true" selection-start-line="999" selection-start-column="43" selection-end-line="999" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2017.2/system/python_stubs/-570142175/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="4081" column="12" lean-forward="true" selection-start-line="4081" selection-start-column="12" selection-end-line="4081" selection-end-column="21" />
+        <state relative-caret-position="212">
+          <caret line="4048" column="8" lean-forward="false" selection-start-line="4048" selection-start-column="8" selection-end-line="4048" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/info.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/resource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-          <folding>
-            <element signature="e#1410#2082#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="510">
+          <caret line="543" column="39" lean-forward="true" selection-start-line="543" selection-start-column="39" selection-end-line="543" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/state2color.py">
+    <entry file="file://$PROJECT_DIR$/img/ring_left.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/draw.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
-          <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="57" selection-end-column="30" />
+          <caret line="14" column="33" lean-forward="false" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Display.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/actions/interval_actions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2611">
-          <caret line="209" column="59" lean-forward="true" selection-start-line="209" selection-start-column="12" selection-end-line="209" selection-end-column="59" />
+        <state relative-caret-position="401">
+          <caret line="193" column="56" lean-forward="true" selection-start-line="189" selection-start-column="0" selection-end-line="193" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/ring.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/sprite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="49" column="21" lean-forward="false" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#220#868#0" expanded="false" />
+            <element signature="e#899#1791#0" expanded="false" />
+            <element signature="e#1819#3390#0" expanded="false" />
+            <element signature="e#3419#3705#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/map_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="198" column="29" lean-forward="false" selection-start-line="198" selection-start-column="29" selection-end-line="198" selection-end-column="29" />
+        <state relative-caret-position="287">
+          <caret line="20" column="66" lean-forward="false" selection-start-line="20" selection-start-column="66" selection-end-line="20" selection-end-column="66" />
           <folding>
             <element signature="e#9965#10138#0" expanded="false" />
             <element signature="e#10173#11233#0" expanded="false" />
@@ -1254,47 +1189,123 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/sprite.py">
+    <entry file="file://$PROJECT_DIR$/src/pygdrawing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="84" column="6" lean-forward="false" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
+        <state relative-caret-position="277">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/sprite.py">
+    <entry file="file://$PROJECT_DIR$/src/display_item/state2color.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
-          <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/person_container.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/person.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/layer/base_layers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="63" column="8" lean-forward="false" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6665">
+          <caret line="425" column="14" lean-forward="false" selection-start-line="425" selection-start-column="8" selection-end-line="425" selection-end-column="14" />
           <folding>
-            <element signature="e#63#94#0" expanded="true" />
+            <element signature="e#1994#4630#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="63" column="54" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="63" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#335#978#0" expanded="false" />
+            <element signature="e#1037#1303#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Display.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="211" column="16" lean-forward="true" selection-start-line="211" selection-start-column="16" selection-end-line="211" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/sprite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="154" column="13" lean-forward="false" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="112" column="31" lean-forward="true" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
+          <folding>
+            <element signature="e#65#100#0" expanded="true" />
+            <element signature="e#3794#4409#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/person.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="49" column="15" lean-forward="true" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/arena.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="111" column="16" lean-forward="true" selection-start-line="111" selection-start-column="16" selection-end-line="111" selection-end-column="16" />
+        <state relative-caret-position="203">
+          <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
           <folding>
             <element signature="e#63#76#0" expanded="true" />
-            <element signature="e#3129#3454#0" expanded="false" />
-            <element signature="e#4346#5011#0" expanded="false" />
-            <element signature="e#5841#6554#0" expanded="false" />
-            <element signature="e#8314#9019#0" expanded="false" />
-            <element signature="e#9060#9261#0" expanded="false" />
-            <element signature="e#9299#9425#0" expanded="false" />
-            <element signature="e#9461#9695#0" expanded="false" />
-            <element signature="e#9735#10763#0" expanded="false" />
-            <element signature="e#10804#11639#0" expanded="false" />
-            <element signature="e#11688#11756#0" expanded="false" />
-            <element signature="e#11801#11970#0" expanded="false" />
-            <element signature="e#12015#12644#0" expanded="false" />
-            <element signature="e#12676#12862#0" expanded="false" />
-            <element signature="e#13611#13779#0" expanded="false" />
-            <element signature="e#13819#13864#0" expanded="false" />
-            <element signature="e#13901#13936#0" expanded="false" />
-            <element signature="e#13958#14357#0" expanded="false" />
+            <element signature="e#3235#3560#0" expanded="false" />
+            <element signature="e#4452#5117#0" expanded="false" />
+            <element signature="e#5947#6660#0" expanded="false" />
+            <element signature="e#8420#9125#0" expanded="false" />
+            <element signature="e#9166#9367#0" expanded="false" />
+            <element signature="e#9405#9531#0" expanded="false" />
+            <element signature="e#9567#9801#0" expanded="false" />
+            <element signature="e#9841#10869#0" expanded="false" />
+            <element signature="e#11963#12592#0" expanded="false" />
+            <element signature="e#12624#12810#0" expanded="false" />
+            <element signature="e#13559#13727#0" expanded="false" />
+            <element signature="e#13767#13812#0" expanded="false" />
+            <element signature="e#13849#13884#0" expanded="false" />
+            <element signature="e#13906#14305#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -38,7 +38,7 @@ class Charactor(Sprite):
         :param color:
         '''
         super(Charactor, self).__init__(image=path)
-        self.scale = scale
+        self.scale = scale * size / self.height
         self.color = color
         self.position = coordinate(pos[0], pos[1], size)
         self.controller = controller
@@ -52,32 +52,29 @@ class Button(Sprite):
     unselected_effect = None
     activated_effect = None
 
-    def __init__(self, label, size=(50, 50),pos=(0, 0), anchor=None, path='ring.png', color=(255, 255, 255),
+    def __init__(self, label, scale=1,pos=(0, 0), anchor=None, path='ring.png', color=(255, 255, 255),
                  font_size=30, font_color=(127, 255, 170, 255)):
 
-        super().__init__(image=path,position=pos,color=color, anchor=anchor)
+        super().__init__(image=path,position=pos,color=color, scale=scale, anchor=anchor)
 
-        self.scale_x = size[0] / self.width
-        self.scale_y = size[1] / self.height
 
         self.activated = False
-
-
+        self.selected =False
+        self.radius = self.height / 2
         text = RichLabel(label, (0, 0), anchor_x='center', anchor_y='center',
                          font_size=font_size, color=font_color)
         self.add(text)
         print(text.parent)
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
-        if self.get_rect().contains(x, y):
+        if (x - self.position[0]) ** 2 + (y - self.position[1]) ** 2 < self.radius ** 2:
             self.on_selected()
         else:
             self.on_unselected()
 
     def on_mouse_press(self, x, y, buttons, modifiers):
-        if buttons == 1:
-            if self.get_rect().contains(x, y):
-                self.on_activated()
+        if buttons == 1 and self.selected:
+            self.on_activated()
 
 
     def on_enter(self):
@@ -106,9 +103,11 @@ class Button(Sprite):
 class Endturn(Button):
     def on_selected(self):
         self.color = (255, 215, 0)
+        self.selected = True
 
     def on_unselected(self):
         self.color = (128, 0, 0)
+        self.selected = False
 
     def on_activated(self):
         if self.parent.state is 'default':

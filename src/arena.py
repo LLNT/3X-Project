@@ -4,9 +4,12 @@
 @time: 2018/2/1 19:02
 '''
 import pyglet
+from pyglet.gl import glEnable,glClear, GL_COLOR_BUFFER_BIT, GL_LINES
+import pyglet.gl
+import random
 
 from cocos.layer import Layer, ColorLayer
-from cocos.director import director
+from cocos.director import director,Director
 from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay
 from cocos.scenes import FadeTransition
@@ -55,14 +58,17 @@ class Arena(Layer):
         controller = map.person_container.controller
         for person in people:
             pid = person.pid
-            self.people[pid] = Charactor(person, 0.35, size, position[pid], controller[pid])
+            self.people[pid] = Charactor(person, 0.9, size, position[pid], controller[pid])
             self.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
         self._clear_map()
-        button = Endturn(label='END',size=(160, 160),pos=(560,200),color=MAROON, font_size=30)
+        button = Endturn(label='END',scale=0.4,pos=(560,200),color=MAROON, font_size=48)
         self.add(button)
 
         self.next_round()
+
+
+
 
     def next_round(self):
         self.map.turn += 1
@@ -308,14 +314,10 @@ class Arena(Layer):
             self.state = 'choose_attack'
             self.wpinfo.visible = True
         elif self.mouse_btn is 1:
-            at, df, wp, map, pos = self.battlelist
-            battle = Battle(at, df, wp, df.item[0], map, pos)
-            res = battle.battle()
-            del battle
             valid = self._mapstate[0]
             action = self._sequential_move(self.selected, valid[self.selected][self.target][1])
             obj = self.people[self.selected]
-            obj.do(action + CallFunc(self._push_battle_scene, res) + CallFunc(self._clear_map))
+            obj.do(action + CallFunc(self._push_battle_scene, self.battlelist) + CallFunc(self._clear_map))
             self.state = 'show_battle_result'
             pass
 
@@ -420,4 +422,7 @@ if __name__ == '__main__':
     map, w, h = map_init()
     director.run(Scene(Arena(map, w, h)))
     map_init()
-    pass
+
+
+
+
