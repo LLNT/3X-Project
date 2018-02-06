@@ -23,6 +23,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Wood":{
@@ -43,6 +51,14 @@
       "DEF":0
     },
     "Bower":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -75,6 +91,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Mountain":{
@@ -95,6 +119,14 @@
       "DEF":0
     },
     "Bower":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -127,6 +159,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Sea":{
@@ -153,6 +193,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Forest":{
@@ -173,6 +221,14 @@
       "DEF":0
     },
     "Bower":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
       "HIT":0,
       "AVO":20,
       "CRT":0,
@@ -205,6 +261,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Bridge":{
@@ -231,6 +295,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Column":{
@@ -251,6 +323,14 @@
       "DEF":0
     },
     "Bower":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -283,6 +363,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Avenue":{
@@ -303,6 +391,14 @@
       "DEF":0
     },
     "Bower":{
+      "HIT":0,
+      "AVO":-5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
       "HIT":0,
       "AVO":-5,
       "CRT":0,
@@ -335,6 +431,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Gate":{
@@ -355,6 +459,14 @@
       "DEF":0
     },
     "Bower":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
       "HIT":0,
       "AVO":20,
       "CRT":0,
@@ -387,6 +499,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Fort":{
@@ -413,6 +533,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Throne":{
@@ -433,6 +561,14 @@
       "DEF":0
     },
     "Bower":{
+      "HIT":0,
+      "AVO":30,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
       "HIT":0,
       "AVO":30,
       "CRT":0,

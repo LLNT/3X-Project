@@ -31,5 +31,16 @@
       "Wind":-65536,
       "Light":-65536,
       "Dark":-65536,
+      "Wand":-65536},
+  "Pegasus Knight":
+    {"Sword":-65536,
+      "Lance":1,
+      "Axe":-65536,
+      "Bow":-65536,
+      "Fire":-65536,
+      "Thunder":-65536,
+      "Wind":-65536,
+      "Light":-65536,
+      "Dark":-65536,
       "Wand":-65536}
 }

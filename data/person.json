@@ -95,7 +95,7 @@
       "RES":0,
       "LUK":20,
       "BLD":6,
-      "MOV":8,
+      "MOV":5,
       "HP":18,
       "CRY":5,
       "EXP":0
@@ -117,5 +117,45 @@
 
     ],
     "Init_item":[4,5]
+  },
+  "4":
+  {
+    "Id": 4,
+    "Name": "Florina",
+    "Cls":"Pegasus Knight",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":17,
+      "STR":5,
+      "MGC":2,
+      "SPD":9,
+      "SKL":7,
+      "DEF":4,
+      "RES":4,
+      "LUK":7,
+      "BLD":4,
+      "MOV":7,
+      "HP":17,
+      "CRY":16,
+      "EXP":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"flolina.png",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[6]
   }
 }

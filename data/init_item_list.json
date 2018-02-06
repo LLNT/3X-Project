@@ -23,5 +23,10 @@
     "Id":5,
     "Itemtype":"Vulnerary",
     "Use":6
+  },
+  {
+    "Id":6,
+    "Itemtype":"Javelin",
+    "Use":20
   }
 ]

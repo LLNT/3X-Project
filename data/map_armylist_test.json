@@ -8,7 +8,7 @@
     },
     {
       "Name": "Kent's Army",
-      "Member":[{"Id":"2","X":0,"Y":2}],
+      "Member":[{"Id":"2","X":0,"Y":2},{"Id":"4","X":0,"Y":0}],
       "Controller":1
     }
   ]
