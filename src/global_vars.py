@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 import terrain
 import cls
 import person
@@ -15,6 +15,7 @@ class Main:
         self.itemtypeBank={}                #type:Dict[str,itemtype.Itemtype]
         self.itemBank={}                    #type:Dict[int,item.Item]
         self.support_cube={}                #type:Dict[str,Dict[str,Dict[str,int]]]
+        self.attackable_weapon_types=[]     #type:List[str]
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -24,5 +25,6 @@ class Main:
         self.cls_clsgroup=data.cls_clsgroup
         self.AIcontroller=ai_controller.AI_Controller()
         self.support_cube=data.support_cube
+        self.attackable_weapon_types=data.attackable_weapon_types
 
 

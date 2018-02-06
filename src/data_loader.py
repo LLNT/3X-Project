@@ -28,4 +28,5 @@ class Main:
         self.item_type_list=json.load(open(path+"item_type_list.json","r"))
         self.init_item_list=json.load(open(path+"init_item_list.json","r"))
         self.support_cube=json.load(open(path+"support_cube.json","r"))
+        self.attackable_weapon_types = json.load(open(path + "attackable_weapon_types.json", "r"))
 

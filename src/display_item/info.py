@@ -56,13 +56,20 @@ class Personinfo(Info):
         self.spr = Sprite(image=p.pic)
         h, w = self.spr.height, self.spr.width
         self.spr.scale_x, self.spr.scale_y = self.width/(w*2), self.height/(h*2)
-        self.spr.position = self.width*1/4, self.height*3/4
+        self.spr.position = self.width*1//4, self.height*3//4
         self.add(self.spr)
 
         content = []
         content.append('HP:' + str(p.ability['HP']))
         content.append('MHP:' + str(p.ability['MHP']))
-        self.display(content, ((0, 0), (self.width/2, self.height/2)))
+        self.display(content, ((0, 0), (self.width//2, self.height//2)))
+        content = []
+        for item in p.item:
+            content.append(str(item.use) + '/' + str(item.itemtype.max_use))
+            content.append(item.itemtype.name)
+
+        self.display(content, ((self.width//2, 0), (self.width, self.height)))
+
 
 class Battleinfo(Info):
     def __init__(self, at, df, wp, map, pos):
