@@ -83,7 +83,7 @@ class Battleinfo(Info):
         content.append('dmg: ' + str(res[5]))
         self.display(content, ((0, self.height / 2), (self.width / 2, self.height)))
 
-        if res[1] == 0:
+        if res[0] == 0:
             content = []
             content.append('sup: ' + str(res[6]))
             content.append('pur: ' + str(res[7]))

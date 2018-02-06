@@ -14,6 +14,7 @@ class Main:
         self.AIcontroller=None             #type:ai_controller.AI_Controller
         self.itemtypeBank={}                #type:Dict[str,itemtype.Itemtype]
         self.itemBank={}                    #type:Dict[int,item.Item]
+        self.support_cube={}                #type:Dict[str,Dict[str,Dict[str,int]]]
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -22,4 +23,6 @@ class Main:
         self.personBank=person.Main(data,self.itemBank).person_bank
         self.cls_clsgroup=data.cls_clsgroup
         self.AIcontroller=ai_controller.AI_Controller()
+        self.support_cube=data.support_cube
+
 

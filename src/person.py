@@ -1,5 +1,5 @@
 import item
-from typing import List,Dict
+from typing import List,Dict,Tuple
 class Person:
     def __init__(self):
         self.pid = ""        #type:str
@@ -10,7 +10,11 @@ class Person:
         self.skills = []     #type:List[str]
         self.weapon_rank={}  #type:Dict[str,int]
         self.item=[]         #type:List[item.Item]
-    def __init__(self,pid,name,cls,ability,skills,pic,weapon_rank_bonus,items,cls_weapon_rank):
+        self.suprank={}      #type:Dict[str,int]
+        self.supdata={}      #type:Dict[str,Tuple[int,int]]
+        self.attribute=""    #type:str
+        self.color=""        #type:str
+    def __init__(self,pid,name,cls,ability,skills,pic,weapon_rank_bonus,items,support,cls_weapon_rank,color,attr):
         self.pid=pid
         self.name=name
         self.cls=cls
@@ -18,11 +22,23 @@ class Person:
         self.skills=skills
         self.pic=pic
         self.weapon_rank=cls_weapon_rank[self.cls].copy()
+        self.suprank={}
+        self.supdata={}
+        self.color=color
+        self.attribute=attr
+        if len(support)>0:
+            for obj in support:
+                self.suprank[obj]=0
+                self.supdata[obj]=(support[obj]["Base"],support[obj]["Growth"])
+                if self.supdata[obj][0]>50:
+                    self.suprank[obj]+=1
+                if self.supdata[obj][0]>100:
+                    self.suprank[obj]+=1
+                if self.supdata[obj][0]>200:
+                    self.suprank[obj]+=1
         for wp in weapon_rank_bonus:
             self.weapon_rank[wp]+=weapon_rank_bonus[wp]
         self.item=items
-
-
 
 class PersonBank:
     def __init__(self):
@@ -35,7 +51,7 @@ class PersonBank:
                 items.append(itembank[item])
             person=Person(pid,persondict[pid]["Name"],persondict[pid]["Cls"],persondict[pid]["Ability"],
                           persondict[pid]["Skills"],persondict[pid]["Picture"],persondict[pid]["Weapon Rank Bonus"],
-                          items,cls_weapon_rank)
+                          items,persondict[pid]["Support"],cls_weapon_rank,persondict[pid]["Color"],persondict[pid]["Attribute"])
             self.person_bank[pid]=person
 
 

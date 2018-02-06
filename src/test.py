@@ -28,4 +28,8 @@ if __name__ == '__main__':
     print(battle.Battle(global_vars.personBank["1"],global_vars.personBank["2"],
                         global_vars.personBank["1"].item[0],global_vars.personBank["2"].item[0],
                         map1,(0,3)).battle())
+    print(global_vars.personBank["1"].suprank)
+    print(battle.Battle(global_vars.personBank["1"], global_vars.personBank["4"],
+                        global_vars.personBank["1"].item[0], global_vars.personBank["4"].item[0],
+                        map1, (0, 1)).battle())
     #map1.drive_map()

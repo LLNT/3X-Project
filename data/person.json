@@ -37,7 +37,15 @@
     [
 
     ],
-    "Init_item":[1,3]
+    "Init_item":[1,3],
+    "Support":{
+      "3":{
+        "Base":51,
+        "Growth":2
+      }
+    },
+    "Color":"Green",
+    "Attribute":"Wind"
   },
   "2":
   {
@@ -76,7 +84,10 @@
     [
     ],
     "Picture":"kent.png",
-    "Init_item":[2]
+    "Init_item":[2],
+    "Support":{},
+    "Color":"Red",
+    "Attribute":"Fire"
   },
   "3":
   {
@@ -116,7 +127,15 @@
     [
 
     ],
-    "Init_item":[4,5]
+    "Init_item":[4,5],
+    "Support":{
+      "1":{
+        "Base":51,
+        "Growth":2
+      }
+    },
+    "Color":"Green",
+    "Attribute":"Wind"
   },
   "4":
   {
@@ -156,6 +175,9 @@
     [
 
     ],
-    "Init_item":[6]
+    "Init_item":[6],
+    "Support":{},
+    "Color":"White",
+    "Attribute":"Light"
   }
 }

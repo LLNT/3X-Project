@@ -212,6 +212,24 @@ class Battle:
         self.su_d=[]
         self.su_a=map.terrain_container.map[posa[0]][posa[1]].enhance[map.global_vars.cls_clsgroup[self.a.cls]].copy()
         self.su_d=map.terrain_container.map[posd[0]][posd[1]].enhance[map.global_vars.cls_clsgroup[self.d.cls]].copy()
+        for unit in map.person_container.people:
+            if unit.pid in self.a.suprank:
+                if (abs(posa[0]-map.person_container.position[unit.pid][0])+abs(posa[1]-map.person_container.position[unit.pid][1])<4):
+                    rank=str(self.a.suprank[unit.pid])
+                    for key in self.su_a:
+                        self.su_a[key]+=(map.global_vars.support_cube[self.a.attribute][rank][key]
+                                         +map.global_vars.support_cube[self.a.color][rank][key]
+                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].attribute][rank][key]
+                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].color][rank][key])
+        for unit in map.person_container.people:
+            if unit.pid in self.d.suprank:
+                if (abs(posd[0]-map.person_container.position[unit.pid][0])+abs(posd[1]-map.person_container.position[unit.pid][1])<4):
+                    rank=self.d.suprank[unit.pid]
+                    for key in self.su_d:
+                        self.su_d[key]+=(map.global_vars.support_cube[self.d.attribute][rank][key]
+                                         +map.global_vars.support_cube[self.d.color][rank][key]
+                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].attribute][rank][key]
+                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].color][rank][key])
         self.sup_eff_a=0
         self.sup_eff_d=0
         if (map.global_vars.cls_clsgroup[self.d.cls] in self.weapon_a.itemtype.special_effect):
