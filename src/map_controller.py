@@ -234,3 +234,6 @@ class Main:
             self.controller = 0
             print('player phase')
             arena.next_round()
+
+    def attackable(self, weapon):
+        return weapon in self.global_vars.attackable_weapon_types

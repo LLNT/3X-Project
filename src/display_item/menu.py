@@ -3,11 +3,10 @@
 @author: Antastsy
 @time: 2018/1/30 20:10
 '''
-from cocos.menu import Menu, MenuItem, zoom_in, zoom_out, verticalMenuLayout
+from cocos.menu import Menu, MenuItem, zoom_in, zoom_out
 from display_item.info import Info
 from cocos.director import director
-from cocos.actions import Delay
-from pyglet.window import key
+import map_controller
 
 class Optionmenu(Menu):
     is_event_handler = True
@@ -37,13 +36,25 @@ class Optionmenu(Menu):
 class Ordermenu(Menu):
     is_event_handler = True
 
-    def __init__(self):
+    def __init__(self, arena):
         super(Ordermenu, self).__init__(title='Order')
+
         l = []
         l.append(MenuItem('Move', self.move))
         l.append(MenuItem('Attack', self.attack))
-        l.append(MenuItem('Cancel', self.cancel))
 
+
+        pid = arena.selected
+        person = arena.people[pid].person
+        position = arena.map.person_container.position
+        x0, y0 = arena.target
+        suprank = person.suprank
+        for id in suprank:
+            x, y = position[id]
+            if abs(x-x0) + abs(y-y0) <= 1:
+                l.append(MenuItem('Support', self.support))
+
+        l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
 
     def on_mouse_release(self, x, y, buttons, modifiers):
@@ -65,6 +76,11 @@ class Ordermenu(Menu):
         self.parent.remove(self)
         del self
 
+    def support(self):
+        self.parent.support()
+        self.parent.remove(self)
+        del self
+
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:
             self.cancel()
@@ -72,7 +88,7 @@ class Ordermenu(Menu):
 
 class Weaponselect(Menu):
     is_event_handler = True
-    def __init__(self, person, dst):
+    def __init__(self, person, dst, map):
         super(Weaponselect, self).__init__(title='Weapons')
         w, h = director.get_window_size()
         self.w, self.h = w, h
@@ -123,13 +139,14 @@ class Weaponselect(Menu):
 class Weaponmenu(Menu):
     is_event_handler = True
 
-    def __init__(self, items):
+    def __init__(self, items, map):
         super(Weaponmenu, self).__init__(title='Weapons')
         w, h = director.get_window_size()
         self.w, self.h = w, h
         l = []
         for item in items:
-            l.append(MenuItem(item.itemtype.name, self.iteminfo, item))
+            if map.attackable(item.itemtype.weapontype):
+                l.append(MenuItem(item.itemtype.name, self.iteminfo, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
@@ -162,7 +179,7 @@ class Weaponmenu(Menu):
 
     def cancel(self):
         self.parent.state = 'valid_dst'
-        self.parent.menu = Ordermenu()
+        self.parent.menu = Ordermenu(self.parent)
         self.parent.add(self.parent.menu)
         self.parent.remove(self)
         del self

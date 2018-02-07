@@ -7,14 +7,11 @@ from cocos.scenes import ShuffleTransition
 from cocos.sprite import Sprite
 
 from audio import Audiolayer
-
 from display_item.battle_scene import Battlescene
 from display_item.menu import Optionmenu, Weaponselect
 from display_item.info import Personinfo, Battleinfo
-from display_item.loading import Loading
 
 from battle import Battle
-
 from data_loader import Main as Data
 import map_controller
 from global_vars import Main as Global
@@ -22,7 +19,6 @@ from person import Person
 from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
 from utility import *
-import time
 
 class Arena(cocos.layer.ColorLayer):
     is_event_handler = True
@@ -33,7 +29,7 @@ class Arena(cocos.layer.ColorLayer):
         pyglet.resource.reindex()
         self.size = 80
         self.select = None #当前选中的角色
-        self.state = 'none' # 0：默认 什么都没选中； 1：选中一个友军 左击移动右击取消 2：选中一个敌军 任何操作都取消 3： 正在显示某个人的信息 任何操作返回
+        self.state = 'none'
         data = Data()
         global_vars = Global(data)
         terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)

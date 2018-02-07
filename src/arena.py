@@ -3,19 +3,16 @@
 @author: Antastsy
 @time: 2018/2/1 19:02
 '''
-import pyglet
-from pyglet.gl import glEnable,glClear, GL_COLOR_BUFFER_BIT, GL_LINES
 import pyglet.gl
-import random
 
 from cocos.layer import Layer, ColorLayer
-from cocos.director import director,Director
+from cocos.director import director
 from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay
 from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell, Endturn
 from display_item.state2color import *
-from display_item.info import Personinfo, Battleinfo, Info
+from display_item.info import Personinfo, Battleinfo
 from display_item.menu import Ordermenu, Weaponmenu
 from display_item.battle_scene import Battlescene
 
@@ -24,7 +21,7 @@ from global_vars import Main as Global
 from data_loader import Main as Data
 from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
-from battle import Battle
+
 
 
 class Arena(Layer):
@@ -66,8 +63,6 @@ class Arena(Layer):
         self.add(button)
 
         self.next_round()
-
-
 
 
     def next_round(self):
@@ -246,7 +241,7 @@ class Arena(Layer):
             if self.mouse_pos in valid[self.selected]:
                 self.target = self.mouse_pos
                 self._set_areastate([self.target], 'target')
-                self.menu = Ordermenu()
+                self.menu = Ordermenu(self)
                 self.add(self.menu)
                 self.is_event_handler = False
                 self.state = 'valid_dst'
@@ -348,11 +343,17 @@ class Arena(Layer):
         self.item = item
         self.is_event_handler = True
 
+    def support(self):
+        self.is_event_handler = True
+        self._set_areastate([self.target], 'in_self_moverange')
+        self.state = 'valid_select'
+        self.target = None
+
     def attack(self):
         self.is_event_handler = False
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
-        self.add(Weaponmenu(items))
+        self.add(Weaponmenu(items, self.map))
         pass
 
     def end_turn(self):
@@ -376,7 +377,6 @@ class Arena(Layer):
 
         obj.do(action + CallFunc(self._clear_map) + CallFunc(self.map.take_turn, self))
         pass
-
 
     def cancel(self):
         self.is_event_handler = True
