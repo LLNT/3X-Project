@@ -6,7 +6,7 @@
 from cocos.menu import Menu, MenuItem, zoom_in, zoom_out
 from display_item.info import Info
 from cocos.director import director
-import map_controller
+from utility import calc_dist
 
 class Optionmenu(Menu):
     is_event_handler = True
@@ -43,16 +43,12 @@ class Ordermenu(Menu):
         l.append(MenuItem('Move', self.move))
         l.append(MenuItem('Attack', self.attack))
 
-
+        map = arena.map
         pid = arena.selected
-        person = arena.people[pid].person
-        position = arena.map.person_container.position
-        x0, y0 = arena.target
-        suprank = person.suprank
-        for id in suprank:
-            x, y = position[id]
-            if abs(x-x0) + abs(y-y0) <= 1:
-                l.append(MenuItem('Support', self.support))
+        position = arena.target
+        self.sup_dict = map.can_support(pid, position)
+        if len(self.sup_dict) > 0:
+            l.append(MenuItem('Support', self.support))
 
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
@@ -77,7 +73,7 @@ class Ordermenu(Menu):
         del self
 
     def support(self):
-        self.parent.support()
+        self.parent.support(self.sup_dict)
         self.parent.remove(self)
         del self
 

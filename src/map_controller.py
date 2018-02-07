@@ -5,8 +5,8 @@ import move_range_person
 import global_vars
 import person
 import numpy
-from functions import *
 from utility import *
+
 def execute(valid,invalid,ally,enemy):
     for item in valid:
         print(item,"Valid")
@@ -244,7 +244,7 @@ class Main:
         p=self.global_vars.personBank[pid]
         for obj in p.suprank:
             if obj in self.person_container.position:
-                if calc_dist(self.person_container.position[pid],self.person_container.position[obj])<2:
+                if calc_dist(pos,self.person_container.position[obj])<2:
                     if (p.supdata[obj][0]>50)and(p.suprank[obj]<1):
                         sup_obj[obj]=self.person_container.position[obj]
                     if (p.supdata[obj][0]>100)and(p.suprank[obj]<2):
@@ -252,3 +252,7 @@ class Main:
                     if (p.supdata[obj][0]>200)and(p.suprank[obj]<3):
                         sup_obj[obj]=self.person_container.position[obj]
         return sup_obj
+
+    def build_support(self, pid1, pid2):
+        print(pid1, pid2)
+        pass

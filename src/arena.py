@@ -150,6 +150,13 @@ class Arena(Layer):
                         cell.state = 'default'
             self.state = 'valid_dst'
             self.item = None
+        elif self.state is 'choose_support':
+            for pid in self.sup_dict:
+                self.people[pid].state = self._reset_person[pid]
+            self.state = 'valid_dst'
+            self.menu = Ordermenu(self)
+            self.add(self.menu)
+            self.is_event_handler = False
         self._repaint()
         pass
 
@@ -166,6 +173,8 @@ class Arena(Layer):
         self.mouse_pos = None
         self.mouse_btn = 0
         self.item = None
+        self.sup_dict = None
+        self._reset_person = {}
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -193,7 +202,8 @@ class Arena(Layer):
             'valid_dst': self._valid_dst,4: self._valid_dst,
             'choose_attack': self._choose_attack,5: self._choose_attack,
             'confirm_attack': self._confirm_attack,6: self._confirm_attack,
-            'show_battle_result': self._show_battle_result, 7 : self._show_battle_result
+            'show_battle_result': self._show_battle_result, 7 : self._show_battle_result,
+            'choose_support': self._choose_support, 8: self._choose_support
         }
 
     def _default(self):
@@ -332,6 +342,17 @@ class Arena(Layer):
         # if confirm, push battle scene and then return to 1, else turn to 5
         pass
 
+    def _choose_support(self):
+        if self.mouse_btn is 1:
+            if self.mouse_pos in self.sup_dict.values():
+                self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
+                for pid in self.sup_dict:
+                    self.people[pid].state = self._reset_person[pid]
+                self.move()
+        elif self.mouse_btn is 4:
+            self._reset()
+        pass
+
     def select_target(self, item):
         area = []
         max_range = item.itemtype.max_range
@@ -348,11 +369,14 @@ class Arena(Layer):
         self.item = item
         self.is_event_handler = True
 
-    def support(self):
+    def support(self, sup_dict):
         self.is_event_handler = True
-        self._set_areastate([self.target], 'in_self_moverange')
-        self.state = 'valid_select'
-        self.target = None
+        self.state = 'choose_support'
+        for pid in sup_dict:
+            self._reset_person[pid] = self.people[pid].state
+            self.people[pid].state = 'can_support'
+        self.sup_dict = sup_dict
+        self._repaint()
 
     def attack(self):
         self.is_event_handler = False

@@ -23,7 +23,7 @@ SKY_BLUE = (135, 206, 235)
 GOLD = (255, 215, 0)
 MAROON = (128, 0, 0)
 RED = (255, 0, 0)
-
+PURPLE = (195, 51, 173)
 
 mapstate2color = {
     'default': WHITE,
@@ -49,6 +49,7 @@ self_state2color = {
     'selected': VIOLET,
     'on_mouse_motion': VIOLET,
     'target': RED,
+    'can_support': PURPLE,
 }
 
 ally_state2color = {
@@ -57,6 +58,7 @@ ally_state2color = {
     'selected': SKY_BLUE,
     'on_mouse_motion': VIOLET,
     'target': RED,
+    'can_support': PURPLE
 }
 
 enemy_state2color = {

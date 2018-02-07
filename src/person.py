@@ -30,12 +30,12 @@ class Person:
             for obj in support:
                 self.suprank[obj]=0
                 self.supdata[obj]=(support[obj]["Base"],support[obj]["Growth"])
-                if self.supdata[obj][0]>50:
+                '''if self.supdata[obj][0]>50:
                     self.suprank[obj]+=1
                 if self.supdata[obj][0]>100:
                     self.suprank[obj]+=1
                 if self.supdata[obj][0]>200:
-                    self.suprank[obj]+=1
+                    self.suprank[obj]+=1'''
         for wp in weapon_rank_bonus:
             self.weapon_rank[wp]+=weapon_rank_bonus[wp]
         self.item=items

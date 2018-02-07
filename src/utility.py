@@ -1,4 +1,3 @@
-from PyQt5.QtGui import QColor
 def coordinate(i, j, size):
     x = i * size + size // 2
     y = j * size + size // 2
@@ -8,6 +7,9 @@ def coordinate_t(x, y, size):
     i = x // size
     j = y // size
     return i, j
+
+def calc_dist(A,B):
+    return abs(A[0]-B[0])+abs(A[1]-B[1])
 
 state = ['none', 'valid_select', 'invalid_select', 'ally_select', 'enemy_select', 'menu_display', 'info']
 
@@ -31,33 +33,5 @@ GOLD = (255, 215, 0)
 MAROON = (128, 0, 0)
 RED = (255, 0, 0)
 
-map_state2color = {
-    'none': WHITE,
-    'in_self_moverange': STEEL_BLUE,
-    'in_enemy_moverange': CORAL,
-    'in_ally_moverange': SLATEBLUE,
-    'in_self_attackrange': LIME,
-    'target': RED,
-}
-
-
-
-map_state2color_motion = {
-    'none': LIGHT_PINK,
-    'in_self_moverange': VIOLET,
-    'in_enemy_moverange': YELLOW,
-    'in_ally_moverange': SLATEBLUE,
-    'in_self_attackrange': GOLD,
-    'target': RED,
-}
-
-per_state2color = {
-    'none': WHITE,
-    'self': SKY_BLUE,
-    'enemy': ORANGE,
-    'ally': CORNISLK,
-    'moved': OLIVE,
-    'selected': CYAN
-}
 
 
