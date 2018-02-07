@@ -48,7 +48,7 @@ class Ordermenu(Menu):
         self.sup_dict = map.can_support(pid, position)
         if len(self.sup_dict) > 0:
             l.append(MenuItem('Support', self.support))
-
+        self.position = arena.width//2,0
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
 
@@ -134,7 +134,7 @@ class Weaponselect(Menu):
 class Weaponmenu(Menu):
     is_event_handler = True
 
-    def __init__(self, items, map):
+    def __init__(self, items, map, arena):
         super(Weaponmenu, self).__init__(title='Weapons')
         w, h = director.get_window_size()
         self.w, self.h = w, h
@@ -143,6 +143,7 @@ class Weaponmenu(Menu):
             if map.attackable(item.itemtype.weapontype):
                 l.append(MenuItem(item.itemtype.name, self.iteminfo, item))
         l.append(MenuItem('Cancel', self.cancel))
+        self.position = arena.width // 2, 0
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
         # self.position = (-w // 4, 0)

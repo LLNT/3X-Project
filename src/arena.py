@@ -62,8 +62,8 @@ class Arena(Layer):
             self.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
         self._clear_map()
-        button = Endturn(label='END',scale=0.4,pos=(560,200),color=MAROON, font_size=48)
-        self.add(button)
+        self.end = Endturn(label='END',scale=0.4,pos=(560,200),color=MAROON, font_size=48)
+        self.add(self.end)
 
 
 
@@ -171,8 +171,9 @@ class Arena(Layer):
     def _set_state(self, state):
         self.state = state
 
-    def _add_menu(self, menu, dt=0.5):
+    def _add_menu(self, menu, dt=0.1):
         self.do(Delay(dt) + CallFunc(self._seq_add, menu))
+        self.end.visible = False
 
     def _set_areastate(self, area, state):
         for i, j in area:
@@ -364,7 +365,7 @@ class Arena(Layer):
         try:
             pid = next(self.iter)
         except:
-            self._set_state('default')
+            self._clear_map()
             self.is_event_handler = True
             return
         person = self.people[pid].person
@@ -422,7 +423,7 @@ class Arena(Layer):
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
 
-        self._add_menu(Weaponmenu(items, self.map))
+        self._add_menu(Weaponmenu(items, self.map, self))
         pass
 
     def end_turn(self):
@@ -449,6 +450,7 @@ class Arena(Layer):
 
     def cancel(self):
         self.is_event_handler = True
+        self.end.visible = True
         self._set_areastate([self.target], 'in_self_moverange')
         self.state = 'valid_select'
         self.target = None
