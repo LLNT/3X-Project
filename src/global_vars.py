@@ -16,6 +16,7 @@ class Main:
         self.itemBank={}                    #type:Dict[int,item.Item]
         self.support_cube={}                #type:Dict[str,Dict[str,Dict[str,int]]]
         self.attackable_weapon_types=[]     #type:List[str]
+        self.player_character_status={}     #type:Dict[str,int]
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -26,5 +27,5 @@ class Main:
         self.AIcontroller=ai_controller.AI_Controller()
         self.support_cube=data.support_cube
         self.attackable_weapon_types=data.attackable_weapon_types
-
+        self.player_character_status=data.player_character_init
 

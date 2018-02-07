@@ -244,13 +244,14 @@ class Main:
         p=self.global_vars.personBank[pid]
         for obj in p.suprank:
             if obj in self.person_container.position:
-                if calc_dist(pos,self.person_container.position[obj])<2:
-                    if (p.supdata[obj][0]>50)and(p.suprank[obj]<1):
-                        sup_obj[obj]=self.person_container.position[obj]
-                    if (p.supdata[obj][0]>100)and(p.suprank[obj]<2):
-                        sup_obj[obj] = self.person_container.position[obj]
-                    if (p.supdata[obj][0]>200)and(p.suprank[obj]<3):
-                        sup_obj[obj]=self.person_container.position[obj]
+                if self.person_container.controller[obj]==0:
+                    if calc_dist(pos,self.person_container.position[obj])<2:
+                        if (p.supdata[obj][0]>50)and(p.suprank[obj]<1):
+                            sup_obj[obj]=self.person_container.position[obj]
+                        if (p.supdata[obj][0]>100)and(p.suprank[obj]<2):
+                            sup_obj[obj] = self.person_container.position[obj]
+                        if (p.supdata[obj][0]>200)and(p.suprank[obj]<3):
+                            sup_obj[obj]=self.person_container.position[obj]
         return sup_obj
 
     def build_support(self, pid1, pid2):
@@ -268,4 +269,15 @@ class Main:
             p.suprank[pid2]=3
             obj.suprank[pid1]=3
             return
+        return
+
+    def defeated_character(self,pid):
+        self.person_container.position.pop(pid)
+        self.person_container.movable.pop(pid)
+        c=self.person_container.controller.pop(pid)
+        if (c==0):
+            if self.global_vars.player_character_status[pid]==1:
+                self.global_vars.player_character_status[pid]==2
+        p=self.person_container.people[pid]
+        self.person_container.people.remove(p)
         return
