@@ -26,8 +26,8 @@ class Battlescene(ColorLayer):
     def __init__(self, battlelist, w=800, h=600, maxsize=2):
         super(Battlescene, self).__init__(255,255,255,255,width=w, height=h)
 
-        self.at, self.df, wp, map, pos = battlelist
-        battle = Battle(self.at, self.df, wp, self.df.item[0], map, pos)
+        self.at, self.df, wp, self.map, pos = battlelist
+        battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
 
@@ -103,6 +103,11 @@ class Battlescene(ColorLayer):
         color = (0, 255, 0, 255)
         if event[0] < 0: # show info on screen
             content = event[1]
+            if content is 'Defeatenemy':
+                if event[0] is -1:
+                    self.map.defeated_character(self.df.pid)
+                elif event[0] is -2:
+                    self.map.defeated_character(self.at.pid)
             self.add_new_infos(content)
             pass
         else:

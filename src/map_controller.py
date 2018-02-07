@@ -277,7 +277,9 @@ class Main:
         c=self.person_container.controller.pop(pid)
         if (c==0):
             if self.global_vars.player_character_status[pid]==1:
-                self.global_vars.player_character_status[pid]==2
-        p=self.person_container.people[pid]
-        self.person_container.people.remove(p)
-        return
+                self.global_vars.player_character_status[pid]=2
+
+        for p in self.person_container.people:
+            if p.pid == pid:
+                self.person_container.people.remove(p)
+                return

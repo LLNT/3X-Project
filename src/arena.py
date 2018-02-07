@@ -8,7 +8,7 @@ import pyglet
 from cocos.layer import Layer, ColorLayer
 from cocos.director import director
 from cocos.scene import Scene
-from cocos.actions import CallFunc, MoveTo, Delay
+from cocos.actions import CallFunc, MoveTo, Delay, FadeOut
 from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell, Endturn
 from display_item.state2color import *
@@ -69,6 +69,9 @@ class Arena(Layer):
 
         self.next_round()
 
+    def on_enter(self):
+        super().on_enter()
+        self.get_next_to_delete()
 
     def next_round(self):
         self.map.turn += 1
@@ -165,6 +168,8 @@ class Arena(Layer):
     def _seq_add(self, item):
         self.add(item)
 
+    def _set_state(self, state):
+        self.state = state
 
     def _add_menu(self, menu, dt=0.5):
         self.do(Delay(dt) + CallFunc(self._seq_add, menu))
@@ -184,6 +189,7 @@ class Arena(Layer):
         self.item = None
         self.sup_dict = None
         self._reset_person = {}
+        self.iter = iter(self.people)
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -336,20 +342,44 @@ class Arena(Layer):
             valid = self._mapstate[0]
             action = self._sequential_move(self.selected, valid[self.selected][self.target][1])
             obj = self.people[self.selected]
-            obj.do(action + CallFunc(self._push_battle_scene, self.battlelist) + CallFunc(self._clear_map))
-            self.state = 'show_battle_result'
+            obj.do(action + CallFunc(self._push_battle_scene, self.battlelist) +
+                   CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+
             pass
 
         pass
 
     def _push_battle_scene(self, res):
+        self.is_event_handler = False
         director.push(FadeTransition(Scene(Battlescene(res)), duration=1.5))
 
     def _show_battle_result(self):
         # 7   show_battle_result
         # showing battle result, push to another scene
         # if confirm, push battle scene and then return to 1, else turn to 5
+        self.is_event_handler = False
+        self.get_next_to_delete()
+
+    def get_next_to_delete(self):
+        try:
+            pid = next(self.iter)
+        except:
+            self._set_state('default')
+            self.is_event_handler = True
+            return
+        person = self.people[pid].person
+        if person.ability['HP'] <= 0:
+            self.people[pid].do(FadeOut(2)+CallFunc(self._delete_person, pid))
+        else:
+            self.get_next_to_delete()
         pass
+
+    def _delete_person(self, pid):
+        person = self.people[pid]
+        self.people.pop(pid)
+        self.remove(person)
+        del person
+        self.get_next_to_delete()
 
     def _choose_support(self):
         if self.mouse_btn is 1:
