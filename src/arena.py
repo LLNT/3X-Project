@@ -65,6 +65,8 @@ class Arena(Layer):
         button = Endturn(label='END',scale=0.4,pos=(560,200),color=MAROON, font_size=48)
         self.add(button)
 
+
+
         self.next_round()
 
 
@@ -155,10 +157,17 @@ class Arena(Layer):
                 self.people[pid].state = self._reset_person[pid]
             self.state = 'valid_dst'
             self.menu = Ordermenu(self)
-            self.add(self.menu)
+            self._add_menu(self.menu)
             self.is_event_handler = False
         self._repaint()
         pass
+
+    def _seq_add(self, item):
+        self.add(item)
+
+
+    def _add_menu(self, menu, dt=0.5):
+        self.do(Delay(dt) + CallFunc(self._seq_add, menu))
 
     def _set_areastate(self, area, state):
         for i, j in area:
@@ -257,7 +266,7 @@ class Arena(Layer):
                 self.target = self.mouse_pos
                 self._set_areastate([self.target], 'target')
                 self.menu = Ordermenu(self)
-                self.add(self.menu)
+                self._add_menu(self.menu)
                 self.is_event_handler = False
                 self.state = 'valid_dst'
             else:
@@ -382,7 +391,8 @@ class Arena(Layer):
         self.is_event_handler = False
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
-        self.add(Weaponmenu(items, self.map))
+
+        self._add_menu(Weaponmenu(items, self.map))
         pass
 
     def end_turn(self):

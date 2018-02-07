@@ -6,7 +6,6 @@
 from cocos.menu import Menu, MenuItem, zoom_in, zoom_out
 from display_item.info import Info
 from cocos.director import director
-from utility import calc_dist
 
 class Optionmenu(Menu):
     is_event_handler = True
