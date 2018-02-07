@@ -191,6 +191,7 @@ class Arena(Layer):
         self.sup_dict = None
         self._reset_person = {}
         self.iter = iter(self.people)
+        self.end.visible = True
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)

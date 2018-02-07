@@ -5,9 +5,10 @@
     <list id="8ff8da34-212e-400e-bbc8-88f215881b81" name="display" comment="on mouse motion" />
     <list id="a32817b5-57da-4971-bfb6-0f92957fd656" name="New changelist" comment="" />
     <list default="true" id="39a02d60-74f4-416d-b1dc-3c640f70ad2c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test2.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/arena.py" afterPath="$PROJECT_DIR$/src/arena.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/menu.py" afterPath="$PROJECT_DIR$/src/display_item/menu.py" />
     </list>
     <ignored path="C:\Users\hasee\git\3X-Project\.idea\shelf/" />
     <ignored mask="*.xml" />
@@ -26,8 +27,8 @@
       <file leaf-file-name="arena.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/arena.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="439" column="50" lean-forward="true" selection-start-line="439" selection-start-column="50" selection-end-line="439" selection-end-column="50" />
+            <state relative-caret-position="297">
+              <caret line="193" column="31" lean-forward="false" selection-start-line="193" selection-start-column="31" selection-end-line="193" selection-end-column="31" />
               <folding>
                 <element signature="e#63#76#0" expanded="true" />
                 <element signature="e#1512#1631#0" expanded="false" />
@@ -37,29 +38,40 @@
                 <element signature="e#4404#4572#0" expanded="false" />
                 <element signature="e#4617#4638#0" expanded="false" />
                 <element signature="e#5887#5973#0" expanded="false" />
-                <element signature="e#6009#6719#0" expanded="false" />
-                <element signature="e#6331#6390#0" expanded="false" />
-                <element signature="e#6623#6695#0" expanded="false" />
-                <element signature="e#6763#7553#0" expanded="false" />
-                <element signature="e#7587#9274#0" expanded="false" />
-                <element signature="e#7587#7600#0" expanded="false" />
-                <element signature="e#8906#8944#0" expanded="false" />
-                <element signature="e#8971#9274#0" expanded="false" />
-                <element signature="e#9040#9257#0" expanded="false" />
-                <element signature="e#9313#10028#0" expanded="false" />
-                <element signature="e#9313#9331#0" expanded="false" />
-                <element signature="e#10069#10270#0" expanded="false" />
-                <element signature="e#10069#10089#0" expanded="false" />
-                <element signature="e#10308#10434#0" expanded="false" />
-                <element signature="e#10308#10325#0" expanded="false" />
-                <element signature="e#10470#10704#0" expanded="false" />
-                <element signature="e#10470#10485#0" expanded="false" />
-                <element signature="e#10744#11772#0" expanded="false" />
-                <element signature="e#13574#13958#0" expanded="false" />
-                <element signature="e#14003#14632#0" expanded="false" />
-                <element signature="e#15214#15365#0" expanded="false" />
-                <element signature="e#15668#15896#0" expanded="false" />
-                <element signature="e#16168#16213#0" expanded="false" />
+                <element signature="e#6363#6422#0" expanded="false" />
+                <element signature="e#6655#6727#0" expanded="false" />
+                <element signature="e#6795#7585#0" expanded="false" />
+                <element signature="e#7619#9306#0" expanded="false" />
+                <element signature="e#7619#7632#0" expanded="false" />
+                <element signature="e#8938#8976#0" expanded="false" />
+                <element signature="e#9003#9306#0" expanded="false" />
+                <element signature="e#9072#9289#0" expanded="false" />
+                <element signature="e#9345#10060#0" expanded="false" />
+                <element signature="e#9345#9363#0" expanded="false" />
+                <element signature="e#10101#10302#0" expanded="false" />
+                <element signature="e#10101#10121#0" expanded="false" />
+                <element signature="e#10340#10466#0" expanded="false" />
+                <element signature="e#10340#10357#0" expanded="false" />
+                <element signature="e#10502#10736#0" expanded="false" />
+                <element signature="e#10502#10517#0" expanded="false" />
+                <element signature="e#10776#11804#0" expanded="false" />
+                <element signature="e#13606#13990#0" expanded="false" />
+                <element signature="e#14035#14664#0" expanded="false" />
+                <element signature="e#15246#15397#0" expanded="false" />
+                <element signature="e#15700#15928#0" expanded="false" />
+                <element signature="e#16200#16245#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="274">
+              <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+              <folding>
+                <element signature="e#63#104#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,8 +80,8 @@
       <file leaf-file-name="sprite.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/sprite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+            <state relative-caret-position="499">
+              <caret line="45" column="26" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="45" selection-end-column="26" />
               <folding>
                 <element signature="e#63#94#0" expanded="true" />
               </folding>
@@ -80,8 +92,8 @@
       <file leaf-file-name="background.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/background.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+            <state relative-caret-position="425">
+              <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
               <folding>
                 <element signature="e#63#92#0" expanded="true" />
               </folding>
@@ -117,8 +129,8 @@
       <file leaf-file-name="map_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/map_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="269" column="31" lean-forward="true" selection-start-line="269" selection-start-column="31" selection-end-line="269" selection-end-column="31" />
+            <state relative-caret-position="475">
+              <caret line="235" column="33" lean-forward="true" selection-start-line="235" selection-start-column="33" selection-end-line="235" selection-end-column="33" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -129,7 +141,7 @@
       <file leaf-file-name="person.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/person.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
+            <state relative-caret-position="-104">
               <caret line="37" column="43" lean-forward="false" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
               <folding />
             </state>
@@ -139,7 +151,7 @@
       <file leaf-file-name="battle_scene.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="1650">
               <caret line="87" column="54" lean-forward="false" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
               <folding>
                 <element signature="e#2856#5188#0" expanded="false" />
@@ -260,6 +272,9 @@
         <option value="$PROJECT_DIR$/src/map_controller.py" />
         <option value="$PROJECT_DIR$/src/display_item/menu.py" />
         <option value="$PROJECT_DIR$/src/arena.py" />
+        <option value="$PROJECT_DIR$/img/test.py" />
+        <option value="$PROJECT_DIR$/src/display_item/test.py" />
+        <option value="$PROJECT_DIR$/src/test2.py" />
       </list>
     </option>
   </component>
@@ -308,6 +323,11 @@
             <path>
               <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -315,6 +335,40 @@
               <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="display_item" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.6.3 (C:\Users\hasee\AppData\Local\Programs\Python\Python36\python.exe) &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.6.3 (C:\Users\hasee\AppData\Local\Programs\Python\Python36\python.exe) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Python36" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.6.3 (C:\Users\hasee\AppData\Local\Programs\Python\Python36\python.exe) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.6.3 (C:\Users\hasee\AppData\Local\Programs\Python\Python36\python.exe) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.6.3 (C:\Users\hasee\AppData\Local\Programs\Python\Python36\python.exe) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -337,15 +391,15 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hasee\Downloads\code\3X-Project\src\display_item" />
-      <recent name="C:\Users\hasee\Downloads\code\3X-Project\src" />
-      <recent name="C:\Users\hasee\Downloads\code\3X-Project\img" />
-      <recent name="C:\Users\hasee\git\3X-Project\src\display_item" />
-      <recent name="C:\Users\hasee\git\3X-Project\src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hasee\git\3X-Project\audio" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hasee\git\3X-Project\src" />
+      <recent name="C:\Users\hasee\git\3X-Project\src\display_item" />
+      <recent name="C:\Users\hasee\git\3X-Project\img" />
+      <recent name="C:\Users\hasee\Downloads\code\3X-Project\src\display_item" />
+      <recent name="C:\Users\hasee\Downloads\code\3X-Project\src" />
     </key>
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -476,41 +530,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.arena">
-    <configuration name="Display_Qt (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="3XProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/Display_Qt.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="Display_Qt" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/history" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="3XProject" />
-      <option name="SCRIPT_NAME" value="C:\Users\hasee\Downloads\code\3X-Project\src\Display_Qt.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.test2">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -609,7 +629,41 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="pygdrawing (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/display_item" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="3XProject" />
+      <option name="SCRIPT_NAME" value="C:\Users\hasee\git\3X-Project\src\test2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/img" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="3XProject" />
+      <option name="SCRIPT_NAME" value="C:\Users\hasee\git\3X-Project\src\test2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -621,25 +675,25 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="3XProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/pygdrawing.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.arena" />
-      <item index="1" class="java.lang.String" itemvalue="Python.pygdrawing (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Display_Qt" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Display_Qt (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.background" />
+      <item index="1" class="java.lang.String" itemvalue="Python.background" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.test (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.test2" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.arena" />
-        <item index="1" class="java.lang.String" itemvalue="Python.background" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Display_Qt (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Display_Qt" />
-        <item index="4" class="java.lang.String" itemvalue="Python.pygdrawing (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.test2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.test (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.arena" />
+        <item index="3" class="java.lang.String" itemvalue="Python.test" />
+        <item index="4" class="java.lang.String" itemvalue="Python.background" />
       </list>
     </recent_temporary>
   </component>
@@ -949,7 +1003,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518015099873</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="fix bugs">
+      <created>1518016417648</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1518016417648</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1058,7 +1119,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="allow person to move" />
     <MESSAGE value="display with qt" />
     <MESSAGE value="fix path" />
     <MESSAGE value="display with QGraphicsView" />
@@ -1083,7 +1143,8 @@
     <MESSAGE value="add weapon info in person info page" />
     <MESSAGE value="fix menu click bug" />
     <MESSAGE value="add death" />
-    <option name="LAST_COMMIT_MESSAGE" value="add death" />
+    <MESSAGE value="fix bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1103,34 +1164,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/axes/_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="2688" column="24" lean-forward="true" selection-start-line="2688" selection-start-column="24" selection-end-line="2688" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/artist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="979" column="49" lean-forward="false" selection-start-line="959" selection-start-column="0" selection-end-line="979" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/figure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="999" column="43" lean-forward="true" selection-start-line="999" selection-start-column="43" selection-end-line="999" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/resource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="543" column="39" lean-forward="true" selection-start-line="543" selection-start-column="39" selection-end-line="543" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/ring_left.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1358,26 +1391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/sprite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-          <folding>
-            <element signature="e#63#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/background.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding>
-            <element signature="e#63#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/copy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3825">
@@ -1401,14 +1414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/person.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="37" column="43" lean-forward="false" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/cocosnode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -1417,34 +1422,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/map_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="269" column="31" lean-forward="true" selection-start-line="269" selection-start-column="31" selection-end-line="269" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.py">
+    <entry file="file://$PROJECT_DIR$/src/test2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="87" column="54" lean-forward="false" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
-          <folding>
-            <element signature="e#2856#5188#0" expanded="false" />
-            <element signature="e#5262#5670#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1461,10 +1443,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/skeleton.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/map_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="235" column="33" lean-forward="true" selection-start-line="235" selection-start-column="33" selection-end-line="235" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/person.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-104">
+          <caret line="37" column="43" lean-forward="false" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1650">
+          <caret line="87" column="54" lean-forward="false" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
+          <folding>
+            <element signature="e#2856#5188#0" expanded="false" />
+            <element signature="e#5262#5670#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/sprite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="45" column="26" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="45" selection-end-column="26" />
+          <folding>
+            <element signature="e#63#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/1.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/background.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="e#63#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/bat.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+          <folding>
+            <element signature="e#63#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/arena.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="439" column="50" lean-forward="true" selection-start-line="439" selection-start-column="50" selection-end-line="439" selection-end-column="50" />
+        <state relative-caret-position="297">
+          <caret line="193" column="31" lean-forward="false" selection-start-line="193" selection-start-column="31" selection-end-line="193" selection-end-column="31" />
           <folding>
             <element signature="e#63#76#0" expanded="true" />
             <element signature="e#1512#1631#0" expanded="false" />
@@ -1474,29 +1533,28 @@
             <element signature="e#4404#4572#0" expanded="false" />
             <element signature="e#4617#4638#0" expanded="false" />
             <element signature="e#5887#5973#0" expanded="false" />
-            <element signature="e#6009#6719#0" expanded="false" />
-            <element signature="e#6331#6390#0" expanded="false" />
-            <element signature="e#6623#6695#0" expanded="false" />
-            <element signature="e#6763#7553#0" expanded="false" />
-            <element signature="e#7587#9274#0" expanded="false" />
-            <element signature="e#7587#7600#0" expanded="false" />
-            <element signature="e#8906#8944#0" expanded="false" />
-            <element signature="e#8971#9274#0" expanded="false" />
-            <element signature="e#9040#9257#0" expanded="false" />
-            <element signature="e#9313#10028#0" expanded="false" />
-            <element signature="e#9313#9331#0" expanded="false" />
-            <element signature="e#10069#10270#0" expanded="false" />
-            <element signature="e#10069#10089#0" expanded="false" />
-            <element signature="e#10308#10434#0" expanded="false" />
-            <element signature="e#10308#10325#0" expanded="false" />
-            <element signature="e#10470#10704#0" expanded="false" />
-            <element signature="e#10470#10485#0" expanded="false" />
-            <element signature="e#10744#11772#0" expanded="false" />
-            <element signature="e#13574#13958#0" expanded="false" />
-            <element signature="e#14003#14632#0" expanded="false" />
-            <element signature="e#15214#15365#0" expanded="false" />
-            <element signature="e#15668#15896#0" expanded="false" />
-            <element signature="e#16168#16213#0" expanded="false" />
+            <element signature="e#6363#6422#0" expanded="false" />
+            <element signature="e#6655#6727#0" expanded="false" />
+            <element signature="e#6795#7585#0" expanded="false" />
+            <element signature="e#7619#9306#0" expanded="false" />
+            <element signature="e#7619#7632#0" expanded="false" />
+            <element signature="e#8938#8976#0" expanded="false" />
+            <element signature="e#9003#9306#0" expanded="false" />
+            <element signature="e#9072#9289#0" expanded="false" />
+            <element signature="e#9345#10060#0" expanded="false" />
+            <element signature="e#9345#9363#0" expanded="false" />
+            <element signature="e#10101#10302#0" expanded="false" />
+            <element signature="e#10101#10121#0" expanded="false" />
+            <element signature="e#10340#10466#0" expanded="false" />
+            <element signature="e#10340#10357#0" expanded="false" />
+            <element signature="e#10502#10736#0" expanded="false" />
+            <element signature="e#10502#10517#0" expanded="false" />
+            <element signature="e#10776#11804#0" expanded="false" />
+            <element signature="e#13606#13990#0" expanded="false" />
+            <element signature="e#14035#14664#0" expanded="false" />
+            <element signature="e#15246#15397#0" expanded="false" />
+            <element signature="e#15700#15928#0" expanded="false" />
+            <element signature="e#16200#16245#0" expanded="false" />
           </folding>
         </state>
       </provider>
