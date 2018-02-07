@@ -254,5 +254,18 @@ class Main:
         return sup_obj
 
     def build_support(self, pid1, pid2):
-        print(pid1, pid2)
-        pass
+        p=self.global_vars.personBank[pid1]
+        obj=self.global_vars.personBank[pid2]
+        if (p.supdata[pid2][0] > 50) and (p.suprank[pid2] < 1):
+            p.suprank[pid2]=1
+            obj.suprank[pid1]=1
+            return
+        if (p.supdata[pid2][0] > 100) and (p.suprank[pid2] < 2):
+            p.suprank[pid2]=2
+            obj.suprank[pid1]=2
+            return
+        if (p.supdata[pid2][0] > 200) and (p.suprank[pid2] < 3):
+            p.suprank[pid2]=3
+            obj.suprank[pid1]=3
+            return
+        return
