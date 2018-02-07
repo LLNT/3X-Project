@@ -126,11 +126,11 @@ class Battlescene(ColorLayer):
                 self.hp1 -= dmg
                 self.hp2 += amg
                 if hit is 'H':
-                    content = "Reflect by " + str(dmg) + ' Damage'
+                    content = "Counter by " + str(dmg) + ' Damage'
                 elif hit is 'C':
                     content = 'Critical Reflect by ' + str(dmg) + ' Damage'
                 elif hit is 'M':
-                    content = 'Reflect Miss'
+                    content = 'Counter Miss'
                     color = (255, 0, 0, 255)
                 else:
                     content = 'oooops'

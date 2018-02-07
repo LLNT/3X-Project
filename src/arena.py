@@ -3,7 +3,7 @@
 @author: Antastsy
 @time: 2018/2/1 19:02
 '''
-import pyglet.gl
+import pyglet
 
 from cocos.layer import Layer, ColorLayer
 from cocos.director import director
@@ -14,6 +14,7 @@ from display_item.sprite import Charactor, Cell, Endturn
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo
 from display_item.menu import Ordermenu, Weaponmenu
+from display_item.background import Background
 from display_item.battle_scene import Battlescene
 
 import map_controller
@@ -33,7 +34,9 @@ class Arena(Layer):
 
         # initialize the holder according to the map
         self.width, self.height = w*size, h*size
-        self.add(ColorLayer(0, 0, 0, 255, self.width, self.height))
+
+        self.add(Background(self.width, self.height))
+        # self.add(ColorLayer(100, 100, 100, 255, self.width, self.height))
 
         self.map = map  # type:map_controller.Main
         self.size = size
@@ -96,6 +99,7 @@ class Arena(Layer):
     def _repaint(self):
         for cell in self.cells.values():
             cell.color = mapstate2color[cell.state]
+            cell.opacity = opacity[cell.state]
         for person in self.people.values(): #type:Charactor
             person.color = per_state2color(person.state, person.controller)
 
@@ -110,6 +114,7 @@ class Arena(Layer):
                 self._repaint()
                 cell = self.cells[(i, j)]
                 cell.color = mapstate2color_motion[cell.state]
+                cell.opacity = opacity[cell.state]
             pass
 
     def _in_arena(self):

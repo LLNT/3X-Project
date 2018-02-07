@@ -24,6 +24,7 @@ class Cell(Sprite):
         self.position = coordinate(pos[0], pos[1], size)
         self.state = state
         self.person_on = None
+        self.opacity = 0
 
 class Charactor(Sprite):
     def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved',path='ring.png',color=(255, 255, 255)):

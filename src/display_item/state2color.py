@@ -73,6 +73,15 @@ ctrl2map_moverange = {
     2:'in_ally_moverange'
 }
 
+opacity ={
+    'default': 0,
+    'in_self_moverange': 60,
+    'in_enemy_moverange': 60,
+    'in_ally_moverange': 60,
+    'in_self_attackrange': 80,
+    'target': 80,
+}
+
 def per_state2color(state, ctrl):
     if ctrl == 0:
         return self_state2color[state]
