@@ -5,6 +5,7 @@ import move_range_person
 import global_vars
 import person
 import numpy
+from functions import *
 from utility import *
 def execute(valid,invalid,ally,enemy):
     for item in valid:
@@ -237,3 +238,17 @@ class Main:
 
     def attackable(self, weapon):
         return weapon in self.global_vars.attackable_weapon_types
+
+    def can_support(self,pid,pos):
+        sup_obj={}   #type:Dict[str,Tuple[int,int]]
+        p=self.global_vars.personBank[pid]
+        for obj in p.suprank:
+            if obj in self.person_container.position:
+                if calc_dist(self.person_container.position[pid],self.person_container.position[obj])<2:
+                    if (p.supdata[obj][0]>50)and(p.suprank[obj]<1):
+                        sup_obj[obj]=self.person_container.position[obj]
+                    if (p.supdata[obj][0]>100)and(p.suprank[obj]<2):
+                        sup_obj[obj] = self.person_container.position[obj]
+                    if (p.supdata[obj][0]>200)and(p.suprank[obj]<3):
+                        sup_obj[obj]=self.person_container.position[obj]
+        return sup_obj
