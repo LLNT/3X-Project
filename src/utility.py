@@ -8,6 +8,11 @@ def coordinate_t(x, y, size):
     j = y // size
     return i, j
 
+def is_weapon(s):
+    if s in ["Sword","Lance","Bow","Axe","Light","Dark","Wind","Fire","Thunder"]:
+        return True
+    return False
+
 def calc_dist(A,B):
     return abs(A[0]-B[0])+abs(A[1]-B[1])
 

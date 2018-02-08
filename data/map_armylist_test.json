@@ -3,12 +3,12 @@
   "Armies":[
     {
       "Name": "Lyn's Army",
-      "Member": [{"Id":"1","X":5,"Y":4},{"Id":"3","X":5,"Y":0}],
+      "Member": [{"Id":"1","X":5,"Y":4,"PRI":0,"AI":"NULL"},{"Id":"3","X":5,"Y":0,"PRI":0,"AI":"NULL"}],
       "Controller": 0
     },
     {
       "Name": "Kent's Army",
-      "Member":[{"Id":"2","X":0,"Y":2},{"Id":"4","X":0,"Y":0}],
+      "Member":[{"Id":"2","X":0,"Y":2,"PRI":0,"AI":"DEFENSIVE"},{"Id":"4","X":0,"Y":0,"PRI":1,"AI":"PASSIVE"}],
       "Controller":1
     }
   ]

@@ -1,5 +1,6 @@
 import item
 from typing import List,Dict,Tuple
+from utility import *
 class Person:
     def __init__(self):
         self.pid = ""        #type:str
@@ -39,6 +40,15 @@ class Person:
         for wp in weapon_rank_bonus:
             self.weapon_rank[wp]+=weapon_rank_bonus[wp]
         self.item=items
+
+    def get_equip(self):
+        if len(self.item)<1:
+            return None
+        for weap in self.item:
+            if is_weapon(weap.itemtype.weapontype):
+                if weap.itemtype.rank<=self.weapon_rank[weap.itemtype.weapontype]:
+                    return weap
+        return None
 
 class PersonBank:
     def __init__(self):
