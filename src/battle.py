@@ -395,9 +395,11 @@ class Battle:
             r=self.battlea()
             self.weapon_a.use = self.wear_buf_a
             if self.weapon_a.use == 0:
+                self.a.banish(self.weapon_a)
                 print("WARNING A RUNS OUT OF WEAPON")
             self.weapon_d.use = self.wear_buf_d
             if self.weapon_d.use == 0:
+                self.d.banish(self.weapon_d)
                 print("WARNING D RUNS OUT OF WEAPON")
             if (r == 1):
                 print("WARNING D IS DEFEATED")
@@ -408,6 +410,7 @@ class Battle:
             r=self.battleb()
             self.weapon_a.use=self.wear_buf_a
             if self.weapon_a.use==0:
+                self.a.banish(self.weapon_a)
                 print("WARNING A RUNS OUT OF WEAPON")
             if (r==1):
                 print("WARNING D IS DEFEATED")

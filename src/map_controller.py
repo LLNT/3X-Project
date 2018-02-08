@@ -224,8 +224,8 @@ class Main:
 
     def ai_turn2(self, arena):
         valid, command = self.send_mapstate()
-        print(command)
         command_type = command[0]
+        print(command)
         if command_type == "M":
             person_to_move = command[1].pid  # type:person.Person
             arena.enemy_move(person_to_move, command[3], valid[person_to_move])
@@ -235,6 +235,10 @@ class Main:
             self.controller = 0
             print('player phase')
             arena.next_round()
+
+        elif command_type == "A":
+            person_to_move = command[1].pid
+            arena.enemy_move(person_to_move, command[3], valid[person_to_move])
 
     def attackable(self, weapon):
         return weapon in self.global_vars.attackable_weapon_types

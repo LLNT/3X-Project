@@ -22,7 +22,8 @@
         "BLD":0,
         "MOV":0,
         "HP":0,
-        "CRY":0
+        "CRY":0,
+        "EXP":0
     },
     "Special_effect":[],
     "Rank":1,
@@ -53,7 +54,8 @@
         "BLD":0,
         "MOV":0,
         "HP":0,
-        "CRY":0
+        "CRY":0,
+      "EXP":0
     },
     "Special_effect":[],
     "Rank":1,
@@ -84,7 +86,8 @@
         "BLD":0,
         "MOV":0,
         "HP":0,
-        "CRY":0
+        "CRY":0,
+      "EXP":0
     },
     "Special_effect":[],
     "Rank":0,
@@ -115,7 +118,8 @@
         "BLD":0,
         "MOV":0,
         "HP":0,
-        "CRY":0
+        "CRY":0,
+      "EXP":0
     },
     "Special_effect":["Pegasus","Dragoon"],
     "Rank":1,
@@ -146,7 +150,8 @@
         "BLD":0,
         "MOV":0,
         "HP":0,
-        "CRY":0
+        "CRY":0,
+      "EXP":0
     },
     "Special_effect":[],
     "Rank":1,
