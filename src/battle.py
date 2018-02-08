@@ -224,7 +224,7 @@ class Battle:
         for unit in map.person_container.people:
             if unit.pid in self.d.suprank:
                 if (abs(posd[0]-map.person_container.position[unit.pid][0])+abs(posd[1]-map.person_container.position[unit.pid][1])<4):
-                    rank=self.d.suprank[unit.pid]
+                    rank=str(self.d.suprank[unit.pid])
                     for key in self.su_d:
                         self.su_d[key]+=(map.global_vars.support_cube[self.d.attribute][rank][key]
                                          +map.global_vars.support_cube[self.d.color][rank][key]
