@@ -61,10 +61,10 @@ class Arena(Layer):
             self.people[pid] = Charactor(person, 0.9, size, position[pid], controller[pid])
             self.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
-        self._clear_map()
+
         self.end = Endturn(label='END',scale=0.4,pos=(560,200),color=MAROON, font_size=48)
         self.add(self.end)
-
+        self._clear_map()
 
 
         self.next_round()
