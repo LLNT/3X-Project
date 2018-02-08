@@ -199,7 +199,8 @@ class Main:
 
     def ai_turn(self, arena):
         valid, command = self.send_mapstate()
-        print(command)
+        for cmd in command:
+            print(cmd)
         command_type = command[0]
         if command_type == "M":
             person_to_move = command[1]  # type:person.Person
@@ -228,7 +229,7 @@ class Main:
         print(command)
         if command_type == "M":
             person_to_move = command[1].pid  # type:person.Person
-            arena.enemy_move(person_to_move, command[3], valid[person_to_move])
+            arena.move(pid=person_to_move, dst=command[3], rng=valid[person_to_move])
 
         elif command_type == "E":
             self.reset_state(1)
@@ -238,7 +239,8 @@ class Main:
 
         elif command_type == "A":
             person_to_move = command[1].pid
-            arena.enemy_move(person_to_move, command[3], valid[person_to_move])
+            battlelist = [command[1], command[4], command[5], self, command[3][-1]]
+            arena.attacking(pid=person_to_move, dst=command[3], rng=valid[person_to_move], battlelist=battlelist)
 
     def attackable(self, weapon):
         return weapon in self.global_vars.attackable_weapon_types

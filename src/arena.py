@@ -72,6 +72,7 @@ class Arena(Layer):
     def on_enter(self):
         super().on_enter()
         self.get_next_to_delete()
+        self.map.take_turn(self)
 
     def next_round(self):
         self.map.turn += 1
@@ -341,15 +342,8 @@ class Arena(Layer):
             self.state = 'choose_attack'
             self.wpinfo.visible = True
         elif self.mouse_btn is 1:
-            valid = self._mapstate[0]
-            action = self._sequential_move(self.selected, valid[self.selected][self.target][1])
-            obj = self.people[self.selected]
-            obj.do(action + CallFunc(self._push_battle_scene, self.battlelist) +
-                   CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
-
+            self.attacking()
             pass
-
-        pass
 
     def _push_battle_scene(self, res):
         self.is_event_handler = False
@@ -419,11 +413,27 @@ class Arena(Layer):
         self.sup_dict = sup_dict
         self._repaint()
 
+    def attacking(self, **kwargs):
+        if len(kwargs) is 0:
+            pid = self.selected
+            dst = self._mapstate[0][self.selected][self.target][1]
+            battlelist = self.battlelist
+        else:
+            pid = kwargs['pid']
+            dst = kwargs['dst']
+            rng = kwargs['rng']
+            battlelist = kwargs['battlelist']
+            self._set_areastate(rng, 'in_enemy_moverange')
+        self.is_event_handler = False
+        action = self._sequential_move(pid, dst)
+        obj = self.people[pid]
+        obj.do(action + CallFunc(self._push_battle_scene, battlelist) +
+               CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+
     def attack(self):
         self.is_event_handler = False
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
-
         self._add_menu(Weaponmenu(items, self.map, self))
         pass
 
@@ -434,18 +444,18 @@ class Arena(Layer):
         self.is_event_handler = False
         self.map.ai_turn2(self)
 
-    def move(self):
-        valid = self._mapstate[0]
-        action = self._sequential_move(self.selected, valid[self.selected][self.target][1])
-        obj = self.people[self.selected]
-        obj.do(action + CallFunc(self._clear_map))
-        pass
-
-    def enemy_move(self, pid, dst, rng):
-        self._set_areastate(rng, 'in_enemy_moverange')
+    def move(self, **kwargs):
+        self.is_event_handler = False
+        if len(kwargs) is 0:
+            pid = self.selected
+            dst = self._mapstate[0][self.selected][self.target][1]
+        else:
+            pid = kwargs['pid']
+            dst = kwargs['dst']
+            rng = kwargs['rng']
+            self._set_areastate(rng, 'in_enemy_moverange')
         action = self._sequential_move(pid, dst)
         obj = self.people[pid]
-
         obj.do(action + CallFunc(self._clear_map) + CallFunc(self.map.take_turn, self))
         pass
 

@@ -202,7 +202,6 @@ class Ring(Layer):
         self.add(self.mask_ring)
         self.right_ring.busy = False
         angle = 360 - prop * 360
-        print(angle)
         self.angles = angle
         if angle > 180:
             self.mask_visible()
@@ -272,11 +271,16 @@ class Ring(Layer):
                                    + RotateTo(angle, d2) + CallFunc(self.change_angle, angle))
 
     def update(self, dt):
+
         r = (self.right_ring.rotation) / 360
+        if r == 0 and self.angles == 360:
+            r = 1
         if r > 0.5:
             self.mask_visible()
-        else:
+        else :
             self.left_visible()
+
+
         color = [0, 0, 0]
         for i in range(3):
             color[i] = int(r * self.delta[i] + self.start_color[i])
