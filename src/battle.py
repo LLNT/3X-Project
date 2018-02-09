@@ -139,8 +139,8 @@ class Battle:
         self.ctrla=map.person_container.controller[self.a.pid]
         self.ctrld=map.person_container.controller[self.d.pid]
         self.dist=abs(posa[0]-posd[0])+abs(posa[1]-posd[1])
-        self.exp_buf_a=self.a.ability["EXP"]
-        self.exp_buf_d=self.d.ability["EXP"]
+        self.exp_buf_a=0
+        self.exp_buf_d=0
         self.wp_buf_a=0
         self.wp_buf_d=0
         self.battleround=0
@@ -162,11 +162,8 @@ class Battle:
         if (self.battleround==0):
             self.wp_buf_a=wp_buf_count(self.weapon_a.itemtype.weapontype,self.weapon_d.itemtype.weapontype)
         self.wp_buf_d=-self.wp_buf_a
-        self.weapon_rank_buf_a=self.a.weapon_rank[self.weapon_a.itemtype.weapontype]
-        if (self.battleround==0):
-            self.weapon_rank_buf_d=self.d.weapon_rank[self.weapon_d.itemtype.weapontype]
-        else:
-            self.weapon_rank_buf_d=0
+        self.weapon_rank_buf_a=0
+        self.weapon_rank_buf_d=0
         self.wear_buf_a=self.weapon_a.use
         if (self.battleround==0):
             self.wear_buf_d=self.weapon_d.use
