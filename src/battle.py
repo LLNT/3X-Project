@@ -124,6 +124,8 @@ class Battle:
         self.immortala=0                  #type:int
         self.immortald=0                  #type:int
         self.log=[]                       #type:List[Tuple[int,str]]
+        self.ctrla=0                      #type:int
+        self.ctrld=0                      #type:int
     def __init__(self,_a,_d,_wpa,_wpd,_map,posa):
         self.queue = collections.deque([])  # type:collections.deque[Attack]
         self.log = []                    #type:List[Tuple[int,str]]
@@ -134,6 +136,8 @@ class Battle:
         self.weapon_d=_wpd               #type:item.Item
         #posa=map.person_container.position[self.a.pid]
         posd=map.person_container.position[self.d.pid]
+        self.ctrla=map.person_container.controller[self.a.pid]
+        self.ctrld=map.person_container.controller[self.d.pid]
         self.dist=abs(posa[0]-posd[0])+abs(posa[1]-posd[1])
         self.exp_buf_a=self.a.ability["EXP"]
         self.exp_buf_d=self.d.ability["EXP"]
@@ -393,39 +397,93 @@ class Battle:
     def battle(self):
         if (self.battleround==0):
             r=self.battlea()
-            self.a.weapon_rank[self.weapon_a.itemtype.weapontype]+=self.weapon_rank_buf_a
-            if self.a.weapon_rank[self.weapon_a.itemtype.weapontype]>400:
-                self.a.weapon_rank[self.weapon_a.itemtype.weapontype]=400
-            self.d.weapon_rank[self.weapon_d.itemtype.weapontype]+=self.weapon_rank_buf_d
-            if self.d.weapon_rank[self.weapon_d.itemtype.weapontype]>400:
-                self.d.weapon_rank[self.weapon_d.itemtype.weapontype]=400
+            if self.ctrla==0:
+                self.a.weapon_rank[self.weapon_a.itemtype.weapontype]+=self.weapon_rank_buf_a
+                if self.a.weapon_rank[self.weapon_a.itemtype.weapontype]>400:
+                    self.a.weapon_rank[self.weapon_a.itemtype.weapontype]=400
+            if self.ctrld==0:
+                self.d.weapon_rank[self.weapon_d.itemtype.weapontype]+=self.weapon_rank_buf_d
+                if self.d.weapon_rank[self.weapon_d.itemtype.weapontype]>400:
+                    self.d.weapon_rank[self.weapon_d.itemtype.weapontype]=400
             self.weapon_a.use = self.wear_buf_a
             if self.weapon_a.use == 0:
                 self.a.banish(self.weapon_a)
+                self.log.append((-1, "Brokenweapon"))
                 print("WARNING A RUNS OUT OF WEAPON")
             self.weapon_d.use = self.wear_buf_d
             if self.weapon_d.use == 0:
                 self.d.banish(self.weapon_d)
+                self.log.append((-2,"Brokenweapon"))
                 print("WARNING D RUNS OUT OF WEAPON")
             if (r == 1):
                 print("WARNING D IS DEFEATED")
+                self.log.append((-1,"Defeatenemy"))
             if (r == 2):
                 print("WARNING A IS DEFEATED")
-            return self.log
+                self.log.append((-2, "Defeatenemy"))
+            growthtuple=[0,0,0,[]]
+            if self.ctrla==0:
+                self.a.ability["EXP"]+=self.exp_buf_a
+                lv_up=0
+                while self.a.ability["EXP"]>=100:
+                    lv_up+=1
+                    self.a.ability["EXP"]-=100
+                if (lv_up+self.a.ability["LV"]>=20):
+                    lv_up=20-self.a.ability["LV"]
+                    self.a.ability["EXP"]=0
+                growthlist=[]
+                for i in range(lv_up):
+                    growth=self.a.lv_up()
+                    growthlist.append(growth)
+                growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist]
+            if self.ctrld==0:
+                self.d.ability["EXP"]+=self.exp_buf_d
+                lv_up=0
+                while self.d.ability["EXP"]>=100:
+                    lv_up+=1
+                    self.d.ability["EXP"]-=100
+                if (lv_up+self.d.ability["LV"]>=20):
+                    lv_up=20-self.d.ability["LV"]
+                    self.d.ability["EXP"]=0
+                growthlist=[]
+                for i in range(lv_up):
+                    growth=self.d.lv_up()
+                    growthlist.append(growth)
+                growthtuple=[2,lv_up,self.d.ability["EXP"],growthlist]
+            return self.log,growthtuple
         else:
             r=self.battleb()
-            self.a.weapon_rank[self.weapon_a.itemtype.weapontype] += self.weapon_rank_buf_a
-            if self.a.weapon_rank[self.weapon_a.itemtype.weapontype] > 400:
-                self.a.weapon_rank[self.weapon_a.itemtype.weapontype] = 400
+            if self.ctrla==0:
+                self.a.weapon_rank[self.weapon_a.itemtype.weapontype] += self.weapon_rank_buf_a
+                if self.a.weapon_rank[self.weapon_a.itemtype.weapontype] > 400:
+                    self.a.weapon_rank[self.weapon_a.itemtype.weapontype] = 400
             self.weapon_a.use=self.wear_buf_a
             if self.weapon_a.use==0:
                 self.a.banish(self.weapon_a)
+                self.log.append((-1, "Brokenweapon"))
                 print("WARNING A RUNS OUT OF WEAPON")
             if (r==1):
                 print("WARNING D IS DEFEATED")
+                self.log.append((-1, "Defeatenemy"))
             if (r==2):
                 print("WARNING A IS DEFEATED")
-            return self.log
+                self.log.append((-2, "Defeatenemy"))
+            growthtuple = [0, 0, 0, []]
+            if self.ctrla==0:
+                self.a.ability["EXP"]+=self.exp_buf_a
+                lv_up=0
+                while self.a.ability["EXP"]>=100:
+                    lv_up+=1
+                    self.a.ability["EXP"]-=100
+                if (lv_up+self.a.ability["LV"]>=20):
+                    lv_up=20-self.a.ability["LV"]
+                    self.a.ability["EXP"]=0
+                growthlist=[]
+                for i in range(lv_up):
+                    growth=self.a.lv_up()
+                    growthlist.append(growth)
+                growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist]
+            return self.log,growthtuple
 
 
     def ambush_a(self):
@@ -730,10 +788,10 @@ class Battle:
                     self.log.append((-2,"Brokenweapon"))
             if (r==2):
                 if att.AorD==0:
-                    self.log.append((-1,"Defeatenemy"))
+
                     return 1   #D defeated
                 else:
-                    self.log.append((-2,"Defeatenemy"))
+
                     return 2   #A defeated
         return 0
 
@@ -769,10 +827,10 @@ class Battle:
                     self.log.append((-2, "Brokenweapon"))
             if (r == 2):
                 if att.AorD == 0:
-                    self.log.append((-1, "Defeatenemy"))
+
                     return 1  # D defeated
                 else:
-                    self.log.append((-2, "Defeatenemy"))
+
                     return 2  # A defeated
         return 0
 
