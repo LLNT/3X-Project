@@ -393,6 +393,12 @@ class Battle:
     def battle(self):
         if (self.battleround==0):
             r=self.battlea()
+            self.a.weapon_rank[self.weapon_a.itemtype.weapontype]+=self.weapon_rank_buf_a
+            if self.a.weapon_rank[self.weapon_a.itemtype.weapontype]>400:
+                self.a.weapon_rank[self.weapon_a.itemtype.weapontype]=400
+            self.d.weapon_rank[self.weapon_d.itemtype.weapontype]+=self.weapon_rank_buf_d
+            if self.d.weapon_rank[self.weapon_d.itemtype.weapontype]>400:
+                self.d.weapon_rank[self.weapon_d.itemtype.weapontype]=400
             self.weapon_a.use = self.wear_buf_a
             if self.weapon_a.use == 0:
                 self.a.banish(self.weapon_a)
@@ -408,6 +414,9 @@ class Battle:
             return self.log
         else:
             r=self.battleb()
+            self.a.weapon_rank[self.weapon_a.itemtype.weapontype] += self.weapon_rank_buf_a
+            if self.a.weapon_rank[self.weapon_a.itemtype.weapontype] > 400:
+                self.a.weapon_rank[self.weapon_a.itemtype.weapontype] = 400
             self.weapon_a.use=self.wear_buf_a
             if self.weapon_a.use==0:
                 self.a.banish(self.weapon_a)
