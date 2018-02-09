@@ -61,7 +61,7 @@ class BattleSim(Layer):
                 del self'''
             return
         event = self.events[self.i]
-        print(event)
+        # print(event)
         color = (0, 255, 0, 255)
         if event[0] < 0: # show info on screen
             content = event[1]
@@ -147,7 +147,7 @@ class Battlescene(BattleSim):
         del battle
         self.w = w
         self.h = h
-        self.events = res
+        self.events = res[0]
         self.i = -1
         self.obj1 = self.attacker.right_ring
         self.obj2 = self.defender.right_ring
