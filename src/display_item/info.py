@@ -102,4 +102,22 @@ class Battleinfo(Info):
         else:
             self.display(['No reflection'], ((self.width / 2, self.height / 2), (self.width, self.height)))
 
-
+class Experience(Info):
+    def __init__(self, **kwargs):
+        w, h = director.get_window_size()
+        if 'width' in kwargs.keys() and 'height' in kwargs.keys():
+            width = kwargs['width']
+            height = kwargs['height']
+        else:
+            width, height = w, h
+        super().__init__(size=(width, height), position=(w//3, h//2))
+        growth = kwargs['growth']
+        content = []
+        content.append("MHP: " + growth['MHP'])
+        content.append("STR: " + growth['STR'])
+        content.append("MGC: " + growth['MGC'])
+        content.append("SPD: " + growth['SPD'])
+        content.append("SKL: " + growth['SKL'])
+        content.append("DEF: " + growth['DEF'])
+        content.append("RES: " + growth['RES'])
+        content.append("LUK: " + growth['LUK'])

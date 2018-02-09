@@ -42,7 +42,6 @@ class BattleSim(Layer):
         self.obj2 = self.defender.right_ring
         self.get_next_action()
 
-
     def get_next_action(self, obj1=False, obj2=False):
         '''
 
@@ -54,10 +53,9 @@ class BattleSim(Layer):
         self.i += 1
         if self.i >= len(self.events):
             if self.i == len(self.events):
-                director.window.push_handlers(self)
+                self.exit()
                 '''self.parent.remove(self)
                 self.parent.on_return()
-
                 del self'''
             return
         event = self.events[self.i]
@@ -125,6 +123,10 @@ class BattleSim(Layer):
         self.info.put(obj)
         obj.do(FadeIn(1.5) + CallFunc(self.get_next_action))
 
+    def exit(self):
+        director.window.push_handlers(self)
+
+
 class Battlescene(BattleSim):
     is_event_handler = False
     def __init__(self, arena, w=640, h=480, maxsize=2):
@@ -144,6 +146,7 @@ class Battlescene(BattleSim):
         self.add(self.defender)
 
         res = battle.battle()
+        print(res[1])
         del battle
         self.w = w
         self.h = h
@@ -166,7 +169,6 @@ class Battlescene(BattleSim):
     def on_mouse_press(self, x, y, buttons, modifiers):
         self.do(CallFunc(self._return_arena)+ Delay(0.5) + CallFunc(self._pop))
 
-
     def _return_arena(self):
         director.window.remove_handlers(self)
         director.push(FadeTransition(Scene(ColorLayer(0, 0, 0, 0, self.w, self.h)), duration=1.5))
@@ -175,7 +177,7 @@ class Battlescene(BattleSim):
         director.pop()
         director.pop()
         self.arena.on_return()
-
         del self
 
-
+    def exit(self):
+        director.window.push_handlers(self)
