@@ -438,7 +438,7 @@ class Arena(Layer):
         self.is_event_handler = False
         action = self._sequential_move(pid, dst)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._simplefied_battle) +
+        obj.do(action + CallFunc(self._push_battle_scene) +
                CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
 
     def attack(self):

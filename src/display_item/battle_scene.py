@@ -54,11 +54,12 @@ class BattleSim(Layer):
         self.i += 1
         if self.i >= len(self.events):
             if self.i == len(self.events):
-                self.parent.remove(self)
+                director.window.push_handlers(self)
+                '''self.parent.remove(self)
                 self.parent.on_return()
 
-                del self
-                return
+                del self'''
+            return
         event = self.events[self.i]
         print(event)
         color = (0, 255, 0, 255)
