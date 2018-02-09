@@ -126,6 +126,8 @@ class Battle:
         self.log=[]                       #type:List[Tuple[int,str]]
         self.ctrla=0                      #type:int
         self.ctrld=0                      #type:int
+        self.abl_ori_a={}
+        self.abl_ori_d={}
     def __init__(self,_a,_d,_wpa,_wpd,_map,posa):
         self.queue = collections.deque([])  # type:collections.deque[Attack]
         self.log = []                    #type:List[Tuple[int,str]]
@@ -134,6 +136,8 @@ class Battle:
         map=_map                         #type:map_controller.Main
         self.weapon_a=_wpa               #type:item.Item
         self.weapon_d=_wpd               #type:item.Item
+        self.abl_ori_a=self.a.ability
+        self.abl_ori_d=self.d.ability
         #posa=map.person_container.position[self.a.pid]
         posd=map.person_container.position[self.d.pid]
         self.ctrla=map.person_container.controller[self.a.pid]
@@ -418,7 +422,7 @@ class Battle:
             if (r == 2):
                 print("WARNING A IS DEFEATED")
                 self.log.append((-2, "Defeatenemy"))
-            growthtuple=[0,0,0,[]]
+            growthtuple=[0,0,0,[],{}]
             if self.ctrla==0:
                 self.a.ability["EXP"]+=self.exp_buf_a
                 lv_up=0
@@ -432,7 +436,7 @@ class Battle:
                 for i in range(lv_up):
                     growth=self.a.lv_up()
                     growthlist.append(growth)
-                growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist]
+                growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
             if self.ctrld==0:
                 self.d.ability["EXP"]+=self.exp_buf_d
                 lv_up=0
@@ -446,7 +450,7 @@ class Battle:
                 for i in range(lv_up):
                     growth=self.d.lv_up()
                     growthlist.append(growth)
-                growthtuple=[2,lv_up,self.d.ability["EXP"],growthlist]
+                growthtuple=[2,lv_up,self.d.ability["EXP"],growthlist,self.abl_ori_d]
             return self.log,growthtuple
         else:
             r=self.battleb()
@@ -465,7 +469,7 @@ class Battle:
             if (r==2):
                 print("WARNING A IS DEFEATED")
                 self.log.append((-2, "Defeatenemy"))
-            growthtuple = [0, 0, 0, []]
+            growthtuple = [0, 0, 0, [],{}]
             if self.ctrla==0:
                 self.a.ability["EXP"]+=self.exp_buf_a
                 lv_up=0
@@ -479,7 +483,21 @@ class Battle:
                 for i in range(lv_up):
                     growth=self.a.lv_up()
                     growthlist.append(growth)
-                growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist]
+                growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
+            if self.ctrld==0:
+                self.d.ability["EXP"]+=self.exp_buf_d
+                lv_up=0
+                while self.d.ability["EXP"]>=100:
+                    lv_up+=1
+                    self.d.ability["EXP"]-=100
+                if (lv_up+self.d.ability["LV"]>=20):
+                    lv_up=20-self.d.ability["LV"]
+                    self.d.ability["EXP"]=0
+                growthlist=[]
+                for i in range(lv_up):
+                    growth=self.d.lv_up()
+                    growthlist.append(growth)
+                growthtuple=[2,lv_up,self.d.ability["EXP"],growthlist,self.abl_ori_d]
             return self.log,growthtuple
 
 
