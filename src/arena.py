@@ -15,7 +15,8 @@ from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo
 from display_item.menu import Ordermenu, Weaponmenu
 from display_item.background import Background
-from display_item.battle_scene import Battlescene
+from display_item.battle_scene import Battlescene, BattleSim
+from display_item.ring import PerSpr
 
 import map_controller
 from global_vars import Main as Global
@@ -58,7 +59,7 @@ class Arena(Layer):
         controller = map.person_container.controller
         for person in people:
             pid = person.pid
-            self.people[pid] = Charactor(person, 0.9, size, position[pid], controller[pid])
+            self.people[pid] = PerSpr(person, 1, size, position[pid], controller[pid], bk_color=(220,220,220))
             self.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
 
@@ -69,10 +70,14 @@ class Arena(Layer):
 
         self.next_round()
 
-    def on_enter(self):
-        super().on_enter()
+
+
+    def on_return(self):
         self.get_next_to_delete()
         self.map.take_turn(self)
+        for person in self.people.values():
+            person.update_hp()
+
 
     def next_round(self):
         self.map.turn += 1
@@ -107,7 +112,7 @@ class Arena(Layer):
             cell.color = mapstate2color[cell.state]
             cell.opacity = opacity[cell.state]
         for person in self.people.values(): #type:Charactor
-            person.color = per_state2color(person.state, person.controller)
+            person.inner.color = per_state2color(person.state, person.controller)
 
         # according to the state of every sprite within, repaint them in the correct color
         pass
@@ -205,6 +210,7 @@ class Arena(Layer):
         for person in self.people.values(): #type:Charactor
             if person.state is not 'moved':
                 person.state = 'unmoved'
+
         self._repaint()
 
     def _get_state_control(self):
@@ -345,9 +351,9 @@ class Arena(Layer):
             self.attacking()
             pass
 
-    def _push_battle_scene(self, res):
+    def _push_battle_scene(self):
         self.is_event_handler = False
-        director.push(FadeTransition(Scene(Battlescene(res)), duration=1.5))
+        director.push(FadeTransition(Scene(Battlescene(self)), duration=1.5))
 
     def _show_battle_result(self):
         # 7   show_battle_result
@@ -388,6 +394,12 @@ class Arena(Layer):
             self._reset()
         pass
 
+    def _simplefied_battle(self):
+        self.is_event_handler = False
+        self.add(BattleSim())
+        self._set_state('show_battle_result')
+        pass
+
     def select_target(self, item):
         area = []
         max_range = item.itemtype.max_range
@@ -417,17 +429,16 @@ class Arena(Layer):
         if len(kwargs) is 0:
             pid = self.selected
             dst = self._mapstate[0][self.selected][self.target][1]
-            battlelist = self.battlelist
         else:
             pid = kwargs['pid']
             dst = kwargs['dst']
             rng = kwargs['rng']
-            battlelist = kwargs['battlelist']
+            self.battlelist = kwargs['battlelist']
             self._set_areastate(rng, 'in_enemy_moverange')
         self.is_event_handler = False
         action = self._sequential_move(pid, dst)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._push_battle_scene, battlelist) +
+        obj.do(action + CallFunc(self._simplefied_battle) +
                CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
 
     def attack(self):
