@@ -21,6 +21,17 @@
       "CRY":6,
       "EXP":0
     },
+    "Growth":
+    {
+      "MHP":40,
+      "STR":55,
+      "MGC":5,
+      "SPD":70,
+      "SKL":65,
+      "DEF":35,
+      "RES":20,
+      "LUK":80
+    },
     "Weapon Rank Bonus":
     {"Sword":0,
       "Lance":0,
@@ -69,6 +80,17 @@
       "CRY":12,
       "EXP":0
     },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
     "Weapon Rank Bonus":
     {"Sword":0,
       "Lance":0,
@@ -109,7 +131,18 @@
       "MOV":5,
       "HP":18,
       "CRY":5,
-      "EXP":0
+      "EXP":99
+    },
+    "Growth":
+    {
+      "MHP":30,
+      "STR":45,
+      "MGC":45,
+      "SPD":55,
+      "SKL":70,
+      "DEF":25,
+      "RES":65,
+      "LUK":140
     },
     "Weapon Rank Bonus":
     {"Sword":0,
@@ -158,6 +191,17 @@
       "HP":17,
       "CRY":16,
       "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
     },
     "Weapon Rank Bonus":
     {"Sword":0,
