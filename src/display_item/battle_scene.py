@@ -13,6 +13,7 @@ from battle import Battle
 from display_item.ring import Scoreboard
 from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
+from display_item.info import Experience
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -29,18 +30,23 @@ class BattleSim(Layer):
     def on_enter(self):
         super().on_enter()
         self.at, self.df, wp, self.map, pos = self.parent.battlelist
-        battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
+        self.battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
         self.attacker = self.parent.people[self.at.pid]
         self.defender = self.parent.people[self.df.pid]
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
-        res = battle.battle()
-        del battle
-        self.events = res
+
         self.i = -1
         self.obj1 = self.attacker.right_ring
         self.obj2 = self.defender.right_ring
+        self.get_battle_result()
         self.get_next_action()
+
+    def get_battle_result(self):
+        res = self.battle.battle()
+        del self.battle
+        self.events = res[0]
+        self.content = res[1]
 
     def get_next_action(self, obj1=False, obj2=False):
         '''
@@ -124,7 +130,17 @@ class BattleSim(Layer):
         obj.do(FadeIn(1.5) + CallFunc(self.get_next_action))
 
     def exit(self):
-        director.window.push_handlers(self)
+        self.parent.remove(self)
+        del self
+
+    def growth(self):
+        person = self.content[0]
+        level = self.content[1]
+        exp = self.content[2]
+        growthlist = self.content[3]
+        origin = self.content[4]
+        self.add(Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin))
+
 
 
 class Battlescene(BattleSim):
@@ -133,28 +149,28 @@ class Battlescene(BattleSim):
         super(Battlescene, self).__init__(maxsize)
 
         self.at, self.df, wp, self.map, pos = arena.battlelist
-        battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
+        self.battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.arena = arena
-        self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1, back_color = WHITE, hp=self.hp1, mhp=self.mhp1)
+        self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
+                                   back_color = BLACK, hp=self.hp1, mhp=self.mhp1)
         pos2 = w  * 3 // 4, h // 3
         self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
-        self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,back_color = WHITE, hp=self.hp2, mhp=self.mhp2)
+        self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
+                                   back_color = BLACK, hp=self.hp2, mhp=self.mhp2)
 
         self.add(self.attacker)
         self.add(self.defender)
 
-        res = battle.battle()
-        print(res[1])
-        del battle
+
         self.w = w
         self.h = h
-        self.events = res[0]
         self.i = -1
         self.obj1 = self.attacker.right_ring
         self.obj2 = self.defender.right_ring
         self.info = Queue(maxsize)
+        self.get_battle_result()
         self.get_next_action()
         '''info = Info()
         self.add(info)
@@ -180,4 +196,7 @@ class Battlescene(BattleSim):
         del self
 
     def exit(self):
-        director.window.push_handlers(self)
+        for info in self.info.queue:
+            self.remove(info)
+        self.growth()
+

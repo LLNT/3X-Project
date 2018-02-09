@@ -136,8 +136,8 @@ class Battle:
         map=_map                         #type:map_controller.Main
         self.weapon_a=_wpa               #type:item.Item
         self.weapon_d=_wpd               #type:item.Item
-        self.abl_ori_a=self.a.ability
-        self.abl_ori_d=self.d.ability
+        self.abl_ori_a=self.a.ability.copy()
+        self.abl_ori_d=self.d.ability.copy()
         #posa=map.person_container.position[self.a.pid]
         posd=map.person_container.position[self.d.pid]
         self.ctrla=map.person_container.controller[self.a.pid]

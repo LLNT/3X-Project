@@ -1,9 +1,10 @@
-import cocos
+from display_item.bar import Bar, Scale_to
 from person import Person
 from cocos.sprite import Sprite
 from cocos.director import director
 from cocos.layer import ColorLayer
 from display_item.text import layout
+from cocos.actions import CallFunc, Delay
 from battle import Battle
 
 class Info(ColorLayer):
@@ -30,14 +31,13 @@ class Info(ColorLayer):
             else:
                 self.position = 0, 0
 
-
-    def display(self, content, pos_range=None):
+    def display(self, content, pos_range=None, font_size=30):
         if pos_range is None:
-            self.items = layout(content, ((0, 0),
-                                          (self.width, self.height)))
+            items = layout(content, ((0, 0),
+                                          (self.width, self.height)), font_size=font_size)
         else:
-            self.items = layout(content, pos_range)
-        for item in self.items:
+            items = layout(content, pos_range, font_size=font_size)
+        for item in items:
             self.add(item)
 
     def info_clear(self):
@@ -109,15 +109,72 @@ class Experience(Info):
             width = kwargs['width']
             height = kwargs['height']
         else:
-            width, height = w, h
-        super().__init__(size=(width, height), position=(w//3, h//2))
-        growth = kwargs['growth']
+            width, height = w//2, h//2
+        if 'position' in kwargs.keys():
+            pos = kwargs['position']
+        else:
+            pos = (0, 0)
+
+
+        super().__init__(size=(width, height), center=True, alpha=255)
+        print(kwargs)
+        self.growthlist = kwargs['growthlist']
+        self.origin = kwargs['origin']
+        self.level = kwargs['level']
+        self.person = kwargs['person']
+        self.leftexp = kwargs['exp']
+        oriexp = self.origin['EXP']
+
+        self.abilities = ["MHP","STR","MGC","SPD","SKL","DEF","RES","LUK"]
         content = []
-        content.append("MHP: " + growth['MHP'])
-        content.append("STR: " + growth['STR'])
-        content.append("MGC: " + growth['MGC'])
-        content.append("SPD: " + growth['SPD'])
-        content.append("SKL: " + growth['SKL'])
-        content.append("DEF: " + growth['DEF'])
-        content.append("RES: " + growth['RES'])
-        content.append("LUK: " + growth['LUK'])
+        for ability in self.abilities:
+            content.append(ability + ':  ')
+        content.append('')
+        self.display(content, font_size=24, pos_range=((0, 0), (self.width//3, self.height)))
+        content = []
+        for ability in self.abilities:
+            content.append(str(self.origin[ability]))
+        content.append('Origin')
+        self.display(content, font_size=20, pos_range=((self.width//3, 0), (self.width*5//9, self.height)))
+        self.bar = Bar(size=(self.width, 30), prop=oriexp / 100, position=(0, -40), color=(0, 0, 255))
+        self.add(self.bar)
+        self.i = 0
+        if self.level > 0:
+            self.bar_raise()
+        else:
+            director.window.push_handlers(self.parent)
+
+    def bar_raise(self, duration=3):
+        if self.bar.scale_x == 1:
+            self.bar.scale_x = 0
+        if self.i < self.level:
+            d = duration * (1 - self.bar.scale_x)
+            scale = 1
+        else:
+            scale = self.leftexp / 100
+            d = duration * (scale - self.bar.scale_x)
+        print(scale, d, self.i)
+        self.bar.do(Scale_to(scale_x=scale, scale_y=1, duration=d) + CallFunc(self.level_up))
+
+    def level_up(self):
+        self.i += 1
+        if self.i > self.level:
+            director.window.push_handlers(self.parent)
+            return
+        try:
+            self.remove(self.content1)
+            self.remove(self.content2)
+        except:
+            pass
+        growth = self.growthlist[self.i - 1]
+        self.content1 = []
+        for ability in self.abilities:
+            self.content1.append(str(growth[ability]))
+        self.content1.append('Grow')
+        self.display(self.content1, font_size=20, pos_range=((self.width*5//9, 0), (self.width*7//9, self.height)))
+        self.content2 = []
+        for ability in self.abilities:
+            self.content2.append(str(growth[ability] + self.origin[ability]))
+        self.content2.append('New')
+        self.display(self.content2, font_size=20, pos_range=((self.width *7//9, 0), (self.width, self.height)))
+        self.do(Delay(0.5) + CallFunc(self.bar_raise))
