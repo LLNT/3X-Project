@@ -26,8 +26,11 @@ class Cell(Sprite):
         self.person_on = None
         self.opacity = 0
 
+
+
 class Charactor(Sprite):
-    def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved',path='ring.png',color=(255, 255, 255)):
+    def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved',
+                 path='ring.png',color=(255, 255, 255)):
         '''
 
         :param pid: pid of person object this sprite refers to
@@ -48,6 +51,15 @@ class Charactor(Sprite):
         self.pid = person.pid
         self.pos = pos
 
+    def on_enter(self):
+        super().on_enter()
+        director.window.push_handlers(self)
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        print(x, y, modifiers)
+        if self.contains(x, y):
+            print(1)
+
 class Button(Sprite):
     selected_effect = None
     unselected_effect = None
@@ -65,7 +77,6 @@ class Button(Sprite):
         text = RichLabel(label, (0, 0), anchor_x='center', anchor_y='center',
                          font_size=font_size, color=font_color)
         self.add(text)
-        print(text.parent)
 
     def on_mouse_motion(self, x, y, buttons, modifiers):
         if (x - self.position[0]) ** 2 + (y - self.position[1]) ** 2 < self.radius ** 2:
@@ -76,7 +87,6 @@ class Button(Sprite):
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 1 and self.selected:
             self.on_activated()
-
 
     def on_enter(self):
         super().on_enter()

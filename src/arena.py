@@ -5,15 +5,15 @@
 '''
 import pyglet
 
-from cocos.layer import Layer, ColorLayer
+from cocos.layer import Layer, ColorLayer, ScrollableLayer
 from cocos.director import director
 from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay, FadeOut
 from cocos.scenes import FadeTransition
-from display_item.sprite import Charactor, Cell, Endturn
+from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo
-from display_item.menu import Ordermenu, Weaponmenu
+from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer
 from display_item.background import Background
 from display_item.battle_scene import Battlescene, BattleSim
 from display_item.ring import PerSpr
@@ -26,16 +26,16 @@ from terrain_container import Main as Terrain_Container
 
 
 
-class Arena(Layer):
+class Arena(ScrollableLayer):
     # the holder of map and roles
     is_event_handler = True
 
-    def __init__(self, map, w, h, size=80):
+    def __init__(self, map, w, h, menulayer,size=80):
         super(Arena, self).__init__()
 
         # initialize the holder according to the map
         self.width, self.height = w*size, h*size
-
+        self.anchor = self.width // 2, self.height // 2
         self.add(Background(self.width, self.height))
         # self.add(ColorLayer(100, 100, 100, 255, self.width, self.height))
 
@@ -63,11 +63,11 @@ class Arena(Layer):
             self.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
 
-        self.end = Endturn(label='END',scale=0.4,pos=(560,200),color=MAROON, font_size=48)
-        self.add(self.end)
+
         self._clear_map()
 
-
+        self.anchor = self.width//2, self.height//2
+        self.menulayer = menulayer
         self.next_round()
 
 
@@ -120,7 +120,7 @@ class Arena(Layer):
     def on_mouse_motion(self, x, y, buttons, modifiers):
         # use _repaint
         if self.is_event_handler:
-            i, j = coordinate_t(x, y, self.size)
+            i, j = self.coordinate_t(x, y)
             if i < self.w and j < self.h:
                 self._repaint()
                 cell = self.cells[(i, j)]
@@ -139,10 +139,21 @@ class Arena(Layer):
         # according to the state link to correct function
         if self.is_event_handler:
             print(self.state)
-            self.mouse_pos = coordinate_t(x, y, self.size)
+            self.mouse_pos = self.coordinate_t(x, y)
             self.mouse_btn = buttons
             self._state_control[self.state].__call__()
         pass
+
+    def on_mouse_scroll(self, x, y, scroll_x, scroll_y):
+
+        if scroll_y == 1.0:
+            self.scale = self.scale * 1.1
+        else:
+            self.scale = self.scale * 0.9
+
+    def on_mouse_drag(self, x, y, dx, dy, buttons, modifiers):
+        if buttons == 1 and self.state is 'default':
+            self.position = self.position[0] + dx, self.position[1] + dy
 
     def _reset(self):
         # reset to last state
@@ -172,14 +183,13 @@ class Arena(Layer):
         pass
 
     def _seq_add(self, item):
-        self.add(item)
+        self.menulayer.add(item)
 
     def _set_state(self, state):
         self.state = state
 
     def _add_menu(self, menu, dt=0.1):
         self.do(Delay(dt) + CallFunc(self._seq_add, menu))
-        self.end.visible = False
 
     def _set_areastate(self, area, state):
         for i, j in area:
@@ -197,7 +207,6 @@ class Arena(Layer):
         self.sup_dict = None
         self._reset_person = {}
         self.iter = iter(self.people)
-        self.end.visible = True
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -235,10 +244,10 @@ class Arena(Layer):
         # not any army is selected.
         # event handler should be true to wait for commands
         # consider end_turn only under this state
+        if not self._in_arena():
+            return
         if self.mouse_btn == 1:
-            if not self._in_arena():
-                pass
-            elif self.cells[self.mouse_pos].person_on is not None: # just select a person
+            if self.cells[self.mouse_pos].person_on is not None: # just select a person
                 pid = self.cells[self.mouse_pos].person_on
                 self.people[pid].state = 'selected'
                 self.selected = pid
@@ -269,7 +278,11 @@ class Arena(Layer):
                 self.info = Personinfo(select)
                 self.add(self.info)
                 self.state = 'person_info'
+            else:
+                self.menulayer.add(Endturn(self))
+                self.is_event_handler = False
             pass
+
 
     def _valid_select(self):
         # 1   valid_select
@@ -472,7 +485,6 @@ class Arena(Layer):
 
     def cancel(self):
         self.is_event_handler = True
-        self.end.visible = True
         self._set_areastate([self.target], 'in_self_moverange')
         self.state = 'valid_select'
         self.target = None
@@ -485,6 +497,14 @@ class Arena(Layer):
     def remove(self, obj):
         super().remove(obj)
         del obj
+
+    def coordinate_t(self, x, y):
+        pos = ((x - self.anchor_x - self.position[0]) // self.scale + self.anchor_x) ,\
+              ((y - self.anchor_y - self.position[1]) // self.scale + self.anchor_y)
+        i = pos[0] // self.size
+        j = pos[1] // self.size
+        return i, j
+
 
 def map_init():
     data = Data()
@@ -513,7 +533,8 @@ if __name__ == '__main__':
     pyglet.resource.reindex()
     director.init(caption='3X-Project')
     map, w, h = map_init()
-    director.run(Scene(Arena(map, w, h)))
+    menulayer = Menulayer()
+    director.run(Scene(Arena(map, w, h, menulayer), menulayer))
     map_init()
 
 

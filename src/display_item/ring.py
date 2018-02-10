@@ -8,6 +8,7 @@ from cocos.actions import RotateTo, RotateBy, Delay, CallFunc
 from cocos.sprite import Sprite
 from display_item.text import Text
 from utility import *
+from cocos.director import director
 class Ring(CocosNode):
 
     def __init__(self, position, scale, start_color=GREEN, end_color=RED,
@@ -104,6 +105,8 @@ class Ring(CocosNode):
 
     def change_angle(self, angle):
         self.angles = angle
+
+
 
 class Scoreboard(Ring):
     def __init__(self, position, scale, start_color=GREEN, end_color=RED,

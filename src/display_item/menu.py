@@ -6,13 +6,19 @@
 from cocos.menu import Menu, MenuItem, zoom_in, zoom_out
 from display_item.info import Info
 from cocos.director import director
+from cocos.layer import ColorLayer
+class Menulayer(ColorLayer):
+    def __init__(self):
+        w, h = director.get_window_size()
+        super().__init__(0,0,0,200,w//4, h)
+        self.position = w - w //4, 0
+
 
 class Ordermenu(Menu):
     is_event_handler = True
 
     def __init__(self, arena):
         super(Ordermenu, self).__init__(title='Order')
-
         l = []
         l.append(MenuItem('Move', self.move))
         l.append(MenuItem('Attack', self.attack))
@@ -23,31 +29,33 @@ class Ordermenu(Menu):
         self.sup_dict = map.can_support(pid, position)
         if len(self.sup_dict) > 0:
             l.append(MenuItem('Support', self.support))
-        self.position = arena.width//2,0
+
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
+        self.position = - director.get_window_size()[0] * 3 // 8, 0
+        self.arena = arena
 
     def on_mouse_release(self, x, y, buttons, modifiers):
         if buttons == 1:
             super().on_mouse_release(x, y, buttons, modifiers)
 
     def move(self):
-        self.parent.move()
+        self.arena.move()
         self.parent.remove(self)
         del self
 
     def cancel(self):
-        self.parent.cancel()
+        self.arena.cancel()
         self.parent.remove(self)
         del self
 
     def attack(self):
-        self.parent.attack()
+        self.arena.attack()
         self.parent.remove(self)
         del self
 
     def support(self):
-        self.parent.support(self.sup_dict)
+        self.arena.support(self.sup_dict)
         self.parent.remove(self)
         del self
 
@@ -67,10 +75,11 @@ class Weaponmenu(Menu):
             if map.attackable(item.itemtype.weapontype):
                 l.append(MenuItem(item.itemtype.name, self.iteminfo, item))
         l.append(MenuItem('Cancel', self.cancel))
-        self.position = arena.width // 2, 0
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
         # self.position = (-w // 4, 0)
+        self.position = - director.get_window_size()[0] * 3 // 8, 0
+        self.arena = arena
 
     def on_mouse_release(self, x, y, buttons, modifiers):
         if buttons == 1:
@@ -98,9 +107,34 @@ class Weaponmenu(Menu):
 
 
     def cancel(self):
-        self.parent.state = 'valid_dst'
-        self.parent.menu = Ordermenu(self.parent)
+        self.arena.state = 'valid_dst'
         self.parent.add(self.parent.menu)
+        self.parent.remove(self)
+        del self
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
+class Endturn(Menu):
+    is_event_handler = True
+    def __init__(self, arena):
+        super().__init__(title='Endturn')
+        l = []
+        l.append(MenuItem('Endturn', self.end_turn))
+        l.append(MenuItem('Cancel', self.cancel))
+
+        self.position = - director.get_window_size()[0] * 3 // 8, 0
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.arena = arena
+
+    def cancel(self):
+        self.arena.is_event_handler = True
+        self.parent.remove(self)
+        del self
+
+    def end_turn(self):
+        self.arena.end_turn()
         self.parent.remove(self)
         del self
 
