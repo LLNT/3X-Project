@@ -26,6 +26,7 @@ class BattleSim(Layer):
         super().__init__()
         self.info = Queue(maxsize)
         self.width, self.height = director.get_window_size()[0], director.get_window_size()[1]
+        self.flag = False
 
     def on_enter(self):
         super().on_enter()
@@ -53,19 +54,15 @@ class BattleSim(Layer):
 
         :return: the next action to call
         '''
-
         if self.obj1.busy or self.obj2.busy:
             return
         self.i += 1
         if self.i >= len(self.events):
-            if self.i == len(self.events):
-                self.exit()
-                '''self.parent.remove(self)
-                self.parent.on_return()
-                del self'''
+            print(self.i)
+            self.exit()
             return
         event = self.events[self.i]
-        # print(event)
+        print(event)
         color = (0, 255, 0, 255)
         if event[0] < 0: # show info on screen
             content = event[1]
@@ -130,8 +127,10 @@ class BattleSim(Layer):
         obj.do(FadeIn(1.5) + CallFunc(self.get_next_action))
 
     def exit(self):
-        self.parent.remove(self)
-        del self
+        if not self.flag:
+            self.flag = True
+            self.parent.remove(self)
+
 
     def growth(self):
         person = self.content[0]
@@ -139,7 +138,8 @@ class BattleSim(Layer):
         exp = self.content[2]
         growthlist = self.content[3]
         origin = self.content[4]
-        self.add(Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin))
+        self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin)
+        self.add(self.exp)
 
 
 
@@ -183,6 +183,7 @@ class Battlescene(BattleSim):
         Layer.on_enter(self)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
+        self.remove(self.exp)
         self.do(CallFunc(self._return_arena)+ Delay(0.5) + CallFunc(self._pop))
 
     def _return_arena(self):
@@ -190,13 +191,15 @@ class Battlescene(BattleSim):
         director.push(FadeTransition(Scene(ColorLayer(0, 0, 0, 0, self.w, self.h)), duration=1.5))
 
     def _pop(self):
-        director.pop()
-        director.pop()
         self.arena.on_return()
+        director.pop()
+        director.pop()
         del self
 
     def exit(self):
-        for info in self.info.queue:
-            self.remove(info)
-        self.growth()
+        if not self.flag:
+            for info in self.info.queue:
+                self.remove(info)
+            self.growth()
+            self.flag = True
 

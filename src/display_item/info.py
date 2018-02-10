@@ -139,10 +139,11 @@ class Experience(Info):
         self.bar = Bar(size=(self.width, 30), prop=oriexp / 100, position=(0, -40), color=(0, 0, 255))
         self.add(self.bar)
         self.i = 0
-        if self.level > 0:
-            self.bar_raise()
-        else:
-            director.window.push_handlers(self.parent)
+        self.flag = True
+
+    def on_enter(self):
+        super().on_enter()
+        self.bar_raise()
 
     def bar_raise(self, duration=3):
         if self.bar.scale_x == 1:
@@ -153,20 +154,24 @@ class Experience(Info):
         else:
             scale = self.leftexp / 100
             d = duration * (scale - self.bar.scale_x)
-        print(scale, d, self.i)
         self.bar.do(Scale_to(scale_x=scale, scale_y=1, duration=d) + CallFunc(self.level_up))
 
     def level_up(self):
-        self.i += 1
-        if self.i > self.level:
-            director.window.push_handlers(self.parent)
+
+        if self.i == self.level:
+            if self.flag:
+                print(self.parent)
+                director.window.push_handlers(self.parent)
+
+                self.flag = False
+                del self
             return
         try:
             self.remove(self.content1)
             self.remove(self.content2)
         except:
             pass
-        growth = self.growthlist[self.i - 1]
+        growth = self.growthlist[self.i]
         self.content1 = []
         for ability in self.abilities:
             self.content1.append(str(growth[ability]))
@@ -178,3 +183,5 @@ class Experience(Info):
         self.content2.append('New')
         self.display(self.content2, font_size=20, pos_range=((self.width *7//9, 0), (self.width, self.height)))
         self.do(Delay(0.5) + CallFunc(self.bar_raise))
+        self.i += 1
+

@@ -80,7 +80,9 @@ class Arena(ScrollableLayer):
 
 
     def next_round(self):
+
         self.map.turn += 1
+
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
@@ -236,7 +238,8 @@ class Arena(ScrollableLayer):
             'choose_attack': self._choose_attack,5: self._choose_attack,
             'confirm_attack': self._confirm_attack,6: self._confirm_attack,
             'show_battle_result': self._show_battle_result, 7 : self._show_battle_result,
-            'choose_support': self._choose_support, 8: self._choose_support
+            'choose_support': self._choose_support, 8: self._choose_support,
+            'end_turn': self._end_turn, 9: self._end_turn
         }
 
     def _default(self):
@@ -279,8 +282,9 @@ class Arena(ScrollableLayer):
                 self.add(self.info)
                 self.state = 'person_info'
             else:
-                self.menulayer.add(Endturn(self))
-                self.is_event_handler = False
+                self.end = Endturn(self)
+                self.menulayer.add(self.end)
+                self.state = 'end_turn'
             pass
 
 
@@ -372,15 +376,41 @@ class Arena(ScrollableLayer):
         # 7   show_battle_result
         # showing battle result, push to another scene
         # if confirm, push battle scene and then return to 1, else turn to 5
+
         self.is_event_handler = False
         self.get_next_to_delete()
+
+    def _choose_support(self):
+        # 8   show_battle_result
+        # showing battle result, push to another scene
+        # if confirm, push battle scene and then return to 1, else turn to 5
+        if self.mouse_btn is 1:
+            if self.mouse_pos in self.sup_dict.values():
+                self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
+                for pid in self.sup_dict:
+                    self.people[pid].state = self._reset_person[pid]
+                self.move()
+        elif self.mouse_btn is 4:
+            self._reset()
+        pass
+
+    def _end_turn(self):
+        # 9   show_battle_result
+        # showing battle result, push to another scene
+        # if confirm, push battle scene and then return to 1, else turn to 5
+        if self.mouse_btn == 4:
+            try:
+                self.menulayer.remove(self.end)
+            except:
+                pass
+            self.state = 'default'
+            del self.end
 
     def get_next_to_delete(self):
         try:
             pid = next(self.iter)
         except:
             self._clear_map()
-            self.is_event_handler = True
             return
         person = self.people[pid].person
         if person.ability['HP'] <= 0:
@@ -396,16 +426,7 @@ class Arena(ScrollableLayer):
         del person
         self.get_next_to_delete()
 
-    def _choose_support(self):
-        if self.mouse_btn is 1:
-            if self.mouse_pos in self.sup_dict.values():
-                self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
-                for pid in self.sup_dict:
-                    self.people[pid].state = self._reset_person[pid]
-                self.move()
-        elif self.mouse_btn is 4:
-            self._reset()
-        pass
+
 
     def _simplefied_battle(self):
         self.is_event_handler = False
@@ -501,8 +522,8 @@ class Arena(ScrollableLayer):
     def coordinate_t(self, x, y):
         pos = ((x - self.anchor_x - self.position[0]) // self.scale + self.anchor_x) ,\
               ((y - self.anchor_y - self.position[1]) // self.scale + self.anchor_y)
-        i = pos[0] // self.size
-        j = pos[1] // self.size
+        i = int(pos[0] // self.size)
+        j = int(pos[1] // self.size)
         return i, j
 
 

@@ -99,16 +99,16 @@ class Weaponmenu(Menu):
         content.append('max_range: ' + str(it.max_range))
         content.append('min_range: ' + str(it.min_range))
         info = Info(size=(self.w // 2, self.h), position=(self.w // 2, 0))
-        self.parent.add(info)
+        self.arena.add(info)
         info.display(content)
         self.parent.remove(self)
-        self.parent.wpinfo = info
-        self.parent.select_target(item)
+        self.arena.wpinfo = info
+        self.arena.select_target(item)
 
 
     def cancel(self):
         self.arena.state = 'valid_dst'
-        self.parent.add(self.parent.menu)
+        self.parent.add(self.arena.menu)
         self.parent.remove(self)
         del self
 
