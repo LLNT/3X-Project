@@ -29,7 +29,8 @@
     "Rank":1,
     "Skills":[],
     "Value":460,
-    "Character_only":[]
+    "Character_only":[],
+    "Use":"UNAVAILABLE"
   },
   {
     "Name":"Iron Lance",
@@ -61,7 +62,8 @@
     "Rank":1,
     "Skills":[],
     "Value":600,
-    "Character_only":[]
+    "Character_only":[],
+    "Use":"UNAVAILABLE"
   },
   {
     "Name":"Vulnerary",
@@ -93,7 +95,8 @@
     "Rank":0,
     "Skills":[],
     "Value":300,
-    "Character_only":[]
+    "Character_only":[],
+    "Use":"HEAL 10"
   },
   {
     "Name":"Iron Bow",
@@ -125,7 +128,8 @@
     "Rank":1,
     "Skills":[],
     "Value":540,
-    "Character_only":[]
+    "Character_only":[],
+    "Use":"UNAVAILABLE"
   },
   {
     "Name":"Javelin",
@@ -157,6 +161,7 @@
     "Rank":1,
     "Skills":[],
     "Value":400,
-    "Character_only":[]
+    "Character_only":[],
+    "Use":"UNAVAILABLE"
   }
 ]
