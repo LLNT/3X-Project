@@ -124,6 +124,18 @@ class Person:
                 growth_rec[abl]=0
         return growth_rec
 
+    def use_item(self,_item):
+        i=_item #type:item.Item
+        if len(i.itemtype.character_only)>0:
+            if not self.pid in i.itemtype.character_only:
+                return 2
+        r=i.use_item(self)
+        i.use-=1
+        if i in self.item:
+            if i.use==0:
+                self.banish(i)
+        return r
+
 
 class PersonBank:
     def __init__(self):

@@ -289,3 +289,39 @@ class Main:
             if p.pid == pid:
                 self.person_container.people.remove(p)
                 return
+
+    def exchange_item(self,p1,p2,i1,i2):
+        person1=self.global_vars.personBank[p1]
+        person2=self.global_vars.personBank[p2]
+        if i1<len(person1.item):
+            item1=person1.item[i1]
+        else:
+            item1=None
+        if i2<len(person2.item):
+            item2=person2.item[i2]
+        else:
+            item2=None
+        if item1==None:
+            if item2==None:
+                return
+            if (person2.get_equip()==item2):
+                person2.dequip(item2)
+            person2.item.remove(item2)
+            person1.item.append(item2)
+            return
+        if item2==None:
+            if (person1.get_equip()==item1):
+                person1.dequip(item1)
+            person1.item.remove(item1)
+            person2.item.append(item1)
+            return
+        if (person1.get_equip()==item1):
+            person1.dequip(item1)
+        if (person2.get_equip()==item2):
+            person2.dequip(item2)
+        person1.item.remove(item1)
+        person2.item.remove(item2)
+        person1.item.append(item2)
+        person2.item.append(item1)
+        return
+

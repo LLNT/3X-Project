@@ -1,5 +1,6 @@
 from typing import Dict
 import itemtype
+import person
 class Item:
     def __init__(self):
         self.itemid=None      #type:int
@@ -11,6 +12,20 @@ class Item:
         self.itemid=iid
         self.itemtype=itemtype
         self.use=use
+
+    def use_item(self,_p):
+        p=_p   #type:person.Person
+        use_eff=self.itemtype.use_effect.split(" ")
+        t=0
+        while t<len(use_eff):
+            if use_eff[t]=="UNAVAILABLE":
+                return 1
+            if use_eff[t]=="HEAL":
+                p.ability["HP"]+=int(use_eff[t+1])
+                if p.ability["HP"]>p.ability["MHP"]:
+                    p.ability["HP"]=p.ability["MHP"]
+                t+=2
+        return 0
 
 class ItemBank:
     def __init__(self):
