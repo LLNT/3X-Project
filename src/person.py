@@ -19,7 +19,7 @@ class Person:
         self.color=""        #type:str
         self.equiped=0       #type:int
         self.growth={}       #type:Dict[str,int]
-        self.status=[]       #[{"Status":str,"Rest":int},]
+        self.status={}       #type:Dict[str,int]
     def __init__(self,pid,name,cls,ability,skills,pic,weapon_rank_bonus,items,support,cls_weapon_rank,color,attr,growth,cls_abl_limit):
         self.pid=pid
         self.name=name
@@ -35,7 +35,7 @@ class Person:
         self.color=color
         self.attribute=attr
         self.equiped=0
-        self.status=[]
+        self.status={}
         if len(support)>0:
             for obj in support:
                 self.suprank[obj]=0
@@ -137,6 +137,15 @@ class Person:
             if i.use==0:
                 self.banish(i)
         return r
+
+    def add_status(self,sta,rest):
+        if not (sta in self.status):
+            self.status[sta]=rest
+            return
+        r0=self.status[sta]
+        if rest>r0:
+            self.status[sta]=rest
+        return
 
 
 class PersonBank:
