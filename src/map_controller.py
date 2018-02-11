@@ -325,3 +325,13 @@ class Main:
         person2.item.append(item1)
         return
 
+    def can_rescue(self,pid,pos):
+        cry_obj={}   #type:Dict[str,Tuple[int,int]]
+        p=self.global_vars.personBank[pid]
+        for obj in self.person_container.position:
+            if (self.person_container.controller[obj]==0) or (self.person_container.controller[obj]==2):
+                if calc_dist(pos,self.person_container.position[obj])==1:
+                    if self.global_vars.personBank[obj].ability["BLD"]<=p.ability["CRY"]:
+                        cry_obj[obj]=self.person_container.position[obj]
+        return cry_obj
+
