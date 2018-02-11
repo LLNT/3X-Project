@@ -19,6 +19,7 @@ class Person:
         self.color=""        #type:str
         self.equiped=0       #type:int
         self.growth={}       #type:Dict[str,int]
+        self.status=[]       #[{"Status":str,"Rest":int},]
     def __init__(self,pid,name,cls,ability,skills,pic,weapon_rank_bonus,items,support,cls_weapon_rank,color,attr,growth,cls_abl_limit):
         self.pid=pid
         self.name=name
@@ -34,6 +35,7 @@ class Person:
         self.color=color
         self.attribute=attr
         self.equiped=0
+        self.status=[]
         if len(support)>0:
             for obj in support:
                 self.suprank[obj]=0
