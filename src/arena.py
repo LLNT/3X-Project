@@ -66,6 +66,10 @@ class Arena(ScrollableLayer):
 
         self._clear_map()
 
+        self.board = Board(self.width, self.height)
+        self._update = (0, 0)
+        self.schedule(self.update)
+
         self.anchor = self.width//2, self.height//2
         self.menulayer = menulayer
         self.next_round()
@@ -122,17 +126,18 @@ class Arena(ScrollableLayer):
     def on_mouse_motion(self, x, y, buttons, modifiers):
         # use _repaint
         if self.is_event_handler:
+            pos = self._coordinate(x, y)
+            self._update = self.board.get_dir(pos[0], pos[1])
             i, j = self.coordinate_t(x, y)
-            if i < self.w and j < self.h:
+            if self._in_arena(i, j):
                 self._repaint()
                 cell = self.cells[(i, j)]
                 cell.color = mapstate2color_motion[cell.state]
                 cell.opacity = opacity[cell.state]
             pass
 
-    def _in_arena(self):
-        i, j = self.mouse_pos
-        if i < self.w and j < self.h:
+    def _in_arena(self, i, j):
+        if i < self.w and j < self.h and i >= 0 and j >= 0:
             return True
         else:
             return False
@@ -247,7 +252,7 @@ class Arena(ScrollableLayer):
         # not any army is selected.
         # event handler should be true to wait for commands
         # consider end_turn only under this state
-        if not self._in_arena():
+        if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
             return
         if self.mouse_btn == 1:
             if self.cells[self.mouse_pos].person_on is not None: # just select a person
@@ -338,7 +343,7 @@ class Arena(ScrollableLayer):
         if self.mouse_btn == 4:
             self._reset()
         elif self.mouse_btn == 1:
-            if not self._in_arena():
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
                 return
             cell = self.cells[self.mouse_pos]
             if cell.state is 'in_self_attackrange' and cell.person_on is not None\
@@ -520,11 +525,54 @@ class Arena(ScrollableLayer):
         del obj
 
     def coordinate_t(self, x, y):
-        pos = ((x - self.anchor_x - self.position[0]) // self.scale + self.anchor_x) ,\
-              ((y - self.anchor_y - self.position[1]) // self.scale + self.anchor_y)
+        pos = self._coordinate(x, y)
         i = int(pos[0] // self.size)
         j = int(pos[1] // self.size)
         return i, j
+
+    def update(self, dt):
+        self.position = self.position[0] + self._update[0], \
+                        self.position[1] + self._update[1]
+
+    def _coordinate(self,x, y):
+        return ((x - self.anchor_x - self.position[0]) // self.scale + self.anchor_x) ,\
+              ((y - self.anchor_y - self.position[1]) // self.scale + self.anchor_y)
+
+class Board():
+    def __init__(self, w=800, h=600, margin=20, step=2):
+        self.w = w
+        self.h = h
+        self.margin = margin
+        self.step = step
+        self.up = self.h - self.margin
+        self.right = self.w - self.margin
+
+    def get_dir(self, x, y):
+        if x < self.margin:
+            if y < self.margin:
+                return (-self.step, -self.step)
+            elif y > self.up:
+                return (-self.step, self.step)
+            else:
+                return (-self.step, 0)
+        elif x > self.right:
+            if y > self.up:
+                return (self.step, self.step)
+            elif y < self.margin:
+                return (self.step, -self.step)
+            else:
+                return (self.step, 0)
+        else:
+            if y < self.margin:
+                return (0, -self.step)
+            elif y > self.up:
+                return (0, self.step)
+            else:
+                return (0, 0)
+
+
+
+
 
 
 def map_init():
