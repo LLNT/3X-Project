@@ -128,6 +128,8 @@ class Battle:
         self.ctrld=0                      #type:int
         self.abl_ori_a={}
         self.abl_ori_d={}
+        self.wp_status_eff_a={}
+        self.wp_status_eff_d={}
     def __init__(self,_a,_d,_wpa,_wpd,_map,posa):
         self.queue = collections.deque([])  # type:collections.deque[Attack]
         self.log = []                    #type:List[Tuple[int,str]]
@@ -136,6 +138,10 @@ class Battle:
         map=_map                         #type:map_controller.Main
         self.weapon_a=_wpa               #type:item.Item
         self.weapon_d=_wpd               #type:item.Item
+        self.wp_status_eff_a = self.weapon_a.itemtype.status
+        self.wp_status_eff_d = {}
+        if not self.weapon_d==None:
+            self.wp_status_eff_d=self.weapon_d.itemtype.status
         self.abl_ori_a=self.a.ability.copy()
         self.abl_ori_d=self.d.ability.copy()
         #posa=map.person_container.position[self.a.pid]
@@ -188,6 +194,10 @@ class Battle:
         if not (self.weapon_d==None):
             for item in self.weapon_d.itemtype.skills:
                 self.skills_d.add(item)
+        if "Immortal" in self.a.status:
+            self.skills_a.add("Immortal")
+        if "Immortal" in self.d.status:
+            self.skills_d.add("Immortal")
         aw_a=0
         aw_d=0
         self.immortala = 0
@@ -808,6 +818,21 @@ class Battle:
                 else:
 
                     return 2   #A defeated
+            if (r==4):
+                if att.AorD==0:
+                    self.log.append((-1,"Stalled for Slept"))
+                else:
+                    self.log.append((-2,"Stalled for Slept"))
+            if (r==5):
+                if att.AorD==0:
+                    self.log.append((-1,"Stalled for Silence"))
+                else:
+                    self.log.append((-2,"Stalled for Silence"))
+            if (r==6):
+                if att.AorD==0:
+                    self.log.append((-1,"Stalled for Stoned"))
+                else:
+                    self.log.append((-2,"Stalled for Stoned"))
         return 0
 
     def battleb(self):
@@ -847,6 +872,21 @@ class Battle:
                 else:
 
                     return 2  # A defeated
+            if (r==4):
+                if att.AorD==0:
+                    self.log.append((-1,"Stalled for Slept"))
+                else:
+                    self.log.append((-2,"Stalled for Slept"))
+            if (r==5):
+                if att.AorD==0:
+                    self.log.append((-1,"Stalled for Silence"))
+                else:
+                    self.log.append((-2,"Stalled for Silence"))
+            if (r==6):
+                if att.AorD==0:
+                    self.log.append((-1,"Stalled for Stoned"))
+                else:
+                    self.log.append((-2,"Stalled for Stoned"))
         return 0
 
     def execute(self,_a):
@@ -857,6 +897,13 @@ class Battle:
 
     def executea(self,_a):
         att=_a       #type:Attack
+        if "Sleep" in self.a.status:
+            return 4
+        if "Silence" in self.a.status:
+            if self.weapon_a.itemtype.weapontype in ["Light","Dark","Thunder","Fire","Wind"]:
+                return 5
+        if "Stone" in self.a.status:
+            return 6
         if (self.wear_buf_a==0):
             return 0   #run out of weapon
         if (self.continue_a(att.continued_attack)==1):
@@ -950,6 +997,14 @@ class Battle:
             self.att_crt=0
             self.att_shield=0
             self.d.ability["HP"]-=dmg
+            for _sta in self.wp_status_eff_a:
+                st=_sta["Status"]
+                chance=_sta["Chance"]
+                rest=_sta["Rest"]
+                rolling=random.randint(0,99)
+                if rolling<chance:
+                    self.log.append((-1, "Attack to " + st))
+                    self.d.add_status(st,rest)
             if (self.d.ability["HP"]<=0):
                 return 2
             return 1
@@ -969,6 +1024,13 @@ class Battle:
 
     def executed(self,_a):
         att=_a       #type:Attack
+        if "Sleep" in self.d.status:
+            return 4
+        if "Silence" in self.d.status:
+            if self.weapon_d.itemtype.weapontype in ["Light","Dark","Thunder","Fire","Wind"]:
+                return 5
+        if "Stone" in self.d.status:
+            return 6
         if (self.wear_buf_d==0):
             return 0   #run out of weapon
         if (self.continue_d(att.continued_attack)==1):
@@ -1062,6 +1124,14 @@ class Battle:
             self.att_crt=0
             self.att_shield=0
             self.a.ability["HP"]-=dmg
+            for _sta in self.wp_status_eff_d:
+                st=_sta["Status"]
+                chance=_sta["Chance"]
+                rest=_sta["Rest"]
+                rolling=random.randint(0,99)
+                if rolling<chance:
+                    self.log.append((-2,"Attack to "+st))
+                    self.a.add_status(st,rest)
             if (self.a.ability["HP"]<=0):
                 return 2
             return 1
