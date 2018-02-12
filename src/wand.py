@@ -1,0 +1,87 @@
+import person,map_controller,item
+from typing import List
+
+class Wand:
+    def __init__(self):
+        self.p=None #type:person.Person
+        self.wand=None #type:item.Item
+        self.map=None #type:map_controller.Main
+        self.exp_buf=0 #type:int
+
+class Type0(Wand):
+    def __init__(self):
+        super(Type0,self).__init__()
+        self.obj=None #type:person.Person
+        self.log=[] #type:List[str]
+    def __init__(self,p,wand,obj,map):
+        self.p=p  #type:person.Person
+        self.wand=wand  #type:item.Item
+        self.obj=obj  #type:person.Person
+        self.map=map  #type:map_controller.Main
+        self.log=[]   #type:List[str]
+        self.exp_buf=0 #type:int
+    def execute(self):
+        funcs=self.wand.itemtype.wand["Effect"].split(",")
+        for func in funcs:
+            if func=="HEAL":
+                base=self.wand.itemtype.power+self.p.ability["MGC"]
+                hpdiff=self.obj.ability["MHP"]-self.obj.ability["HP"]
+                if base>hpdiff:
+                    base=hpdiff
+                self.obj.ability["HP"]+=base
+                self.log.append((1,"H,%d,0"%(base)))
+            if func=="RELIEF":
+                if "Sleep" in self.obj.status:
+                    self.obj.status.pop("Sleep")
+                    self.log.append((-1, "Relief Sleep"))
+                if "Stone" in self.obj.status:
+                    self.obj.status.pop("Stone")
+                    self.log.append((-1, "Relief Stone"))
+                if "Berserk" in self.obj.status:
+                    self.obj.status.pop("Berserk")
+                    self.log.append((-1, "Relief Berserk"))
+                if "Poison" in self.obj.status:
+                    self.obj.status.pop("Poison")
+                    self.log.append((-1, "Relief Poison"))
+                if "Silence" in self.obj.status:
+                    self.obj.status.pop("Silence")
+                    self.log.append((-1, "Relief Silence"))
+            if func=="POWER":
+                self.obj.ability["MGC"]+=7
+                self.obj.add_status("Power",7)
+                self.log.append((-1,"Powered"))
+            if func=="RESTORE":
+                self.obj.ability["DEF"]+=7
+                self.obj.add_status("Restore",7)
+                self.log.append((-1,"Restored"))
+            if func=="BARRIER":
+                self.obj.ability["RES"]+=7
+                self.obj.add_status("Barrier",7)
+                self.log.append((-1,"Barriered"))
+            if func=="PROTECT":
+                self.obj.add_status("Immortal",1)
+                self.log.append((-1,"Protected"))
+        self.p.weapon_rank["Wand"]+=1
+        if self.p.weapon_rank["Wand"]>=400:
+            self.p.weapon_rank["Wand"]=400
+        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
+        self.wand.use-=1
+        if self.wand.use<=0:
+            self.p.banish(self.wand)
+        self.log.append((-1,"Wand used out"))
+        ori_abl=self.p.ability
+        self.p.ability["EXP"] += self.exp_buf
+        lv_up = 0
+        while self.p.ability["EXP"] >= 100:
+            lv_up += 1
+            self.p.ability["EXP"] -= 100
+        if (lv_up + self.p.ability["LV"] >= 20):
+            lv_up = 20 - self.p.ability["LV"]
+            self.p.ability["EXP"] = 0
+        growthlist = []
+        for i in range(lv_up):
+            growth = self.p.lv_up()
+            growthlist.append(growth)
+        growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist,ori_abl]
+        return self.log,growthtuple
+

@@ -150,6 +150,12 @@ class Person:
         r0=self.status[sta]
         if rest>r0:
             self.status[sta]=rest
+        if sta=="Power":
+            self.ability["MGC"]-=r0
+        if sta=="Restore":
+            self.ability["DEF"]-=r0
+        if sta=="Barrier":
+            self.ability["RES"]-=r0
         return
 
 

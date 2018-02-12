@@ -341,6 +341,9 @@ class Main:
         if item.itemtype.use_effect.split(" ")[0]=="HEAL":
             if self.global_vars.personBank[pid].ability["HP"]>=self.global_vars.personBank[pid].ability["MHP"]:
                 return False
+        if len(item.itemtype.character_only)>0:
+            if not pid in item.itemtype.character_only:
+                return False
         return True
 
     def can_equip(self, pid, item):
@@ -359,6 +362,8 @@ class Main:
     def available_wand(self,pid):
         wands=[]
         p=self.global_vars.personBank[pid]
+        if "Silence" in p.status:
+            return wands
         for i in p.item:
             if i.itemtype.weapontype=="Wand":
                 if i.itemtype.rank<=p.weapon_rank["Wand"]:
