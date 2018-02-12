@@ -336,9 +336,21 @@ class Main:
         return cry_obj
 
     def can_use(self, pid, item):
+        if item.itemtype.use_effect=="UNAVAILABLE":
+            return False
+        if item.itemtype.use_effect.split(" ")[0]=="HEAL":
+            if self.global_vars.personBank[pid].ability["HP"]>=self.global_vars.personBank[pid].ability["MHP"]:
+                return False
         return True
 
     def can_equip(self, pid, item):
+        if not item.itemtype.weapontype in ["Sword","Bow","Axe","Lance","Light","Dark","Wind","Fire","Thunder"]:
+            return False
+        if item.itemtype.rank>self.global_vars.personBank[pid].weapon_rank[item.itemtype.weapontype]:
+            return False
+        if len(item.itemtype.character_only)>0:
+            if not pid in item.itemtype.character_only:
+                return False
         return True
 
     def can_banish(self, pid, item):

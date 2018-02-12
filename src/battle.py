@@ -451,7 +451,8 @@ class Battle:
                 self.log.append((-2, "Defeatenemy"))
             growthtuple=[0,0,0,[],{}]
             if self.ctrla==0:
-                self.exp_buf_a+=int((31+self.d.ability["LV"]-self.a.ability["LV"]+self.adjust_lv_d-self.adjust_lv_a)*self.d.coefficient)
+                if self.give_damage_a>0:
+                    self.exp_buf_a+=int((31+self.d.ability["LV"]-self.a.ability["LV"]+self.adjust_lv_d-self.adjust_lv_a)*self.d.coefficient)
                 if self.exp_buf_a<1:
                     self.exp_buf_a=1
                 self.a.ability["EXP"]+=self.exp_buf_a
@@ -468,7 +469,8 @@ class Battle:
                     growthlist.append(growth)
                 growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
             if self.ctrld==0:
-                self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
+                if self.give_damage_d>0:
+                    self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
                     "LV"] + self.adjust_lv_a - self.adjust_lv_d) * self.a.coefficient)
                 if self.exp_buf_d < 1:
                     self.exp_buf_d = 1
@@ -505,7 +507,8 @@ class Battle:
                 self.log.append((-2, "Defeatenemy"))
             growthtuple = [0, 0, 0, [],{}]
             if self.ctrla==0:
-                self.exp_buf_a += int((31 + self.d.ability["LV"] - self.a.ability[
+                if self.give_damage_a>0:
+                    self.exp_buf_a += int((31 + self.d.ability["LV"] - self.a.ability[
                     "LV"] + self.adjust_lv_d - self.adjust_lv_a) * self.d.coefficient)
                 if self.exp_buf_a < 1:
                     self.exp_buf_a = 1
@@ -523,7 +526,8 @@ class Battle:
                     growthlist.append(growth)
                 growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
             if self.ctrld==0:
-                self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
+                if self.give_damage_d>0:
+                    self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
                     "LV"] + self.adjust_lv_a - self.adjust_lv_d) * self.a.coefficient)
                 if self.exp_buf_d < 1:
                     self.exp_buf_d = 1

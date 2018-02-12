@@ -33,5 +33,10 @@
     "Id":7,
     "Itemtype":"Seal of Master",
     "Use":1
+  },
+  {
+    "Id":8,
+    "Itemtype":"Silver Bow",
+    "Use":20
   }
 ]
