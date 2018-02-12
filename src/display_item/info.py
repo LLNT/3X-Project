@@ -78,10 +78,10 @@ class Personinfo(Info):
         self.display(content, ((0, 0), (self.width//2, self.height//2)))
         content = []
         for item in p.item:
-            content.append(str(item.use) + '/' + str(item.itemtype.max_use))
-            content.append(item.itemtype.name)
+            content.append(item.itemtype.name + ' ' +
+                           str(item.use) + '/' + str(item.itemtype.max_use))
 
-        self.display(content, ((self.width//2, 0), (self.width, self.height)))
+        self.display(content, ((self.width//2, 0), (self.width, self.height)), 25)
 
 
 class Battleinfo(Info):
@@ -140,10 +140,9 @@ class Experience(Info):
 
         self.abilities = ["MHP","STR","MGC","SPD","SKL","DEF","RES","LUK"]
         if self.level > 0:
-            content_label = []
+            content_label = ['']
             for ability in self.abilities:
                 content_label.append(ability + ':  ')
-            content_label.append('')
             self.display(content_label, font_size=24, pos_range=((0, 0), (self.width // 3, self.height)))
         else:
             self.opacity = 0
@@ -179,24 +178,21 @@ class Experience(Info):
         self.info_clear(2)
         self.info_clear(3)
         
-        content_origin = []
+        content_origin = ['Origin']
         for ability in self.abilities:
             content_origin.append(str(self.origin[ability]))
-        content_origin.append('Origin')
         self.display(content_origin, font_size=20, contentid=1,
                      pos_range=((self.width // 3, 0), (self.width * 5 // 9, self.height)))
         growth = self.growthlist[self.i]
-        content_grow = []
+        content_grow = ['Grow']
         for ability in self.abilities:
             content_grow.append(str(growth[ability]))
-        content_grow.append('Grow')
         self.display(content_grow, font_size=20, contentid=2,
                      pos_range=((self.width*5//9, 0), (self.width*7//9, self.height)))
-        content_new = []
+        content_new = ['New']
         for ability in self.abilities:
             self.origin[ability] = growth[ability] + self.origin[ability]
             content_new.append(str(self.origin[ability]))
-        content_new.append('New')
         self.display(content_new, font_size=20, contentid=3,
                      pos_range=((self.width *7//9, 0), (self.width, self.height)))
 

@@ -37,7 +37,7 @@ def layout(content, pos_range=None, color=(127, 255, 170, 255), font_name='times
     pos_x = (x0 + x1) / 2
     y_range = (y1 - y0)
     textlist = []
-    for i, text in enumerate(content):
+    for i, text in enumerate(reversed(content)):
         pos_y = (i + 1) / num * y_range + y0
         textlist.append(Text(content=text, position=(pos_x, pos_y), color=color,
                              font_size=font_size, font_name=font_name))

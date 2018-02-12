@@ -233,6 +233,7 @@ class Arena(ScrollableLayer):
         for person in self.people.values(): #type:Charactor
             if person.state is not 'moved':
                 person.state = 'unmoved'
+            person.update_hp()
 
         self._repaint()
 
@@ -383,7 +384,7 @@ class Arena(ScrollableLayer):
 
     def _push_battle_scene(self):
         self.is_event_handler = False
-        director.push(FadeTransition(Scene(Battlescene(self)), duration=1.5))
+        director.push(FadeTransition(Scene(Battlescene(self, self.width, self.height)), duration=1.5))
 
     def _show_battle_result(self):
         # 7   show_battle_result
@@ -539,7 +540,7 @@ class Arena(ScrollableLayer):
         person = self.people[pid].person
         obj = self.people[pid]
         action = self._sequential_move(pid, dst)
-        obj.do(action + CallFunc(self._clear_map) + CallFunc(person.use_item, item)
+        obj.do(action + CallFunc(person.use_item, item) + CallFunc(self._clear_map)
                + CallFunc(self.map.take_turn, self))
         pass
 
