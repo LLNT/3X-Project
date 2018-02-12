@@ -117,9 +117,14 @@ class Itemuse(Menu):
         w, h = director.get_window_size()
         self.w, self.h = w, h
         l = []
-        l.append(MenuItem('Use', self.use))
-        l.append(MenuItem('Equip', self.equip))
-        l.append(MenuItem('Banish', self.banish))
+        pid = arena.selected
+        map = arena.map
+        if map.can_use(pid, item):
+            l.append(MenuItem('Use', self.use))
+        if map.can_equip(pid, item):
+            l.append(MenuItem('Equip', self.equip))
+        if map.can_banish(pid, item):
+            l.append(MenuItem('Banish', self.banish))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None

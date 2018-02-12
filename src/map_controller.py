@@ -335,3 +335,11 @@ class Main:
                         cry_obj[obj]=self.person_container.position[obj]
         return cry_obj
 
+    def can_use(self, pid, item):
+        return True
+
+    def can_equip(self, pid, item):
+        return True
+
+    def can_banish(self, pid, item):
+        return True
