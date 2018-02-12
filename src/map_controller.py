@@ -355,3 +355,12 @@ class Main:
 
     def can_banish(self, pid, item):
         return True
+
+    def available_wand(self,pid):
+        wands=[]
+        p=self.global_vars.personBank[pid]
+        for i in p.item:
+            if i.itemtype.weapontype=="Wand":
+                if i.itemtype.rank<=p.weapon_rank["Wand"]:
+                    wands.append(i)
+        return wands
