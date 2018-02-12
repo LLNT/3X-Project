@@ -30,8 +30,9 @@ class Info(ColorLayer):
                 self.position = position
             else:
                 self.position = 0, 0
+        self.contents = {}
 
-    def display(self, content, pos_range=None, font_size=30):
+    def display(self, content, pos_range=None, font_size=30, contentid=None):
         if pos_range is None:
             items = layout(content, ((0, 0),
                                           (self.width, self.height)), font_size=font_size)
@@ -39,10 +40,22 @@ class Info(ColorLayer):
             items = layout(content, pos_range, font_size=font_size)
         for item in items:
             self.add(item)
+        if contentid:
+            self.contents[contentid] = items
+        else:
+            self.contents[len(self.contents)] = items
 
-    def info_clear(self):
-        self.parent.remove(self)
-        del self
+    def info_clear(self, contentid=None):
+        if contentid:
+            if contentid in self.contents.keys():
+                for item in self.contents[contentid]:
+                    self.remove(item)
+                del self.contents[contentid]
+            else:
+                pass
+        else:
+            self.parent.remove(self)
+            del self
 
 class Personinfo(Info):
     # 显示个人的信息
@@ -126,21 +139,19 @@ class Experience(Info):
         oriexp = self.origin['EXP']
 
         self.abilities = ["MHP","STR","MGC","SPD","SKL","DEF","RES","LUK"]
-        content = []
-        for ability in self.abilities:
-            content.append(ability + ':  ')
-        content.append('')
-        self.display(content, font_size=24, pos_range=((0, 0), (self.width//3, self.height)))
-        content = []
-        for ability in self.abilities:
-            content.append(str(self.origin[ability]))
-        content.append('Origin')
-        self.display(content, font_size=20, pos_range=((self.width//3, 0), (self.width*5//9, self.height)))
+        if self.level > 0:
+            content_label = []
+            for ability in self.abilities:
+                content_label.append(ability + ':  ')
+            content_label.append('')
+            self.display(content_label, font_size=24, pos_range=((0, 0), (self.width // 3, self.height)))
+        else:
+            self.opacity = 0
         self.bar = Bar(size=(self.width, 30), prop=oriexp / 100, position=(0, -40), color=(0, 0, 255))
         self.add(self.bar)
         self.i = 0
         self.flag = True
-
+        
     def on_enter(self):
         super().on_enter()
         self.bar_raise()
@@ -157,31 +168,39 @@ class Experience(Info):
         self.bar.do(Scale_to(scale_x=scale, scale_y=1, duration=d) + CallFunc(self.level_up))
 
     def level_up(self):
-
         if self.i == self.level:
             if self.flag:
                 print(self.parent)
                 director.window.push_handlers(self.parent)
-
                 self.flag = False
                 del self
             return
-        try:
-            self.remove(self.content1)
-            self.remove(self.content2)
-        except:
-            pass
+        self.info_clear(1)
+        self.info_clear(2)
+        self.info_clear(3)
+        
+        content_origin = []
+        for ability in self.abilities:
+            content_origin.append(str(self.origin[ability]))
+        content_origin.append('Origin')
+        self.display(content_origin, font_size=20, contentid=1,
+                     pos_range=((self.width // 3, 0), (self.width * 5 // 9, self.height)))
         growth = self.growthlist[self.i]
-        self.content1 = []
+        content_grow = []
         for ability in self.abilities:
-            self.content1.append(str(growth[ability]))
-        self.content1.append('Grow')
-        self.display(self.content1, font_size=20, pos_range=((self.width*5//9, 0), (self.width*7//9, self.height)))
-        self.content2 = []
+            content_grow.append(str(growth[ability]))
+        content_grow.append('Grow')
+        self.display(content_grow, font_size=20, contentid=2,
+                     pos_range=((self.width*5//9, 0), (self.width*7//9, self.height)))
+        content_new = []
         for ability in self.abilities:
-            self.content2.append(str(growth[ability] + self.origin[ability]))
-        self.content2.append('New')
-        self.display(self.content2, font_size=20, pos_range=((self.width *7//9, 0), (self.width, self.height)))
+            self.origin[ability] = growth[ability] + self.origin[ability]
+            content_new.append(str(self.origin[ability]))
+        content_new.append('New')
+        self.display(content_new, font_size=20, contentid=3,
+                     pos_range=((self.width *7//9, 0), (self.width, self.height)))
+
+
         self.do(Delay(0.5) + CallFunc(self.bar_raise))
         self.i += 1
 

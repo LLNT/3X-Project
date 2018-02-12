@@ -12,6 +12,13 @@ class Menulayer(ColorLayer):
         w, h = director.get_window_size()
         super().__init__(0,0,0,200,w//4, h)
         self.position = w - w //4, 0
+        self.opacity = 0
+
+    def appear(self, opcacity=200):
+        self.opacity = 200
+
+    def disapper(self):
+        self.opacity = 0
 
 
 class Ordermenu(Menu):
@@ -19,9 +26,11 @@ class Ordermenu(Menu):
 
     def __init__(self, arena):
         super(Ordermenu, self).__init__(title='Order')
+        self.arena = arena
         l = []
         l.append(MenuItem('Move', self.move))
         l.append(MenuItem('Attack', self.attack))
+        l.append(MenuItem('Item', self.item))
 
         map = arena.map
         pid = arena.selected
@@ -33,7 +42,7 @@ class Ordermenu(Menu):
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.position = - director.get_window_size()[0] * 3 // 8, 0
-        self.arena = arena
+
 
     def on_mouse_release(self, x, y, buttons, modifiers):
         if buttons == 1:
@@ -59,9 +68,91 @@ class Ordermenu(Menu):
         self.parent.remove(self)
         del self
 
+    def item(self):
+        self.arena.item_show()
+        self.parent.remove(self)
+        del self
+
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:
             self.cancel()
+
+class Showweapon(Menu):
+    is_event_handler = True
+
+    def __init__(self, items, arena):
+        super(Showweapon, self).__init__(title='Weapons')
+        w, h = director.get_window_size()
+        self.w, self.h = w, h
+        l = []
+        for item in items:
+            content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
+            l.append(MenuItem(content, self.itemuse, item))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.info = None
+        # self.position = (-w // 4, 0)
+        self.position = - director.get_window_size()[0] * 6 // 8, 0
+        self.arena = arena
+
+    def itemuse(self, item):
+        self.parent.remove(self)
+        self.parent.add(Itemuse(item, self, self.arena))
+
+    def cancel(self):
+        self.arena.state = 'valid_dst'
+        self.parent.add(self.arena.menu)
+        self.parent.remove(self)
+        del self
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
+class Itemuse(Menu):
+    is_event_handler = True
+
+    def __init__(self, item, menu, arena):
+        super().__init__(title='Weapons')
+        w, h = director.get_window_size()
+        self.w, self.h = w, h
+        l = []
+        l.append(MenuItem('Use', self.use))
+        l.append(MenuItem('Equip', self.equip))
+        l.append(MenuItem('Banish', self.banish))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.info = None
+        # self.position = (-w // 4, 0)
+        self.position = - director.get_window_size()[0] * 3 // 8, 0
+        self.item = item
+        self.menu = menu
+        self.arena = arena
+
+    def use(self):
+        self.arena.use(self.item)
+        self.parent.remove(self)
+        pass
+
+    def equip(self):
+        self.arena.equip(self.item)
+        self.parent.remove(self)
+        pass
+
+    def banish(self):
+        self.arena.banish(self.item)
+        self.parent.remove(self)
+        pass
+
+    def cancel(self):
+        self.parent.remove(self)
+        self.parent.add(self.menu)
+        del self
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
 
 class Weaponmenu(Menu):
     is_event_handler = True

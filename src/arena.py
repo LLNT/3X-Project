@@ -13,7 +13,7 @@ from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo
-from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer
+from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon
 from display_item.background import Background
 from display_item.battle_scene import Battlescene, BattleSim
 from display_item.ring import PerSpr
@@ -63,15 +63,18 @@ class Arena(ScrollableLayer):
             self.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
 
+        self.menulayer = menulayer
 
-        self._clear_map()
 
         self.board = Board(self.width, self.height)
         self._update = (0, 0)
-        self.schedule(self.update)
+        # self.schedule(self.update)
 
         self.anchor = self.width//2, self.height//2
-        self.menulayer = menulayer
+
+        self._clear_map()
+
+
         self.next_round()
 
 
@@ -123,6 +126,12 @@ class Arena(ScrollableLayer):
         # according to the state of every sprite within, repaint them in the correct color
         pass
 
+    def _in_arena(self, i, j):
+        if i < self.w and j < self.h and i >= 0 and j >= 0:
+            return True
+        else:
+            return False
+
     def on_mouse_motion(self, x, y, buttons, modifiers):
         # use _repaint
         if self.is_event_handler:
@@ -136,11 +145,6 @@ class Arena(ScrollableLayer):
                 cell.opacity = opacity[cell.state]
             pass
 
-    def _in_arena(self, i, j):
-        if i < self.w and j < self.h and i >= 0 and j >= 0:
-            return True
-        else:
-            return False
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         # according to the state link to correct function
@@ -153,10 +157,11 @@ class Arena(ScrollableLayer):
 
     def on_mouse_scroll(self, x, y, scroll_x, scroll_y):
 
-        if scroll_y == 1.0:
-            self.scale = self.scale * 1.1
-        else:
-            self.scale = self.scale * 0.9
+        # if scroll_y == 1.0:
+        #     self.scale = self.scale * 1.1
+        # else:
+        #     self.scale = self.scale * 0.9
+        pass
 
     def on_mouse_drag(self, x, y, dx, dy, buttons, modifiers):
         if buttons == 1 and self.state is 'default':
@@ -196,6 +201,7 @@ class Arena(ScrollableLayer):
         self.state = state
 
     def _add_menu(self, menu, dt=0.1):
+        self.menulayer.appear()
         self.do(Delay(dt) + CallFunc(self._seq_add, menu))
 
     def _set_areastate(self, area, state):
@@ -213,6 +219,7 @@ class Arena(ScrollableLayer):
         self.item = None
         self.sup_dict = None
         self._reset_person = {}
+        self.menulayer.disapper()
         self.iter = iter(self.people)
         try:
             self.remove(self.info)
@@ -289,6 +296,7 @@ class Arena(ScrollableLayer):
             else:
                 self.end = Endturn(self)
                 self.menulayer.add(self.end)
+                self.menulayer.appear()
                 self.state = 'end_turn'
             pass
 
@@ -406,6 +414,7 @@ class Arena(ScrollableLayer):
         if self.mouse_btn == 4:
             try:
                 self.menulayer.remove(self.end)
+                self.menulayer.disapper()
             except:
                 pass
             self.state = 'default'
@@ -487,6 +496,13 @@ class Arena(ScrollableLayer):
         self._add_menu(Weaponmenu(items, self.map, self))
         pass
 
+    def item_show(self):
+        self.is_event_handler = False
+        self._set_areastate([self.target], 'target')
+        items = self.people[self.selected].person.item
+        self._add_menu(Showweapon(items, self))
+        pass
+
     def end_turn(self):
         self._clear_map()
         self.map.controller = 1
@@ -513,8 +529,31 @@ class Arena(ScrollableLayer):
         self.is_event_handler = True
         self._set_areastate([self.target], 'in_self_moverange')
         self.state = 'valid_select'
+        self.menulayer.disapper()
         self.target = None
         pass
+
+    def use(self, item):
+        pid = self.selected
+        dst = self._mapstate[0][self.selected][self.target][1]
+        person = self.people[pid].person
+        obj = self.people[pid]
+        action = self._sequential_move(pid, dst)
+        obj.do(action + CallFunc(self._clear_map) + CallFunc(person.use_item, item)
+               + CallFunc(self.map.take_turn, self))
+        pass
+
+    def equip(self, item):
+        pid = self.selected
+        person = self.people[pid].person
+        person.equip(item)
+        self.item_show()
+
+    def banish(self, item):
+        pid = self.selected
+        person = self.people[pid].person
+        person.banish(item)
+        self.item_show()
 
     def set_turn(self, turn):
         # change the turn over the arena
@@ -600,10 +639,12 @@ def coordinate(i, j, size):
 if __name__ == '__main__':
     pyglet.resource.path = ['../img']
     pyglet.resource.reindex()
-    director.init(caption='3X-Project')
     map, w, h = map_init()
+    size = 80
+    director.init(caption='3X-Project', width=w*size, height=h*size)
+
     menulayer = Menulayer()
-    director.run(Scene(Arena(map, w, h, menulayer), menulayer))
+    director.run(Scene(Arena(map, w, h, menulayer, size), menulayer))
     map_init()
 
 
