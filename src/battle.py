@@ -130,16 +130,33 @@ class Battle:
         self.abl_ori_d={}
         self.wp_status_eff_a={}
         self.wp_status_eff_d={}
+        self.give_damage_a=0
+        self.give_damage_d=0
+        self.adjust_lv_a=0
+        self.adjust_lv_d=0
     def __init__(self,_a,_d,_wpa,_wpd,_map,posa):
         self.queue = collections.deque([])  # type:collections.deque[Attack]
         self.log = []                    #type:List[Tuple[int,str]]
         self.a=_a                        #type:person.Person
         self.d=_d                        #type:person.Person
+        self.give_damage_a = 0
+        self.give_damage_d = 0
         map=_map                         #type:map_controller.Main
+        self.adjust_lv_a = 0
+        self.adjust_lv_d = 0
+        if self.a.cls in map.global_vars.cls_rank["High"]:
+            self.adjust_lv_a=20
+        if self.a.cls in map.global_vars.cls_rank["SHigh"]:
+            self.adjust_lv_a=20
+        if self.d.cls in map.global_vars.cls_rank["High"]:
+            self.adjust_lv_d=20
+        if self.d.cls in map.global_vars.cls_rank["SHigh"]:
+            self.adjust_lv_d=20
         self.weapon_a=_wpa               #type:item.Item
         self.weapon_d=_wpd               #type:item.Item
         self.wp_status_eff_a = self.weapon_a.itemtype.status
         self.wp_status_eff_d = {}
+
         if not self.weapon_d==None:
             self.wp_status_eff_d=self.weapon_d.itemtype.status
         self.abl_ori_a=self.a.ability.copy()
@@ -434,6 +451,9 @@ class Battle:
                 self.log.append((-2, "Defeatenemy"))
             growthtuple=[0,0,0,[],{}]
             if self.ctrla==0:
+                self.exp_buf_a+=int((31+self.d.ability["LV"]-self.a.ability["LV"]+self.adjust_lv_d-self.adjust_lv_a)*self.d.coefficient)
+                if self.exp_buf_a<1:
+                    self.exp_buf_a=1
                 self.a.ability["EXP"]+=self.exp_buf_a
                 lv_up=0
                 while self.a.ability["EXP"]>=100:
@@ -448,6 +468,10 @@ class Battle:
                     growthlist.append(growth)
                 growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
             if self.ctrld==0:
+                self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
+                    "LV"] + self.adjust_lv_a - self.adjust_lv_d) * self.a.coefficient)
+                if self.exp_buf_d < 1:
+                    self.exp_buf_d = 1
                 self.d.ability["EXP"]+=self.exp_buf_d
                 lv_up=0
                 while self.d.ability["EXP"]>=100:
@@ -481,6 +505,10 @@ class Battle:
                 self.log.append((-2, "Defeatenemy"))
             growthtuple = [0, 0, 0, [],{}]
             if self.ctrla==0:
+                self.exp_buf_a += int((31 + self.d.ability["LV"] - self.a.ability[
+                    "LV"] + self.adjust_lv_d - self.adjust_lv_a) * self.d.coefficient)
+                if self.exp_buf_a < 1:
+                    self.exp_buf_a = 1
                 self.a.ability["EXP"]+=self.exp_buf_a
                 lv_up=0
                 while self.a.ability["EXP"]>=100:
@@ -495,6 +523,10 @@ class Battle:
                     growthlist.append(growth)
                 growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
             if self.ctrld==0:
+                self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
+                    "LV"] + self.adjust_lv_a - self.adjust_lv_d) * self.a.coefficient)
+                if self.exp_buf_d < 1:
+                    self.exp_buf_d = 1
                 self.d.ability["EXP"]+=self.exp_buf_d
                 lv_up=0
                 while self.d.ability["EXP"]>=100:
@@ -702,7 +734,7 @@ class Battle:
     def shield_a(self):
         if not("Shield" in self.skills_a):
             return 0
-        p=self.a.ability["LV"]*2
+        p=self.a.ability["LV"]+self.adjust_lv_a
         q=random.randint(0,99)
         if (q>=p):
             return 0
@@ -711,7 +743,7 @@ class Battle:
     def shield_d(self):
         if not("Shield" in self.skills_d):
             return 0
-        p=self.d.ability["LV"]*2
+        p=self.d.ability["LV"]+self.adjust_lv_d
         q=random.randint(0,99)
         if (q>=p):
             return 0
@@ -813,10 +845,18 @@ class Battle:
                     self.log.append((-2,"Brokenweapon"))
             if (r==2):
                 if att.AorD==0:
-
+                    self.exp_buf_a=int((self.d.ability["LV"]+self.adjust_lv_d)*self.d.coefficient)-\
+                                   int((self.a.ability["LV"]+self.adjust_lv_a)*self.a.coefficient/2)+\
+                                   self.d.bonus+20
+                    if self.exp_buf_a<0:
+                        self.exp_buf_a=0
                     return 1   #D defeated
                 else:
-
+                    self.exp_buf_d = int((self.a.ability["LV"] + self.adjust_lv_a) * self.a.coefficient) - \
+                                     int((self.d.ability["LV"] + self.adjust_lv_d) * self.d.coefficient / 2)+\
+                                     self.a.bonus+20
+                    if self.exp_buf_d < 0:
+                        self.exp_buf_d = 0
                     return 2   #A defeated
             if (r==4):
                 if att.AorD==0:
@@ -867,10 +907,18 @@ class Battle:
                     self.log.append((-2, "Brokenweapon"))
             if (r == 2):
                 if att.AorD == 0:
-
+                    self.exp_buf_a = int((self.d.ability["LV"] + self.adjust_lv_d) * self.d.coefficient) - \
+                                     int((self.a.ability["LV"] + self.adjust_lv_a) * self.a.coefficient / 2)+\
+                                     self.d.bonus+20
+                    if self.exp_buf_a < 0:
+                        self.exp_buf_a = 0
                     return 1  # D defeated
                 else:
-
+                    self.exp_buf_d = int((self.a.ability["LV"] + self.adjust_lv_a) * self.a.coefficient) - \
+                                     int((self.d.ability["LV"] + self.adjust_lv_d) * self.d.coefficient / 2)\
+                                     + self.a.bonus +20
+                    if self.exp_buf_d < 0:
+                        self.exp_buf_d = 0
                     return 2  # A defeated
             if (r==4):
                 if att.AorD==0:
@@ -907,11 +955,11 @@ class Battle:
         if (self.wear_buf_a==0):
             return 0   #run out of weapon
         if (self.continue_a(att.continued_attack)==1):
-            self.queue.append(Attack(0,1,0,0,0,0))
+            self.queue.appendleft(Attack(0,1,0,0,0,0))
             self.log.append((-1,"Continue"))
         if (self.weapon_duplicate_a(att.wea_dup_attack)==1):
             self.queue.appendleft(Attack(0,att.continued_attack,1,0,0,0))
-            self.log.appendleft((-1,"Weaponduplicate"))
+            self.log.append((-1,"Weaponduplicate"))
         if (self.shootingstar_a(att.shootingstar_attack)==1):
             self.queue.appendleft(Attack(0,att.continued_attack,att.wea_dup_attack,1,0,0))
             self.queue.appendleft(Attack(0, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
@@ -972,6 +1020,8 @@ class Battle:
         q=random.randint(0,99)
         if (q<hitb):
             s=""
+            if (dmg>0):
+                self.give_damage_a=1
             if (self.att_crt==1):
                 s+="C,"     #critical
             elif (dmg==0):
@@ -989,8 +1039,6 @@ class Battle:
             self.log.append((1,s))
             self.weapon_rank_buf_a+=1
             self.wear_buf_a-=1
-            self.exp_buf_a+=1
-            self.exp_buf_d+=1
             self.att_sun=0
             self.att_moon=0
             self.att_wrath=0
@@ -1010,8 +1058,6 @@ class Battle:
             return 1
         else:
             self.weapon_rank_buf_a+=1
-            self.exp_buf_a+=1
-            self.exp_buf_d+=1
             self.att_sun=0
             self.att_moon=0
             self.att_wrath = 0
@@ -1034,11 +1080,11 @@ class Battle:
         if (self.wear_buf_d==0):
             return 0   #run out of weapon
         if (self.continue_d(att.continued_attack)==1):
-            self.queue.append(Attack(1,1,0,0,0,0))
-            self.log.appendleft((-2,"Continue"))
+            self.queue.appendleft(Attack(1,1,0,0,0,0))
+            self.log.append((-2,"Continue"))
         if (self.weapon_duplicate_d(att.wea_dup_attack)==1):
-            self.queue.append(Attack(1,att.continued_attack,1,0,0,0))
-            self.log.appendleft((-2,"Weaponduplicate"))
+            self.queue.appendleft(Attack(1,att.continued_attack,1,0,0,0))
+            self.log.append((-2,"Weaponduplicate"))
         if (self.shootingstar_d(att.shootingstar_attack)==1):
             self.queue.appendleft(Attack(1,att.continued_attack,att.wea_dup_attack,1,0,0))
             self.queue.appendleft(Attack(1, att.continued_attack, att.wea_dup_attack, 1, 0, 0))
@@ -1099,6 +1145,8 @@ class Battle:
         q=random.randint(0,99)
         if (q<hitb):
             s=""
+            if (dmg>0):
+                self.give_damage_d=1
             if (self.att_crt==1):
                 s+="C,"     #critical
             elif (dmg==0):
@@ -1116,8 +1164,6 @@ class Battle:
             self.log.append((2,s))
             self.weapon_rank_buf_d+=1
             self.wear_buf_d-=1
-            self.exp_buf_d+=1
-            self.exp_buf_a+=1
             self.att_sun=0
             self.att_moon=0
             self.att_wrath=0
@@ -1137,8 +1183,6 @@ class Battle:
             return 1
         else:
             self.weapon_rank_buf_d += 1
-            self.exp_buf_d += 1
-            self.exp_buf_a += 1
             self.att_sun = 0
             self.att_moon = 0
             self.att_wrath = 0

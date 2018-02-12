@@ -17,6 +17,7 @@ class Main:
         self.support_cube={}                #type:Dict[str,Dict[str,Dict[str,int]]]
         self.attackable_weapon_types=[]     #type:List[str]
         self.player_character_status={}     #type:Dict[str,int]
+        self.cls_rank={}                    #type:Dict[str,List[str]]
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -28,4 +29,5 @@ class Main:
         self.support_cube=data.support_cube
         self.attackable_weapon_types=data.attackable_weapon_types
         self.player_character_status=data.player_character_init
+        self.cls_rank=data.cls_rank
 

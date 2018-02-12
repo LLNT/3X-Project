@@ -30,3 +30,4 @@ class Main:
         self.support_cube=json.load(open(path+"support_cube.json","r"))
         self.attackable_weapon_types = json.load(open(path + "attackable_weapon_types.json", "r"))
         self.player_character_init=json.load(open(path+"player_character_init.json","r"))
+        self.cls_rank=json.load(open(path+"cls_rank.json","r"))

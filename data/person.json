@@ -56,7 +56,9 @@
       }
     },
     "Color":"Green",
-    "Attribute":"Wind"
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0
   },
   "2":
   {
@@ -109,7 +111,9 @@
     "Init_item":[2],
     "Support":{},
     "Color":"Red",
-    "Attribute":"Fire"
+    "Attribute":"Fire",
+    "Coefficient":1.5,
+    "Bonus":60
   },
   "3":
   {
@@ -168,7 +172,9 @@
       }
     },
     "Color":"Green",
-    "Attribute":"Wind"
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0
   },
   "4":
   {
@@ -222,6 +228,8 @@
     "Init_item":[6],
     "Support":{},
     "Color":"White",
-    "Attribute":"Light"
+    "Attribute":"Light",
+    "Coefficient":1.5,
+    "Bonus":40
   }
 }
