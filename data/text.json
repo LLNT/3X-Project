@@ -1,0 +1,209 @@
+{
+  "BT990-1":{
+    "Type":"B",
+    "Speaker":"1",
+    "Tag":"琳",
+    "Text":"放马过来吧，芙罗莉娜！",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "BT990-2": {
+    "Type": "B",
+    "Speaker": "4",
+    "Tag":"芙罗莉娜",
+    "Text": "琳……我是不会手下留情的哦，",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-3": {
+    "Type": "B",
+    "Speaker": "4",
+    "Tag":"芙罗莉娜",
+    "Text": "我要证明，我已经是独当一面的天马骑士了。",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-4": {
+    "Type": "B",
+    "Speaker": "1",
+    "Tag":"琳",
+    "Text": "正合我意！",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-5": {
+    "Type": "B",
+    "Speaker": "4",
+    "Tag":"琳",
+    "Text": "哇！男人！弓箭手！",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-6": {
+    "Type": "B",
+    "Speaker": "3",
+    "Tag":"威尔",
+    "Text": "是我，芙罗莉娜，",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-7": {
+    "Type": "B",
+    "Speaker": "3",
+    "Tag":"威尔",
+    "Text": "你还是一点长进都没有嘛。",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-8": {
+    "Type": "B",
+    "Speaker": "4",
+    "Tag":"芙罗莉娜",
+    "Text": "诶，原来是威尔，",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-9": {
+    "Type": "B",
+    "Speaker": "4",
+    "Tag":"芙罗莉娜",
+    "Text": "吓死我了，呜呜呜……",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-10": {
+    "Type": "B",
+    "Speaker": "3",
+    "Tag":"威尔",
+    "Text": "一边哭着一边挥着枪冲过来……",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-11": {
+    "Type": "B",
+    "Speaker": "3",
+    "Tag":"威尔",
+    "Text": "好可怕呀，芙罗莉娜。",
+    "Left": null,
+    "Right": null,
+    "Direction": -1
+  },
+  "BT990-12":{
+    "Type":"B",
+    "Speaker":"2",
+    "Tag":"肯特",
+    "Text":"即使是训练，我也不会轻易让你们通过，",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "BT990-13":{
+    "Type":"B",
+    "Speaker":"2",
+    "Tag":"肯特",
+    "Text":"这是我身为基亚兰骑士团长的尊严！",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-11":{
+    "Type":"B",
+    "Speaker":"1",
+    "Tag":"琳",
+    "Text":"肯特真是强的可怕，",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-12":{
+    "Type":"B",
+    "Speaker":"1",
+    "Tag":"琳",
+    "Text":"有你保护，我也安心了。",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-13":{
+    "Type":"B",
+    "Speaker":"1",
+    "Tag":"琳",
+    "Text":"我真是无能……",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-21":{
+    "Type":"B",
+    "Speaker":"2",
+    "Tag":"肯特",
+    "Text":"我很欣慰，看到琳迪斯小姐的成长，",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-22":{
+    "Type":"B",
+    "Speaker":"2",
+    "Tag":"肯特",
+    "Text":"琳迪斯小姐请务必收下这大师之证和我最崇高的敬意。",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-23":{
+    "Type":"B",
+    "Speaker":"2",
+    "Tag":"肯特",
+    "Text":"我无法再战了，真是让人遗憾，",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-24":{
+    "Type":"B",
+    "Speaker":"1",
+    "Tag":"肯特",
+    "Text":"这大师之证就给你了。",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-31":{
+    "Type":"B",
+    "Speaker":"3",
+    "Tag":"威尔",
+    "Text":"琳迪斯小姐，我先行撤退了，",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-32":{
+    "Type":"B",
+    "Speaker":"3",
+    "Tag":"威尔",
+    "Text":"你也千万不要勉强自己。",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  },
+  "DT990-41":{
+    "Type":"B",
+    "Speaker":"4",
+    "Tag":"芙罗莉娜",
+    "Text":"你们真的好强啊，我先撤退了……",
+    "Left":null,
+    "Right":null,
+    "Direction":-1
+  }
+}

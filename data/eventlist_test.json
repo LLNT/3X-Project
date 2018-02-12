@@ -1,0 +1,146 @@
+{
+  "Battle":
+  [
+    {
+      "Event": "B9900010",
+      "Character": [["1","4"],["4","1"]],
+      "Condition": [
+        [[],["B9900010"]]
+      ],
+      "Text":["BT990-1","BT990-2","BT990-3","BT990-4"],
+      "Finish":[
+        {
+          "Condition":[],
+          "Execute":[],
+          "Jump":"F"
+        }
+      ]
+    },
+    {
+      "Event": "B9900020",
+      "Character": [["3","4"],["4","3"]],
+      "Condition": [
+        [[],["B9900020"]]
+      ],
+      "Text":["BT990-5","BT990-6","BT990-7","BT990-8","BT990-9","BT990-10","BT990-11"],
+      "Finish":[
+        {
+          "Condition":[],
+          "Execute":[],
+          "Jump":"F"
+        }
+      ]
+    },
+    {
+      "Event": "B9900030",
+      "Character": [["2",null],[null,"2"]],
+      "Condition": [
+        [[],["B9900030"]]
+      ],
+      "Text":["BT990-12","BT990-13"],
+      "Finish":[
+        {
+          "Condition":[],
+          "Execute":[],
+          "Jump":"F"
+        }
+      ]
+    }
+  ],
+  "Defeated":[
+    {
+      "Event": "D99010",
+      "Person": "1",
+      "Enemy": [
+        "2",
+        ""
+      ],
+      "Condition": [
+        [
+          [],
+          [
+            "D99010"
+          ]
+        ]
+      ],
+      "Text": [["DT990-11","DT990-12"],["DT990-13"]],
+      "Finish": [
+        {
+          "Condition": [],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D99020",
+      "Person": "2",
+      "Enemy": [
+        "1",
+        ""
+      ],
+      "Condition": [
+        [
+          [],
+          [
+            "D99020"
+          ]
+        ]
+      ],
+      "Text": [["DT990-21","DT990-22"],["DT990-23","DT990-24"]],
+      "Finish": [
+        {
+          "Condition": [],
+          "Execute":["I/7/E"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D99030",
+      "Person": "3",
+      "Enemy": [
+        ""
+      ],
+      "Condition": [
+        [
+          [],
+          [
+            "D99030"
+          ]
+        ]
+      ],
+      "Text": [["DT990-31","DT990-32"]],
+      "Finish": [
+        {
+          "Condition": [],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D99040",
+      "Person": "4",
+      "Enemy": [
+        ""
+      ],
+      "Condition": [
+        [
+          [],
+          [
+            "D99040"
+          ]
+        ]
+      ],
+      "Text": [["DT990-41"]],
+      "Finish": [
+        {
+          "Condition": [],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    }
+    ]
+}

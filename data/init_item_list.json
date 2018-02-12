@@ -28,5 +28,10 @@
     "Id":6,
     "Itemtype":"Javelin",
     "Use":20
+  },
+  {
+    "Id":7,
+    "Itemtype":"Seal of Master",
+    "Use":1
   }
 ]
