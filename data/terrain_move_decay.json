@@ -3,102 +3,119 @@
     "Infantry":1,
     "Knight":1,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Wood":{
     "Infantry":2,
     "Knight":3,
     "Bower":2,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1.5
   },
   "River":{
     "Infantry":5,
     "Knight":255,
     "Bower":255,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":255
   },
   "Mountain":{
     "Infantry":3,
     "Knight":255,
     "Bower":3,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":3
   },
   "High Mountain":{
     "Infantry":255,
     "Knight":255,
     "Bower":255,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":255
   },
   "Sea":{
     "Infantry":255,
     "Knight":255,
     "Bower":255,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":255
   },
   "Forest":{
     "Infantry":5,
     "Knight":255,
     "Bower":3,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":2
   },
   "Grass":{
     "Infantry":1,
     "Knight":1.5,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Bridge":{
     "Infantry":1,
     "Knight":1,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Column":{
     "Infantry":1,
     "Knight":1.5,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Wall":{
     "Infantry":255,
     "Knight":255,
     "Bower":255,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Avenue":{
     "Infantry":1,
     "Knight":0.8,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Cliff":{
     "Infantry":255,
     "Knight":255,
     "Bower":255,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":255
   },
   "Gate":{
     "Infantry":1,
     "Knight":1,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Village":{
     "Infantry":1,
     "Knight":1,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Fort":{
     "Infantry":1,
     "Knight":1,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   },
   "Throne":{
     "Infantry":1,
     "Knight":1,
     "Bower":1,
-    "Pegasus":1
+    "Pegasus":1,
+    "Magician":1
   }
 }

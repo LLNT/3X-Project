@@ -4,6 +4,7 @@
   "Lancer":"Infantry",
   "Warrior":"Infantry", 
   "Archer":"Bower",
+  "Cleric":"Magician",
   "Cavalier":"Knight",
   "Nomad":"Knight",
   "Pegasus Knight":"Pegasus",

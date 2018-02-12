@@ -135,7 +135,7 @@
       "MOV":5,
       "HP":18,
       "CRY":5,
-      "EXP":99
+      "EXP":0
     },
     "Growth":
     {
@@ -231,5 +231,62 @@
     "Attribute":"Light",
     "Coefficient":1.5,
     "Bonus":40
+  },
+  "5":{
+    "Id": 5,
+    "Name": "Serra",
+    "Cls":"Cleric",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":17,
+      "STR":0,
+      "MGC":2,
+      "SPD":8,
+      "SKL":5,
+      "DEF":2,
+      "RES":5,
+      "LUK":8,
+      "BLD":4,
+      "MOV":5,
+      "HP":17,
+      "CRY":3,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":50,
+      "STR":5,
+      "MGC":50,
+      "SPD":50,
+      "SKL":30,
+      "DEF":15,
+      "RES":55,
+      "LUK":65
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"serra.png",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[9],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Thunder",
+    "Coefficient":1.0,
+    "Bonus":0
   }
 }

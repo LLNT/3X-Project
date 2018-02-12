@@ -38,5 +38,10 @@
     "Id":8,
     "Itemtype":"Silver Bow",
     "Use":20
+  },
+  {
+    "Id":9,
+    "Itemtype":"Heal",
+    "Use":40
   }
 ]
