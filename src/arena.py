@@ -13,7 +13,7 @@ from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo, Info
-from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon, Showwand
+from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon, Showwand, Weaponexchange
 from display_item.background import Background
 from display_item.battle_scene import Battlescene, Wandtype0, Wandtype1
 from display_item.ring import PerSpr
@@ -187,9 +187,13 @@ class Arena(ScrollableLayer):
                         cell.state = 'default'
 
             self.item = None
-        elif self.state is 'choose_support':
-            for pid in self.sup_dict:
-                self.people[pid].state = self._reset_person[pid]
+        elif self.state is 'choose_support' or self.state is 'choose_exchange':
+            if self.state is 'choose_support':
+                for pid in self.sup_dict:
+                    self.people[pid].state = self._reset_person[pid]
+            else:
+                for pid in self.exc:
+                    self.people[pid].state = self._reset_person[pid]
             self.menu = Ordermenu(self)
             self._add_menu(self.menu)
             self.is_event_handler = False
@@ -273,7 +277,8 @@ class Arena(ScrollableLayer):
             'end_turn': self._end_turn, 9: self._end_turn,
             'wand_type0': self._wand_type0,10:self._wand_type0,
             'wand_type1': self._wand_type1,
-            'wand_type1_confirm': self._wand_type1_confirm
+            'wand_type1_confirm': self._wand_type1_confirm,
+            'choose_exchange': self._choose_exchange
         }
 
     def _default(self):
@@ -509,8 +514,23 @@ class Arena(ScrollableLayer):
             obj.do(action + CallFunc(self._push_scene, Wandtype1) +
                    CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
         else:
+            self.state = 'wand_type1'
             pass
         pass
+
+    def _choose_exchange(self):
+        if self.mouse_btn == 4:
+            self._reset()
+            pass
+        elif self.mouse_btn == 1:
+            pid = self.cells[self.mouse_pos].person_on
+            if pid is not None and pid in self.exc:
+                self.menulayer.add(Weaponexchange(self.people[self.selected].person.item, self,
+                                                  (-self.width, 0)))
+                self.menulayer.add(Weaponexchange(self.people[pid].person.item, self,
+                                                  (-self.width//2, 0)))
+                self.is_event_handler = False
+            pass
 
     def get_next_to_delete(self):
         try:
@@ -681,6 +701,29 @@ class Arena(ScrollableLayer):
     def set_turn(self, turn):
         # change the turn over the arena
         pass
+
+    def can_exchange(self, pos):
+        exc_obj = []
+        for x in (0, 1):
+            for y in (0, 1):
+                i, j = pos[0]+x, pos[1]+y
+                if self._in_arena(i, j):
+                    pid = self.cells[(i, j)].person_on
+                    if pid is not None:
+                        if self.map.person_container.controller[pid] == 0:
+                            exc_obj.append(pid)
+        return exc_obj
+
+    def exchange(self, exc):
+        self._set_areastate([self.target], 'target')
+        self.state = 'choose_exchange'
+        for pid in exc:
+            self._reset_person[pid] = self.people[pid].state
+            self.people[pid].state = 'can_exchange'
+        self.exc = exc
+        self._repaint()
+        self.menulayer.disapper()
+        self.is_event_handler = True
 
     def remove(self, obj):
         super().remove(obj)

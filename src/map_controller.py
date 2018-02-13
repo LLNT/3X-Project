@@ -370,5 +370,3 @@ class Main:
                     wands.append(i)
         return wands
 
-    def can_exchange(self):
-        return True

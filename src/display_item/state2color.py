@@ -56,6 +56,7 @@ self_state2color = {
     'on_mouse_motion': VIOLET,
     'target': RED,
     'can_support': PURPLE,
+    'can_exchange': GOLD,
 }
 
 ally_state2color = {

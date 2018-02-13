@@ -44,7 +44,9 @@ class Ordermenu(Menu):
         if len(self.sup_dict) > 0:
             l.append(MenuItem('Support', self.support))
 
-
+        self.exc = arena.can_exchange(position)
+        if len(self.exc) > 0:
+            l.append(MenuItem('Exchange', self.exchange))
 
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
@@ -82,6 +84,11 @@ class Ordermenu(Menu):
 
     def item(self):
         self.arena.item_show()
+        self.parent.remove(self)
+        del self
+
+    def exchange(self):
+        self.arena.exchange(self.exc)
         self.parent.remove(self)
         del self
 
@@ -244,6 +251,38 @@ class Weaponmenu(Menu):
         self.arena.wpinfo = info
         self.arena.select_target(item)
 
+
+    def cancel(self):
+        self.arena.state = 'valid_dst'
+        self.parent.add(self.arena.menu)
+        self.parent.remove(self)
+        del self
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
+class Weaponexchange(Menu):
+    is_event_handler = True
+
+    def __init__(self, items, arena, position):
+        super(Weaponexchange, self).__init__()
+        w, h = director.get_window_size()
+        self.w, self.h = w, h
+        l = []
+        for item in items:
+            content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
+            l.append(MenuItem(content, self.item, item))
+        if len(l) < 5:
+            l.append(MenuItem('Empty', self.cancel))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.info = None
+        # self.position = (-w // 4, 0)
+        self.position = position
+        self.arena = arena
+
+    def item(self, item):
+        self.cancel()
 
     def cancel(self):
         self.arena.state = 'valid_dst'
