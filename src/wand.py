@@ -31,7 +31,7 @@ class Type0(Wand):
                 if base>hpdiff:
                     base=hpdiff
                 self.obj.ability["HP"]+=base
-                self.log.append((1,"H,-%d,0"%(base)))
+                self.log.append((1,"H,%d,0"%(base)))
             if func=="RELIEF":
                 if "Sleep" in self.obj.status:
                     self.obj.status.pop("Sleep")

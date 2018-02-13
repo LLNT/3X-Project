@@ -252,7 +252,7 @@ class Wandtype0(Battlescene):
                 self.hp2 += dmg
                 self.hp1 -= amg
                 if hit is 'H':
-                    content = "Hit by " + str(dmg) + ' Damage'
+                    content = "Heal by " + str(dmg) + ' Damage'
                 elif hit is 'C':
                     content = 'Critical Attack by ' + str(dmg) + ' Damage'
                 elif hit is 'M':
