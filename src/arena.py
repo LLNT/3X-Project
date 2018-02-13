@@ -15,7 +15,7 @@ from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo
 from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon, Showwand
 from display_item.background import Background
-from display_item.battle_scene import Battlescene, BattleSim, Wandtype0
+from display_item.battle_scene import Battlescene, Wandtype0
 from display_item.ring import PerSpr
 
 import map_controller
@@ -402,6 +402,9 @@ class Arena(ScrollableLayer):
     def _push_battle_scene(self, **kwargs):
         director.push(FadeTransition(Scene(Battlescene(self, self.width, self.height)), duration=1.5))
 
+    def _push_wand_type0(self, **kwargs):
+        director.push(FadeTransition(Scene(Wandtype0(self, self.width, self.height)), duration=1.5))
+
     def _show_battle_result(self):
         # 7   show_battle_result
         # showing battle result, push to another scene
@@ -455,7 +458,7 @@ class Arena(ScrollableLayer):
                 self.is_event_handler = False
                 action = self._sequential_move(pid, dst)
                 obj = self.people[pid]
-                obj.do(action + CallFunc(director.push(FadeTransition(Wandtype0(self, self.width, self.height), duration=1.5))) +
+                obj.do(action + CallFunc(self._push_wand_type0) +
                        CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
             else:
                 self._reset()

@@ -22,39 +22,35 @@ BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
 GRAY = (175, 175, 175)
-class BattleSim(Layer):
-    def __init__(self, maxsize=2):
+class Animation(Layer):
+    '''
+    the base class for animations displaying
+    recieves battle result and the playing object, plays them in the correct order
+
+    '''
+    def __init__(self, obj1, obj2, pid1, pid2, arena, maxsize=2, width=640, height=480):
         super().__init__()
         self.info = Queue(maxsize)
-        self.width, self.height = director.get_window_size()[0], director.get_window_size()[1]
         self.flag = False
-
-    def on_enter(self):
-        super().on_enter()
-        self.at, self.df, wp, self.map, pos = self.parent.battlelist
-        self.battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
-        self.attacker = self.parent.people[self.at.pid]
-        self.defender = self.parent.people[self.df.pid]
+        self.attacker = obj1
+        self.defender = obj2
+        self.at = arena.people[pid1].person
+        self.df = arena.people[pid2].person
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
-
-        self.i = -1
         self.obj1 = self.attacker.right_ring
         self.obj2 = self.defender.right_ring
-        self.get_battle_result()
+        self.i = -1
+        self.width = width
+        self.height = height
+        self.map = arena.map
+
+    def excute(self, event):
+        self.events = event[0]
+        self.content = event[1]
         self.get_next_action()
 
-    def get_battle_result(self):
-        res = self.battle.battle()
-        del self.battle
-        self.events = res[0]
-        self.content = res[1]
-
-    def get_next_action(self, obj1=False, obj2=False):
-        '''
-
-        :return: the next action to call
-        '''
+    def get_next_action(self):
         if self.obj1.busy or self.obj2.busy:
             return
         self.i += 1
@@ -111,8 +107,6 @@ class BattleSim(Layer):
             t1.do(a1 + CallFunc(t1.parent.set_busy) + CallFunc(self.get_next_action))
             t2.do(a2 + CallFunc(t2.parent.set_busy) + CallFunc(self.get_next_action))
 
-
-
             # show leaving effect
             pass
 
@@ -128,10 +122,11 @@ class BattleSim(Layer):
         obj.do(FadeIn(1.5) + CallFunc(self.get_next_action))
 
     def exit(self):
-        if not self.flag:
-            self.flag = True
-            self.parent.remove(self)
-
+        '''
+        should be override to define the movement when exit
+        :return:
+        '''
+        pass
 
     def growth(self):
         person = self.content[0]
@@ -142,16 +137,13 @@ class BattleSim(Layer):
         self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin)
         self.add(self.exp)
 
-class Battlescene(BattleSim):
+class Battlescene(Animation):
     is_event_handler = False
     def __init__(self, arena, w=640, h=480, maxsize=2):
-        super(Battlescene, self).__init__(maxsize)
-
         self.at, self.df, wp, self.map, pos = arena.battlelist
         self.battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
-        self.arena = arena
         self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
                                    back_color = BLACK, hp=self.hp1, mhp=self.mhp1)
         pos2 = w  * 3 // 4, h // 3
@@ -159,28 +151,25 @@ class Battlescene(BattleSim):
         self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
                                    back_color = BLACK, hp=self.hp2, mhp=self.mhp2)
 
+        self.arena = arena
+        super(Battlescene, self).__init__(
+            obj1=self.attacker,
+            obj2=self.defender,
+            pid1=self.at.pid,
+            pid2=self.df.pid,
+            arena=arena,
+            width=w,
+            height=h,
+            maxsize=maxsize
+        )
         self.add(self.attacker)
         self.add(self.defender)
 
 
-        self.w = w
-        self.h = h
-        self.i = -1
-        self.obj1 = self.attacker.right_ring
-        self.obj2 = self.defender.right_ring
-        self.info = Queue(maxsize)
-        self.get_battle_result()
+        event = self.battle.battle()
+        del self.battle
+        self.excute(event=event)
 
-        '''info = Info()
-        self.add(info)
-        content = []
-        for event in res:
-            content.append(str(event[0])+','+event[1])
-        info.display(content)'''
-
-    def on_enter(self):
-        Layer.on_enter(self)
-        self.get_next_action()
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         self.remove(self.exp)
@@ -188,7 +177,8 @@ class Battlescene(BattleSim):
 
     def _return_arena(self):
         director.window.remove_handlers(self)
-        director.push(FadeTransition(Scene(ColorLayer(0, 0, 0, 0, self.w, self.h)), duration=1.5))
+        director.push(FadeTransition(Scene(
+            ColorLayer(0, 0, 0, 0, self.width, self.height)), duration=1.5))
 
     def _pop(self):
         self.arena.on_return()
@@ -205,13 +195,10 @@ class Battlescene(BattleSim):
 
 class Wandtype0(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
-        BattleSim.__init__(self)
-
         self.at, wand, self.df, self.map = arena.wandlist
         self.battle = Type0(self.at, wand, self.df, self.map)
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
-        self.arena = arena
         self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
                                    back_color=BLACK, hp=self.hp1, mhp=self.mhp1)
         pos2 = w * 3 // 4, h // 3
@@ -219,19 +206,78 @@ class Wandtype0(Battlescene):
         self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
                                    back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
 
+        self.arena = arena
+        super(Battlescene, self).__init__(
+            obj1=self.attacker,
+            obj2=self.defender,
+            pid1=self.at.pid,
+            pid2=self.df.pid,
+            arena=arena,
+            width=w,
+            height=h,
+            maxsize=maxsize
+        )
         self.add(self.attacker)
         self.add(self.defender)
 
-        self.w = w
-        self.h = h
-        self.i = -1
-        self.obj1 = self.attacker.right_ring
-        self.obj2 = self.defender.right_ring
-        self.info = Queue(maxsize)
-        self.get_battle_result()
-
-    def get_battle_result(self):
-        res = self.battle.execute()
+        event = self.battle.execute()
         del self.battle
-        self.events = res[0]
-        self.content = res[1]
+        self.excute(event=event)
+
+    def get_next_action(self):
+        if self.obj1.busy or self.obj2.busy:
+            return
+        self.i += 1
+        if self.i >= len(self.events):
+            print(self.i)
+            self.exit()
+            return
+        event = self.events[self.i]
+        print(event)
+        color = (0, 255, 0, 255)
+        if event[0] < 0: # show info on screen
+            content = event[1]
+            if content is 'Defeatenemy':
+                if event[0] is -1:
+                    self.map.defeated_character(self.df.pid)
+                elif event[0] is -2:
+                    self.map.defeated_character(self.at.pid)
+            self.add_new_infos(content)
+            pass
+        else:
+            hit, dmg, amg = event[1].split(',')
+            dmg = int(dmg)
+            amg = int(amg)
+            if event[0] is 1:
+                self.hp2 += dmg
+                self.hp1 -= amg
+                if hit is 'H':
+                    content = "Hit by " + str(dmg) + ' Damage'
+                elif hit is 'C':
+                    content = 'Critical Attack by ' + str(dmg) + ' Damage'
+                elif hit is 'M':
+                    content = 'Miss'
+                    color = (255, 0, 0, 255)
+                else:
+                    content = 'oooops'
+            elif event[0] is 2:
+                color = (255, 255, 0, 255)
+                self.hp1 += dmg
+                self.hp2 -= amg
+                if hit is 'H':
+                    content = "Counter by " + str(dmg) + ' Damage'
+                elif hit is 'C':
+                    content = 'Critical Reflect by ' + str(dmg) + ' Damage'
+                elif hit is 'M':
+                    content = 'Counter Miss'
+                    color = (255, 0, 0, 255)
+                else:
+                    content = 'oooops'
+            self.add_new_infos(content, color)
+
+            t1, a1 = self.attacker.set_angle_action(self.hp1 / self.mhp1)
+            t2, a2 = self.defender.set_angle_action(self.hp2 / self.mhp2)
+            t1.busy = t2.busy = True
+            t1.do(a1 + CallFunc(t1.parent.set_busy) + CallFunc(self.get_next_action))
+            t2.do(a2 + CallFunc(t2.parent.set_busy) + CallFunc(self.get_next_action))
+
