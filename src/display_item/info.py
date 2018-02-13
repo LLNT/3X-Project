@@ -75,6 +75,8 @@ class Personinfo(Info):
         content = []
         content.append('HP:' + str(p.ability['HP']))
         content.append('MHP:' + str(p.ability['MHP']))
+        print(p.status)
+
         self.display(content, ((0, 0), (self.width//2, self.height//2)))
         content = []
         for item in p.item:

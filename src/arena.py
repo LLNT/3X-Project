@@ -78,6 +78,8 @@ class Arena(ScrollableLayer):
 
         self.next_round()
 
+        window = director.window
+
 
 
     def on_return(self):
@@ -483,12 +485,12 @@ class Arena(ScrollableLayer):
                 user = self.people[self.selected].person
                 target = self.people[cell.person_on].person
                 wand = self.item_w
-                self.wandlist_type1 = user, wand, target, self.map, self.target
-                hitr = Type1(user, wand, target, self.map, self.target)
+                self.wandlist_type1 = [user, wand, target, self.map, self.target]
+                hitr = Type1(user, wand, target, self.map, self.target).simulate()
                 self.hitrate = Info()
 
                 self.add(self.hitrate)
-                self.hitrate.display(hitr)
+                self.hitrate.display([str(hitr)])
                 self.state = 'wand_type1_confirm'
             else:
                 self._reset()
@@ -566,23 +568,25 @@ class Arena(ScrollableLayer):
     def wanduse(self, item_w):
         self.menulayer.disapper()
         area = []
+        max_range = item_w.itemtype.max_range
+        min_range = item_w.itemtype.min_range
+        if max_range == -1:
+            person = self.people[self.selected].person
+            max_range = max(1, person.ability['MGC'])
+        (i, j) = self.target
+        for distance in range(min_range, max_range + 1):
+            for dx in range(distance + 1):
+                dy = distance - dx
+                for x, y in [(i + dx, j + dy), (i + dx, j - dy), (i - dx, j + dy), (i - dx, j - dy)]:
+                    if x in range(self.w) and y in range(self.h):
+                        area.append((x, y))
+        self._set_areastate(area, 'in_self_wandrange')
+        self.item_w = item_w
+        self.is_event_handler = True
         if item_w.itemtype.wand['Type'] == 0:
-            max_range = item_w.itemtype.max_range
-            min_range = item_w.itemtype.min_range
-            if max_range == -1:
-                person = self.people[self.selected].person
-                max_range = max(1, person.ability['MGC'])
-            (i, j) = self.target
-            for distance in range(min_range, max_range + 1):
-                for dx in range(distance + 1):
-                    dy = distance - dx
-                    for x, y in [(i + dx, j + dy), (i + dx, j - dy), (i - dx, j + dy), (i - dx, j - dy)]:
-                        if x in range(self.w) and y in range(self.h):
-                            area.append((x, y))
-            self._set_areastate(area, 'in_self_wandrange')
             self.state = 'wand_type0'
-            self.item_w = item_w
-            self.is_event_handler = True
+        elif item_w.itemtype.wand['Type'] == 1:
+            self.state = 'wand_type1'
         else:
             self._add_menu(Showwand(self.avl, self))
 
@@ -762,9 +766,10 @@ if __name__ == '__main__':
     size = 80
     director.init(caption='3X-Project', width=w*size, height=h*size)
 
+
     menulayer = Menulayer()
     director.run(Scene(Arena(map, w, h, menulayer, size), menulayer))
-    map_init()
+
 
 
 

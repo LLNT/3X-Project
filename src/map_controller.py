@@ -369,3 +369,6 @@ class Main:
                 if i.itemtype.rank<=p.weapon_rank["Wand"]:
                     wands.append(i)
         return wands
+
+    def can_exchange(self):
+        return True

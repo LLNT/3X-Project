@@ -14,7 +14,7 @@ from display_item.ring import Scoreboard
 from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
 from display_item.info import Experience
-from wand import Type0
+from wand import Type0, Type1
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -283,8 +283,8 @@ class Wandtype0(Battlescene):
 
 class Wandtype1(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
-        self.at, wand, self.df, self.map = arena.wandlist_type0
-        self.battle = Type0(self.at, wand, self.df, self.map)
+        self.at, wand, self.df, self.map, pos = arena.wandlist_type1
+        self.battle = Type1(self.at, wand, self.df, self.map, pos)
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,

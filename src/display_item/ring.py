@@ -47,30 +47,30 @@ class Ring(CocosNode):
     def set_busy(self):
         self.right_ring.busy = False
 
-    def set_angle_action(self, proportion, duration=4):
+    def set_angle_action(self, proportion, max_duration=4, min_duration=2):
         angle = 360 - proportion * 360
         delta = abs(self.angles - angle)
         if delta <= 10:
-            return self.right_ring, Delay(0.5)
-        duration = min(1, delta/90) * duration
+            return self.right_ring, Delay(min_duration)
+        duration = min(1, delta / 90) * (max_duration - min_duration)
         if self.angles > angle: # right rotation
             if angle >= 180:
-                return self.right_ring, (Delay(0.5) + RotateTo(180, duration) + CallFunc(self.change_angle, angle))
+                return self.right_ring, (Delay(0.5) + RotateTo(180, duration + min_duration) + CallFunc(self.change_angle, angle))
             elif self.angles <= 180:
-                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration) + CallFunc(self.change_angle, angle))
+                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration + min_duration) + CallFunc(self.change_angle, angle))
             else:
-                d1 = duration * (self.angles - 180) / delta
-                d2 = duration - d1
+                d1 = (duration + min_duration) * (self.angles - 180) / delta
+                d2 = duration + min_duration - d1
                 return self.right_ring, (Delay(0.5) + RotateTo(180, d1)
                                    + RotateBy(angle - 180, d2) + CallFunc(self.change_angle, angle))
         else: #
             if angle <= 180:
-                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration) + CallFunc(self.change_angle, angle))
+                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration + min_duration) + CallFunc(self.change_angle, angle))
             elif self.angles >= 180:
-                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration) + CallFunc(self.change_angle, angle))
+                return self.right_ring, (Delay(0.5) + RotateTo(angle, duration + min_duration) + CallFunc(self.change_angle, angle))
             else:
-                d1 = duration * (180 - self.angles) / delta
-                d2 = duration - d1
+                d1 = (duration + min_duration) * (180 - self.angles) / delta
+                d2 = duration + min_duration - d1
                 return self.right_ring, (Delay(0.5) + RotateBy(180 - self.angles, d1)
                                    + RotateBy(angle - 180, d2) + CallFunc(self.change_angle, angle))
 
