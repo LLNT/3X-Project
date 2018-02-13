@@ -13,9 +13,9 @@ from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo
-from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon
+from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon, Showwand
 from display_item.background import Background
-from display_item.battle_scene import Battlescene, BattleSim
+from display_item.battle_scene import Battlescene, BattleSim, Wandtype0
 from display_item.ring import PerSpr
 
 import map_controller
@@ -23,6 +23,7 @@ from global_vars import Main as Global
 from data_loader import Main as Data
 from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
+from battle import Battle
 
 
 
@@ -182,15 +183,28 @@ class Arena(ScrollableLayer):
                         cell.state = 'in_self_moverange'
                     else:
                         cell.state = 'default'
-            self.state = 'valid_dst'
+
             self.item = None
         elif self.state is 'choose_support':
             for pid in self.sup_dict:
                 self.people[pid].state = self._reset_person[pid]
-            self.state = 'valid_dst'
             self.menu = Ordermenu(self)
             self._add_menu(self.menu)
             self.is_event_handler = False
+
+        elif self.state is 'wand_type0':
+            self.wand(self.avl)
+            pid = self.selected
+            valid = self._mapstate[0]
+            for (i, j) in self.cells.keys():
+                cell = self.cells[(i, j)]
+                if cell.state is 'in_self_wandrange':
+                    if (i, j) in valid[pid]:
+                        cell.state = 'in_self_moverange'
+                    else:
+                        cell.state = 'default'
+            self.item = None
+        self.state = 'valid_dst'
         self._repaint()
         pass
 
@@ -221,6 +235,8 @@ class Arena(ScrollableLayer):
         self._reset_person = {}
         self.menulayer.disapper()
         self.iter = iter(self.people)
+        self.item_w = None
+        self.avl = None
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -252,7 +268,8 @@ class Arena(ScrollableLayer):
             'confirm_attack': self._confirm_attack,6: self._confirm_attack,
             'show_battle_result': self._show_battle_result, 7 : self._show_battle_result,
             'choose_support': self._choose_support, 8: self._choose_support,
-            'end_turn': self._end_turn, 9: self._end_turn
+            'end_turn': self._end_turn, 9: self._end_turn,
+            'wand_type0': self._wand_type0,10:self._wand_type0
         }
 
     def _default(self):
@@ -382,8 +399,7 @@ class Arena(ScrollableLayer):
             self.attacking()
             pass
 
-    def _push_battle_scene(self):
-        self.is_event_handler = False
+    def _push_battle_scene(self, **kwargs):
         director.push(FadeTransition(Scene(Battlescene(self, self.width, self.height)), duration=1.5))
 
     def _show_battle_result(self):
@@ -420,6 +436,31 @@ class Arena(ScrollableLayer):
                 pass
             self.state = 'default'
             del self.end
+
+    def _wand_type0(self):
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
+                return
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is not None\
+                and self.people[cell.person_on].controller is not 1:
+                user = self.people[self.selected].person
+                target = self.people[cell.person_on].person
+                wand = self.item_w
+                self.wandlist = user, wand, target, self.map
+                pid = self.selected
+                dst = self._mapstate[0][self.selected][self.target][1]
+                self.is_event_handler = False
+                action = self._sequential_move(pid, dst)
+                obj = self.people[pid]
+                obj.do(action + CallFunc(director.push(FadeTransition(Wandtype0(self, self.width, self.height), duration=1.5))) +
+                       CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+            else:
+                self._reset()
+            pass
+        pass
 
     def get_next_to_delete(self):
         try:
@@ -474,6 +515,29 @@ class Arena(ScrollableLayer):
         self.sup_dict = sup_dict
         self._repaint()
 
+    def wanduse(self, item_w):
+        self.menulayer.disapper()
+        area = []
+        if item_w.itemtype.wand['Type'] == 0:
+            max_range = item_w.itemtype.max_range
+            min_range = item_w.itemtype.min_range
+            if max_range == -1:
+                person = self.people[self.selected].person
+                max_range = max(1, person.ability['MGC'])
+            (i, j) = self.target
+            for distance in range(min_range, max_range + 1):
+                for dx in range(distance + 1):
+                    dy = distance - dx
+                    for x, y in [(i + dx, j + dy), (i + dx, j - dy), (i - dx, j + dy), (i - dx, j - dy)]:
+                        if x in range(self.w) and y in range(self.h):
+                            area.append((x, y))
+            self._set_areastate(area, 'in_self_wandrange')
+            self.state = 'wand_type0'
+            self.item_w = item_w
+            self.is_event_handler = True
+        else:
+            self._add_menu(Showwand(self.avl, self))
+
     def attacking(self, **kwargs):
         if len(kwargs) is 0:
             pid = self.selected
@@ -525,6 +589,12 @@ class Arena(ScrollableLayer):
         obj = self.people[pid]
         obj.do(action + CallFunc(self._clear_map) + CallFunc(self.map.take_turn, self))
         pass
+
+    def wand(self, avl):
+        self.is_event_handler = False
+        self._set_areastate([self.target], 'target')
+        self._add_menu(Showwand(avl, self))
+        self.avl = avl
 
     def cancel(self):
         self.is_event_handler = True

@@ -14,6 +14,7 @@ from display_item.ring import Scoreboard
 from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
 from display_item.info import Experience
+from wand import Type0
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -141,8 +142,6 @@ class BattleSim(Layer):
         self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin)
         self.add(self.exp)
 
-
-
 class Battlescene(BattleSim):
     is_event_handler = False
     def __init__(self, arena, w=640, h=480, maxsize=2):
@@ -171,7 +170,7 @@ class Battlescene(BattleSim):
         self.obj2 = self.defender.right_ring
         self.info = Queue(maxsize)
         self.get_battle_result()
-        self.get_next_action()
+
         '''info = Info()
         self.add(info)
         content = []
@@ -181,6 +180,7 @@ class Battlescene(BattleSim):
 
     def on_enter(self):
         Layer.on_enter(self)
+        self.get_next_action()
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         self.remove(self.exp)
@@ -203,3 +203,35 @@ class Battlescene(BattleSim):
             self.growth()
             self.flag = True
 
+class Wandtype0(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        BattleSim.__init__(self)
+
+        self.at, wand, self.df, self.map = arena.wandlist
+        self.battle = Type0(self.at, wand, self.df, self.map)
+        pos1 = w // 4, h // 3
+        self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
+        self.arena = arena
+        self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
+                                   back_color=BLACK, hp=self.hp1, mhp=self.mhp1)
+        pos2 = w * 3 // 4, h // 3
+        self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
+        self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
+                                   back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
+
+        self.add(self.attacker)
+        self.add(self.defender)
+
+        self.w = w
+        self.h = h
+        self.i = -1
+        self.obj1 = self.attacker.right_ring
+        self.obj2 = self.defender.right_ring
+        self.info = Queue(maxsize)
+        self.get_battle_result()
+
+    def get_battle_result(self):
+        res = self.battle.execute()
+        del self.battle
+        self.events = res[0]
+        self.content = res[1]

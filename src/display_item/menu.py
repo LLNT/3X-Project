@@ -35,9 +35,16 @@ class Ordermenu(Menu):
         map = arena.map
         pid = arena.selected
         position = arena.target
+
+        self.avl = map.available_wand(pid)
+        if len(self.avl) > 0:
+            l.append(MenuItem('Wand', self.wand))
+
         self.sup_dict = map.can_support(pid, position)
         if len(self.sup_dict) > 0:
             l.append(MenuItem('Support', self.support))
+
+
 
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
@@ -63,6 +70,11 @@ class Ordermenu(Menu):
         self.parent.remove(self)
         del self
 
+    def wand(self):
+        self.arena.wand(self.avl)
+        self.parent.remove(self)
+        del self
+
     def support(self):
         self.arena.support(self.sup_dict)
         self.parent.remove(self)
@@ -70,6 +82,38 @@ class Ordermenu(Menu):
 
     def item(self):
         self.arena.item_show()
+        self.parent.remove(self)
+        del self
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
+class Showwand(Menu):
+    is_event_handler = True
+
+    def __init__(self, avl, arena):
+        super().__init__(title='Wands')
+        w, h = director.get_window_size()
+        self.w, self.h = w, h
+        l = []
+        for item in avl:
+            content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
+            l.append(MenuItem(content, self.wanduse, item))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.info = None
+        # self.position = (-w // 4, 0)
+        self.position = - director.get_window_size()[0] * 6 // 8, 0
+        self.arena = arena
+
+    def wanduse(self, item):
+        self.parent.remove(self)
+        self.arena.wanduse(item)
+
+    def cancel(self):
+        self.arena.state = 'valid_dst'
+        self.parent.add(self.arena.menu)
         self.parent.remove(self)
         del self
 
@@ -157,7 +201,6 @@ class Itemuse(Menu):
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:
             self.cancel()
-
 
 class Weaponmenu(Menu):
     is_event_handler = True

@@ -31,6 +31,9 @@ mapstate2color = {
     'in_enemy_moverange': CORAL,
     'in_ally_moverange': SLATEBLUE,
     'in_self_attackrange': LIME,
+    'in_self_wandrange':PURPLE,
+    'in_enemy_wandrange':PURPLE,
+    'in_ally_wandrange':PURPLE,
     'target': RED,
 }
 
@@ -40,6 +43,9 @@ mapstate2color_motion = {
     'in_enemy_moverange': YELLOW,
     'in_ally_moverange': SLATEBLUE,
     'in_self_attackrange': LIME,
+    'in_self_wandrange':PURPLE,
+    'in_enemy_wandrange':PURPLE,
+    'in_ally_wandrange':PURPLE,
     'target': RED,
 }
 
@@ -82,6 +88,9 @@ opacity ={
     'in_ally_moverange': 60,
     'in_self_attackrange': 80,
     'target': 80,
+    'in_self_wandrange':80,
+    'in_enemy_wandrange':80,
+    'in_ally_wandrange':80,
 }
 
 def per_state2color(state, ctrl):
