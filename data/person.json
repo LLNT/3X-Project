@@ -274,13 +274,13 @@
       "Wind":0,
       "Light":0,
       "Dark":0,
-      "Wand":0},
+      "Wand":300},
     "Picture":"serra.png",
     "Skills":
     [
 
     ],
-    "Init_item":[9],
+    "Init_item":[9,10],
     "Support":{
 
     },
