@@ -43,5 +43,10 @@
     "Id":9,
     "Itemtype":"Heal",
     "Use":40
-  }
+  },
+{
+"Id":10,
+"Itemtype":"Sleep",
+"Use":1
+}
 ]
