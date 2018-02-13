@@ -195,7 +195,7 @@ class Battlescene(Animation):
 
 class Wandtype0(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
-        self.at, wand, self.df, self.map = arena.wandlist
+        self.at, wand, self.df, self.map = arena.wandlist_type0
         self.battle = Type0(self.at, wand, self.df, self.map)
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
@@ -280,4 +280,36 @@ class Wandtype0(Battlescene):
             t1.busy = t2.busy = True
             t1.do(a1 + CallFunc(t1.parent.set_busy) + CallFunc(self.get_next_action))
             t2.do(a2 + CallFunc(t2.parent.set_busy) + CallFunc(self.get_next_action))
+
+class Wandtype1(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        self.at, wand, self.df, self.map = arena.wandlist_type0
+        self.battle = Type0(self.at, wand, self.df, self.map)
+        pos1 = w // 4, h // 3
+        self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
+        self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
+                                   back_color=BLACK, hp=self.hp1, mhp=self.mhp1)
+        pos2 = w * 3 // 4, h // 3
+        self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
+        self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
+                                   back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
+
+        self.arena = arena
+        super(Battlescene, self).__init__(
+            obj1=self.attacker,
+            obj2=self.defender,
+            pid1=self.at.pid,
+            pid2=self.df.pid,
+            arena=arena,
+            width=w,
+            height=h,
+            maxsize=maxsize
+        )
+        self.add(self.attacker)
+        self.add(self.defender)
+
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
+
 
