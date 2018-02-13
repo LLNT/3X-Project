@@ -70,6 +70,9 @@ class Type0(Wand):
             self.p.banish(self.wand)
         self.log.append((-1,"Wand used out"))
         ori_abl=self.p.ability
+        growthtuple=[1,0,0,{},{}]
+        if not self.map.person_container.controller[self.p.pid]==0:
+            return self.log,growthtuple
         self.p.ability["EXP"] += self.exp_buf
         lv_up = 0
         while self.p.ability["EXP"] >= 100:
