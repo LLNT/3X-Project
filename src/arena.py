@@ -283,6 +283,8 @@ class Arena(ScrollableLayer):
             'wand_type1': self._wand_type1,
             'wand_type1_confirm': self._wand_type1_confirm,
             'wand_type2': self._wand_type2,
+            'wand_type3': self._wand_type3
+            'wand_type3_confirm': self._wand_type3_confirm,
             'choose_exchange': self._choose_exchange
         }
 
@@ -534,6 +536,45 @@ class Arena(ScrollableLayer):
                 self.is_event_handler = False
             else:
                 self._reset()
+            pass
+        pass
+
+    def _wand_type3(self):
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
+                return
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is not None\
+                and self.people[cell.person_on].controller is 1:
+                user = self.people[self.selected].person
+                target = self.people[cell.person_on].person
+                wand = self.item_w
+                self.wandlist_type3 = [user, wand, target, self.map, self.target]
+                hitr = Type1(user, wand, target, self.map, self.target).simulate()
+                self.hitrate = Info()
+
+                self.add(self.hitrate)
+                self.hitrate.display([str(hitr)])
+                self.state = 'wand_type1_confirm'
+            else:
+                self._reset()
+            pass
+        pass
+
+    def _wand_type3_confirm(self):
+        self.remove(self.hitrate)
+        if self.mouse_btn is 1:
+            pid = self.selected
+            dst = self._mapstate[0][self.selected][self.target][1]
+            self.is_event_handler = False
+            action = self._sequential_move(pid, dst)
+            obj = self.people[pid]
+            obj.do(action + CallFunc(self._push_scene, Wandtype1) +
+                   CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+        else:
+            self.state = 'wand_type1'
             pass
         pass
 
