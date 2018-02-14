@@ -321,8 +321,8 @@ class Main:
             person2.dequip(item2)
         person1.item.remove(item1)
         person2.item.remove(item2)
-        person1.item.append(item2)
-        person2.item.append(item1)
+        person1.item.insert(i1,item2)
+        person2.item.insert(i2,item1)
         return
 
     def can_rescue(self,pid,pos):

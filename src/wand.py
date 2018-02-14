@@ -106,7 +106,7 @@ class Type1(Wand):
         self.map=map  #type:map_controller.Main
         self.log=[]   #type:List[str]
         self.exp_buf=0 #type:int
-        self.pos=(0,0) #type:Tuple[int,int]
+        self.pos=pos #type:Tuple[int,int]
         self.hit=0     #type:int
         self.avo=0     #type:int
         self.dist=calc_dist(self.pos,self.map.person_container.position[self.obj.pid])
@@ -242,6 +242,102 @@ class Type2(Wand):
             growthlist.append(growth)
         growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist,ori_abl]
         return self.log,growthtuple
+
+class Type3(Wand):
+    def __init__(self):
+        super(Type3,self).__init__()
+        self.obj=None #type:person.Person
+        self.log=[] #type:List[str]
+        self.pos=(0,0) #type:Tuple[int,int]
+        self.hit=0
+        self.avo=0
+        self.dist=0
+        self.item_to_get=None #type:item.Item
+    def __init__(self,p,wand,obj,map,pos,_item):
+        self.p=p  #type:person.Person
+        self.wand=wand  #type:item.Item
+        self.obj=obj  #type:person.Person
+        self.map=map  #type:map_controller.Main
+        self.log=[]   #type:List[str]
+        self.exp_buf=0 #type:int
+        self.pos=pos #type:Tuple[int,int]
+        self.hit=0     #type:int
+        self.avo=0     #type:int
+        self.item_to_get=_item #type:item.Item
+        self.dist=calc_dist(self.pos,self.map.person_container.position[self.obj.pid])
+        self.hit+=self.wand.itemtype.hit
+        self.hit+=self.p.ability["MGC"]*2
+        self.hit+=int(self.p.ability["LUK"]/2)
+        self.hit+=self.p.ability["SKL"]
+        self.avo+=self.obj.ability["RES"]*2
+        self.hit+=int(self.p.ability["LUK"]/2)
+    def simulate(self):
+        sim_hit=self.hit-self.avo
+        sim_hit+=(11-self.dist)
+        if sim_hit<0:
+            sim_hit=0
+        return sim_hit
+    def execute(self):
+        sim_hit = self.hit - self.avo
+        sim_hit += (11 - self.dist)
+        q=random.randint(0,99)
+        if q<sim_hit:
+            funcs=self.wand.itemtype.wand["Effect"].split(",")
+            for func in funcs:
+                if func=="THIEF":
+                    self.obj.dequip(self.item_to_get)
+                    self.obj.item.remove(self.item_to_get)
+                    self.log.append((-1, "Getitem"))
+            self.p.weapon_rank["Wand"] += 1
+            if self.p.weapon_rank["Wand"] >= 400:
+                self.p.weapon_rank["Wand"] = 400
+            self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
+            self.wand.use -= 1
+            if self.wand.use <= 0:
+                self.p.banish(self.wand)
+                self.log.append((-1, "Wand used out"))
+            ori_abl = self.p.ability
+            growthtuple = [1, 0, 0, {}, {}]
+            if not self.map.person_container.controller[self.p.pid] == 0:
+                return self.log, growthtuple
+            self.p.ability["EXP"] += self.exp_buf
+            lv_up = 0
+            while self.p.ability["EXP"] >= 100:
+                lv_up += 1
+                self.p.ability["EXP"] -= 100
+            if (lv_up + self.p.ability["LV"] >= 20):
+                lv_up = 20 - self.p.ability["LV"]
+                self.p.ability["EXP"] = 0
+            growthlist = []
+            for i in range(lv_up):
+                growth = self.p.lv_up()
+                growthlist.append(growth)
+            growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist, ori_abl]
+            return self.log, growthtuple
+        else:
+            self.log.append((-1,"Miss"))
+            self.p.weapon_rank["Wand"] += 1
+            if self.p.weapon_rank["Wand"] >= 400:
+                self.p.weapon_rank["Wand"] = 400
+            self.exp_buf += 1
+            ori_abl = self.p.ability
+            growthtuple = [1, 0, 0, {}, {}]
+            if not self.map.person_container.controller[self.p.pid] == 0:
+                return self.log, growthtuple
+            self.p.ability["EXP"] += self.exp_buf
+            lv_up = 0
+            while self.p.ability["EXP"] >= 100:
+                lv_up += 1
+                self.p.ability["EXP"] -= 100
+            if (lv_up + self.p.ability["LV"] >= 20):
+                lv_up = 20 - self.p.ability["LV"]
+                self.p.ability["EXP"] = 0
+            growthlist = []
+            for i in range(lv_up):
+                growth = self.p.lv_up()
+                growthlist.append(growth)
+            growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist, ori_abl]
+            return self.log, growthtuple
 
 
 
