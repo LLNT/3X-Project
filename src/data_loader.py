@@ -31,3 +31,5 @@ class Main:
         self.attackable_weapon_types = json.load(open(path + "attackable_weapon_types.json", "r"))
         self.player_character_init=json.load(open(path+"player_character_init.json","r"))
         self.cls_rank=json.load(open(path+"cls_rank.json","r"))
+        self.itemtype_typenames=json.load(open(path+"itemtype_typenames.json","r"))
+        self.flags=json.load(open(path+"flags.json","r"))

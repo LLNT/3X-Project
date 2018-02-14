@@ -195,6 +195,54 @@ class Type1(Wand):
             growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist, ori_abl]
             return self.log, growthtuple
 
+class Type2(Wand):
+    def __init__(self):
+        super(Type2,self).__init__()
+        self.obj=None #type:person.Person
+        self.log=[] #type:List[str]
+        self.item_to_repair=None #type:item.Item
+    def __init__(self,p,wand,obj,map,_item):
+        self.p=p  #type:person.Person
+        self.wand=wand  #type:item.Item
+        self.obj=obj  #type:person.Person
+        self.map=map  #type:map_controller.Main
+        self.log=[]   #type:List[str]
+        self.exp_buf=0 #type:int
+        self.item_to_repair=_item #type:item.Item
+    def execute(self):
+        funcs=self.wand.itemtype.wand["Effect"].split(",")
+        for func in funcs:
+            if func=="REPAIR":
+                max_use=self.item_to_repair.itemtype.max_use
+                self.item_to_repair.use=max_use
+                self.log.append((-1,"Item repaired"))
+        self.p.weapon_rank["Wand"]+=1
+        if self.p.weapon_rank["Wand"]>=400:
+            self.p.weapon_rank["Wand"]=400
+        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
+        self.wand.use-=1
+        if self.wand.use<=0:
+            self.p.banish(self.wand)
+            self.log.append((-1,"Wand used out"))
+        ori_abl=self.p.ability
+        growthtuple=[1,0,0,{},{}]
+        if not self.map.person_container.controller[self.p.pid]==0:
+            return self.log,growthtuple
+        self.p.ability["EXP"] += self.exp_buf
+        lv_up = 0
+        while self.p.ability["EXP"] >= 100:
+            lv_up += 1
+            self.p.ability["EXP"] -= 100
+        if (lv_up + self.p.ability["LV"] >= 20):
+            lv_up = 20 - self.p.ability["LV"]
+            self.p.ability["EXP"] = 0
+        growthlist = []
+        for i in range(lv_up):
+            growth = self.p.lv_up()
+            growthlist.append(growth)
+        growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist,ori_abl]
+        return self.log,growthtuple
+
 
 
 

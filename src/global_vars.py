@@ -18,6 +18,8 @@ class Main:
         self.attackable_weapon_types=[]     #type:List[str]
         self.player_character_status={}     #type:Dict[str,int]
         self.cls_rank={}                    #type:Dict[str,List[str]]
+        self.flags={}                       #type:Dict[str,bool]
+        self.transporter={}                 #type:Dict[str,List[item.Item]]
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -30,4 +32,8 @@ class Main:
         self.attackable_weapon_types=data.attackable_weapon_types
         self.player_character_status=data.player_character_init
         self.cls_rank=data.cls_rank
+        self.flags=data.flags
+        self.transporter={}
+        for _type in data.itemtype_typenames:
+            self.transporter[_type]=[]
 
