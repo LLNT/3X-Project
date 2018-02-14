@@ -243,6 +243,7 @@ class Arena(ScrollableLayer):
         self.iter = iter(self.people)
         self.item_w = None
         self.avl = None
+        self.excpid = None
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -526,10 +527,11 @@ class Arena(ScrollableLayer):
             pid = self.cells[self.mouse_pos].person_on
             if pid is not None and pid in self.exc:
                 self.menulayer.add(Weaponexchange(self.people[self.selected].person.item, self,
-                                                  (-self.width, 0)))
+                                                  (-self.width, 0)), name='left')
                 self.menulayer.add(Weaponexchange(self.people[pid].person.item, self,
-                                                  (-self.width//2, 0)))
+                                                  (-self.width//2, 0)), name='right')
                 self.is_event_handler = False
+                self.excpid = pid
             pass
 
     def get_next_to_delete(self):
@@ -704,14 +706,13 @@ class Arena(ScrollableLayer):
 
     def can_exchange(self, pos):
         exc_obj = []
-        for x in (0, 1):
-            for y in (0, 1):
-                i, j = pos[0]+x, pos[1]+y
-                if self._in_arena(i, j):
-                    pid = self.cells[(i, j)].person_on
-                    if pid is not None:
-                        if self.map.person_container.controller[pid] == 0:
-                            exc_obj.append(pid)
+        for (x, y) in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            i, j = pos[0]+x, pos[1]+y
+            if self._in_arena(i, j):
+                pid = self.cells[(i, j)].person_on
+                if pid is not None:
+                    if self.map.person_container.controller[pid] == 0:
+                        exc_obj.append(pid)
         return exc_obj
 
     def exchange(self, exc):
@@ -724,6 +725,15 @@ class Arena(ScrollableLayer):
         self._repaint()
         self.menulayer.disapper()
         self.is_event_handler = True
+
+    def exchange_item(self, item1, item2):
+        print(item1, item2)
+        self.map.exchange_item(self.selected, self.excpid, item1, item2)
+        self.menulayer.add(Weaponexchange(self.people[self.selected].person.item, self,
+                                          (-self.width, 0)), name='left')
+        self.menulayer.add(Weaponexchange(self.people[self.excpid].person.item, self,
+                                          (-self.width//2, 0)), name='right')
+        self.is_event_handler = False
 
     def remove(self, obj):
         super().remove(obj)

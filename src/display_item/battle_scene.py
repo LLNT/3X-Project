@@ -28,14 +28,14 @@ class Animation(Layer):
     recieves battle result and the playing object, plays them in the correct order
 
     '''
-    def __init__(self, obj1, obj2, pid1, pid2, arena, maxsize=2, width=640, height=480):
+    def __init__(self, obj1, obj2, at, df, arena, maxsize=2, width=640, height=480):
         super().__init__()
         self.info = Queue(maxsize)
         self.flag = False
         self.attacker = obj1
         self.defender = obj2
-        self.at = arena.people[pid1].person
-        self.df = arena.people[pid2].person
+        self.at = at
+        self.df = df
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
         self.obj1 = self.attacker.right_ring
@@ -141,7 +141,9 @@ class Battlescene(Animation):
     is_event_handler = False
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, self.df, wp, self.map, pos = arena.battlelist
-        self.battle = Battle(self.at, self.df, wp, self.df.item[0], self.map, pos)
+        self.at.equip(wp)
+        wp_d = self.df.get_equip()
+        self.battle = Battle(self.at, self.df, wp, wp_d, self.map, pos)
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
@@ -155,8 +157,8 @@ class Battlescene(Animation):
         super(Battlescene, self).__init__(
             obj1=self.attacker,
             obj2=self.defender,
-            pid1=self.at.pid,
-            pid2=self.df.pid,
+            at=self.at,
+            df=self.df,
             arena=arena,
             width=w,
             height=h,
@@ -164,6 +166,7 @@ class Battlescene(Animation):
         )
         self.add(self.attacker)
         self.add(self.defender)
+
 
 
         event = self.battle.battle()
@@ -210,8 +213,8 @@ class Wandtype0(Battlescene):
         super(Battlescene, self).__init__(
             obj1=self.attacker,
             obj2=self.defender,
-            pid1=self.at.pid,
-            pid2=self.df.pid,
+            at=self.at,
+            df=self.df,
             arena=arena,
             width=w,
             height=h,
@@ -298,8 +301,8 @@ class Wandtype1(Battlescene):
         super(Battlescene, self).__init__(
             obj1=self.attacker,
             obj2=self.defender,
-            pid1=self.at.pid,
-            pid2=self.df.pid,
+            at=self.at,
+            df=self.df,
             arena=arena,
             width=w,
             height=h,
@@ -307,7 +310,6 @@ class Wandtype1(Battlescene):
         )
         self.add(self.attacker)
         self.add(self.defender)
-
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
