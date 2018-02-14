@@ -339,6 +339,53 @@ class Type3(Wand):
             growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist, ori_abl]
             return self.log, growthtuple
 
-
+class Type4(Wand):
+    def __init__(self):
+        super(Type4,self).__init__()
+        self.log=[] #type:List[str]
+        self.tarpos=(0,0) #type:Tuple[int,int]
+    def __init__(self,p,wand,map,tarpos):
+        self.p=p  #type:person.Person
+        self.wand=wand  #type:item.Item
+        self.map=map  #type:map_controller.Main
+        self.log=[]   #type:List[str]
+        self.exp_buf=0 #type:int
+        self.tarpos=tarpos #type:Tuple[int,int]
+    def execute(self):
+        funcs=self.wand.itemtype.wand["Effect"].split(",")
+        for func in funcs:
+            if func=="REWARP":
+                self.map.person_container.position[self.p.pid]=self.tarpos
+                self.log.append((-1,"%s Moved"%(self.p.name)))
+            if func=="TORCH":
+                pass
+            if func=="UNLOCK":
+                pass
+        self.p.weapon_rank["Wand"]+=1
+        if self.p.weapon_rank["Wand"]>=400:
+            self.p.weapon_rank["Wand"]=400
+        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
+        self.wand.use-=1
+        if self.wand.use<=0:
+            self.p.banish(self.wand)
+            self.log.append((-1,"Wand used out"))
+        ori_abl=self.p.ability
+        growthtuple=[1,0,0,{},{}]
+        if not self.map.person_container.controller[self.p.pid]==0:
+            return self.log,growthtuple
+        self.p.ability["EXP"] += self.exp_buf
+        lv_up = 0
+        while self.p.ability["EXP"] >= 100:
+            lv_up += 1
+            self.p.ability["EXP"] -= 100
+        if (lv_up + self.p.ability["LV"] >= 20):
+            lv_up = 20 - self.p.ability["LV"]
+            self.p.ability["EXP"] = 0
+        growthlist = []
+        for i in range(lv_up):
+            growth = self.p.lv_up()
+            growthlist.append(growth)
+        growthtuple = [1, lv_up, self.p.ability["EXP"], growthlist,ori_abl]
+        return self.log,growthtuple
 
 
