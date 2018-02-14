@@ -57,9 +57,7 @@ class Listwand(Menu):
         super().__init__(title='Items')
         l = []
         for item in items:
-
             content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
-            print(content)
             l.append(MenuItem(content, self.call_banish, item))
         self.create_menu(l, zoom_in(), zoom_out())
         self.flag = flag
@@ -91,6 +89,7 @@ class Banish(Menu):
     def transport(self, item):
         self.kill()
         self.parent.map.send_to_transporter(item)
+        self.parent.exit()
 
     def cancel(self):
         self.kill()

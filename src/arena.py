@@ -86,7 +86,7 @@ class Arena(ScrollableLayer):
 
     def on_return(self, person, getitem=None):
         if getitem is not None:
-            self.add(Getitem(person,getitem,False,self.map))
+            self.add(Getitem(person,getitem,self.map.global_vars.flags['Have Transporter'],self.map))
             self.is_event_handler = False
         else:
             self.get_next_to_delete()
