@@ -28,6 +28,7 @@ class Menulayer(ColorLayer):
 class Ordermenu(Menu):
     is_event_handler = True
 
+
     def __init__(self, arena):
         super(Ordermenu, self).__init__(title='Order')
         self.arena = arena
@@ -52,7 +53,9 @@ class Ordermenu(Menu):
         if len(self.exc) > 0:
             l.append(MenuItem('Exchange', self.exchange))
 
-        l.append(MenuItem('Cancel', self.cancel))
+        self.allow_cancel = arena.allow_cancel
+        if self.allow_cancel:
+            l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.position = - director.get_window_size()[0] * 3 // 8, 0
 
@@ -90,8 +93,11 @@ class Ordermenu(Menu):
         self.parent.remove(self)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
-        if buttons == 4:
-            self.cancel()
+        if buttons == 4 :
+            if self.allow_cancel:
+                self.cancel()
+            else:
+                self.move()
 
 class Showwand(Menu):
     is_event_handler = True
@@ -117,7 +123,7 @@ class Showwand(Menu):
 
     def cancel(self):
         self.arena.state = 'valid_dst'
-        self.parent.add(self.arena.menu)
+        self.parent.add(Ordermenu(self.arena))
         self.parent.remove(self)
         
 
@@ -149,7 +155,7 @@ class Showweapon(Menu):
 
     def cancel(self):
         self.arena.state = 'valid_dst'
-        self.parent.add(self.arena.menu)
+        self.parent.add(Ordermenu(self.arena))
         self.parent.remove(self)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
@@ -249,7 +255,7 @@ class Weaponmenu(Menu):
 
     def cancel(self):
         self.arena.state = 'valid_dst'
-        self.parent.add(self.arena.menu)
+        self.parent.add(Ordermenu(self.arena))
         self.parent.remove(self)
         
 
@@ -289,20 +295,28 @@ class Weaponexchange(Menu):
         self.selected = None
 
 
-    def item(self, item):
-        self.selected = item
-        left = self.parent.get('left').selected
-        right = self.parent.get('right').selected
-        print(left, right)
-        if left is not None and right is not None:
 
+    def item(self, item):
+        if self.selected is not None:
+            for name in self.parent.children_names:
+                if self.parent.children_names[name] == self:
+                    self.name = name
             self.parent.remove('left')
             self.parent.remove('right')
-            self.do(Delay(0.5) + CallFunc(self.arena.exchange_item(left, right)))
+            self.do(Delay(0.5) + CallFunc(self.arena.exchange_item(self.selected, item, self.name)))
+
+        else:
+            self.selected = item
+            left = self.parent.get('left').selected
+            right = self.parent.get('right').selected
+            if left is not None and right is not None:
+                self.parent.remove('left')
+                self.parent.remove('right')
+                self.do(Delay(0.5) + CallFunc(self.arena.exchange_item(left, right)))
 
     def cancel(self):
         self.arena.state = 'valid_dst'
-        self.parent.add(self.arena.menu)
+        self.parent.add(Ordermenu(self.arena))
         self.parent.remove('left')
         self.parent.remove('right')
 

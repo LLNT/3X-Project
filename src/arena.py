@@ -36,6 +36,7 @@ class Arena(ScrollableLayer):
 
         # initialize the holder according to the map
         self.width, self.height = w*size, h*size
+        self.windowsize = director.get_window_size()
         self.anchor = self.width // 2, self.height // 2
         self.add(Background(self.width, self.height))
         # self.add(ColorLayer(100, 100, 100, 255, self.width, self.height))
@@ -244,6 +245,7 @@ class Arena(ScrollableLayer):
         self.item_w = None
         self.avl = None
         self.excpid = None
+        self.allow_cancel = True
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -279,6 +281,7 @@ class Arena(ScrollableLayer):
             'wand_type0': self._wand_type0,10:self._wand_type0,
             'wand_type1': self._wand_type1,
             'wand_type1_confirm': self._wand_type1_confirm,
+            'wand_type2': self._wand_type2,
             'choose_exchange': self._choose_exchange
         }
 
@@ -519,6 +522,9 @@ class Arena(ScrollableLayer):
             pass
         pass
 
+    def _wand_type2(self):
+        pass
+
     def _choose_exchange(self):
         if self.mouse_btn == 4:
             self._reset()
@@ -527,9 +533,9 @@ class Arena(ScrollableLayer):
             pid = self.cells[self.mouse_pos].person_on
             if pid is not None and pid in self.exc:
                 self.menulayer.add(Weaponexchange(self.people[self.selected].person.item, self,
-                                                  (-self.width, 0)), name='left')
+                                                  (-self.windowsize[0], 0)), name='left')
                 self.menulayer.add(Weaponexchange(self.people[pid].person.item, self,
-                                                  (-self.width//2, 0)), name='right')
+                                                  (-self.windowsize[0]//2, 0)), name='right')
                 self.is_event_handler = False
                 self.excpid = pid
             pass
@@ -609,6 +615,8 @@ class Arena(ScrollableLayer):
             self.state = 'wand_type0'
         elif item_w.itemtype.wand['Type'] == 1:
             self.state = 'wand_type1'
+        elif item_w.itemtype.wand['Type'] == 2:
+            self.state = 'wand_type2'
         else:
             self._add_menu(Showwand(self.avl, self))
 
@@ -726,14 +734,23 @@ class Arena(ScrollableLayer):
         self.menulayer.disapper()
         self.is_event_handler = True
 
-    def exchange_item(self, item1, item2):
+    def exchange_item(self, item1, item2, name=None):
         print(item1, item2)
-        self.map.exchange_item(self.selected, self.excpid, item1, item2)
+        if name is None:
+            pid1, pid2 = self.selected, self.excpid
+        elif name is 'left':
+            pid1 = pid2 = self.selected
+        elif name is 'right':
+            pid1 = pid2 = self.excpid
+        else:
+            return
+        self.map.exchange_item(pid1, pid2, item1, item2)
         self.menulayer.add(Weaponexchange(self.people[self.selected].person.item, self,
-                                          (-self.width, 0)), name='left')
+                                          (-self.windowsize[0], 0)), name='left')
         self.menulayer.add(Weaponexchange(self.people[self.excpid].person.item, self,
-                                          (-self.width//2, 0)), name='right')
+                                          (-self.windowsize[0]//2, 0)), name='right')
         self.is_event_handler = False
+        self.allow_cancel = False
 
     def remove(self, obj):
         super().remove(obj)
@@ -786,10 +803,6 @@ class Board():
                 return (0, 0)
 
 
-
-
-
-
 def map_init():
     data = Data()
     global_vars = Global(data)
@@ -817,7 +830,7 @@ if __name__ == '__main__':
     pyglet.resource.reindex()
     map, w, h = map_init()
     size = 80
-    director.init(caption='3X-Project', width=w*size, height=h*size)
+    director.init(caption='3X-Project', width=1280, height=720)
 
 
     menulayer = Menulayer()
