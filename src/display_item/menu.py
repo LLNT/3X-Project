@@ -364,14 +364,17 @@ class Endturn(Menu):
 class Listwand(Menu):
     is_event_handler = True
 
-    def __init__(self, items, arena):
+    def __init__(self, items, arena, type):
         super().__init__(title='Wands')
         w, h = director.get_window_size()
         self.w, self.h = w, h
         l = []
         for item in items:
             content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
-            l.append(MenuItem(content, self.wandrpr, item))
+            if type is 2:
+                l.append(MenuItem(content, self.wandrpr, item))
+            elif type is 3:
+                l.append(MenuItem(content, self.wandstl, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
@@ -382,6 +385,10 @@ class Listwand(Menu):
     def wandrpr(self, item):
         self.parent.remove(self)
         self.arena.wandrpr(item)
+
+    def wandstl(self, item):
+        self.parent.remove(self)
+        self.arena.wandstl(item)
 
     def cancel(self):
         self.arena.state = 'wand_type2'

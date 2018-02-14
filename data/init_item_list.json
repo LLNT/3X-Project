@@ -53,5 +53,10 @@
 "Id":11,
 "Itemtype":"Repair",
 "Use":3
+},
+  {
+"Id":12,
+"Itemtype":"Thief",
+"Use":3
 }
 ]
