@@ -17,6 +17,7 @@ from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showwea
 from display_item.background import Background
 from display_item.battle_scene import Battlescene, Wandtype0, Wandtype1, Wandtype2, Wandtype3
 from display_item.ring import PerSpr
+from display_item.getitem import Getitem
 
 import map_controller
 from global_vars import Main as Global
@@ -83,12 +84,24 @@ class Arena(ScrollableLayer):
 
 
 
-    def on_return(self):
+    def on_return(self, person, getitem=None):
+        if getitem is not None:
+            self.add(Getitem(person,getitem,False,self.map))
+            self.is_event_handler = False
+        else:
+            self.get_next_to_delete()
+            self.map.take_turn(self)
+            for person in self.people.values():
+                person.update_hp()
+
+    def end_getitem(self):
+        director.window.push_handlers(self)
         self.get_next_to_delete()
         self.map.take_turn(self)
         for person in self.people.values():
             person.update_hp()
-
+        self.state = 'default'
+        print(self.is_event_handler)
 
     def next_round(self):
 
@@ -758,7 +771,7 @@ class Arena(ScrollableLayer):
     def banish(self, item):
         pid = self.selected
         person = self.people[pid].person
-        person.banish(item)
+        person.call_banish(item)
         self.item_show()
 
     def set_turn(self, turn):

@@ -104,16 +104,12 @@ class Showwand(Menu):
 
     def __init__(self, avl, arena):
         super().__init__(title='Wands')
-        w, h = director.get_window_size()
-        self.w, self.h = w, h
         l = []
         for item in avl:
             content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
             l.append(MenuItem(content, self.wanduse, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.info = None
-        # self.position = (-w // 4, 0)
         self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
 
@@ -136,16 +132,12 @@ class Showweapon(Menu):
 
     def __init__(self, items, arena):
         super(Showweapon, self).__init__(title='Weapons')
-        w, h = director.get_window_size()
-        self.w, self.h = w, h
         l = []
         for item in items:
             content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
             l.append(MenuItem(content, self.itemuse, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.info = None
-        # self.position = (-w // 4, 0)
         self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
 
@@ -167,8 +159,6 @@ class Itemuse(Menu):
 
     def __init__(self, item, menu, arena):
         super().__init__(title='Weapons')
-        w, h = director.get_window_size()
-        self.w, self.h = w, h
         l = []
         pid = arena.selected
         map = arena.map
@@ -180,8 +170,6 @@ class Itemuse(Menu):
             l.append(MenuItem('Banish', self.banish))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.info = None
-        # self.position = (-w // 4, 0)
         self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.item = item
         self.menu = menu
@@ -198,7 +186,7 @@ class Itemuse(Menu):
         pass
 
     def banish(self):
-        self.arena.banish(self.item)
+        self.arena.call_banish(self.item)
         self.parent.remove(self)
         pass
 
@@ -224,7 +212,6 @@ class Weaponmenu(Menu):
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
-        # self.position = (-w // 4, 0)
         self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
 
@@ -279,8 +266,6 @@ class Weaponexchange(Menu):
     selected = None
     def __init__(self, items, arena, position):
         super(Weaponexchange, self).__init__()
-        w, h = director.get_window_size()
-        self.w, self.h = w, h
         l = []
         i = 0
         for i, item in enumerate(items):
@@ -289,12 +274,9 @@ class Weaponexchange(Menu):
         if len(l) < 5:
             l.append(Exchangeitem('Empty', self.item, i+1))
         self.create_menu(l,None, None)
-        # self.position = (-w // 4, 0)
         self.position = position
         self.arena = arena
         self.selected = None
-
-
 
     def item(self, item):
         if self.selected is not None:
@@ -360,14 +342,11 @@ class Endturn(Menu):
         if buttons == 4:
             self.cancel()
 
-
 class Listwand(Menu):
     is_event_handler = True
 
     def __init__(self, items, arena, type):
         super().__init__(title='Wands')
-        w, h = director.get_window_size()
-        self.w, self.h = w, h
         l = []
         for item in items:
             content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
@@ -377,8 +356,6 @@ class Listwand(Menu):
                 l.append(MenuItem(content, self.wandstl, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.info = None
-        # self.position = (-w // 4, 0)
         self.position = - director.get_window_size()[0] * 6 // 8, 0
         self.arena = arena
 

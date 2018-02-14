@@ -44,6 +44,8 @@ class Animation(Layer):
         self.width = width
         self.height = height
         self.map = arena.map
+        self.item = None
+        self.getitem = None
 
     def excute(self, event):
         self.events = event[0]
@@ -68,8 +70,10 @@ class Animation(Layer):
                     self.map.defeated_character(self.df.pid)
                 elif event[0] is -2:
                     self.map.defeated_character(self.at.pid)
+
+            elif content is 'Getitem':
+                self.getitem = self.item
             self.add_new_infos(content)
-            pass
         else:
             hit, dmg, amg = event[1].split(',')
             dmg = int(dmg)
@@ -173,7 +177,6 @@ class Battlescene(Animation):
         del self.battle
         self.excute(event=event)
 
-
     def on_mouse_press(self, x, y, buttons, modifiers):
         self.remove(self.exp)
         self.do(CallFunc(self._return_arena)+ Delay(0.5) + CallFunc(self._pop))
@@ -184,7 +187,7 @@ class Battlescene(Animation):
             ColorLayer(0, 0, 0, 0, self.width, self.height)), duration=1.5))
 
     def _pop(self):
-        self.arena.on_return()
+        self.arena.on_return(self.at, self.getitem)
         director.pop()
         director.pop()
         del self
@@ -358,6 +361,7 @@ class Wandtype3(Battlescene):
         self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
                                    back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
 
+
         self.arena = arena
         super(Battlescene, self).__init__(
             obj1=self.attacker,
@@ -371,9 +375,7 @@ class Wandtype3(Battlescene):
         )
         self.add(self.attacker)
         self.add(self.defender)
-
+        self.item = item
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
-
-
