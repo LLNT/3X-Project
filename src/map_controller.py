@@ -370,3 +370,7 @@ class Main:
                     wands.append(i)
         return wands
 
+    def send_to_transporter(self,_item):
+        self.global_vars.transporter[_item.itemtype.weapontype].append(_item)
+        return
+
