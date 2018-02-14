@@ -13,9 +13,9 @@ from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo, Info
-from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon, Showwand, Weaponexchange
+from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon, Showwand, Weaponexchange, Listwand
 from display_item.background import Background
-from display_item.battle_scene import Battlescene, Wandtype0, Wandtype1
+from display_item.battle_scene import Battlescene, Wandtype0, Wandtype1, Wandtype2
 from display_item.ring import PerSpr
 
 import map_controller
@@ -199,7 +199,7 @@ class Arena(ScrollableLayer):
             self._add_menu(self.menu)
             self.is_event_handler = False
 
-        elif self.state is 'wand_type0' or self.state is  'wand_type1':
+        elif self.state is 'wand_type0' or self.state is  'wand_type1' or self.state is  'wand_type2':
             self.wand(self.avl)
             pid = self.selected
             valid = self._mapstate[0]
@@ -246,6 +246,7 @@ class Arena(ScrollableLayer):
         self.avl = None
         self.excpid = None
         self.allow_cancel = True
+        self.wandlist_type0 = self.wandlist_type1 = self.wandlist_type2 = []
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -416,12 +417,6 @@ class Arena(ScrollableLayer):
         scene = Scene((layer(self, self.width, self.height)))
         director.push(FadeTransition(scene, duration=1.5))
 
-    def _push_battle_scene(self, **kwargs):
-        director.push(FadeTransition(Scene(Battlescene(self, self.width, self.height)), duration=1.5))
-
-    def _push_wand_type0(self, **kwargs):
-        director.push(FadeTransition(Scene(Wandtype0(self, self.width, self.height)), duration=1.5))
-
     def _show_battle_result(self):
         # 7   show_battle_result
         # showing battle result, push to another scene
@@ -469,7 +464,7 @@ class Arena(ScrollableLayer):
                 user = self.people[self.selected].person
                 target = self.people[cell.person_on].person
                 wand = self.item_w
-                self.wandlist_type0 = user, wand, target, self.map
+                self.wandlist_type0 = [user, wand, target, self.map]
                 pid = self.selected
                 dst = self._mapstate[0][self.selected][self.target][1]
                 self.is_event_handler = False
@@ -523,6 +518,23 @@ class Arena(ScrollableLayer):
         pass
 
     def _wand_type2(self):
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
+                return
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is not None\
+                and self.people[cell.person_on].controller is not 1:
+                user = self.people[self.selected].person
+                target = self.people[cell.person_on].person
+                wand = self.item_w
+                self.wandlist_type2 = [user, wand, target, self.map]
+                self.menulayer.add(Listwand(target.item, self))
+                self.is_event_handler = False
+            else:
+                self._reset()
+            pass
         pass
 
     def _choose_exchange(self):
@@ -751,6 +763,16 @@ class Arena(ScrollableLayer):
                                           (-self.windowsize[0]//2, 0)), name='right')
         self.is_event_handler = False
         self.allow_cancel = False
+
+    def wandrpr(self, item):
+        self.wandlist_type2.append(item)
+        pid = self.selected
+        dst = self._mapstate[0][self.selected][self.target][1]
+        self.is_event_handler = False
+        action = self._sequential_move(pid, dst)
+        obj = self.people[pid]
+        obj.do(action + CallFunc(self._push_scene, Wandtype2) +
+               CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
 
     def remove(self, obj):
         super().remove(obj)

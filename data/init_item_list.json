@@ -48,5 +48,10 @@
 "Id":10,
 "Itemtype":"Sleep",
 "Use":1
+},
+  {
+"Id":11,
+"Itemtype":"Repair",
+"Use":3
 }
 ]

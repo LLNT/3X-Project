@@ -114,7 +114,7 @@ class Showwand(Menu):
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
         # self.position = (-w // 4, 0)
-        self.position = - director.get_window_size()[0] * 6 // 8, 0
+        self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
 
     def wanduse(self, item):
@@ -146,7 +146,7 @@ class Showweapon(Menu):
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
         # self.position = (-w // 4, 0)
-        self.position = - director.get_window_size()[0] * 6 // 8, 0
+        self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
 
     def itemuse(self, item):
@@ -354,6 +354,37 @@ class Endturn(Menu):
 
     def end_turn(self):
         self.arena.end_turn()
+        self.parent.remove(self)
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
+
+class Listwand(Menu):
+    is_event_handler = True
+
+    def __init__(self, items, arena):
+        super().__init__(title='Wands')
+        w, h = director.get_window_size()
+        self.w, self.h = w, h
+        l = []
+        for item in items:
+            content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
+            l.append(MenuItem(content, self.wandrpr, item))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.info = None
+        # self.position = (-w // 4, 0)
+        self.position = - director.get_window_size()[0] * 6 // 8, 0
+        self.arena = arena
+
+    def wandrpr(self, item):
+        self.parent.remove(self)
+        self.arena.wandrpr(item)
+
+    def cancel(self):
+        self.arena.state = 'wand_type2'
         self.parent.remove(self)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
