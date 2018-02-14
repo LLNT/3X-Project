@@ -70,7 +70,7 @@ class Type0(Wand):
         self.wand.use-=1
         if self.wand.use<=0:
             self.p.banish(self.wand)
-        self.log.append((-1,"Wand used out"))
+            self.log.append((-1,"Wand used out"))
         ori_abl=self.p.ability
         growthtuple=[1,0,0,{},{}]
         if not self.map.person_container.controller[self.p.pid]==0:
@@ -151,7 +151,7 @@ class Type1(Wand):
             self.wand.use -= 1
             if self.wand.use <= 0:
                 self.p.banish(self.wand)
-            self.log.append((-1, "Wand used out"))
+                self.log.append((-1, "Wand used out"))
             ori_abl = self.p.ability
             growthtuple = [1, 0, 0, {}, {}]
             if not self.map.person_container.controller[self.p.pid] == 0:
