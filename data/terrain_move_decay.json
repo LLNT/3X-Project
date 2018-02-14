@@ -73,8 +73,8 @@
     "Infantry":255,
     "Knight":255,
     "Bower":255,
-    "Pegasus":1,
-    "Magician":1
+    "Pegasus":255,
+    "Magician":255
   },
   "Avenue":{
     "Infantry":1,
@@ -117,5 +117,33 @@
     "Bower":1,
     "Pegasus":1,
     "Magician":1
+  },
+  "Floor":{
+    "Infantry":1,
+    "Knight":1,
+    "Bower":1,
+    "Pegasus":1,
+    "Magician":1
+  },
+  "Treasury":{
+    "Infantry":1,
+    "Knight":1,
+    "Bower":1,
+    "Pegasus":1,
+    "Magician":1
+  },
+  "Empty Treasury":{
+    "Infantry":1,
+    "Knight":1,
+    "Bower":1,
+    "Pegasus":1,
+    "Magician":1
+  },
+  "Closed":{
+    "Infantry":255,
+    "Knight":255,
+    "Bower":255,
+    "Pegasus":255,
+    "Magician":255
   }
 }

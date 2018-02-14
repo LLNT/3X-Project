@@ -1,0 +1,17 @@
+{
+  "Name":"map_0_varblock_1",
+  "M":8,
+  "N":7,
+  "Anchor_X":0,
+  "Anchor_Y":13,
+  "Map":[
+    ["Treasury","Wall","Floor","Floor","Floor","Floor","Treasury"],
+    ["Floor","Wall","Floor","Floor","Column","Floor","Floor"],
+    ["Floor","Wall","Floor","Floor","Floor","Floor","Floor"],
+    ["Floor","Wall","Floor","Floor","Floor","Floor","Throne"],
+    ["Floor","Wall","Floor","Floor","Floor","Floor","Floor"],
+    ["Wall","Wall","Floor","Floor","Column","Floor","Floor"],
+    ["Floor","Floor","Floor","Floor","Floor","Floor","Treasury"],
+    ["Wall","Wall","Wall","Wall","Wall","Wall","Wall"]
+  ]
+}
