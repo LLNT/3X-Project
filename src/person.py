@@ -99,6 +99,7 @@ class Person:
 
     def lv_up(self):
         growth_rec={}
+        self.ability["LV"]+=1
         for abl in self.growth:
             if self.growth[abl]>0:
                 base=int(self.growth[abl]/100)
