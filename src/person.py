@@ -159,6 +159,37 @@ class Person:
             self.ability["RES"]-=r0
         return
 
+    def can_promote(self,global_vars):
+        if not (self.cls in global_vars.cls_rank["Low"]):
+            return []
+        if not self.ability["LV"]>=10:
+            return []
+        if self.cls=="Archer":
+            return ["Sniper"]
+        return []
+
+    def promote(self,cl,g_vars):
+        c_tar=g_vars.clsBank[cl]
+        for wptype in c_tar.weapon_rank:
+            self.weapon_rank[wptype]+=c_tar.weapon_rank[wptype]
+            if self.weapon_rank[wptype]>400:
+                self.weapon_rank[wptype]=400
+        self.ability_limit=c_tar.ability_limit.copy()
+        promote_base=g_vars.cls_promotion[self.cls]
+        promote_tar=g_vars.cls_promotion[cl]
+        abl_ori=self.ability.copy()
+        promote_bonus={}
+        for abl in self.ability:
+            promote=promote_tar[abl]-promote_base[abl]
+            if promote+self.ability[abl]>=self.ability_limit[abl]:
+                promote=self.ability_limit[abl]-self.ability[abl]
+            promote_bonus[abl]=promote
+            self.ability[abl]+=promote
+        self.cls=cl
+        self.ability["LV"]=1
+        self.ability["EXP"]=1
+        return promote_bonus,abl_ori
+
 
 class PersonBank:
     def __init__(self):

@@ -139,6 +139,13 @@
     "Pegasus":1,
     "Magician":1
   },
+  "Door":{
+    "Infantry":255,
+    "Knight":255,
+    "Bower":255,
+    "Pegasus":255,
+    "Magician":255
+  },
   "Closed":{
     "Infantry":255,
     "Knight":255,
