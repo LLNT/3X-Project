@@ -571,7 +571,8 @@ class Arena(ScrollableLayer):
                 self.wandlist_type3 = [user, wand, target, self.map, self.target]
                 eqp=target.get_equip()
                 target_item_list=target.item.copy()
-                target_item_list.remove(eqp)
+                if not eqp==None:
+                    target_item_list.remove(eqp)
                 self._add_menu(Listwand(target_item_list, self, type=3))
                 self.is_event_handler = False
             else:
