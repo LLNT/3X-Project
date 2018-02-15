@@ -1,9 +1,12 @@
 {
-  "High":[],
-  "Low":[ "Lord",
-  "Cavalier",
-  "Archer",
-  "Pegasus Knight",
+  "High":[
+    "Sniper"
+  ],
+  "Low":[
+    "Lord",
+    "Cavalier",
+    "Archer",
+    "Pegasus Knight",
     "Cleric"
 ],
   "SHigh":[],

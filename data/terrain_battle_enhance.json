@@ -831,6 +831,48 @@
       "DEF":0
     }
   },
+  "Door":{
+    "Infantry":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Knight":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Bower":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Pegasus":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Magician":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    }
+  },
   "Closed":{
     "Infantry":{
       "HIT":0,

@@ -21,7 +21,7 @@ class Main:
         self.cls_clsgroup=json.load(open(path+"cls_clsgroup.json","r"))
         self.cls_skills=json.load(open(path+"cls_skills.json","r"))
         self.cls_ability_limit=json.load(open(path+"cls_ability_limit.json","r"))
-        self.persondata=json.load(open(path+"person.json","r"))
+        self.persondata=json.load(open(path+"person_test.json","r"))
         self.pidlist=self.persondata.keys()
         self.terrain_map=json.load(open(path+"terrain_map_test.json","r"))
         self.map_armylist=json.load(open(path+"map_armylist_test.json","r"))
@@ -33,3 +33,4 @@ class Main:
         self.cls_rank=json.load(open(path+"cls_rank.json","r"))
         self.itemtype_typenames=json.load(open(path+"itemtype_typenames.json","r"))
         self.flags=json.load(open(path+"flags.json","r"))
+        self.cls_promote_bonus=json.load(open(path+"cls_promotion_bonus.json","r"))
