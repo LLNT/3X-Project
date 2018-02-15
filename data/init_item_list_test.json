@@ -1,0 +1,73 @@
+[
+  {
+    "Id":1,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":2,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":3,
+    "Itemtype":"Vulnerary",
+    "Use":6
+  },
+  {
+    "Id":4,
+    "Itemtype":"Iron Bow",
+    "Use":45
+  },
+  {
+    "Id":5,
+    "Itemtype":"Vulnerary",
+    "Use":6
+  },
+  {
+    "Id":6,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":7,
+    "Itemtype":"Seal of Master",
+    "Use":1
+  },
+  {
+    "Id":8,
+    "Itemtype":"Silver Bow",
+    "Use":20
+  },
+  {
+    "Id":9,
+    "Itemtype":"Heal",
+    "Use":40
+  },
+{
+"Id":10,
+"Itemtype":"Sleep",
+"Use":1
+},
+  {
+"Id":11,
+"Itemtype":"Repair",
+"Use":3
+},
+  {
+"Id":12,
+"Itemtype":"Thief",
+"Use":3
+}
+  ,
+  {
+"Id":13,
+"Itemtype":"Rewarp",
+"Use":3
+},
+  {
+    "Id":14,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  }
+]

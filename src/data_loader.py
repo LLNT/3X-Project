@@ -26,7 +26,7 @@ class Main:
         self.terrain_map=json.load(open(path+"terrain_map_test.json","r"))
         self.map_armylist=json.load(open(path+"map_armylist_test.json","r"))
         self.item_type_list=json.load(open(path+"item_type_list.json","r"))
-        self.init_item_list=json.load(open(path+"init_item_list.json","r"))
+        self.init_item_list=json.load(open(path+"init_item_list_test.json","r"))
         self.support_cube=json.load(open(path+"support_cube.json","r"))
         self.attackable_weapon_types = json.load(open(path + "attackable_weapon_types.json", "r"))
         self.player_character_init=json.load(open(path+"player_character_init.json","r"))

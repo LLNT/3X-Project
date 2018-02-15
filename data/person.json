@@ -1,0 +1,63 @@
+{
+  "1":
+  {
+    "Id": 1,
+    "Name": "Yury",
+    "Cls":"Lord",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":20,
+      "STR":6,
+      "MGC":0,
+      "SPD":7,
+      "SKL":6,
+      "DEF":4,
+      "RES":1,
+      "LUK":3,
+      "BLD":6,
+      "MOV":5,
+      "HP":20,
+      "CRY":5,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":65,
+      "STR":65,
+      "MGC":30,
+      "SPD":90,
+      "SKL":55,
+      "DEF":60,
+      "RES":40,
+      "LUK":70
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"lin.png",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[1],
+    "Support":{
+      "3":{
+        "Base":51,
+        "Growth":2
+      }
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0
+  }
+}
