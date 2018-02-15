@@ -149,6 +149,7 @@ class Experience(Info):
         else:
             self.opacity = 0
         self.bar = Bar(size=(self.width, 30), prop=oriexp / 100, position=(0, -40), color=(0, 0, 255))
+
         self.add(self.bar)
         self.i = 0
         self.flag = True
@@ -166,6 +167,7 @@ class Experience(Info):
         else:
             scale = self.leftexp / 100
             d = duration * (scale - self.bar.scale_x)
+        print(d, scale)
         self.bar.do(Scale_to(scale_x=scale, scale_y=1, duration=d) + CallFunc(self.level_up))
 
     def level_up(self):

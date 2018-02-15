@@ -13,9 +13,11 @@ from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo, Info
-from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, Showweapon, Showwand, Weaponexchange, Listwand
+from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, \
+    Showweapon, Showwand, Weaponexchange, Listwand
 from display_item.background import Background
-from display_item.battle_scene import Battlescene, Wandtype0, Wandtype1, Wandtype2, Wandtype3
+from display_item.battle_scene import Battlescene, Wandtype0, Wandtype1, \
+    Wandtype2, Wandtype3, Wandtype4
 from display_item.ring import PerSpr
 from display_item.getitem import Getitem
 
@@ -212,7 +214,7 @@ class Arena(ScrollableLayer):
             self._add_menu(self.menu)
             self.is_event_handler = False
 
-        elif self.state in ['wand_type0','wand_type1','wand_type2','wand_type3']:
+        elif self.state in ['wand_type0','wand_type1','wand_type2','wand_type3', 'wand_type4_rewarp']:
             self.wand(self.avl)
             pid = self.selected
             valid = self._mapstate[0]
@@ -298,6 +300,7 @@ class Arena(ScrollableLayer):
             'wand_type2': self._wand_type2,
             'wand_type3': self._wand_type3,
             'wand_type3_confirm': self._wand_type3_confirm,
+            'wand_type4_rewarp':self._wand_type4_rewarp,
             'choose_exchange': self._choose_exchange
         }
 
@@ -589,6 +592,31 @@ class Arena(ScrollableLayer):
             pass
         pass
 
+    def _wand_type4_rewarp(self):
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
+                return
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is None:
+                user = self.people[self.selected].person
+                target = self.mouse_pos
+                wand = self.item_w
+                self.wandlist_type4_rewarp = [user, wand, target, self.map]
+                pid = self.selected
+                dst = self._mapstate[0][self.selected][self.target][1]
+                self.is_event_handler = False
+                action = self._sequential_move(pid, dst)
+                obj = self.people[pid]
+                obj.do(action + CallFunc(self._push_scene, Wandtype4) +
+                       CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+            else:
+                self._reset()
+            pass
+        pass
+
+
     def _choose_exchange(self):
         if self.mouse_btn == 4:
             self._reset()
@@ -683,6 +711,8 @@ class Arena(ScrollableLayer):
             self.state = 'wand_type2'
         elif item_w.itemtype.wand['Type'] == 3:
             self.state = 'wand_type3'
+        elif item_w.itemtype.name == 'Rewarp':
+            self.state = 'wand_type4_rewarp'
         else:
             self._add_menu(Showwand(self.avl, self))
 

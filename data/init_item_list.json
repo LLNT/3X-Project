@@ -59,4 +59,10 @@
 "Itemtype":"Thief",
 "Use":3
 }
+  ,
+  {
+"Id":13,
+"Itemtype":"Rewarp",
+"Use":3
+}
 ]

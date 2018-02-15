@@ -14,7 +14,7 @@ from display_item.ring import Scoreboard
 from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
 from display_item.info import Experience
-from wand import Type0, Type1, Type2, Type3
+from wand import Type0, Type1, Type2, Type3, Type4
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -379,3 +379,24 @@ class Wandtype3(Battlescene):
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
+
+class Wandtype4(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        user, wand, target, self.map= arena.wandlist_type4_rewarp
+        self.battle = Type4(user, wand, self.map, target)
+        super(Layer, self).__init__()
+        self.width = w
+        self.height = h
+        self.arena = arena
+        self.at = user
+        self.getitem = None
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
+
+
+
+    def excute(self, event):
+        self.events = event[0]
+        self.content = event[1]
+        self.growth()
