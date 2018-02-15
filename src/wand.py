@@ -71,7 +71,7 @@ class Type0(Wand):
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
-        ori_abl=self.p.ability
+        ori_abl=self.p.ability.copy()
         growthtuple=[1,0,0,{},{}]
         if not self.map.person_container.controller[self.p.pid]==0:
             return self.log,growthtuple
@@ -152,7 +152,7 @@ class Type1(Wand):
             if self.wand.use <= 0:
                 self.p.banish(self.wand)
                 self.log.append((-1, "Wand used out"))
-            ori_abl = self.p.ability
+            ori_abl = self.p.ability.copy()
             growthtuple = [1, 0, 0, {}, {}]
             if not self.map.person_container.controller[self.p.pid] == 0:
                 return self.log, growthtuple
@@ -176,7 +176,7 @@ class Type1(Wand):
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += 1
-            ori_abl = self.p.ability
+            ori_abl = self.p.ability.copy()
             growthtuple = [1, 0, 0, {}, {}]
             if not self.map.person_container.controller[self.p.pid] == 0:
                 return self.log, growthtuple
@@ -224,7 +224,7 @@ class Type2(Wand):
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
-        ori_abl=self.p.ability
+        ori_abl=self.p.ability.copy()
         growthtuple=[1,0,0,{},{}]
         if not self.map.person_container.controller[self.p.pid]==0:
             return self.log,growthtuple
@@ -296,7 +296,7 @@ class Type3(Wand):
             if self.wand.use <= 0:
                 self.p.banish(self.wand)
                 self.log.append((-1, "Wand used out"))
-            ori_abl = self.p.ability
+            ori_abl = self.p.ability.copy()
             growthtuple = [1, 0, 0, {}, {}]
             if not self.map.person_container.controller[self.p.pid] == 0:
                 return self.log, growthtuple
@@ -320,7 +320,7 @@ class Type3(Wand):
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += 1
-            ori_abl = self.p.ability
+            ori_abl = self.p.ability.copy()
             growthtuple = [1, 0, 0, {}, {}]
             if not self.map.person_container.controller[self.p.pid] == 0:
                 return self.log, growthtuple
@@ -369,7 +369,7 @@ class Type4(Wand):
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
-        ori_abl=self.p.ability
+        ori_abl=self.p.ability.copy()
         growthtuple=[1,0,0,{},{}]
         if not self.map.person_container.controller[self.p.pid]==0:
             return self.log,growthtuple
