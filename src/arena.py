@@ -128,6 +128,7 @@ class Arena(ScrollableLayer):
         map.person_container.movable[pid] = False
         self._mapstate = self.map.send_mapstate()
         self.people[pid].state = 'moved'
+        self.people[pid].pos = dst[-1]
         self.is_event_handler = False
         self.cells[dst[-1]].person_on = pid
         action = Delay(0.1)
@@ -641,13 +642,16 @@ class Arena(ScrollableLayer):
         person = self.people[pid].person
         if person.ability['HP'] <= 0:
             self.people[pid].do(FadeOut(2)+CallFunc(self._delete_person, pid))
+
         else:
             self.get_next_to_delete()
         pass
 
     def _delete_person(self, pid):
         person = self.people[pid]
+        pos = self.people[pid].pos
         self.people.pop(pid)
+        self.cells[pos].person_on = None
         self.remove(person)
         del person
         self.get_next_to_delete()
