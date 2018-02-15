@@ -60,7 +60,7 @@
         "CRY":0,
         "EXP":0
     },
-    "Special_effect":[],
+    "Special_effect":["Knight","Armor"],
     "Rank":1,
     "Skills":[],
     "Status":[],

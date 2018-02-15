@@ -69,5 +69,10 @@
     "Id":14,
     "Itemtype":"Iron Sword",
     "Use":46
+  },
+  {
+    "Id":15,
+    "Itemtype":"Rapier",
+    "Use":40
   }
 ]
