@@ -138,6 +138,21 @@ class PerSpr(Ring):
         self.pos = pos
         self.inner = Sprite(image='ring.png', scale=scl*0.9)
         self.add(self.inner)
+        self._opacity = 255
+
+    def _set_opacity(self, opacity):
+        self.inner.opacity = opacity
+        self.left_ring.opacity = opacity
+        self.right_ring.opacity = opacity
+        self.mask_ring.opacity = opacity
+        self.backend.opacity = opacity
+
+    def _get_opacity(self):
+        return self._opacity
+
+    opacity = property(_get_opacity, lambda self, opa: self._set_opacity(opa))
+
+
 
     def update_hp(self):
         self.hp = self.person.ability['HP']

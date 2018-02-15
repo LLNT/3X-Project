@@ -8,7 +8,7 @@ import pyglet
 from cocos.layer import Layer, ColorLayer, ScrollableLayer
 from cocos.director import director
 from cocos.scene import Scene
-from cocos.actions import CallFunc, MoveTo, Delay, FadeOut
+from cocos.actions import CallFunc, MoveTo, Delay, FadeTo, FadeIn, FadeOut, Place
 from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
@@ -122,19 +122,34 @@ class Arena(ScrollableLayer):
 
     def _sequential_move(self, pid, dst):
         # move person of pid through the trace dst
+        self.is_event_handler = False
         map = self.map
         self.cells[map.person_container.position[pid]].person_on = None
         map.person_container.position[pid] = dst[-1]
         map.person_container.movable[pid] = False
-        self._mapstate = self.map.send_mapstate()
         self.people[pid].state = 'moved'
         self.people[pid].pos = dst[-1]
-        self.is_event_handler = False
         self.cells[dst[-1]].person_on = pid
         action = Delay(0.1)
         for x,y in dst:
             action = action + MoveTo(coordinate(x, y, self.size), 0.5)
         return action
+
+    def _transfer(self, pid, pos, duration=2):
+        self.is_event_handler = False
+        map = self.map
+        self.cells[map.person_container.position[pid]].person_on = None
+        map.person_container.position[pid] = pos
+        map.person_container.movable[pid] = False
+        self.people[pid].state = 'moved'
+        self.people[pid].pos = pos
+        self.cells[pos].person_on = pid
+        x, y = pos
+        action = FadeOut(duration) + Delay(0.5) + \
+                 Place(coordinate(x, y, self.size)) + FadeIn(duration)
+        return action
+
+
 
     def _repaint(self):
         for cell in self.cells.values():
@@ -610,9 +625,7 @@ class Arena(ScrollableLayer):
                 wand = self.item_w
                 self.wandlist_type4_rewarp = [user, wand, target, self.map]
                 pid = self.selected
-                dst = self._mapstate[0][self.selected][self.target][1]
-                self.is_event_handler = False
-                action = self._sequential_move(pid, dst)
+                action = self._transfer(pid, target)
                 obj = self.people[pid]
                 obj.do(action + CallFunc(self._push_scene, Wandtype4) +
                        CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
