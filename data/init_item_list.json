@@ -64,5 +64,10 @@
 "Id":13,
 "Itemtype":"Rewarp",
 "Use":3
-}
+},
+  {
+    "Id":14,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  }
 ]
