@@ -134,6 +134,7 @@ class PerSpr(Ring):
         self.update_hp()
         self.controller = controller
         self.state = state
+        self.moved = False
         self.pid = person.pid
         self.pos = pos
         self.inner = Sprite(image='ring.png', scale=scl*0.9)

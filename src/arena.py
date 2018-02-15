@@ -114,6 +114,7 @@ class Arena(ScrollableLayer):
         self._mapstate = self.map.send_mapstate()
         for p in self.people.values():
             p.state = 'unmoved'
+            p.moved = False
         self._repaint()
         if self.map.turn > 6:
             director.pop()
@@ -128,6 +129,7 @@ class Arena(ScrollableLayer):
         map.person_container.position[pid] = dst[-1]
         map.person_container.movable[pid] = False
         self.people[pid].state = 'moved'
+        self.people[pid].moved = True
         self.people[pid].pos = dst[-1]
         self.cells[dst[-1]].person_on = pid
         action = Delay(0.1)
@@ -142,6 +144,7 @@ class Arena(ScrollableLayer):
         map.person_container.position[pid] = pos
         map.person_container.movable[pid] = False
         self.people[pid].state = 'moved'
+        self.people[pid].moved = True
         self.people[pid].pos = pos
         self.cells[pos].person_on = pid
         x, y = pos
@@ -288,8 +291,10 @@ class Arena(ScrollableLayer):
         for cell in self.cells.values():
             cell.state = 'default'
         for person in self.people.values(): #type:Charactor
-            if person.state is not 'moved':
+            if not person.moved:
                 person.state = 'unmoved'
+            else:
+                person.state = 'moved'
             person.update_hp()
 
         self._repaint()
