@@ -374,3 +374,36 @@ class Main:
         self.global_vars.transporter[_item.itemtype.weapontype].append(_item)
         return
 
+    def find_nearest_empty_block(self,pos,as_blank=[],as_occupied=[]):
+        _map = []
+        for i in range(self.terrain_container.M):
+            _row = []
+            for j in range(self.terrain_container.N):
+                _row.append(0)
+            _map.append(_row)
+            del (_row)
+        for p in self.person_container.position:
+            _map[self.person_container.position[p][0]][self.person_container.position[p][1]]=1
+        for _pos in as_blank:
+            _map[_pos[0]][_pos[1]]=0
+        for _pos in as_occupied:
+            _map[_pos[0]][_pos[1]]=1
+        dmax=-1
+        retmap={}
+        for i in range(self.terrain_container.M):
+            for j in range(self.terrain_container.N):
+                if (_map[i][j]==0):
+                    d=calc_dist((i,j),pos)
+                    if d in retmap:
+                        retmap[d].append((i,j))
+                    else:
+                        if (d>dmax):
+                            dmax=d
+                        retmap[d]=[(i,j)]
+        if dmax==-1:
+            return (-1,-1)
+        for i in range(0,dmax):
+            if i in retmap:
+                candidates=retmap[i]
+                return candidates[0]
+
