@@ -602,7 +602,7 @@ class Type8(Wand):
             if (calc_dist(self.pos,self.map.person_container.position[_obj])<=maxr) and \
                 (calc_dist(self.pos,self.map.person_container.position[_obj])>=minr):
                 if (self.map.person_container.controller[self.p.pid]%2==self.map.person_container.controller[_obj]%2):
-                    obj.append(_obj)
+                    obj.append(self.map.global_vars.personBank[_obj])
         return obj
     def execute(self):
         objs=self.get_objs()
