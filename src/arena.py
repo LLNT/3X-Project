@@ -16,8 +16,7 @@ from display_item.info import Personinfo, Battleinfo, Info
 from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, \
     Showweapon, Showwand, Weaponexchange, Listwand
 from display_item.background import Background
-from display_item.battle_scene import Battlescene, Wandtype0, Wandtype1, \
-    Wandtype2, Wandtype3, Wandtype4
+from display_item.battle_scene import *
 from display_item.ring import PerSpr
 from display_item.getitem import Getitem
 
@@ -26,7 +25,7 @@ from global_vars import Main as Global
 from data_loader import Main as Data
 from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
-from wand import Type1, Type3
+from wand import Type1, Type3, Type5
 
 
 
@@ -233,7 +232,9 @@ class Arena(ScrollableLayer):
             self._add_menu(self.menu)
             self.is_event_handler = False
 
-        elif self.state in ['wand_type0','wand_type1','wand_type2','wand_type3', 'wand_type4_rewarp']:
+        elif self.state in ['wand_type0','wand_type1','wand_type2','wand_type3',
+                            'wand_type4', 'wand_type5', 'wand_type6', 'wand_type7',
+                            'wand_type8', 'wand_type9']:
             self.wand(self.avl)
             pid = self.selected
             valid = self._mapstate[0]
@@ -321,7 +322,11 @@ class Arena(ScrollableLayer):
             'wand_type2': self._wand_type2,
             'wand_type3': self._wand_type3,
             'wand_type3_confirm': self._wand_type3_confirm,
-            'wand_type4_rewarp':self._wand_type4_rewarp,
+            'wand_type4':self._wand_type4,
+            'wand_type5': self._wand_type5,
+            'wand_type6': self._wand_type6,
+            'wand_type7': self._wand_type7,
+            'wand_type8': self._wand_type8,
             'choose_exchange': self._choose_exchange
         }
 
@@ -504,13 +509,7 @@ class Arena(ScrollableLayer):
                 target = self.people[cell.person_on].person
                 wand = self.item_w
                 self.wandlist_type0 = [user, wand, target, self.map]
-                pid = self.selected
-                dst = self._mapstate[0][self.selected][self.target][1]
-                self.is_event_handler = False
-                action = self._sequential_move(pid, dst)
-                obj = self.people[pid]
-                obj.do(action + CallFunc(self._push_scene, Wandtype0) +
-                       CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+                self._battle(Wandtype0)
             else:
                 self._reset()
             pass
@@ -531,7 +530,6 @@ class Arena(ScrollableLayer):
                 self.wandlist_type1 = [user, wand, target, self.map, self.target]
                 hitr = Type1(user, wand, target, self.map, self.target).simulate()
                 self.hitrate = Info()
-
                 self.add(self.hitrate)
                 self.hitrate.display([str(hitr)])
                 self.state = 'wand_type1_confirm'
@@ -540,17 +538,10 @@ class Arena(ScrollableLayer):
             pass
         pass
 
-
     def _wand_type1_confirm(self):
         self.remove(self.hitrate)
         if self.mouse_btn is 1:
-            pid = self.selected
-            dst = self._mapstate[0][self.selected][self.target][1]
-            self.is_event_handler = False
-            action = self._sequential_move(pid, dst)
-            obj = self.people[pid]
-            obj.do(action + CallFunc(self._push_scene, Wandtype1) +
-                   CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+            self._battle(Wandtype1)
         else:
             self.state = 'wand_type1'
             pass
@@ -603,13 +594,7 @@ class Arena(ScrollableLayer):
     def _wand_type3_confirm(self):
         self.remove(self.hitrate)
         if self.mouse_btn is 1:
-            pid = self.selected
-            dst = self._mapstate[0][self.selected][self.target][1]
-            self.is_event_handler = False
-            action = self._sequential_move(pid, dst)
-            obj = self.people[pid]
-            obj.do(action + CallFunc(self._push_scene, Wandtype3) +
-                   CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+            self._battle(Wandtype3)
         else:
             self.wandlist_type3.pop()
             self.state = 'wand_type3'
@@ -617,7 +602,7 @@ class Arena(ScrollableLayer):
             pass
         pass
 
-    def _wand_type4_rewarp(self):
+    def _wand_type4(self):
         if self.mouse_btn == 4:
             self._reset()
         elif self.mouse_btn == 1:
@@ -628,7 +613,7 @@ class Arena(ScrollableLayer):
                 user = self.people[self.selected].person
                 target = self.mouse_pos
                 wand = self.item_w
-                self.wandlist_type4_rewarp = [user, wand, target, self.map]
+                self.wandlist_type4 = [user, wand, target, self.map]
                 pid = self.selected
                 action = self._transfer(pid, target)
                 obj = self.people[pid]
@@ -639,6 +624,109 @@ class Arena(ScrollableLayer):
             pass
         pass
 
+    def _wand_type5(self):
+        '''
+        wait for choose an enemy
+        :return:
+        '''
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
+                return
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is not None\
+                and self.people[cell.person_on].controller is 1:
+                self.state = 'wand_type5_chstar'
+                self.objper = self.people[cell.person_on].person
+            else:
+                self._reset()
+            pass
+        pass
+
+    def _wand_type5_chstar(self):
+        if self.mouse_btn == 4:
+            self.state = 'wand_type5'
+        elif self.mouse_btn == 1:
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is None:
+                user = self.people[self.selected].person
+                target = self.objper
+                wand = self.item_w
+                self.wandlist_type5 = [user, wand, target, self.map, self.target, self.mouse_pos]
+                hitr = Type5(user, wand, target, self.map, self.target, self.mouse_pos).simulate()
+                self.hitrate = Info()
+                self.add(self.hitrate)
+                self.hitrate.display([str(hitr)])
+                self.state = 'wand_type5_confirm'
+
+    def _wand_type5_confirm(self):
+        self.remove(self.hitrate)
+        if self.mouse_btn is 1:
+            self._battle(Wandtype5)
+        else:
+            self.state = 'wand_type5'
+            pass
+        pass
+
+    def _wand_type6(self):
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
+                return
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is not None\
+                and self.people[cell.person_on].controller is not 1:
+                user = self.people[self.selected].person
+                target = self.people[cell.person_on].person
+                wand = self.item_w
+                self.wandlist_type6 = [user, wand, target, self.map, self.mouse_pos]
+                self._battle(Wandtype6)
+            else:
+                self._reset()
+            pass
+        pass
+
+    def _wand_type7(self):
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
+                return
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is not None\
+                and self.people[cell.person_on].controller is not 1:
+                self.state = 'wand_type7_confirm'
+                self.objper = self.people[cell.person_on].person
+            else:
+                self._reset()
+            pass
+        pass
+
+    def _wand_type7_confirm(self):
+        if self.mouse_btn == 4:
+            self.state = 'wand_type7'
+        elif self.mouse_btn == 1:
+            cell = self.cells[self.mouse_pos]
+            if cell.state is 'in_self_wandrange' and cell.person_on is None:
+                user = self.people[self.selected].person
+                target = self.objper
+                wand = self.item_w
+                self.wandlist_type7 = [user, wand, target, self.map, self.mouse_pos]
+                self._battle(Wandtype7)
+        pass
+
+    def _wand_type8(self):
+        if self.mouse_btn == 4:
+            self._reset()
+        elif self.mouse_btn == 1:
+            user = self.people[self.selected].person
+            wand = self.item_w
+            self.wandlist_type8 = [user, wand, self.map, self.target]
+            self._battle(Wandtype8)
+            pass
+        pass
 
     def _choose_exchange(self):
         if self.mouse_btn == 4:
@@ -668,6 +756,15 @@ class Arena(ScrollableLayer):
         else:
             self.get_next_to_delete()
         pass
+
+    def _battle(self, layer):
+        pid = self.selected
+        dst = self._mapstate[0][self.selected][self.target][1]
+        self.is_event_handler = False
+        action = self._sequential_move(pid, dst)
+        obj = self.people[pid]
+        obj.do(action + CallFunc(self._push_scene, layer) +
+               CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
 
     def _delete_person(self, pid):
         person = self.people[pid]
@@ -729,7 +826,12 @@ class Arena(ScrollableLayer):
         self._set_areastate(area, 'in_self_wandrange')
         self.item_w = item_w
         self.is_event_handler = True
-        if item_w.itemtype.wand['Type'] == 0:
+        wandtype = item_w.itemtype.wand['Type']
+        if wandtype is not None:
+            self.state = 'wand_type' + str(wandtype)
+        else:
+            self._add_menu(Showwand(self.avl, self))
+        '''if item_w.itemtype.wand['Type'] == 0:
             self.state = 'wand_type0'
         elif item_w.itemtype.wand['Type'] == 1:
             self.state = 'wand_type1'
@@ -739,8 +841,8 @@ class Arena(ScrollableLayer):
             self.state = 'wand_type3'
         elif item_w.itemtype.name == 'Rewarp':
             self.state = 'wand_type4_rewarp'
-        else:
-            self._add_menu(Showwand(self.avl, self))
+        '''
+
 
     def attacking(self, **kwargs):
         if len(kwargs) is 0:

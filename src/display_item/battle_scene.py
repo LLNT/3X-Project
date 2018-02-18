@@ -14,7 +14,7 @@ from display_item.ring import Scoreboard
 from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
 from display_item.info import Experience
-from wand import Type0, Type1, Type2, Type3, Type4
+from wand import *
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -199,10 +199,8 @@ class Battlescene(Animation):
             self.growth()
             self.flag = True
 
-class Wandtype0(Battlescene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
-        self.at, wand, self.df, self.map = arena.wandlist_type0
-        self.battle = Type0(self.at, wand, self.df, self.map)
+    def wandinit(self, wand, w, h, arena, maxsize):
+
         pos1 = w // 4, h // 3
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
@@ -229,6 +227,12 @@ class Wandtype0(Battlescene):
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
+
+class Wandtype0(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        self.at, wand, self.df, self.map = arena.wandlist_type0
+        self.battle = Type0(self.at, wand, self.df, self.map)
+        self.wandinit(wand, w, h, arena, maxsize)
 
     def get_next_action(self):
         if self.obj1.busy or self.obj2.busy:
@@ -290,99 +294,24 @@ class Wandtype0(Battlescene):
 class Wandtype1(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type1
-        self.battle = Type1(self.at, wand, self.df, self.map, pos)
-        pos1 = w // 4, h // 3
-        self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
-        self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
-                                   back_color=BLACK, hp=self.hp1, mhp=self.mhp1)
-        pos2 = w * 3 // 4, h // 3
-        self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
-        self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
-                                   back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
-
-        self.arena = arena
-        super(Battlescene, self).__init__(
-            obj1=self.attacker,
-            obj2=self.defender,
-            at=self.at,
-            df=self.df,
-            arena=arena,
-            width=w,
-            height=h,
-            maxsize=maxsize
-        )
-        self.add(self.attacker)
-        self.add(self.defender)
-        event = self.battle.execute()
-        del self.battle
-        self.excute(event=event)
+        self.battle = Type1(self.at, wand, self.df, self.map)
+        self.wandinit(wand, w, h, arena, maxsize)
 
 class Wandtype2(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, item = arena.wandlist_type2
         self.battle = Type2(self.at, wand, self.df, self.map, item)
-        pos1 = w // 4, h // 3
-        self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
-        self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
-                                   back_color=BLACK, hp=self.hp1, mhp=self.mhp1)
-        pos2 = w * 3 // 4, h // 3
-        self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
-        self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
-                                   back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
-
-        self.arena = arena
-        super(Battlescene, self).__init__(
-            obj1=self.attacker,
-            obj2=self.defender,
-            at=self.at,
-            df=self.df,
-            arena=arena,
-            width=w,
-            height=h,
-            maxsize=maxsize
-        )
-        self.add(self.attacker)
-        self.add(self.defender)
-
-        event = self.battle.execute()
-        del self.battle
-        self.excute(event=event)
+        self.wandinit(wand, w, h, arena, maxsize)
 
 class Wandtype3(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos, item = arena.wandlist_type3
         self.battle = Type3(self.at, wand, self.df, self.map, pos, item)
-        pos1 = w // 4, h // 3
-        self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
-        self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
-                                   back_color=BLACK, hp=self.hp1, mhp=self.mhp1)
-        pos2 = w * 3 // 4, h // 3
-        self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
-        self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
-                                   back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
-
-
-        self.arena = arena
-        super(Battlescene, self).__init__(
-            obj1=self.attacker,
-            obj2=self.defender,
-            at=self.at,
-            df=self.df,
-            arena=arena,
-            width=w,
-            height=h,
-            maxsize=maxsize
-        )
-        self.add(self.attacker)
-        self.add(self.defender)
-        self.item = item
-        event = self.battle.execute()
-        del self.battle
-        self.excute(event=event)
+        self.wandinit(wand, w, h, arena, maxsize)
 
 class Wandtype4(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
-        user, wand, target, self.map= arena.wandlist_type4_rewarp
+        user, wand, target, self.map= arena.wandlist_type4
         self.battle = Type4(user, wand, self.map, target)
         super(Layer, self).__init__()
         self.width = w
@@ -395,8 +324,51 @@ class Wandtype4(Battlescene):
         self.excute(event=event)
 
 
+    def excute(self, event):
+        self.events = event[0]
+        self.content = event[1]
+        self.growth()
+
+class Wandtype5(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        self.at, wand, self.df, self.map, pos, tarpos = arena.wandlist_type5
+        self.battle = Type5(self.at, wand, self.df, self.map, pos, tarpos)
+        self.wandinit(wand, w, h, arena, maxsize)
+
+class Wandtype6(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        self.at, wand, self.df, self.map, pos = arena.wandlist_type6
+        self.battle = Type6(self.at,wand, self.df,self.map, pos)
+        self.wandinit(wand, w, h, arena, maxsize)
+
+class Wandtype7(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        self.at, wand, self.df, self.map, pos = arena.wandlist_type7
+        self.battle = Type7(self.at,wand, self.df,self.map, pos)
+        self.wandinit(wand, w, h, arena, maxsize)
+
+class Wandtype8(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        user, wand, self.map, pos= arena.wandlist_type8
+        self.battle = Type8(user, wand, self.map, pos)
+        super(Layer, self).__init__()
+        self.width = w
+        self.height = h
+        self.arena = arena
+        self.at = user
+        self.getitem = None
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
+
 
     def excute(self, event):
         self.events = event[0]
         self.content = event[1]
         self.growth()
+
+class Wandtype9(Battlescene):
+    def __init__(self, arena, w=640, h=480, maxsize=2):
+        self.at, wand, self.df, self.map, pos = arena.wandlist_type9
+        self.battle = Type9(self.at,wand, self.df,self.map, pos)
+        self.wandinit(wand, w, h, arena, maxsize)

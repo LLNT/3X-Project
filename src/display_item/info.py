@@ -168,13 +168,11 @@ class Experience(Info):
         else:
             scale = self.leftexp / 100
             d = duration * (scale - self.bar.scale_x)
-        print(d, scale)
         self.bar.do(Scale_to(scale_x=scale, scale_y=1, duration=d) + CallFunc(self.level_up))
 
     def level_up(self):
         if self.i == self.level:
             if self.flag:
-                print(self.parent)
                 director.window.push_handlers(self.parent)
                 self.flag = False
                 del self
