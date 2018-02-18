@@ -23,12 +23,14 @@ class Main:
         self.global_vars=None           #type:global_vars.Main
         self.turn=0
         self.controller=0
-    def __init__(self,terrain_map,person_container,glb):
+        self.mapgrid_eventlist={}
+    def __init__(self,terrain_map,person_container,glb,mapgrid_eventlist={}):
         self.terrain_container=terrain_map
         self.person_container=person_container
         self.turn=0
         self.controller=0
         self.global_vars=glb
+        self.mapgrid_eventlist=mapgrid_eventlist
     def send_mapstate(self):
         valid={}                       #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
         invalid={}                     #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
@@ -266,16 +268,34 @@ class Main:
         if (p.supdata[pid2][0] > 50) and (p.suprank[pid2] < 1):
             p.suprank[pid2]=1
             obj.suprank[pid1]=1
-            return
+            if pid1 in self.global_vars.support_text_map:
+                if pid2 in self.global_vars.support_text_map[pid1]:
+                    return self.global_vars.support_text_map[pid1][pid2]["C"]
+            if pid2 in self.global_vars.support_text_map:
+                if pid1 in self.global_vars.support_text_map[pid2]:
+                    return self.global_vars.support_text_map[pid2][pid1]["C"]
+            return []
         if (p.supdata[pid2][0] > 100) and (p.suprank[pid2] < 2):
             p.suprank[pid2]=2
             obj.suprank[pid1]=2
-            return
+            if pid1 in self.global_vars.support_text_map:
+                if pid2 in self.global_vars.support_text_map[pid1]:
+                    return self.global_vars.support_text_map[pid1][pid2]["B"]
+            if pid2 in self.global_vars.support_text_map:
+                if pid1 in self.global_vars.support_text_map[pid2]:
+                    return self.global_vars.support_text_map[pid2][pid1]["B"]
+            return []
         if (p.supdata[pid2][0] > 200) and (p.suprank[pid2] < 3):
             p.suprank[pid2]=3
             obj.suprank[pid1]=3
-            return
-        return
+            if pid1 in self.global_vars.support_text_map:
+                if pid2 in self.global_vars.support_text_map[pid1]:
+                    return self.global_vars.support_text_map[pid1][pid2]["A"]
+            if pid2 in self.global_vars.support_text_map:
+                if pid1 in self.global_vars.support_text_map[pid2]:
+                    return self.global_vars.support_text_map[pid2][pid1]["A"]
+            return []
+        return []
 
     def defeated_character(self,pid):
         self.person_container.position.pop(pid)

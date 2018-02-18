@@ -1,6 +1,7 @@
 import os
 import platform
 import json
+import codecs
 class Main:
     def __init__(self):
         ostype=platform.platform()
@@ -34,3 +35,6 @@ class Main:
         self.itemtype_typenames=json.load(open(path+"itemtype_typenames.json","r"))
         self.flags=json.load(open(path+"flags.json","r"))
         self.cls_promote_bonus=json.load(open(path+"cls_promotion_bonus.json","r"))
+        self.support_text_map=json.load(open(path+"support_text.json","r"))
+        self.text=json.load(codecs.open(path+"text.json","r","utf-8"))
+        self.mapgrid_eventlist=json.load(open(path+"mapgrid_eventlist_test.json","r"))

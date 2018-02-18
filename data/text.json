@@ -141,8 +141,8 @@
     "Type":"S",
     "Tag":"威尔",
     "Text":"琳迪斯小姐，",
-    "Left":"lin.png",
-    "Right":"will.png",
+    "Left":"lyn_dialog.png",
+    "Right":"weir_dialog.png",
     "Direction":1,
     "Scene":""
   },
