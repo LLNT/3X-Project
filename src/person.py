@@ -22,8 +22,9 @@ class Person:
         self.status={}       #type:Dict[str,int]
         self.coefficient=0.0 #type:float
         self.bonus=0         #type:int
+        self.battlecard={}
     def __init__(self,pid,name,cls,ability,skills,pic,weapon_rank_bonus,items,support,cls_weapon_rank,color,attr,growth,
-                 cls_abl_limit,coe,bon):
+                 cls_abl_limit,coe,bon,battlecard):
         self.pid=pid
         self.name=name
         self.cls=cls
@@ -54,6 +55,7 @@ class Person:
         for wp in weapon_rank_bonus:
             self.weapon_rank[wp]+=weapon_rank_bonus[wp]
         self.item=items
+        self.battlecard=battlecard
 
     def get_equip(self):
         if len(self.item)<1:
@@ -204,7 +206,7 @@ class PersonBank:
                           persondict[pid]["Skills"],persondict[pid]["Picture"],persondict[pid]["Weapon Rank Bonus"],
                           items,persondict[pid]["Support"],cls_weapon_rank,persondict[pid]["Color"],
                           persondict[pid]["Attribute"],persondict[pid]["Growth"],cls_abl_lmt,
-                          persondict[pid]["Coefficient"],persondict[pid]["Bonus"])
+                          persondict[pid]["Coefficient"],persondict[pid]["Bonus"],persondict[pid]["Battlecard"])
             self.person_bank[pid]=person
 
 

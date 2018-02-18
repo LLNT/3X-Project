@@ -281,6 +281,31 @@ class Battle:
             self.log.append((-2,"Redseal"))
         self.calc_param(turns=0)
 
+    def get_battlecard(self):
+        btca=""
+        btcd=""
+        if self.weapon_a==None:
+            btca=self.a.battlecard[self.a.cls]["Base"]
+        else:
+            if self.a.cls in self.a.battlecard:
+                if self.weapon_a.itemtype.weapontype in self.a.battlecard[self.a.cls]:
+                    btca = self.a.battlecard[self.a.cls][self.weapon_a.itemtype.weapontype]
+                else:
+                    btca = self.a.battlecard[self.a.cls]["Base"]
+            else:
+                btca = self.a.battlecard["Base"]
+        if self.weapon_d==None:
+            btcd=self.a.battlecard[self.d.cls]["Base"]
+        else:
+            if self.d.cls in self.d.battlecard:
+                if self.weapon_d.itemtype.weapontype in self.d.battlecard[self.d.cls]:
+                    btcd = self.d.battlecard[self.d.cls][self.weapon_d.itemtype.weapontype]
+                else:
+                    btcd = self.d.battlecard[self.d.cls]["Base"]
+            else:
+                btcd = self.d.battlecard["Base"]
+        return (btca,btcd)
+
     def calc_param(self,turns=1):
         self.hita=0
         self.hitd=0
