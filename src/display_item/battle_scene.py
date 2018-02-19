@@ -322,6 +322,7 @@ class Wandtype4(Battlescene):
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
+        self.transtuple = user.pid, target
 
 
     def excute(self, event):

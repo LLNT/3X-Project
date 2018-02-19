@@ -94,7 +94,7 @@ class Arena(ScrollableLayer):
         else:
             if transtuple is not None:
                 self.transtuple = transtuple
-                print(self.transtuple)
+            print(self.transtuple)
             if self.transtuple is not None:
                 pid, pos = self.transtuple
                 target = self.people[pid]
@@ -295,6 +295,7 @@ class Arena(ScrollableLayer):
         self.avl = None
         self.excpid = None
         self.allow_cancel = True
+        self.transtuple = None
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -636,9 +637,8 @@ class Arena(ScrollableLayer):
                 self.wandlist_type4 = [user, wand, target, self.map]
                 pid = self.selected
                 obj = self.people[pid]
-                self.transtuple = pid, target
                 dst = self._mapstate[0][self.selected][self.target][1]
-                obj.do(self._sequential_move(dst) + self._set_moved(pid, dst) +
+                obj.do(self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) +
                        CallFunc(self._push_scene, Wandtype4) + CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
             else:
                 self._reset()
