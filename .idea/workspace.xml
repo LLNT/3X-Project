@@ -4,9 +4,7 @@
     <list id="4f913d86-ada2-4ef9-b9c6-2500ca87cb8f" name="move" comment="" />
     <list id="8ff8da34-212e-400e-bbc8-88f215881b81" name="display" comment="on mouse motion" />
     <list id="a32817b5-57da-4971-bfb6-0f92957fd656" name="New changelist" comment="" />
-    <list default="true" id="39a02d60-74f4-416d-b1dc-3c640f70ad2c" name="Default" comment="transfer~">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/3XProject.iml" afterPath="$PROJECT_DIR$/.idea/3XProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="39a02d60-74f4-416d-b1dc-3c640f70ad2c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/arena.py" afterPath="$PROJECT_DIR$/src/arena.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/battle_scene.py" afterPath="$PROJECT_DIR$/src/display_item/battle_scene.py" />
@@ -29,8 +27,8 @@
       <file leaf-file-name="arena.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/arena.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="636" column="67" lean-forward="false" selection-start-line="636" selection-start-column="67" selection-end-line="636" selection-end-column="67" />
+            <state relative-caret-position="350">
+              <caret line="691" column="71" lean-forward="true" selection-start-line="691" selection-start-column="71" selection-end-line="691" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -39,8 +37,8 @@
       <file leaf-file-name="battle_scene.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="324" column="42" lean-forward="false" selection-start-line="324" selection-start-column="42" selection-end-line="324" selection-end-column="42" />
+            <state relative-caret-position="472">
+              <caret line="337" column="45" lean-forward="false" selection-start-line="337" selection-start-column="45" selection-end-line="337" selection-end-column="45" />
               <folding>
                 <element signature="e#65#100#0" expanded="true" />
               </folding>
@@ -53,23 +51,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="9775">
               <caret line="394" column="18" lean-forward="false" selection-start-line="394" selection-start-column="18" selection-end-line="394" selection-end-column="18" />
-              <folding>
-                <marker date="1519029458476" expanded="true" signature="112:296" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="136:296" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="24584:24604" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="24681:25947" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="24775:25947" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="24808:25117" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="25152:25947" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="25198:25308" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="25354:25464" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="25512:25626" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="25673:25785" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="25833:25947" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="26184:26271" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="26559:26623" ph="..." />
-                <marker date="1519029458476" expanded="true" signature="26672:26756" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,31 +92,10 @@
       <file leaf-file-name="map_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/map_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7050">
+            <state relative-caret-position="7550">
               <caret line="309" column="51" lean-forward="false" selection-start-line="309" selection-start-column="45" selection-end-line="309" selection-end-column="51" />
               <folding>
                 <marker date="1519029458470" expanded="true" signature="458:704" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="15655:16105" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="15821:15950" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="15998:16105" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="16147:17223" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="16477:16708" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="16732:16912" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="17258:17769" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="17404:17746" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="17509:17746" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="17583:17746" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="17804:18234" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="17940:18081" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="18129:18214" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="18271:18689" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="18584:18669" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="18727:18747" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="18782:19088" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="18926:19067" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="18972:19067" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="19130:19223" ph="..." />
-                <marker date="1519029458470" expanded="true" signature="19363:19523" ph="..." />
               </folding>
             </state>
           </provider>
@@ -310,6 +271,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -337,7 +299,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -364,157 +325,6 @@
       <recent name="C:\Users\hasee\Downloads\code\3X-Project\src\display_item" />
       <recent name="C:\Users\hasee\Downloads\code\3X-Project\src" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/3XProject.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_ability_limit.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_clsgroup.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_promotion_bonus.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_rank.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_skills.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_typenames.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_weapon_rank.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/init_item_list.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/init_item_list_test.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/item_type_list.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/person.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/person_test.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/text.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/__pycache__/data_loader.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/__pycache__/global_vars.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/__pycache__/itemtype.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/__pycache__/map_controller.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/__pycache__/person.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/arena.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/battle.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/data_loader.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/display_item/battle_scene.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/display_item/state2color.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/global_vars.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/itemtype.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/map_controller.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/person.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/wand.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/cls_promotion_chain.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/mapgrid_eventlist_test.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/background_test.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/florina_battle_lance.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/kent_battle_lance.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/lyn_battle_sword.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/lyn_dialog.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/serra_battle_base.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/weir_battle_bow_0.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/weir_battle_bow_1.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/weir_dialog.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/display_item/action_control.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -714,13 +524,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1511945176045</updated>
-    </task>
-    <task id="LOCAL-00012" summary="display with cocos">
-      <created>1516776362965</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1516776362965</updated>
     </task>
     <task id="LOCAL-00013" summary="display with cocos">
       <created>1516798868913</created>
@@ -1058,20 +861,27 @@
       <option name="project" value="LOCAL" />
       <updated>1518706542479</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="fix bugs">
+      <created>1519029895175</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1519029895175</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19325481" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13865097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27628636" sideWeight="0.21627408" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27628636" sideWeight="0.7837259" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23378076" sideWeight="0.4914347" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3456376" sideWeight="0.49571735" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15310493" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16809422" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43288592" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -1081,26 +891,15 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15324385" sideWeight="0.5085653" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16809422" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43288592" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12955032" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23378076" sideWeight="0.4914347" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3456376" sideWeight="0.49571735" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27628636" sideWeight="0.7869379" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13704497" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15324385" sideWeight="0.4914347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Log Manager" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1176,7 +975,6 @@
     <MESSAGE value="add weapon info in person info page" />
     <MESSAGE value="fix menu click bug" />
     <MESSAGE value="add death" />
-    <MESSAGE value="fix bugs" />
     <MESSAGE value="battle scene" />
     <MESSAGE value="add exp" />
     <MESSAGE value="add mouse events" />
@@ -1192,7 +990,8 @@
     <MESSAGE value="add transport" />
     <MESSAGE value="fix person_on" />
     <MESSAGE value="transfer~" />
-    <option name="LAST_COMMIT_MESSAGE" value="transfer~" />
+    <MESSAGE value="fix bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1516,31 +1315,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/map_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7050">
+        <state relative-caret-position="7550">
           <caret line="309" column="51" lean-forward="false" selection-start-line="309" selection-start-column="45" selection-end-line="309" selection-end-column="51" />
           <folding>
             <marker date="1519029458470" expanded="true" signature="458:704" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="15655:16105" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="15821:15950" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="15998:16105" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="16147:17223" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="16477:16708" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="16732:16912" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="17258:17769" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="17404:17746" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="17509:17746" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="17583:17746" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="17804:18234" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="17940:18081" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="18129:18214" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="18271:18689" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="18584:18669" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="18727:18747" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="18782:19088" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="18926:19067" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="18972:19067" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="19130:19223" ph="..." />
-            <marker date="1519029458470" expanded="true" signature="19363:19523" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1572,23 +1350,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9775">
           <caret line="394" column="18" lean-forward="false" selection-start-line="394" selection-start-column="18" selection-end-line="394" selection-end-column="18" />
-          <folding>
-            <marker date="1519029458476" expanded="true" signature="112:296" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="136:296" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="24584:24604" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="24681:25947" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="24775:25947" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="24808:25117" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="25152:25947" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="25198:25308" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="25354:25464" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="25512:25626" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="25673:25785" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="25833:25947" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="26184:26271" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="26559:26623" ph="..." />
-            <marker date="1519029458476" expanded="true" signature="26672:26756" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1602,8 +1364,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="324" column="42" lean-forward="false" selection-start-line="324" selection-start-column="42" selection-end-line="324" selection-end-column="42" />
+        <state relative-caret-position="472">
+          <caret line="337" column="45" lean-forward="false" selection-start-line="337" selection-start-column="45" selection-end-line="337" selection-end-column="45" />
           <folding>
             <element signature="e#65#100#0" expanded="true" />
           </folding>
@@ -1612,8 +1374,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/arena.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="636" column="67" lean-forward="false" selection-start-line="636" selection-start-column="67" selection-end-line="636" selection-end-column="67" />
+        <state relative-caret-position="350">
+          <caret line="691" column="71" lean-forward="true" selection-start-line="691" selection-start-column="71" selection-end-line="691" selection-end-column="71" />
           <folding />
         </state>
       </provider>

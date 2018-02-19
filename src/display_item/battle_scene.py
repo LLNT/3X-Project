@@ -335,6 +335,7 @@ class Wandtype5(Battlescene):
         self.at, wand, self.df, self.map, pos, tarpos = arena.wandlist_type5
         self.battle = Type5(self.at, wand, self.df, self.map, pos, tarpos)
         self.wandinit(wand, w, h, arena, maxsize)
+        self.transtuple = self.df.pid, tarpos
 
 class Wandtype6(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
@@ -349,6 +350,7 @@ class Wandtype7(Battlescene):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type7
         self.battle = Type7(self.at,wand, self.df,self.map, pos)
         self.wandinit(wand, w, h, arena, maxsize)
+        self.transtuple = self.df.pid, pos
 
 class Wandtype8(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):

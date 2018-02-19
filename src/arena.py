@@ -685,7 +685,6 @@ class Arena(ScrollableLayer):
         self.remove(self.hitrate)
         if self.mouse_btn is 1:
             dst = self._mapstate[0][self.selected][self.target][1]
-            self.transtuple = self.objper.pid, self.wandlist_type5[-1]
             Sequencial(
                 (self.people[self.selected], self._sequential_move(dst)),
                 (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
@@ -777,7 +776,6 @@ class Arena(ScrollableLayer):
                 wand = self.item_w
                 self.wandlist_type7 = [user, wand, target, self.map, self.mouse_pos]
                 dst = self._mapstate[0][self.selected][self.target][1]
-                self.transtuple = self.objper.pid, self.wandlist_type7[-1]
                 Sequencial(
                     (self.people[self.selected], self._sequential_move(dst)),
                     (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
