@@ -8,6 +8,7 @@ from cocos.director import director
 from cocos.layer import ColorLayer, Layer
 from cocos.scenes import FadeTransition
 from cocos.scene import Scene
+from cocos.sprite import Sprite
 from display_item.text import Text
 from battle import Battle
 from display_item.ring import Scoreboard
@@ -171,7 +172,7 @@ class Battlescene(Animation):
         )
         self.add(self.attacker)
         self.add(self.defender)
-
+        self.add_battle_card(w, h)
         event = self.battle.battle()
         del self.battle
         self.excute(event=event)
@@ -201,11 +202,11 @@ class Battlescene(Animation):
 
     def wandinit(self, wand, w, h, arena, maxsize):
 
-        pos1 = w // 4, h // 3
+        pos1 = w // 4, h // 4
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
         self.attacker = Scoreboard(pos1, 0.4, prop=self.hp1 / self.mhp1,
                                    back_color=BLACK, hp=self.hp1, mhp=self.mhp1)
-        pos2 = w * 3 // 4, h // 3
+        pos2 = w * 3 // 4, h // 4
         self.hp2, self.mhp2 = self.df.ability['HP'], self.df.ability['MHP']
         self.defender = Scoreboard(pos2, 0.4, prop=self.hp2 / self.mhp2,
                                    back_color=BLACK, hp=self.hp2, mhp=self.mhp2)
@@ -223,10 +224,16 @@ class Battlescene(Animation):
         )
         self.add(self.attacker)
         self.add(self.defender)
-
+        self.add_battle_card(w, h)
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
+
+
+    def add_battle_card(self, w, h):
+        btca, btcd = self.battle.get_battlecard()
+        self.add(Sprite(btca, position=(w//4, h*3//4)))
+        self.add(Sprite(btcd, position=(w*3//4, h*3//4)))
 
 class Wandtype0(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
