@@ -189,6 +189,7 @@ class Battlescene(Animation):
         self.arena.on_return(self.at, self.getitem, self.transtuple)
         director.pop()
         director.pop()
+        self.kill()
         del self
 
     def exit(self):
