@@ -489,6 +489,7 @@ class Type6(Wand):
         self.log=[] #type:List[str]
         self.pos=(0,0) #type:Tuple[int,int]
         self.obj=None  #type:person.Person
+        self.tarpos=(0,0)
     def __init__(self,p,wand,obj,map,pos):
         self.p=p  #type:person.Person
         self.wand=wand  #type:item.Item
@@ -497,12 +498,14 @@ class Type6(Wand):
         self.exp_buf=0 #type:int
         self.obj=obj   #type:person.Person
         self.pos=pos #type:Tuple[int,int]
+        self.tarpos=self.map.find_nearest_empty_block(self.pos,[self.map.person_container.position[self.p.pid]],[self.pos])
+    def get_target(self):
+        return self.tarpos
     def execute(self):
         funcs=self.wand.itemtype.wand["Effect"].split(",")
         for func in funcs:
             if func=="RESCUE":
-                self.map.person_container.position[self.obj.pid]=\
-                    self.map.find_nearest_empty_block(self.pos,[self.map.person_container.position[self.p.pid]],[self.pos])
+                self.map.person_container.position[self.obj.pid]=self.tarpos
                 self.log.append((-1,"%s Moved"%(self.obj.name)))
         self.p.weapon_rank["Wand"]+=1
         if self.p.weapon_rank["Wand"]>=400:
