@@ -304,6 +304,8 @@ class Battle:
                     btcd = self.d.battlecard[self.d.cls]["Base"]
             else:
                 btcd = self.d.battlecard["Base"]
+        print(btca,btcd)
+        print(self.weapon_a.itemid,self.weapon_d.itemid)
         return (btca,btcd)
 
     def calc_param(self,turns=1):

@@ -141,10 +141,10 @@
     "Type":"S",
     "Tag":"威尔",
     "Text":"琳迪斯小姐，",
-    "Left":"lyn_dialog.png",
-    "Right":"weir_dialog.png",
+    "Left":"lyn_dialog.jpg",
+    "Right":"weir_dialog.jpg",
     "Direction":1,
-    "Scene":""
+    "Scene":"background_test.jpg"
   },
   "ST1-3-2":{
     "Type":"S",
@@ -153,7 +153,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-3":{
     "Type":"S",
@@ -162,7 +162,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-4":{
     "Type":"S",
@@ -171,7 +171,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-5":{
     "Type":"S",
@@ -180,7 +180,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-6":{
     "Type":"S",
@@ -189,7 +189,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-7":{
     "Type":"S",
@@ -198,7 +198,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-8":{
     "Type":"S",
@@ -207,7 +207,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-9":{
     "Type":"S",
@@ -216,7 +216,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-10":{
     "Type":"S",
@@ -225,7 +225,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-11":{
     "Type":"S",
@@ -234,7 +234,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-12":{
     "Type":"S",
@@ -243,7 +243,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-13":{
     "Type":"S",
@@ -252,7 +252,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-14":{
     "Type":"S",
@@ -261,7 +261,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-15":{
     "Type":"S",
@@ -270,7 +270,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-16":{
     "Type":"S",
@@ -279,7 +279,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-17":{
     "Type":"S",
@@ -288,7 +288,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-18":{
     "Type":"S",
@@ -297,7 +297,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-19":{
     "Type":"S",
@@ -306,7 +306,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-20":{
     "Type":"S",
@@ -315,7 +315,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-21":{
     "Type":"S",
@@ -324,7 +324,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-22":{
     "Type":"S",
@@ -333,7 +333,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-23":{
     "Type":"S",
@@ -342,7 +342,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-24":{
     "Type":"S",
@@ -351,7 +351,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-25":{
     "Type":"S",
@@ -360,7 +360,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-26":{
     "Type":"S",
@@ -369,7 +369,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-27":{
     "Type":"S",
@@ -378,7 +378,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-28":{
     "Type":"S",
@@ -387,7 +387,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-29":{
     "Type":"S",
@@ -396,7 +396,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-30":{
     "Type":"S",
@@ -405,7 +405,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-31":{
     "Type":"S",
@@ -414,7 +414,7 @@
     "Left":null,
     "Right":null,
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-32":{
     "Type":"S",
@@ -423,7 +423,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-33":{
     "Type":"S",
@@ -432,7 +432,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-34":{
     "Type":"S",
@@ -441,7 +441,7 @@
     "Left":null,
     "Right":null,
     "Direction":0,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-35":{
     "Type":"S",
@@ -450,7 +450,7 @@
     "Left":"lin.png",
     "Right":"will.png",
     "Direction":1,
-    "Scene":""
+    "Scene":null
   },
   "ST1-3-36":{
     "Type":"S",
@@ -459,6 +459,6 @@
     "Left":"lin.png",
     "Right":"will.png",
     "Direction":0,
-    "Scene":""
+    "Scene":null
   }
 }
