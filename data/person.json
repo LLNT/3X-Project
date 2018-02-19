@@ -58,7 +58,14 @@
     "Color":"Green",
     "Attribute":"Wind",
     "Coefficient":1.0,
-    "Bonus":0
+    "Bonus":0,
+    "Battlecard":{
+      "Lord":{
+        "Sword":"",
+        "Base":""
+      },
+      "Base":""
+    }
   },
   "2":
   {
@@ -116,6 +123,14 @@
     "Color":"White",
     "Attribute":"Thunder",
     "Coefficient":1.0,
-    "Bonus":0
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Lance":"",
+        "Sword":"",
+        "Base":""
+      },
+      "Base":""
+    }
   }
 }

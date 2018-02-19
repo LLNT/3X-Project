@@ -124,6 +124,7 @@
     "Battlecard":{
       "Cavalier": {
         "Lance":"kent_battle_lance.jpg",
+        "Sword":"kent_battle_sword.jpg",
         "Base":"kent_battle_lance.jpg"
       },
       "Base":"kent_battle_lance.jpg"
