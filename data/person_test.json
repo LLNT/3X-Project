@@ -322,6 +322,9 @@
     "Coefficient":1.0,
     "Bonus":0,
     "Battlecard":{
+      "Cleric":{
+        "Base":"serra_battle_base.jpg"
+      },
       "Base":"serra_battle_base.jpg"
     }
   }
