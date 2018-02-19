@@ -94,7 +94,7 @@ class Arena(ScrollableLayer):
         else:
             if transtuple is not None:
                 self.transtuple = transtuple
-            print(self.transtuple)
+                print(self.transtuple)
             if self.transtuple is not None:
                 pid, pos = self.transtuple
                 target = self.people[pid]
