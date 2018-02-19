@@ -74,5 +74,10 @@
     "Id":15,
     "Itemtype":"Rapier",
     "Use":40
+  },
+  {
+    "Id":16,
+    "Itemtype":"Rewarp",
+    "Use":4
   }
 ]

@@ -19,6 +19,7 @@ from display_item.background import Background
 from display_item.battle_scene import *
 from display_item.ring import PerSpr
 from display_item.getitem import Getitem
+from display_item.action_control import Sequencial
 
 import map_controller
 from global_vars import Main as Global
@@ -26,6 +27,7 @@ from data_loader import Main as Data
 from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
 from wand import Type1, Type3, Type5
+from typing import Dict
 
 
 
@@ -51,8 +53,8 @@ class Arena(ScrollableLayer):
 
 
         # add map elements
-        self.cells = {}
-        self.people = {}
+        self.cells = {}  #type:Dict[str,Cell]
+        self.people = {} #type:Dict[str,PerSpr]
         for i in range(w):
             for j in range(h):
                 self.cells[(i, j)] = Cell(size, (i, j))
@@ -324,6 +326,8 @@ class Arena(ScrollableLayer):
             'wand_type3_confirm': self._wand_type3_confirm,
             'wand_type4':self._wand_type4,
             'wand_type5': self._wand_type5,
+            'wand_type5_chstar': self._wand_type5_chstar,
+            'wand_type5_confirm': self._wand_type5_confirm,
             'wand_type6': self._wand_type6,
             'wand_type7': self._wand_type7,
             'wand_type8': self._wand_type8,
@@ -342,6 +346,7 @@ class Arena(ScrollableLayer):
                 pid = self.cells[self.mouse_pos].person_on
                 self.people[pid].state = 'selected'
                 self.selected = pid
+                self.origin_pos = self.mouse_pos
                 valid, invalid, ally, enemy = self._mapstate
                 if pid in valid.keys():   # a valid person selected
                     area = valid[pid]
@@ -390,6 +395,8 @@ class Arena(ScrollableLayer):
                 self._add_menu(self.menu)
                 self.is_event_handler = False
                 self.state = 'valid_dst'
+                self.cells[self.target].person_on = self.selected
+                self.cells[self.origin_pos].person_on = None
             else:
                 pass
         elif self.mouse_btn == 4:
@@ -617,8 +624,8 @@ class Arena(ScrollableLayer):
                 pid = self.selected
                 action = self._transfer(pid, target)
                 obj = self.people[pid]
-                obj.do(action + CallFunc(self._push_scene, Wandtype4) +
-                       CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+                obj.do(self._sequential_move(pid, self._mapstate[0][self.selected][self.target][1]) + action +
+                       CallFunc(self._push_scene, Wandtype4) + CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
             else:
                 self._reset()
             pass
@@ -663,7 +670,12 @@ class Arena(ScrollableLayer):
     def _wand_type5_confirm(self):
         self.remove(self.hitrate)
         if self.mouse_btn is 1:
-            self._battle(Wandtype5)
+            Sequencial(
+                (self.people[self.selected], self._sequential_move(self.selected, self._mapstate[0][self.selected][self.target][1])),
+                (self.people[self.objper.pid], self._transfer(self.objper.pid, self.wandlist_type5[-1])),
+                (self, CallFunc(self._push_scene, Wandtype5)), (self, CallFunc(self._clear_map)),
+                (self, CallFunc(self._set_state, 'show_battle_result'))
+            ).excute()
         else:
             self.state = 'wand_type5'
             pass
@@ -907,6 +919,8 @@ class Arena(ScrollableLayer):
         self._set_areastate([self.target], 'in_self_moverange')
         self.state = 'valid_select'
         self.menulayer.disapper()
+        self.cells[self.target].person_on = None
+        self.cells[self.origin_pos].person_on = self.selected
         self.target = None
         pass
 
