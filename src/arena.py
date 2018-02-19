@@ -87,24 +87,34 @@ class Arena(ScrollableLayer):
 
 
 
-    def on_return(self, person, getitem=None):
+    def on_return(self, person, getitem=None, transtuple=None):
         if getitem is not None:
             self.add(Getitem(person,getitem,self.map.global_vars.flags['Have Transporter'],self.map))
             self.is_event_handler = False
         else:
-            self.get_next_to_delete()
-            self.map.take_turn(self)
-            for person in self.people.values():
-                person.update_hp()
+            if transtuple is not None:
+                self.transtuple = transtuple
+            if self.transtuple is not None:
+                target = self.people[self.transtuple[0]]
+                action = self._transfer(self.transtuple[1])
+                target.do(action + CallFunc(self.clear))
+            else:
+                self.clear()
+
+    def clear(self):
+        self.get_next_to_delete()
+
+        self.map.take_turn(self)
+        for person in self.people.values():
+            person.update_hp()
+        self.state = 'default'
 
     def end_getitem(self):
-        director.window.push_handlers(self)
         self.get_next_to_delete()
         self.map.take_turn(self)
         for person in self.people.values():
             person.update_hp()
         self.state = 'default'
-        print(self.is_event_handler)
 
     def next_round(self):
 
@@ -279,7 +289,7 @@ class Arena(ScrollableLayer):
         self.avl = None
         self.excpid = None
         self.allow_cancel = True
-        self.wandlist_type0 = self.wandlist_type1 = self.wandlist_type2 = []
+        self.transtuple = None
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -326,6 +336,7 @@ class Arena(ScrollableLayer):
             'wand_type5_confirm': self._wand_type5_confirm,
             'wand_type6': self._wand_type6,
             'wand_type7': self._wand_type7,
+            'wand_type7_confirm': self._wand_type7_confirm,
             'wand_type8': self._wand_type8,
             'choose_exchange': self._choose_exchange
         }
@@ -618,10 +629,10 @@ class Arena(ScrollableLayer):
                 wand = self.item_w
                 self.wandlist_type4 = [user, wand, target, self.map]
                 pid = self.selected
-                action = self._transfer(target)
                 obj = self.people[pid]
+                self.transtuple = pid, target
                 dst = self._mapstate[0][self.selected][self.target][1]
-                obj.do(self._sequential_move(dst) + action + self._set_moved(pid, dst) +
+                obj.do(self._sequential_move(dst) + self._set_moved(pid, dst) +
                        CallFunc(self._push_scene, Wandtype4) + CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
             else:
                 self._reset()
@@ -668,10 +679,10 @@ class Arena(ScrollableLayer):
         self.remove(self.hitrate)
         if self.mouse_btn is 1:
             dst = self._mapstate[0][self.selected][self.target][1]
+            self.transtuple = self.objper.pid, self._transfer(self.wandlist_type5[-1])
             Sequencial(
                 (self.people[self.selected], self._sequential_move(dst)),
-                (self.people[self.selected], self._set_moved(self.selected, dst)),
-                (self.people[self.objper.pid], self._transfer(self.wandlist_type5[-1])),
+                (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
                 (self, CallFunc(self._push_scene, Wandtype5)), (self, CallFunc(self._clear_map)),
                 (self, CallFunc(self._set_state, 'show_battle_result'))
             ).excute()
@@ -702,6 +713,7 @@ class Arena(ScrollableLayer):
                 target = self.people[cell.person_on].person
                 wand = self.item_w
                 self.wandlist_type6 = [user, wand, target, self.map, self.mouse_pos]
+                self.transtuple = None
                 self._battle(Wandtype6)
             else:
                 self._reset()
@@ -734,7 +746,14 @@ class Arena(ScrollableLayer):
                 target = self.objper
                 wand = self.item_w
                 self.wandlist_type7 = [user, wand, target, self.map, self.mouse_pos]
-                self._battle(Wandtype7)
+                dst = self._mapstate[0][self.selected][self.target][1]
+                self.transtuple = self.objper.pid, self.wandlist_type7[-1]
+                Sequencial(
+                    (self.people[self.selected], self._sequential_move(dst)),
+                    (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
+                    (self, CallFunc(self._push_scene, Wandtype7)), (self, CallFunc(self._clear_map)),
+                    (self, CallFunc(self._set_state, 'show_battle_result'))
+                ).excute()
         pass
 
     def _wand_type8(self):
@@ -848,7 +867,15 @@ class Arena(ScrollableLayer):
         self.is_event_handler = True
         wandtype = item_w.itemtype.wand['Type']
         if wandtype is not None:
-            self.state = 'wand_type' + str(wandtype)
+
+            if wandtype == 8:
+                user = self.people[self.selected].person
+                wand = self.item_w
+                self.wandlist_type8 = [user, wand, self.map, self.target]
+                director.window.remove_handlers(self)
+                self._battle(Wandtype8)
+            else:
+                self.state = 'wand_type' + str(wandtype)
         else:
             self._add_menu(Showwand(self.avl, self))
         '''if item_w.itemtype.wand['Type'] == 0:

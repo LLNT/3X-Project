@@ -79,5 +79,10 @@
     "Id":16,
     "Itemtype":"Rewarp",
     "Use":4
+  },
+  {
+    "Id":17,
+    "Itemtype":"Rescue",
+    "Use":4
   }
 ]
