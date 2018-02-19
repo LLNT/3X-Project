@@ -9,11 +9,17 @@ class Wand:
         self.wand=None #type:item.Item
         self.map=None #type:map_controller.Main
         self.exp_buf=0 #type:int
+        self.obj=None #type:person.Person
+
+    def get_battlecard(self):
+        if self.obj==None:
+            return (self.p.battlecard[self.p.cls]["Base"],None)
+        else:
+            return (self.p.battlecard[self.p.cls]["Base"],self.obj.battlecard[self.obj.cls]["Base"])
 
 class Type0(Wand):
     def __init__(self):
         super(Type0,self).__init__()
-        self.obj=None #type:person.Person
         self.log=[] #type:List[str]
     def __init__(self,p,wand,obj,map):
         self.p=p  #type:person.Person
@@ -93,7 +99,6 @@ class Type0(Wand):
 class Type1(Wand):
     def __init__(self):
         super(Type1,self).__init__()
-        self.obj=None #type:person.Person
         self.log=[] #type:List[str]
         self.pos=(0,0) #type:Tuple[int,int]
         self.hit=0
@@ -198,7 +203,6 @@ class Type1(Wand):
 class Type2(Wand):
     def __init__(self):
         super(Type2,self).__init__()
-        self.obj=None #type:person.Person
         self.log=[] #type:List[str]
         self.item_to_repair=None #type:item.Item
     def __init__(self,p,wand,obj,map,_item):
@@ -246,7 +250,6 @@ class Type2(Wand):
 class Type3(Wand):
     def __init__(self):
         super(Type3,self).__init__()
-        self.obj=None #type:person.Person
         self.log=[] #type:List[str]
         self.pos=(0,0) #type:Tuple[int,int]
         self.hit=0
@@ -351,6 +354,7 @@ class Type4(Wand):
         self.log=[]   #type:List[str]
         self.exp_buf=0 #type:int
         self.tarpos=tarpos #type:Tuple[int,int]
+        self.obj=None
     def execute(self):
         funcs=self.wand.itemtype.wand["Effect"].split(",")
         for func in funcs:
@@ -391,7 +395,6 @@ class Type4(Wand):
 class Type5(Wand):
     def __init__(self):
         super(Type5,self).__init__()
-        self.obj=None #type:person.Person
         self.log=[] #type:List[str]
         self.pos=(0,0) #type:Tuple[int,int]
         self.hit=0
@@ -488,7 +491,6 @@ class Type6(Wand):
         super(Type6,self).__init__()
         self.log=[] #type:List[str]
         self.pos=(0,0) #type:Tuple[int,int]
-        self.obj=None  #type:person.Person
         self.tarpos=(0,0)
     def __init__(self,p,wand,obj,map,pos):
         self.p=p  #type:person.Person
@@ -539,7 +541,6 @@ class Type7(Wand):
         super(Type7,self).__init__()
         self.log=[] #type:List[str]
         self.tarpos=(0,0) #type:Tuple[int,int]
-        self.obj=None  #type:person.Person
     def __init__(self,p,wand,obj,map,tarpos):
         self.p=p  #type:person.Person
         self.wand=wand  #type:item.Item
@@ -593,6 +594,7 @@ class Type8(Wand):
         self.log=[]   #type:List[str]
         self.exp_buf=0 #type:int
         self.pos=pos
+        self.obj=None
     def get_objs(self):
         obj=[]
         minr=self.wand.itemtype.min_range
