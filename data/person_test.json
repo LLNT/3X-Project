@@ -115,7 +115,7 @@
     [
     ],
     "Picture":"kent.png",
-    "Init_item":[2,14],
+    "Init_item":[2,14,16],
     "Support":{},
     "Color":"Red",
     "Attribute":"Fire",
