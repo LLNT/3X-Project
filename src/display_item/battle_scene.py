@@ -172,14 +172,14 @@ class Battlescene(Animation):
         )
         self.add(self.attacker)
         self.add(self.defender)
-        self.add_battle_card(w, h)
+        # self.add_battle_card(w, h)
         event = self.battle.battle()
         del self.battle
         self.excute(event=event)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         self.remove(self.exp)
-        self.do(CallFunc(self._return_arena)+ Delay(0.5) + CallFunc(self._pop))
+        self.do(CallFunc(self._return_arena)+ Delay(1.5) + CallFunc(self._pop))
 
     def _return_arena(self):
         director.window.remove_handlers(self)
@@ -187,9 +187,9 @@ class Battlescene(Animation):
             ColorLayer(0, 0, 0, 0, self.width, self.height)), duration=1.5))
 
     def _pop(self):
+        director.pop()
+        director.pop()
         self.arena.on_return(self.at, self.getitem, self.transtuple)
-        director.pop()
-        director.pop()
         self.kill()
         del self
 
@@ -224,7 +224,7 @@ class Battlescene(Animation):
         )
         self.add(self.attacker)
         self.add(self.defender)
-        self.add_battle_card(w, h)
+        # self.add_battle_card(w, h)
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)

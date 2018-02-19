@@ -110,12 +110,10 @@ class Arena(ScrollableLayer):
 
     def clear(self):
         self.get_next_to_delete()
-
         self.map.take_turn(self)
         for person in self.people.values():
             person.update_hp()
         self.state = 'default'
-        director.window.push_handlers(self)
 
     def end_getitem(self):
         self.get_next_to_delete()
@@ -496,7 +494,8 @@ class Arena(ScrollableLayer):
         # if confirm, push battle scene and then return to 1, else turn to 5
         if self.mouse_btn is 1:
             if self.mouse_pos in self.sup_dict.values():
-                self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
+                c = self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
+                print(c)
                 for pid in self.sup_dict:
                     self.people[pid].state = self._reset_person[pid]
                 self.move()
@@ -639,7 +638,7 @@ class Arena(ScrollableLayer):
                 obj = self.people[pid]
                 dst = self._mapstate[0][self.selected][self.target][1]
                 obj.do(self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) +
-                       CallFunc(self._push_scene, Wandtype4) + CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+                       CallFunc(self._push_scene, Wandtype4))
             else:
                 self._reset()
             pass
@@ -688,8 +687,7 @@ class Arena(ScrollableLayer):
             Sequencial(
                 (self.people[self.selected], self._sequential_move(dst)),
                 (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
-                (self, CallFunc(self._push_scene, Wandtype5)), (self, CallFunc(self._clear_map)),
-                (self, CallFunc(self._set_state, 'show_battle_result'))
+                (self, CallFunc(self._push_scene, Wandtype5))
             ).excute()
             '''Graphic(
                 (self.people[self.selected],
@@ -779,8 +777,7 @@ class Arena(ScrollableLayer):
                 Sequencial(
                     (self.people[self.selected], self._sequential_move(dst)),
                     (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
-                    (self, CallFunc(self._push_scene, Wandtype7)), (self, CallFunc(self._clear_map)),
-                    (self, CallFunc(self._set_state, 'show_battle_result'))
+                    (self, CallFunc(self._push_scene, Wandtype7))
                 ).excute()
         pass
 
@@ -830,8 +827,7 @@ class Arena(ScrollableLayer):
         self.is_event_handler = False
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._push_scene, layer) +
-               CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+        obj.do(action + CallFunc(self._push_scene, layer))
 
     def _delete_person(self, pid):
         person = self.people[pid]
@@ -942,8 +938,7 @@ class Arena(ScrollableLayer):
         self.is_event_handler = False
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._push_scene, Battlescene) +
-               CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+        obj.do(action + CallFunc(self._push_scene, Battlescene))
 
     def attack(self):
         self.is_event_handler = False
@@ -1070,8 +1065,7 @@ class Arena(ScrollableLayer):
         self.is_event_handler = False
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._push_scene, Wandtype2) +
-               CallFunc(self._clear_map) + CallFunc(self._set_state, 'show_battle_result'))
+        obj.do(action + CallFunc(self._push_scene, Wandtype2))
 
     def wandstl(self, item):
         self.wandlist_type3.append(item)
