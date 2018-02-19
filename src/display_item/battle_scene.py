@@ -46,6 +46,7 @@ class Animation(Layer):
         self.map = arena.map
         self.item = None
         self.getitem = None
+        self.transtuple = None
 
     def excute(self, event):
         self.events = event[0]
@@ -171,8 +172,6 @@ class Battlescene(Animation):
         self.add(self.attacker)
         self.add(self.defender)
 
-
-
         event = self.battle.battle()
         del self.battle
         self.excute(event=event)
@@ -187,9 +186,10 @@ class Battlescene(Animation):
             ColorLayer(0, 0, 0, 0, self.width, self.height)), duration=1.5))
 
     def _pop(self):
-        self.arena.on_return(self.at, self.getitem)
+        self.arena.on_return(self.at, self.getitem, self.transtuple)
         director.pop()
         director.pop()
+        self.kill()
         del self
 
     def exit(self):
@@ -339,7 +339,9 @@ class Wandtype6(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type6
         self.battle = Type6(self.at,wand, self.df,self.map, pos)
+        self.transtuple_c = self.df.pid, self.battle.get_target()
         self.wandinit(wand, w, h, arena, maxsize)
+        self.transtuple = self.transtuple_c
 
 class Wandtype7(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
@@ -360,6 +362,7 @@ class Wandtype8(Battlescene):
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
+        self.transtuple = None
 
 
     def excute(self, event):

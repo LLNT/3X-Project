@@ -21,6 +21,8 @@ class Main:
         self.flags={}                       #type:Dict[str,bool]
         self.transporter={}                 #type:Dict[str,List[item.Item]]
         self.cls_promotion={}               #type:Dict[str,Dict[str,int]]
+        self.support_text_map={}            #type:Dict[str,Dict[str,Dict[str,List[str]]]]
+        self.text={}                        #type:Dict[str,Dict[str,str]]
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -38,4 +40,6 @@ class Main:
         for _type in data.itemtype_typenames:
             self.transporter[_type]=[]
         self.cls_promotion=data.cls_promote_bonus
+        self.support_text_map=data.support_text_map
+        self.text=data.text
 

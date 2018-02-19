@@ -17,9 +17,11 @@ class Itemtype:
         self.value=0          #type:int
         self.character_only=[]  # type:List[str]
         self.use_effect=""  # type:str
+        self.battletype=""  #type:str
+        self.icon=""        #type:str
         self.wand={}            #{"Type":int,"Effect":str}
         self.status=[]          #[{"Status":str,"Rest":int,"Chance":int},]
-    def __init__(self,name,use,weap,pw,wt,ht,ct,max_r,min_r,bonus,special,rk,sk,val,charonly,use_eff,wand,status):
+    def __init__(self,name,use,weap,pw,wt,ht,ct,max_r,min_r,bonus,special,rk,sk,val,charonly,use_eff,wand,status,btype,ic):
         self.name=name
         self.max_use=use
         self.weapontype=weap
@@ -38,6 +40,8 @@ class Itemtype:
         self.use_effect=use_eff
         self.wand=wand
         self.status=status
+        self.battletype=btype
+        self.icon=ic
 class ItemtypeBank:
     def __init__(self):
         self.itemtypebank={} #type:Dict[str,Itemtype]
@@ -48,7 +52,8 @@ class ItemtypeBank:
                               item["Power"],item["Weight"],item["Hit"],
                               item["Critical"],item["Max_range"],item["Min_range"],
                               item["Ability_bonus"],item["Special_effect"],item["Rank"],
-                              item["Skills"],item["Value"],item["Character_only"],item["Use"],item["Wand"],item["Status"])
+                              item["Skills"],item["Value"],item["Character_only"],item["Use"],item["Wand"],
+                              item["Status"],item["Battle_type"],item["Icon"])
             self.itemtypebank[item["Name"]]=itemtype
 
 class Main:

@@ -3,5 +3,20 @@
     "Id":1,
     "Itemtype":"Rapier",
     "Use":40
+  },
+  {
+    "Id":2,
+    "Itemtype":"Silver Sword",
+    "Use":20
+  },
+  {
+    "Id":3,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":4,
+    "Itemtype":"Iron Knife",
+    "Use":25
   }
 ]

@@ -186,8 +186,8 @@ class Battle:
                 self.battleround=1
             if (self.weapon_d.itemtype.min_range>self.dist):
                 self.battleround=1
-        if (self.battleround==0):
-            self.wp_buf_a=wp_buf_count(self.weapon_a.itemtype.weapontype,self.weapon_d.itemtype.weapontype)
+        if not(self.weapon_d==None):
+            self.wp_buf_a=wp_buf_count(self.weapon_a.itemtype.battletype,self.weapon_d.itemtype.battletype)
         self.wp_buf_d=-self.wp_buf_a
         self.weapon_rank_buf_a=0
         self.weapon_rank_buf_d=0
@@ -281,6 +281,31 @@ class Battle:
             self.log.append((-2,"Redseal"))
         self.calc_param(turns=0)
 
+    def get_battlecard(self):
+        btca=""
+        btcd=""
+        if self.weapon_a==None:
+            btca=self.a.battlecard[self.a.cls]["Base"]
+        else:
+            if self.a.cls in self.a.battlecard:
+                if self.weapon_a.itemtype.weapontype in self.a.battlecard[self.a.cls]:
+                    btca = self.a.battlecard[self.a.cls][self.weapon_a.itemtype.weapontype]
+                else:
+                    btca = self.a.battlecard[self.a.cls]["Base"]
+            else:
+                btca = self.a.battlecard["Base"]
+        if self.weapon_d==None:
+            btcd=self.a.battlecard[self.d.cls]["Base"]
+        else:
+            if self.d.cls in self.d.battlecard:
+                if self.weapon_d.itemtype.weapontype in self.d.battlecard[self.d.cls]:
+                    btcd = self.d.battlecard[self.d.cls][self.weapon_d.itemtype.weapontype]
+                else:
+                    btcd = self.d.battlecard[self.d.cls]["Base"]
+            else:
+                btcd = self.d.battlecard["Base"]
+        return (btca,btcd)
+
     def calc_param(self,turns=1):
         self.hita=0
         self.hitd=0
@@ -301,13 +326,13 @@ class Battle:
                   self.weapon_a.itemtype.critical+self.su_a["CRT"]
         self.crad=int(self.d.ability["LUK"]/2)+int(self.d.ability["SPD"]/4)+\
                   int(self.d.ability["SKL"]/4)+self.su_d["CRA"]
-        if (self.weapon_a.itemtype.weapontype=="Sword")or(self.weapon_a.itemtype.weapontype=="Lance")or\
-           (self.weapon_a.itemtype.weapontype=="Axe")or(self.weapon_a.itemtype.weapontype=="Bow"):
+        if (self.weapon_a.itemtype.battletype=="Sword")or(self.weapon_a.itemtype.battletype=="Lance")or\
+           (self.weapon_a.itemtype.battletype=="Axe")or(self.weapon_a.itemtype.battletype=="Bow"):
             self.atka=self.a.ability["STR"]
             self.defd=self.d.ability["DEF"]
-        if (self.weapon_a.itemtype.weapontype=="Fire")or(self.weapon_a.itemtype.weapontype=="Thunder")or\
-           (self.weapon_a.itemtype.weapontype=="Wind")or(self.weapon_a.itemtype.weapontype=="Light")or\
-           (self.weapon_a.itemtype.weapontype=="Dark"):
+        if (self.weapon_a.itemtype.battletype=="Fire")or(self.weapon_a.itemtype.battletype=="Thunder")or\
+           (self.weapon_a.itemtype.battletype=="Wind")or(self.weapon_a.itemtype.battletype=="Light")or\
+           (self.weapon_a.itemtype.battletype=="Dark"):
             self.atka=self.a.ability["MGC"]
             self.defd=self.d.ability["RES"]
         self.atka+=(self.weapon_a.itemtype.power+self.su_a["ATK"]+self.wp_buf_a)
@@ -1001,6 +1026,9 @@ class Battle:
         if (self.sunlight_a()==1):
             self.att_sun=1
             self.log.append((-1,"Sunlight"))
+        if ("Drain" in self.skills_a):
+            self.att_sun=1
+            self.log.append((-1,"Drain"))
         hitb=self.hita-self.avod
         if (self.bane_a()==1):
             self.atka+=65536
@@ -1126,6 +1154,9 @@ class Battle:
         if (self.sunlight_d()==1):
             self.att_sun=1
             self.log.append((-2,"Sunlight"))
+        if ("Drain" in self.skills_d):
+            self.att_sun=1
+            self.log.append((-2,"Drain"))
         hitb=self.hitd-self.avoa
         if (self.bane_d()==1):
             self.atkd+=65536

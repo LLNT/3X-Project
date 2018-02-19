@@ -58,7 +58,14 @@
     "Color":"Green",
     "Attribute":"Wind",
     "Coefficient":1.0,
-    "Bonus":0
+    "Bonus":0,
+    "Battlecard":{
+      "Lord": {
+        "Sword":"lyn_battle_sword.jpg",
+        "Base":"lyn_battle_sword.jpg"
+      },
+      "Base":"lyn_battle_sword.jpg"
+    }
   },
   "2":
   {
@@ -108,12 +115,19 @@
     [
     ],
     "Picture":"kent.png",
-    "Init_item":[2,14],
+    "Init_item":[2,14,16],
     "Support":{},
     "Color":"Red",
     "Attribute":"Fire",
     "Coefficient":1.5,
-    "Bonus":60
+    "Bonus":60,
+    "Battlecard":{
+      "Cavalier": {
+        "Lance":"kent_battle_lance.jpg",
+        "Base":"kent_battle_lance.jpg"
+      },
+      "Base":"kent_battle_lance.jpg"
+    }
   },
   "3":
   {
@@ -174,7 +188,18 @@
     "Color":"Green",
     "Attribute":"Wind",
     "Coefficient":1.0,
-    "Bonus":0
+    "Bonus":0,
+    "Battlecard":{
+      "Archer": {
+        "Bow":"weir_battle_bow_0.jpg",
+        "Base":"weir_battle_bow_0.jpg"
+      },
+      "Sniper":{
+        "Bow":"weir_battle_bow_1.jpg",
+        "Base":"weir_battle_bow_1.jpg"
+      },
+      "Base":"weir_battle_bow_0.jpg"
+    }
   },
   "4":
   {
@@ -230,7 +255,14 @@
     "Color":"White",
     "Attribute":"Light",
     "Coefficient":1.5,
-    "Bonus":40
+    "Bonus":40,
+    "Battlecard":{
+      "Pegasus Knight": {
+        "Lance":"florina_battle_lance.jpg",
+        "Base":"florina_battle_lance.jpg"
+      },
+      "Base":"florina_battle_lance.jpg"
+    }
   },
   "5":{
     "Id": 5,
@@ -280,13 +312,16 @@
     [
 
     ],
-    "Init_item":[9,11,12,7,13],
+    "Init_item":[9,11,12,17,13],
     "Support":{
 
     },
     "Color":"White",
     "Attribute":"Thunder",
     "Coefficient":1.0,
-    "Bonus":0
+    "Bonus":0,
+    "Battlecard":{
+      "Base":"serra_battle_base.jpg"
+    }
   }
 }

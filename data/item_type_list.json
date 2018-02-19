@@ -32,6 +32,8 @@
     "Value":460,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Sword",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -67,6 +69,119 @@
     "Value":6000,
     "Character_only":["1"],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Sword",
+    "Icon":"",
+    "Wand":{}
+  },
+  {
+    "Name":"Rune Sword",
+    "Max_use":15,
+    "Weapon_type":"Sword",
+    "Power":12,
+    "Weight":11,
+    "Hit":65,
+    "Critical":0,
+    "Max_range":2,
+    "Min_range":1,
+    "Ability_bonus":{
+        "LV":0,
+        "MHP":0,
+        "STR":0,
+        "MGC":0,
+        "SPD":0,
+        "SKL":0,
+        "DEF":0,
+        "RES":0,
+        "LUK":0,
+        "BLD":0,
+        "MOV":0,
+        "HP":0,
+        "CRY":0,
+        "EXP":0
+    },
+    "Special_effect":[],
+    "Rank":1,
+    "Skills":["Drain"],
+    "Status":[],
+    "Value":3300,
+    "Character_only":[],
+    "Use":"UNAVAILABLE",
+    "Battle_type":"Dark",
+    "Icon":"",
+    "Wand":{}
+  },
+  {
+    "Name":"Silver Sword",
+    "Max_use":20,
+    "Weapon_type":"Sword",
+    "Power":13,
+    "Weight":8,
+    "Hit":80,
+    "Critical":0,
+    "Max_range":1,
+    "Min_range":1,
+    "Ability_bonus":{
+        "LV":0,
+        "MHP":0,
+        "STR":0,
+        "MGC":0,
+        "SPD":0,
+        "SKL":0,
+        "DEF":0,
+        "RES":0,
+        "LUK":0,
+        "BLD":0,
+        "MOV":0,
+        "HP":0,
+        "CRY":0,
+        "EXP":0
+    },
+    "Special_effect":[],
+    "Rank":230,
+    "Skills":[],
+    "Status":[],
+    "Value":1500,
+    "Character_only":[],
+    "Use":"UNAVAILABLE",
+    "Battle_type":"Sword",
+    "Icon":"",
+    "Wand":{}
+  },
+  {
+    "Name":"Iron Knife",
+    "Max_use":25,
+    "Weapon_type":"Sword",
+    "Power":4,
+    "Weight":2,
+    "Hit":65,
+    "Critical":0,
+    "Max_range":2,
+    "Min_range":1,
+    "Ability_bonus":{
+        "LV":0,
+        "MHP":0,
+        "STR":0,
+        "MGC":0,
+        "SPD":0,
+        "SKL":0,
+        "DEF":0,
+        "RES":0,
+        "LUK":0,
+        "BLD":0,
+        "MOV":0,
+        "HP":0,
+        "CRY":0,
+        "EXP":0
+    },
+    "Special_effect":[],
+    "Rank":80,
+    "Skills":[],
+    "Status":[],
+    "Value":750,
+    "Character_only":[],
+    "Use":"UNAVAILABLE",
+    "Battle_type":"Sword",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -102,6 +217,8 @@
     "Value":600,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Lance",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -137,6 +254,8 @@
     "Value":300,
     "Character_only":[],
     "Use":"HEAL 10",
+    "Battle_type":"Usable",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -172,6 +291,8 @@
     "Value":10000,
     "Character_only":[],
     "Use":"HEAL 10",
+    "Battle_type":"Usable",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -207,6 +328,8 @@
     "Value":540,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Bow",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -242,6 +365,8 @@
     "Value":1600,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Bow",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -277,6 +402,8 @@
     "Value":400,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Lance",
+    "Icon":"",
     "Wand":{}
   },
   {
@@ -312,6 +439,8 @@
     "Value":800,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -350,6 +479,8 @@
     "Value":1200,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -388,6 +519,8 @@
     "Value":3000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -426,6 +559,8 @@
     "Value":2000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -464,6 +599,8 @@
     "Value":2400,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -502,6 +639,8 @@
     "Value":10000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":8,
       "Effect":"HEAL"
@@ -540,6 +679,8 @@
     "Value":12000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":8,
       "Effect":"HEAL,RELIEF"
@@ -578,6 +719,8 @@
     "Value":600,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"RELIEF"
@@ -616,6 +759,8 @@
     "Value":3000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"HEAL,RELIEF"
@@ -654,6 +799,8 @@
     "Value":8000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":2,
       "Effect":"REPAIR"
@@ -692,6 +839,8 @@
     "Value":8000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":6,
       "Effect":"RESCUE"
@@ -730,6 +879,8 @@
     "Value":12000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":7,
       "Effect":"WARP"
@@ -768,6 +919,8 @@
     "Value":10000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":5,
       "Effect":"EXPEL"
@@ -806,6 +959,8 @@
     "Value":15000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":4,
       "Effect":"REWARP"
@@ -844,6 +999,8 @@
     "Value":7500,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"POWER"
@@ -882,6 +1039,8 @@
     "Value":6000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"RESTORE"
@@ -920,6 +1079,8 @@
     "Value":4500,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"BARRIER"
@@ -958,6 +1119,8 @@
     "Value":6000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":1,
       "Effect":"BERSERK"
@@ -996,6 +1159,8 @@
     "Value":5000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":1,
       "Effect":"SLEEP"
@@ -1034,6 +1199,8 @@
     "Value":3000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":1,
       "Effect":"POISON"
@@ -1072,6 +1239,8 @@
     "Value":4000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":1,
       "Effect":"SILENCE"
@@ -1110,6 +1279,8 @@
     "Value":15000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":1,
       "Effect":"STONE"
@@ -1148,6 +1319,8 @@
     "Value":12000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":0,
       "Effect":"PROTECT"
@@ -1186,6 +1359,8 @@
     "Value":2000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":4,
       "Effect":"UNLOCK"
@@ -1224,6 +1399,8 @@
     "Value":0,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":3,
       "Effect":"THIEF"
@@ -1262,6 +1439,8 @@
     "Value":1000,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":4,
       "Effect":"TORCH"
@@ -1300,6 +1479,8 @@
     "Value":0,
     "Character_only":[],
     "Use":"UNAVAILABLE",
+    "Battle_type":"Wand",
+    "Icon":"",
     "Wand":{
       "Type":9,
       "Effect":"ISTURIAS"

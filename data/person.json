@@ -59,5 +59,63 @@
     "Attribute":"Wind",
     "Coefficient":1.0,
     "Bonus":0
+  },
+  "2":
+  {
+    "Id": 2,
+    "Name": "Tanya",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":7,
+      "MHP":31,
+      "STR":19,
+      "MGC":2,
+      "SPD":15,
+      "SKL":21,
+      "DEF":13,
+      "RES":6,
+      "LUK":9,
+      "BLD":10,
+      "MOV":8,
+      "HP":31,
+      "CRY":15,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":55,
+      "STR":75,
+      "MGC":5,
+      "SPD":45,
+      "SKL":75,
+      "DEF":30,
+      "RES":15,
+      "LUK":30
+    },
+    "Weapon Rank Bonus":
+    {"Sword":170,
+      "Lance":170,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"tanya.jpg",
+    "Skills":
+    [
+      "Awareness"
+    ],
+    "Init_item":[2],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Thunder",
+    "Coefficient":1.0,
+    "Bonus":0
   }
 }

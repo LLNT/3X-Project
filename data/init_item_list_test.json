@@ -51,12 +51,12 @@
 },
   {
 "Id":11,
-"Itemtype":"Repair",
+"Itemtype":"Expel",
 "Use":3
 },
   {
 "Id":12,
-"Itemtype":"Thief",
+"Itemtype":"Warp",
 "Use":3
 }
   ,
@@ -74,5 +74,15 @@
     "Id":15,
     "Itemtype":"Rapier",
     "Use":40
+  },
+  {
+    "Id":16,
+    "Itemtype":"Rewarp",
+    "Use":4
+  },
+  {
+    "Id":17,
+    "Itemtype":"Rescue",
+    "Use":4
   }
 ]

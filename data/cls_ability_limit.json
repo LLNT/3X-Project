@@ -42,6 +42,21 @@
       "HP":80,
       "CRY":20
   },
+  "Paladin":{
+      "LV":20,
+      "MHP":60,
+      "STR":24,
+      "MGC":21,
+      "SPD":25,
+      "SKL":26,
+      "DEF":25,
+      "RES":25,
+      "LUK":30,
+      "BLD":20,
+      "MOV":15,
+      "HP":80,
+      "CRY":20
+  },
   "Swordman":
     { "LV":20,
       "MHP":40,

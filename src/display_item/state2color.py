@@ -57,6 +57,7 @@ self_state2color = {
     'target': RED,
     'can_support': PURPLE,
     'can_exchange': GOLD,
+    'can_wanduse': GOLD
 }
 
 ally_state2color = {
