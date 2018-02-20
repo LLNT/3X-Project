@@ -1145,7 +1145,7 @@ def map_init():
     global_vars = Global(data)
     terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)
     person_container_test = Person_Container(data.map_armylist, global_vars.personBank)
-    map = map_controller.Main(terrain_container_test, person_container_test, global_vars)
+    map = map_controller.Main(terrain_container_test, person_container_test, global_vars,general_eventlist=data.general_eventlist)
     w = terrain_container_test.M
     h = terrain_container_test.N
     return map, w, h

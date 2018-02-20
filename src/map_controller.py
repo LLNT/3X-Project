@@ -24,13 +24,15 @@ class Main:
         self.turn=0
         self.controller=0
         self.mapgrid_eventlist={}
-    def __init__(self,terrain_map,person_container,glb,mapgrid_eventlist={}):
+        self.general_eventlist={}
+    def __init__(self,terrain_map,person_container,glb,mapgrid_eventlist={},general_eventlist={}):
         self.terrain_container=terrain_map
         self.person_container=person_container
         self.turn=0
         self.controller=0
         self.global_vars=glb
         self.mapgrid_eventlist=mapgrid_eventlist
+        self.general_eventlist=general_eventlist
     def send_mapstate(self):
         valid={}                       #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
         invalid={}                     #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]

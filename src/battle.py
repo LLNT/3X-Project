@@ -134,6 +134,10 @@ class Battle:
         self.give_damage_d=0
         self.adjust_lv_a=0
         self.adjust_lv_d=0
+        self.eventlist=[]
+        self.d_def_event=None
+        self.a_def_event=None
+        self.def_event=None
     def __init__(self,_a,_d,_wpa,_wpd,_map,posa):
         self.queue = collections.deque([])  # type:collections.deque[Attack]
         self.log = []                    #type:List[Tuple[int,str]]
@@ -142,6 +146,109 @@ class Battle:
         self.give_damage_a = 0
         self.give_damage_d = 0
         map=_map                         #type:map_controller.Main
+        self.eventlist=[]
+        self.d_def_event=None
+        self.a_def_event=None
+        self.def_event=None
+        for event in map.general_eventlist["Battle"]:
+            ch=event["Character"]
+            cd=event["Condition"]
+            person_coherent=0
+            condition_satisfied=0
+            for pattern in ch:
+                if pattern[0]==None:
+                    if pattern[1]==None:
+                        person_coherent=1
+                    elif pattern[1]==self.d.pid:
+                        person_coherent=1
+                elif pattern[0]==self.a.pid:
+                    if pattern[1]==None:
+                        person_coherent=1
+                    elif pattern[1]==self.d.pid:
+                        person_coherent=1
+            if person_coherent==0:
+                continue
+            for conj_item in cd:
+                item_satisfied=1
+                tr_items=conj_item[0]
+                fl_items=conj_item[1]
+                for tag in tr_items:
+                    if not (tag in map.global_vars.flags):
+                        item_satisfied=0
+                        break
+                    elif map.global_vars.flags[tag]==False:
+                        item_satisfied=0
+                        break
+                if item_satisfied==0:
+                    continue
+                for tag in fl_items:
+                    if not (tag in map.global_vars.flags):
+                        pass
+                    elif map.global_vars.flags[tag]==True:
+                        item_satisfied=0
+                        break
+                if item_satisfied==1:
+                    condition_satisfied=1
+                    break
+            if condition_satisfied==1:
+                self.eventlist.append(event)
+        for event in map.general_eventlist["Defeated"]:
+            if self.a_def_event==None:
+                if event["Person"]==self.a.pid:
+                    if (event["Enemy"]==self.d.pid)or(event["Enemy"]==None):
+                        condition_satisfied=0
+                        for conj_item in event["Condition"]:
+                            item_satisfied = 1
+                            tr_items = conj_item[0]
+                            fl_items = conj_item[1]
+                            for tag in tr_items:
+                                if not (tag in map.global_vars.flags):
+                                    item_satisfied = 0
+                                    break
+                                elif map.global_vars.flags[tag] == False:
+                                    item_satisfied = 0
+                                    break
+                            if item_satisfied == 0:
+                                continue
+                            for tag in fl_items:
+                                if not (tag in map.global_vars.flags):
+                                    pass
+                                elif map.global_vars.flags[tag] == True:
+                                    item_satisfied = 0
+                                    break
+                            if item_satisfied == 1:
+                                condition_satisfied = 1
+                                break
+                        if condition_satisfied == 1:
+                            self.a_def_event=event
+            if self.d_def_event==None:
+                if event["Person"]==self.d.pid:
+                    if (event["Enemy"]==self.a.pid)or(event["Enemy"]==None):
+                        condition_satisfied=0
+                        for conj_item in event["Condition"]:
+                            item_satisfied = 1
+                            tr_items = conj_item[0]
+                            fl_items = conj_item[1]
+                            for tag in tr_items:
+                                if not (tag in map.global_vars.flags):
+                                    item_satisfied = 0
+                                    break
+                                elif map.global_vars.flags[tag] == False:
+                                    item_satisfied = 0
+                                    break
+                            if item_satisfied == 0:
+                                continue
+                            for tag in fl_items:
+                                if not (tag in map.global_vars.flags):
+                                    pass
+                                elif map.global_vars.flags[tag] == True:
+                                    item_satisfied = 0
+                                    break
+                            if item_satisfied == 1:
+                                condition_satisfied = 1
+                                break
+                        if condition_satisfied == 1:
+                            self.d_def_event=event
         self.adjust_lv_a = 0
         self.adjust_lv_d = 0
         if self.a.cls in map.global_vars.cls_rank["High"]:
@@ -156,7 +263,6 @@ class Battle:
         self.weapon_d=_wpd               #type:item.Item
         self.wp_status_eff_a = self.weapon_a.itemtype.status
         self.wp_status_eff_d = {}
-
         if not self.weapon_d==None:
             self.wp_status_eff_d=self.weapon_d.itemtype.status
         self.abl_ori_a=self.a.ability.copy()
@@ -304,8 +410,6 @@ class Battle:
                     btcd = self.d.battlecard[self.d.cls]["Base"]
             else:
                 btcd = self.d.battlecard["Base"]
-        print(btca,btcd)
-        print(self.weapon_a.itemid,self.weapon_d.itemid)
         return (btca,btcd)
 
     def calc_param(self,turns=1):
@@ -464,20 +568,22 @@ class Battle:
             if self.weapon_a.use == 0:
                 self.a.banish(self.weapon_a)
                 self.log.append((-1, "Brokenweapon"))
-                print("WARNING A RUNS OUT OF WEAPON")
+                #A RUNS OUT OF WEAPON
             self.weapon_d.use = self.wear_buf_d
             if self.weapon_d.use == 0:
                 self.d.banish(self.weapon_d)
                 self.log.append((-2,"Brokenweapon"))
-                print("WARNING D RUNS OUT OF WEAPON")
+                #D RUNS OUT OF WEAPON
             if (r == 1):
-                print("WARNING D IS DEFEATED")
+                #D IS DEFEATED
                 self.log.append((-1,"Defeatenemy"))
+                self.def_event=self.d_def_event
             if (r == 2):
-                print("WARNING A IS DEFEATED")
+                #A IS DEFEATED
                 self.log.append((-2, "Defeatenemy"))
+                self.def_event=self.a_def_event
             growthtuple=[0,0,0,[],{}]
-            if self.ctrla==0:
+            if (self.ctrla==0)and(not(r==2)):
                 if self.give_damage_a>0:
                     self.exp_buf_a+=int((31+self.d.ability["LV"]-self.a.ability["LV"]+self.adjust_lv_d-self.adjust_lv_a)*self.d.coefficient)
                 if self.exp_buf_a<1:
@@ -495,7 +601,7 @@ class Battle:
                     growth=self.a.lv_up()
                     growthlist.append(growth)
                 growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
-            if self.ctrld==0:
+            if self.ctrld==0and(not(r==1)):
                 if self.give_damage_d>0:
                     self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
                     "LV"] + self.adjust_lv_a - self.adjust_lv_d) * self.a.coefficient)
@@ -514,7 +620,7 @@ class Battle:
                     growth=self.d.lv_up()
                     growthlist.append(growth)
                 growthtuple=[2,lv_up,self.d.ability["EXP"],growthlist,self.abl_ori_d]
-            return self.log,growthtuple
+            return self.log,growthtuple,self.eventlist,self.def_event
         else:
             r=self.battleb()
             if self.ctrla==0:
@@ -525,15 +631,17 @@ class Battle:
             if self.weapon_a.use==0:
                 self.a.banish(self.weapon_a)
                 self.log.append((-1, "Brokenweapon"))
-                print("WARNING A RUNS OUT OF WEAPON")
+                #A RUNS OUT OF WEAPON
             if (r==1):
-                print("WARNING D IS DEFEATED")
+                #D IS DEFEATED
                 self.log.append((-1, "Defeatenemy"))
+                self.def_event=self.d_def_event
             if (r==2):
-                print("WARNING A IS DEFEATED")
+                #A IS DEFEATED
                 self.log.append((-2, "Defeatenemy"))
+                self.def_event=self.a_def_event
             growthtuple = [0, 0, 0, [],{}]
-            if self.ctrla==0:
+            if self.ctrla==0and(not(r==2)):
                 if self.give_damage_a>0:
                     self.exp_buf_a += int((31 + self.d.ability["LV"] - self.a.ability[
                     "LV"] + self.adjust_lv_d - self.adjust_lv_a) * self.d.coefficient)
@@ -552,7 +660,7 @@ class Battle:
                     growth=self.a.lv_up()
                     growthlist.append(growth)
                 growthtuple=[1,lv_up,self.a.ability["EXP"],growthlist,self.abl_ori_a]
-            if self.ctrld==0:
+            if self.ctrld==0and(not(r==1)):
                 if self.give_damage_d>0:
                     self.exp_buf_d += int((31 + self.a.ability["LV"] - self.d.ability[
                     "LV"] + self.adjust_lv_a - self.adjust_lv_d) * self.a.coefficient)
@@ -571,7 +679,7 @@ class Battle:
                     growth=self.d.lv_up()
                     growthlist.append(growth)
                 growthtuple=[2,lv_up,self.d.ability["EXP"],growthlist,self.abl_ori_d]
-            return self.log,growthtuple
+            return self.log,growthtuple,self.eventlist,self.def_event
 
 
     def ambush_a(self):

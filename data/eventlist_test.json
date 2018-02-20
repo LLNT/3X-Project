@@ -51,19 +51,39 @@
     {
       "Event": "D99010",
       "Person": "1",
-      "Enemy": [
-        "2",
-        ""
-      ],
+      "Enemy": "2",
       "Condition": [
         [
           [],
           [
-            "D99010"
+            "D99010",
+            "D99011"
           ]
         ]
       ],
-      "Text": [["DT990-11","DT990-12"],["DT990-13"]],
+      "Text": ["DT990-11","DT990-12"],
+      "Finish": [
+        {
+          "Condition": [],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D99011",
+      "Person": "1",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D99010",
+            "D99011"
+          ]
+        ]
+      ],
+      "Text": ["DT990-13"],
       "Finish": [
         {
           "Condition": [],
@@ -75,10 +95,29 @@
     {
       "Event": "D99020",
       "Person": "2",
-      "Enemy": [
-        "1",
-        ""
+      "Enemy": "1",
+      "Condition": [
+        [
+          [],
+          [
+            "D99020",
+            "D99021"
+          ]
+        ]
       ],
+      "Text": ["DT990-21","DT990-22"],
+      "Finish": [
+        {
+          "Condition": [],
+          "Execute":["I/7/E"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D99021",
+      "Person": "2",
+      "Enemy": null,
       "Condition": [
         [
           [],
@@ -87,7 +126,7 @@
           ]
         ]
       ],
-      "Text": [["DT990-21","DT990-22"],["DT990-23","DT990-24"]],
+      "Text": ["DT990-23","DT990-24"],
       "Finish": [
         {
           "Condition": [],
@@ -99,9 +138,7 @@
     {
       "Event": "D99030",
       "Person": "3",
-      "Enemy": [
-        ""
-      ],
+      "Enemy": null,
       "Condition": [
         [
           [],
@@ -122,9 +159,7 @@
     {
       "Event": "D99040",
       "Person": "4",
-      "Enemy": [
-        ""
-      ],
+      "Enemy": null,
       "Condition": [
         [
           [],
