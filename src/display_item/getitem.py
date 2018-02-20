@@ -48,6 +48,7 @@ class Getitem(Layer):
     def exit(self):
         self.kill()
         self.parent.end_getitem()
+        director.window.push_handlers(self.parent)
         del self
         pass
 

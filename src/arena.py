@@ -88,7 +88,8 @@ class Arena(ScrollableLayer):
 
 
 
-    def on_return(self, person, getitem=None, transtuple=None):
+    def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
+        print(getitem)
         if getitem is not None:
             self.add(Getitem(person,getitem,self.map.global_vars.flags['Have Transporter'],self.map))
             self.is_event_handler = False
@@ -108,7 +109,17 @@ class Arena(ScrollableLayer):
                 target.do(action + CallFunc(self.clear))
                 director.window.push_handlers(self)
             else:
-                self.clear()
+                if finish is not None:
+                    _type, _id, _pid = finish[0].split('/')
+                    if _pid is 'E':
+                        _pid = defeat
+                    if _type is 'I':
+                        self.add(Getitem(self.people[_pid].person, self.map.global_vars.itemBank[int(_id)],
+                                         self.map.global_vars.flags['Have Transporter'], self.map))
+
+                    pass
+                else:
+                    self.clear()
 
     def clear(self):
         self.is_event_handler = True
