@@ -119,9 +119,10 @@ class Battledialog(BaseDialog):
 
         # add text
         self.text = {}
-        self.text['left'] = Text(text=' ', position=(w // 4, h // 6),font_size=30,
-                                 multiline=True, align='center',width=8)
-        self.text['right'] = Text(text=' ', position=(w * 3 // 4, h // 6), font_size=30)
+        self.text['left'] = Text(text=' ', position=(w // 4, h // 6),font_size=25,
+                                 multiline=True, width=250)
+        self.text['right'] = Text(text=' ', position=(w * 3 // 4, h // 6), font_size=25,
+                                  multiline=True, width=250)
         self.add(self.text['left'])
         self.add(self.text['right'])
         self.excute()
