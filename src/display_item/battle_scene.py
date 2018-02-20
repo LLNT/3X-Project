@@ -16,6 +16,7 @@ from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
 from display_item.info import Experience
 from wand import *
+from display_item.dialog import Battledialog
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -52,7 +53,19 @@ class Animation(Layer):
     def excute(self, event):
         self.events = event[0]
         self.content = event[1]
-        self.get_next_action()
+        battlebefore = event[2]
+        if len(battlebefore) > 0:
+            textlist = battlebefore[0]['Text']
+            textsource = self.map.global_vars.text
+
+            pid2dir = {}
+            pid2dir[self.at.pid] = 'left'
+            pid2dir[self.df.pid] = 'right'
+            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir)
+            self.add(dialog)
+        else:
+            self.get_next_action()
+
 
     def get_next_action(self):
         if self.obj1.busy or self.obj2.busy:
