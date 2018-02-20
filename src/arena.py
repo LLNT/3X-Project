@@ -98,22 +98,25 @@ class Arena(ScrollableLayer):
             if self.transtuple is not None:
                 pid, pos = self.transtuple
                 target = self.people[pid]
-                action = self._transfer(pos)
+                action = self._transfer(pos,1)
                 map = self.map
                 self.cells[map.person_container.position[pid]].person_on = None
                 map.person_container.position[pid] = pos
                 self.people[pid].pos = pos
                 self.cells[pos].person_on = pid
                 target.do(action + CallFunc(self.clear))
+                director.window.push_handlers(self)
             else:
                 self.clear()
 
     def clear(self):
+        self.is_event_handler = True
         self.get_next_to_delete()
         self.map.take_turn(self)
         for person in self.people.values():
             person.update_hp()
         self.state = 'default'
+        print("cleard")
 
     def end_getitem(self):
         self.get_next_to_delete()
@@ -687,7 +690,7 @@ class Arena(ScrollableLayer):
             Sequencial(
                 (self.people[self.selected], self._sequential_move(dst)),
                 (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
-                (self, CallFunc(self._push_scene, Wandtype5))
+                (self.people[self.selected], CallFunc(self._push_scene, Wandtype5))
             ).excute()
             '''Graphic(
                 (self.people[self.selected],
@@ -777,7 +780,7 @@ class Arena(ScrollableLayer):
                 Sequencial(
                     (self.people[self.selected], self._sequential_move(dst)),
                     (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
-                    (self, CallFunc(self._push_scene, Wandtype7))
+                    (self.people[self.selected], CallFunc(self._push_scene, Wandtype7))
                 ).excute()
         pass
 

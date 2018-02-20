@@ -178,20 +178,11 @@ class Battlescene(Animation):
         self.excute(event=event)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
-        self.remove(self.exp)
-        self.do(CallFunc(self._return_arena)+ Delay(1.5) + CallFunc(self._pop))
 
-    def _return_arena(self):
-        director.window.remove_handlers(self)
-        director.push(FadeTransition(Scene(
-            ColorLayer(0, 0, 0, 0, self.width, self.height)), duration=1.5))
-
-    def _pop(self):
-        director.pop()
-        director.pop()
         self.arena.on_return(self.at, self.getitem, self.transtuple)
         self.kill()
-        del self
+        director.window.remove_handlers(self)
+        director.pop()
 
     def exit(self):
         if not self.flag:
@@ -309,6 +300,7 @@ class Wandtype2(Battlescene):
         self.at, wand, self.df, self.map, item = arena.wandlist_type2
         self.battle = Type2(self.at, wand, self.df, self.map, item)
         self.wandinit(wand, w, h, arena, maxsize)
+
 
 class Wandtype3(Battlescene):
     def __init__(self, arena, w=640, h=480, maxsize=2):

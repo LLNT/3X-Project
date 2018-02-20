@@ -20,6 +20,8 @@ class Sequencial():
     def excute(self, i=0):
         if i < self.length:
             _target, _action = self.actionlist[i]  #type:CocosNode, Action
+            if _target is None:
+                _target = CocosNode()
             _target.do(_action + CallFunc(self.excute, i+1))
         else:
             print('excuted')
