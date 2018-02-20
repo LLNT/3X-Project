@@ -20,6 +20,7 @@ from display_item.battle_scene import *
 from display_item.ring import PerSpr
 from display_item.getitem import Getitem
 from display_item.action_control import Sequencial, Graphic
+from display_item.dialog import Dialogscene
 
 import map_controller
 from global_vars import Main as Global
@@ -497,11 +498,17 @@ class Arena(ScrollableLayer):
         # if confirm, push battle scene and then return to 1, else turn to 5
         if self.mouse_btn is 1:
             if self.mouse_pos in self.sup_dict.values():
-                c = self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
-                print(c)
+                self.textlist = self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
+
                 for pid in self.sup_dict:
                     self.people[pid].state = self._reset_person[pid]
-                self.move()
+                dst = self._mapstate[0][self.selected][self.target][1]
+                pid = self.selected
+                obj = self.people[pid]
+                action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
+                if len(self.textlist) > 0:
+                    action = action + CallFunc(self._push_scene, Dialogscene)
+                obj.do(action)
         elif self.mouse_btn is 4:
             self._reset()
         pass
