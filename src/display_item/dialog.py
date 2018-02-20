@@ -114,24 +114,29 @@ class Battledialog(BaseDialog):
         self.type = type
 
         # add label
-        self.label = Text(text=' ', position=(w // 6, h // 3))
-        self.add(self.label)
+        self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
+        self.add(self.text)
 
         # add text
-        self.text = {}
-        self.text['left'] = Text(text=' ', position=(w // 4, h // 6),font_size=25,
-                                 multiline=True, width=250)
-        self.text['right'] = Text(text=' ', position=(w * 3 // 4, h // 6), font_size=25,
-                                  multiline=True, width=250)
-        self.add(self.text['left'])
-        self.add(self.text['right'])
+        self.label = {}
+        self.label['left'] = Text(text=' ', position=(w // 4, h // 4),font_size=25)
+        self.label['right'] = Text(text=' ', position=(w * 3 // 4, h // 4), font_size=25)
+        self.add(self.label['left'])
+        self.add(self.label['right'])
         self.excute()
 
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
         dir = self.pid2dir[item['Speaker']]
-        self.text[dir].element.text = item['Tag'] + '\n' + item['Text']
+        self.label[dir].element.text = item['Tag']
+        self.text.element.text = item['Text']
+        if dir is 'left':
+            self.label['right'].visible = False
+            self.label['left'].visible = True
+        else:
+            self.label['right'].visible = True
+            self.label['left'].visible = False
 
         super().excute()
 

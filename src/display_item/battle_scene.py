@@ -147,7 +147,6 @@ class Animation(Layer):
         :return:
         '''
         if self.dialogafter is not None:
-            print(self.dialogafter)
             textlist = self.dialogafter['Text']
             textsource = self.map.global_vars.text
             pid2dir = {}
@@ -251,8 +250,22 @@ class Battlescene(Animation):
         btca, btcd = self.battle.get_battlecard()
         self.add(Sprite(btca, position=(w//4, h*3//4)))
         self.add(Sprite(btcd, position=(w*3//4, h*3//4)))
+        
+class Wandscene(Battlescene):
+    def excute(self, event):
+        self.events = event[0]
+        self.content = event[1]
+        self.get_next_action()
+        
+    def exit(self):
+        if not self.flag:
+            for info in self.info.queue:
+                self.remove(info)
+            self.flag = True
+            self.growth()
+        
 
-class Wandtype0(Battlescene):
+class Wandtype0(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map = arena.wandlist_type0
         self.battle = Type0(self.at, wand, self.df, self.map)
@@ -315,26 +328,26 @@ class Wandtype0(Battlescene):
             t1.do(a1 + CallFunc(t1.parent.set_busy) + CallFunc(self.get_next_action))
             t2.do(a2 + CallFunc(t2.parent.set_busy) + CallFunc(self.get_next_action))
 
-class Wandtype1(Battlescene):
+class Wandtype1(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type1
         self.battle = Type1(self.at, wand, self.df, self.map)
         self.wandinit(wand, w, h, arena, maxsize)
 
-class Wandtype2(Battlescene):
+class Wandtype2(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, item = arena.wandlist_type2
         self.battle = Type2(self.at, wand, self.df, self.map, item)
         self.wandinit(wand, w, h, arena, maxsize)
 
 
-class Wandtype3(Battlescene):
+class Wandtype3(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos, item = arena.wandlist_type3
         self.battle = Type3(self.at, wand, self.df, self.map, pos, item)
         self.wandinit(wand, w, h, arena, maxsize)
 
-class Wandtype4(Battlescene):
+class Wandtype4(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         user, wand, target, self.map= arena.wandlist_type4
         self.battle = Type4(user, wand, self.map, target)
@@ -355,14 +368,14 @@ class Wandtype4(Battlescene):
         self.content = event[1]
         self.growth()
 
-class Wandtype5(Battlescene):
+class Wandtype5(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos, tarpos = arena.wandlist_type5
         self.battle = Type5(self.at, wand, self.df, self.map, pos, tarpos)
         self.wandinit(wand, w, h, arena, maxsize)
         self.transtuple = self.df.pid, tarpos
 
-class Wandtype6(Battlescene):
+class Wandtype6(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type6
         self.battle = Type6(self.at,wand, self.df,self.map, pos)
@@ -370,14 +383,14 @@ class Wandtype6(Battlescene):
         self.wandinit(wand, w, h, arena, maxsize)
         self.transtuple = self.transtuple_c
 
-class Wandtype7(Battlescene):
+class Wandtype7(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type7
         self.battle = Type7(self.at,wand, self.df,self.map, pos)
         self.wandinit(wand, w, h, arena, maxsize)
         self.transtuple = self.df.pid, pos
 
-class Wandtype8(Battlescene):
+class Wandtype8(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         user, wand, self.map, pos= arena.wandlist_type8
         self.battle = Type8(user, wand, self.map, pos)
@@ -398,7 +411,7 @@ class Wandtype8(Battlescene):
         self.content = event[1]
         self.growth()
 
-class Wandtype9(Battlescene):
+class Wandtype9(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type9
         self.battle = Type9(self.at,wand, self.df,self.map, pos)
