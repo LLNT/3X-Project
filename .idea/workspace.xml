@@ -5,11 +5,12 @@
     <list id="8ff8da34-212e-400e-bbc8-88f215881b81" name="display" comment="on mouse motion" />
     <list id="a32817b5-57da-4971-bfb6-0f92957fd656" name="New changelist" comment="" />
     <list default="true" id="39a02d60-74f4-416d-b1dc-3c640f70ad2c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/3XProject.iml" afterPath="$PROJECT_DIR$/.idea/3XProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eventlist_test.json" afterPath="$PROJECT_DIR$/data/eventlist_test.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/battle_scene.py" afterPath="$PROJECT_DIR$/src/display_item/battle_scene.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/dialog.py" afterPath="$PROJECT_DIR$/src/display_item/dialog.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/ring.py" afterPath="$PROJECT_DIR$/src/display_item/ring.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/display_item/text.py" afterPath="$PROJECT_DIR$/src/display_item/text.py" />
     </list>
     <ignored path="C:\Users\hasee\git\3X-Project\.idea\shelf/" />
     <ignored mask="*.xml" />
@@ -40,230 +41,109 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.85958105">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="arena.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/arena.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="701" column="18" lean-forward="false" selection-start-line="701" selection-start-column="18" selection-end-line="701" selection-end-column="18" />
-                  <folding>
-                    <element signature="e#63#76#0" expanded="true" />
-                    <marker date="1519081331639" expanded="true" signature="43274:43362" ph="..." />
-                    <marker date="1519081331639" expanded="true" signature="43393:43445" ph="..." />
-                    <marker date="1519081331639" expanded="true" signature="43474:43548" ph="..." />
-                    <marker date="1519081331639" expanded="true" signature="43578:43851" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="battle_scene.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="231">
-                  <caret line="63" column="89" lean-forward="false" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
-                  <folding>
-                    <element signature="e#65#100#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="dialog.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/display_item/dialog.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-7">
-                  <caret line="121" column="59" lean-forward="false" selection-start-line="121" selection-start-column="59" selection-end-line="121" selection-end-column="59" />
-                  <folding>
-                    <element signature="e#56#97#0" expanded="true" />
-                    <element signature="e#2494#2729#0" expanded="false" />
-                    <element signature="e#2774#3020#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-            <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/text/__init__.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="177">
-                  <caret line="393" column="6" lean-forward="false" selection-start-line="393" selection-start-column="6" selection-end-line="393" selection-end-column="6" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="text.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/display_item/text.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="425">
-                  <caret line="20" column="52" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="20" selection-end-column="52" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="text.json" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/data/text.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-5725">
-                  <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="battle.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/battle.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="376">
-                  <caret line="681" column="54" lean-forward="false" selection-start-line="681" selection-start-column="45" selection-end-line="681" selection-end-column="54" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="info.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/display_item/info.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4225">
-                  <caret line="176" column="33" lean-forward="false" selection-start-line="176" selection-start-column="33" selection-end-line="176" selection-end-column="33" />
-                  <folding>
-                    <marker date="1519081203052" expanded="true" signature="4306:7413" ph="..." />
-                    <marker date="1519081203052" expanded="true" signature="4340:4774" ph="..." />
-                    <marker date="1519081203052" expanded="true" signature="6251:6276" ph="..." />
-                    <marker date="1519081203052" expanded="true" signature="6251:6295" ph="..." />
-                    <marker date="1519081203052" expanded="true" signature="6251:7413" ph="..." />
-                    <marker date="1519081203052" expanded="true" signature="7060:7192" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="map_controller.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/map_controller.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6425">
-                  <caret line="266" column="11" lean-forward="false" selection-start-line="266" selection-start-column="11" selection-end-line="266" selection-end-column="11" />
-                  <folding>
-                    <marker date="1519081331656" expanded="true" signature="458:704" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="458:738" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="1124:1134" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="1163:10132" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="1634:5836" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="1685:5789" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="1748:3242" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="1809:3086" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="2058:2595" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="2105:2595" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="2757:2948" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="3307:4537" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="3544:4058" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="3589:4058" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="4215:4401" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="4559:5789" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="4796:5311" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="4841:5311" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="5468:5654" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="5867:10132" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="5918:10023" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="5981:7474" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="6042:7318" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="6291:6827" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="6338:6827" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="6989:7180" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="7539:8770" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="7776:8291" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="7821:8291" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="8448:8634" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="8792:10023" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="9029:9544" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="9074:9544" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="9701:9887" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="10165:10347" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="10212:10332" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="10373:11442" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="10401:11442" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="10525:11442" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="10694:10963" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="11005:11395" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="11048:11179" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="11224:11340" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="11473:11989" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="11636:11825" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="11860:11989" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="12024:12063" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="12096:12212" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="12244:12972" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="12379:12531" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="12566:12695" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="12730:12972" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="13007:13073" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="13109:13900" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="13234:13877" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="13288:13877" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="13349:13877" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="13426:13877" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="13942:15720" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="14096:14588" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="14216:14362" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="14420:14566" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="14653:15145" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="14773:14919" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="14977:15123" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="15210:15702" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="15330:15476" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="15534:15680" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="15759:16209" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="15925:16054" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="16102:16209" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="16131:16209" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="16251:17327" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="16581:16812" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="16836:17016" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="17362:17873" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="17508:17850" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="17613:17850" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="17687:17850" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="17908:18338" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="18044:18185" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="18233:18318" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="18375:18793" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="18688:18773" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="18831:18851" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="18886:19192" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="19030:19171" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="19076:19171" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="19234:19327" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="19467:19627" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="19992:20349" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="20046:20349" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="20082:20349" ph="..." />
-                    <marker date="1519081331656" expanded="true" signature="20235:20349" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="text.json" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/data/text.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="50">
-                  <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="battle_scene.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="158" column="25" lean-forward="false" selection-start-line="158" selection-start-column="25" selection-end-line="158" selection-end-column="25" />
+              <folding>
+                <element signature="e#65#100#0" expanded="true" />
+                <element signature="e#2169#4451#0" expanded="false" />
+                <element signature="e#6016#7216#0" expanded="false" />
+                <element signature="e#7673#8673#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/display_item/dialog.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="53">
+              <caret line="112" column="30" lean-forward="true" selection-start-line="112" selection-start-column="30" selection-end-line="112" selection-end-column="30" />
+              <folding>
+                <element signature="e#56#97#0" expanded="true" />
+                <element signature="e#2552#2787#0" expanded="false" />
+                <element signature="e#2832#3078#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/text/layout.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="841" column="0" lean-forward="false" selection-start-line="841" selection-start-column="0" selection-end-line="841" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/text/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="264" column="68" lean-forward="false" selection-start-line="264" selection-start-column="66" selection-end-line="264" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="text.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/display_item/text.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="text.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/text.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="409">
+              <caret line="152" column="24" lean-forward="true" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ring.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/display_item/ring.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="115" column="95" lean-forward="false" selection-start-line="115" selection-start-column="95" selection-end-line="115" selection-end-column="95" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/display_item/menu.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="236" column="17" lean-forward="false" selection-start-line="236" selection-start-column="17" selection-end-line="236" selection-end-column="17" />
+              <folding>
+                <element signature="e#10646#11668#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="info.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/display_item/info.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="36" column="22" lean-forward="true" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -340,7 +220,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Display_Qt.py" />
         <option value="$PROJECT_DIR$/src/.gitignore" />
         <option value="$PROJECT_DIR$/src/person_info.py" />
         <option value="$PROJECT_DIR$/src/menu.py" />
@@ -374,8 +253,6 @@
         <option value="$PROJECT_DIR$/src/display_item/bar.py" />
         <option value="$PROJECT_DIR$/src/display_item/sprite.py" />
         <option value="$PROJECT_DIR$/src/test_display.py" />
-        <option value="$PROJECT_DIR$/src/display_item/text.py" />
-        <option value="$PROJECT_DIR$/src/display_item/ring.py" />
         <option value="$PROJECT_DIR$/src/wand.py" />
         <option value="$PROJECT_DIR$/src/display_item/menu.py" />
         <option value="$PROJECT_DIR$/data/flags.json" />
@@ -389,7 +266,10 @@
         <option value="$PROJECT_DIR$/src/display_item/action_control.py" />
         <option value="$PROJECT_DIR$/src/map_controller.py" />
         <option value="$PROJECT_DIR$/src/arena.py" />
+        <option value="$PROJECT_DIR$/src/display_item/ring.py" />
+        <option value="$PROJECT_DIR$/src/display_item/text.py" />
         <option value="$PROJECT_DIR$/src/display_item/battle_scene.py" />
+        <option value="$PROJECT_DIR$/data/eventlist_test.json" />
         <option value="$PROJECT_DIR$/src/display_item/dialog.py" />
       </list>
     </option>
@@ -401,10 +281,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="275" />
-    <option name="y" value="63" />
-    <option name="width" value="1380" />
-    <option name="height" value="736" />
+    <option name="x" value="496" />
+    <option name="y" value="304" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -448,7 +328,18 @@
             <path>
               <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="3X-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="display_item" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="3X-Project" type="b2602c69:ProjectViewProjectNode" />
@@ -692,13 +583,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1511945176045</updated>
-    </task>
-    <task id="LOCAL-00015" summary="fix movable">
-      <created>1517306701092</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1517306701092</updated>
     </task>
     <task id="LOCAL-00016" summary="git ignore">
       <created>1517307399870</created>
@@ -1036,7 +920,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519022982286</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="dialog before battle">
+      <created>1519114451069</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1519114451069</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1046,8 +937,8 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14186296" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="24" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3736018" sideWeight="0.22269808" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3736018" sideWeight="0.7773019" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31879196" sideWeight="0.22269808" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31879196" sideWeight="0.7773019" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23378076" sideWeight="0.4914347" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16331096" sideWeight="0.49357602" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16809422" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1130,7 +1021,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="update battle scene&#10;modified will's hp" />
     <MESSAGE value="add hp hint" />
     <MESSAGE value="hp color transforms with circle&#10;can handle multiple result now" />
     <MESSAGE value="add weapon info in person info page" />
@@ -1155,7 +1045,8 @@
     <MESSAGE value="fix moved" />
     <MESSAGE value="fix transfer" />
     <MESSAGE value="update type7" />
-    <option name="LAST_COMMIT_MESSAGE" value="update type7" />
+    <MESSAGE value="dialog before battle" />
+    <option name="LAST_COMMIT_MESSAGE" value="dialog before battle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1175,15 +1066,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/src/test_display.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/sprite.py" />
     <entry file="file://$PROJECT_DIR$/src/itemtype.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -1242,17 +1124,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/menu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2250">
-          <caret line="94" column="4" lean-forward="false" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="55" />
-          <folding>
-            <element signature="e#64#143#0" expanded="false" />
-            <element signature="e#10646#11668#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1316,14 +1187,6 @@
       </provider>
     </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/cocos/cocosnode.py" />
-    <entry file="file://$PROJECT_DIR$/src/display_item/ring.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="49" column="8" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/cocos/director.py" />
     <entry file="file:///usr/local/lib/python3.5/dist-packages/pyglet/event.py" />
     <entry file="file://$PROJECT_DIR$/src/display_item/state2color.py">
@@ -1465,21 +1328,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4225">
-          <caret line="176" column="33" lean-forward="false" selection-start-line="176" selection-start-column="33" selection-end-line="176" selection-end-column="33" />
-          <folding>
-            <marker date="1519081203052" expanded="true" signature="4306:7413" ph="..." />
-            <marker date="1519081203052" expanded="true" signature="4340:4774" ph="..." />
-            <marker date="1519081203052" expanded="true" signature="6251:6276" ph="..." />
-            <marker date="1519081203052" expanded="true" signature="6251:6295" ph="..." />
-            <marker date="1519081203052" expanded="true" signature="6251:7413" ph="..." />
-            <marker date="1519081203052" expanded="true" signature="7060:7192" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/background_test.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1491,17 +1339,32 @@
       </provider>
     </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/cocos/text.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/cocosnode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="504" column="0" lean-forward="false" selection-start-line="504" selection-start-column="0" selection-end-line="504" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/azhar.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/text.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/arena.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-625">
           <caret line="701" column="18" lean-forward="false" selection-start-line="701" selection-start-column="18" selection-end-line="701" selection-end-column="18" />
-          <folding>
-            <element signature="e#63#76#0" expanded="true" />
-            <marker date="1519081331639" expanded="true" signature="43274:43362" ph="..." />
-            <marker date="1519081331639" expanded="true" signature="43393:43445" ph="..." />
-            <marker date="1519081331639" expanded="true" signature="43474:43548" ph="..." />
-            <marker date="1519081331639" expanded="true" signature="43578:43851" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1513,65 +1376,94 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/cocosnode.py">
+    <entry file="file://$PROJECT_DIR$/src/display_item/ring.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="504" column="0" lean-forward="false" selection-start-line="504" selection-start-column="0" selection-end-line="504" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="115" column="95" lean-forward="false" selection-start-line="115" selection-start-column="95" selection-end-line="115" selection-end-column="95" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/text.py">
+    <entry file="file://$PROJECT_DIR$/src/display_item/menu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="20" column="52" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="20" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="63" column="89" lean-forward="false" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
+        <state relative-caret-position="193">
+          <caret line="236" column="17" lean-forward="false" selection-start-line="236" selection-start-column="17" selection-end-line="236" selection-end-column="17" />
           <folding>
-            <element signature="e#65#100#0" expanded="true" />
+            <element signature="e#10646#11668#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/text.py">
+    <entry file="file://$PROJECT_DIR$/src/display_item/info.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="114" column="25" lean-forward="false" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
+        <state relative-caret-position="243">
+          <caret line="36" column="22" lean-forward="true" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/text/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="393" column="6" lean-forward="false" selection-start-line="393" selection-start-column="6" selection-end-line="393" selection-end-column="6" />
+        <state relative-caret-position="468">
+          <caret line="264" column="68" lean-forward="false" selection-start-line="264" selection-start-column="66" selection-end-line="264" selection-end-column="68" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyglet/text/layout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="841" column="0" lean-forward="false" selection-start-line="841" selection-start-column="0" selection-end-line="841" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/cocos/text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="152" column="24" lean-forward="true" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/eventlist_test.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="167" column="11" lean-forward="true" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/battle_scene.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="158" column="25" lean-forward="false" selection-start-line="158" selection-start-column="25" selection-end-line="158" selection-end-column="25" />
+          <folding>
+            <element signature="e#65#100#0" expanded="true" />
+            <element signature="e#2169#4451#0" expanded="false" />
+            <element signature="e#6016#7216#0" expanded="false" />
+            <element signature="e#7673#8673#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/display_item/dialog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="121" column="59" lean-forward="false" selection-start-line="121" selection-start-column="59" selection-end-line="121" selection-end-column="59" />
+        <state relative-caret-position="53">
+          <caret line="112" column="30" lean-forward="true" selection-start-line="112" selection-start-column="30" selection-end-line="112" selection-end-column="30" />
           <folding>
             <element signature="e#56#97#0" expanded="true" />
-            <element signature="e#2494#2729#0" expanded="false" />
-            <element signature="e#2774#3020#0" expanded="false" />
+            <element signature="e#2552#2787#0" expanded="false" />
+            <element signature="e#2832#3078#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/text.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5725">
-          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -54,14 +54,14 @@ class Animation(Layer):
         self.events = event[0]
         self.content = event[1]
         battlebefore = event[2]
+        self.dialogafter = event[3]
         if len(battlebefore) > 0:
             textlist = battlebefore[0]['Text']
             textsource = self.map.global_vars.text
-
             pid2dir = {}
             pid2dir[self.at.pid] = 'left'
             pid2dir[self.df.pid] = 'right'
-            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir)
+            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, 'before')
             self.add(dialog)
         else:
             self.get_next_action()
@@ -135,7 +135,8 @@ class Animation(Layer):
             obj_leave.do(MoveTo((self.width // 2, self.height), 1) | FadeOut(1))
         for obj in self.info.queue:
             obj.do(MoveBy((0, 40), 1))
-        obj = Text(content=content, position=(self.width // 2, self.height // 2 + 50), color=color)
+        obj = Text(text=content, position=(self.width // 2, self.height // 2 + 50),
+                   color=color, font_size=30)
         self.add(obj)
         self.info.put(obj)
         obj.do(FadeIn(1.5) + CallFunc(self.get_next_action))
@@ -145,6 +146,18 @@ class Animation(Layer):
         should be override to define the movement when exit
         :return:
         '''
+        if self.dialogafter is not None:
+            print(self.dialogafter)
+            textlist = self.dialogafter['Text']
+            textsource = self.map.global_vars.text
+            pid2dir = {}
+            pid2dir[self.at.pid] = 'left'
+            pid2dir[self.df.pid] = 'right'
+            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, 'after')
+            self.add(dialog)
+        else:
+            self.growth()
+
         pass
 
     def growth(self):
@@ -201,8 +214,8 @@ class Battlescene(Animation):
         if not self.flag:
             for info in self.info.queue:
                 self.remove(info)
-            self.growth()
             self.flag = True
+            super().exit()
 
     def wandinit(self, wand, w, h, arena, maxsize):
 

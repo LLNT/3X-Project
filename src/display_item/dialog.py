@@ -62,11 +62,11 @@ class Dialogscene(BaseDialog):
         self.add(self.right)
 
         # add label
-        self.label = Text('', (w // 6, h // 3))
+        self.label = Text(text=' ', position=(w // 6, h // 3), font_size=24)
         self.add(self.label)
 
         # add text
-        self.text = Text('', (w // 2, h // 6))
+        self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
         self.add(self.text)
 
         self.excute()
@@ -106,21 +106,22 @@ class Dialogscene(BaseDialog):
 
 class Battledialog(BaseDialog):
 
-    def __init__(self, textlist, textsource, w, h, pid2dir):
+    def __init__(self, textlist, textsource, w, h, pid2dir, type):
         super().__init__(textlist, textsource)
 
         self.w, self.h = w, h
         self.pid2dir = pid2dir
-
+        self.type = type
 
         # add label
-        self.label = Text('', (w // 6, h // 3))
+        self.label = Text(text=' ', position=(w // 6, h // 3))
         self.add(self.label)
 
         # add text
         self.text = {}
-        self.text['left'] = Text(' ', (w // 4, h // 6),font_size=30)
-        self.text['right'] = Text(' ', (w * 3 // 4, h // 6), font_size=30)
+        self.text['left'] = Text(text=' ', position=(w // 4, h // 6),font_size=30,
+                                 multiline=True, align='center',width=8)
+        self.text['right'] = Text(text=' ', position=(w * 3 // 4, h // 6), font_size=30)
         self.add(self.text['left'])
         self.add(self.text['right'])
         self.excute()
@@ -129,12 +130,15 @@ class Battledialog(BaseDialog):
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
         dir = self.pid2dir[item['Speaker']]
-        self.text[dir].element.text = item['Text']
+        self.text[dir].element.text = item['Tag'] + '\n' + item['Text']
 
         super().excute()
 
     def exit(self):
         self.kill()
-        self.parent.get_next_action()
+        if self.type is 'before':
+            self.parent.get_next_action()
+        elif self.type is 'after':
+            self.parent.growth()
 
     pass

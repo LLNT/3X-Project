@@ -113,7 +113,7 @@ class Scoreboard(Ring):
                  prop=1, back_color = BLACK, hp=20, mhp=20):
         super().__init__(position, scale, start_color=start_color, end_color=end_color,
                  prop=prop, back_color = back_color)
-        self.hp = Text(str(hp), (0, 0), color=(255, 255, 255, 255))
+        self.hp = Text(text=str(hp), position=(0, 0), color=(255, 255, 255, 255),  font_size=30)
         self.add(self.hp)
         self.mhp = mhp
 

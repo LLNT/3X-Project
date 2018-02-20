@@ -8,17 +8,8 @@ from cocos.text import RichLabel
 
 class Text(RichLabel):
 
-    def __init__(self, content, position, color=(127, 255, 170, 255),
-                 font_name='times new roman',font_size=36):
-
-
-        super(Text, self).__init__(text=content,
-                                   font_name=font_name,
-                                   font_size=font_size,
-                                   position=position,
-                                   color=color,
-                                   anchor_x='center',
-                                   anchor_y='center')
+    def __init__(self, **kwargs):
+        super(Text, self).__init__(anchor_x='center',anchor_y='center', **kwargs)
 
 def layout(content, pos_range=None, color=(127, 255, 170, 255), font_name='times new roman',font_size=36):
     '''
@@ -39,7 +30,7 @@ def layout(content, pos_range=None, color=(127, 255, 170, 255), font_name='times
     textlist = []
     for i, text in enumerate(reversed(content)):
         pos_y = (i + 1) / num * y_range + y0
-        textlist.append(Text(content=text, position=(pos_x, pos_y), color=color,
+        textlist.append(Text(text=text, position=(pos_x, pos_y), color=color,
                              font_size=font_size, font_name=font_name))
     return textlist
 
