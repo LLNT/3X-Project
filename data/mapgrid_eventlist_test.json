@@ -48,6 +48,11 @@
           "Condition":[[["VT990-111-C"],[]]],
           "Execute":["CLV/5,0","I/20/V"],
           "Jump":"F"
+        },
+        {
+          "Condition":[],
+          "Execute":["CLV/5,0"],
+          "Jump":"F"
         }
         ]
       }
