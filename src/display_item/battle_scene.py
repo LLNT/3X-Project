@@ -219,6 +219,24 @@ class Battlescene(Animation):
             self.flag = True
             super().exit()
 
+    def add_battle_card(self, w, h):
+        btca, btcd = self.battle.get_battlecard()
+        self.add(Sprite(btca, position=(w//4, h*3//4)))
+        self.add(Sprite(btcd, position=(w*3//4, h*3//4)))
+        
+class Wandscene(Battlescene):
+    def excute(self, event):
+        self.events = event[0]
+        self.content = event[1]
+        self.get_next_action()
+        
+    def exit(self):
+        if not self.flag:
+            for info in self.info.queue:
+                self.remove(info)
+            self.flag = True
+            self.growth()
+
     def wandinit(self, wand, w, h, arena, maxsize):
 
         pos1 = w // 4, h // 4
@@ -244,35 +262,16 @@ class Battlescene(Animation):
         self.add(self.attacker)
         self.add(self.defender)
         # self.add_battle_card(w, h)
-        event = self.battle.execute()
-        del self.battle
-        self.excute(event=event)
 
-
-    def add_battle_card(self, w, h):
-        btca, btcd = self.battle.get_battlecard()
-        self.add(Sprite(btca, position=(w//4, h*3//4)))
-        self.add(Sprite(btcd, position=(w*3//4, h*3//4)))
-        
-class Wandscene(Battlescene):
-    def excute(self, event):
-        self.events = event[0]
-        self.content = event[1]
-        self.get_next_action()
-        
-    def exit(self):
-        if not self.flag:
-            for info in self.info.queue:
-                self.remove(info)
-            self.flag = True
-            self.growth()
-        
 
 class Wandtype0(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map = arena.wandlist_type0
         self.battle = Type0(self.at, wand, self.df, self.map)
         self.wandinit(wand, w, h, arena, maxsize)
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
 
     def get_next_action(self):
         if self.obj1.busy or self.obj2.busy:
@@ -336,12 +335,18 @@ class Wandtype1(Wandscene):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type1
         self.battle = Type1(self.at, wand, self.df, self.map)
         self.wandinit(wand, w, h, arena, maxsize)
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
 
 class Wandtype2(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, item = arena.wandlist_type2
         self.battle = Type2(self.at, wand, self.df, self.map, item)
         self.wandinit(wand, w, h, arena, maxsize)
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
 
 
 class Wandtype3(Wandscene):
@@ -349,6 +354,9 @@ class Wandtype3(Wandscene):
         self.at, wand, self.df, self.map, pos, item = arena.wandlist_type3
         self.battle = Type3(self.at, wand, self.df, self.map, pos, item)
         self.wandinit(wand, w, h, arena, maxsize)
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
 
 class Wandtype4(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
@@ -377,6 +385,9 @@ class Wandtype5(Wandscene):
         self.battle = Type5(self.at, wand, self.df, self.map, pos, tarpos)
         self.wandinit(wand, w, h, arena, maxsize)
         self.transtuple = self.df.pid, tarpos
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
 
 class Wandtype6(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
@@ -385,6 +396,9 @@ class Wandtype6(Wandscene):
         self.transtuple_c = self.df.pid, self.battle.get_target()
         self.wandinit(wand, w, h, arena, maxsize)
         self.transtuple = self.transtuple_c
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
 
 class Wandtype7(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
@@ -392,6 +406,9 @@ class Wandtype7(Wandscene):
         self.battle = Type7(self.at,wand, self.df,self.map, pos)
         self.wandinit(wand, w, h, arena, maxsize)
         self.transtuple = self.df.pid, pos
+        event = self.battle.execute()
+        del self.battle
+        self.excute(event=event)
 
 class Wandtype8(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):

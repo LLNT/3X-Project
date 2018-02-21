@@ -38,4 +38,4 @@ class Main:
         self.support_text_map=json.load(open(path+"support_text.json","r"))
         self.text=json.load(codecs.open(path+"text.json","r","utf-8"))
         self.mapgrid_eventlist=json.load(open(path+"mapgrid_eventlist_test.json","r"))
-        self.general_eventlist=json.load(open(path+"eventlist_test.json","r"))
+        self.general_eventlist=json.load(open(path+"eventlist.json","r"))
