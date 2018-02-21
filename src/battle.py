@@ -168,6 +168,8 @@ class Battle:
                         person_coherent=1
             if person_coherent==0:
                 continue
+            if len(cd)<1:
+                condition_satisfied=1
             for conj_item in cd:
                 item_satisfied=1
                 tr_items=conj_item[0]
@@ -197,6 +199,8 @@ class Battle:
                 if event["Person"]==self.a.pid:
                     if (event["Enemy"]==self.d.pid)or(event["Enemy"]==None):
                         condition_satisfied=0
+                        if len(event["Condition"]<1):
+                            condition_satisfied=1
                         for conj_item in event["Condition"]:
                             item_satisfied = 1
                             tr_items = conj_item[0]
@@ -225,6 +229,8 @@ class Battle:
                 if event["Person"]==self.d.pid:
                     if (event["Enemy"]==self.a.pid)or(event["Enemy"]==None):
                         condition_satisfied=0
+                        if len(event["Condition"])<1:
+                            condition_satisfied=1
                         for conj_item in event["Condition"]:
                             item_satisfied = 1
                             tr_items = conj_item[0]

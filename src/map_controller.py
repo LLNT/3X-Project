@@ -23,16 +23,14 @@ class Main:
         self.global_vars=None           #type:global_vars.Main
         self.turn=0
         self.controller=0
-        self.mapgrid_eventlist={}
-        self.general_eventlist={}
-    def __init__(self,terrain_map,person_container,glb,mapgrid_eventlist={},general_eventlist={}):
+        self.eventlist={}
+    def __init__(self,terrain_map,person_container,glb,eventlist={}):
         self.terrain_container=terrain_map
         self.person_container=person_container
         self.turn=0
         self.controller=0
         self.global_vars=glb
-        self.mapgrid_eventlist=mapgrid_eventlist
-        self.general_eventlist=general_eventlist
+        self.eventlist=eventlist
     def send_mapstate(self):
         valid={}                       #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
         invalid={}                     #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
@@ -428,4 +426,47 @@ class Main:
             if i in retmap:
                 candidates=retmap[i]
                 return candidates[0]
+
+    def get_grid_event(self,pos,p):
+        if self.terrain_container.map[pos[0]][pos[1]].typename=="Village":
+            event=None
+            if not("%d,%d"%pos in self.eventlist["Villages"]):
+                return ("V",None)
+            candidates=self.eventlist["Villages"]["%d,%d"%pos]
+            for candidate in candidates:
+                ch=candidate["Character"]
+                cd=candidate["Condition"]
+                if not(ch==p):
+                    if not(ch==None):
+                        continue
+                condition_satisfied=0
+                if len(cd)<1:
+                    condition_satisfied=1
+                for conj_item in cd:
+                    item_satisfied = 1
+                    tr_items = conj_item[0]
+                    fl_items = conj_item[1]
+                    for tag in tr_items:
+                        if not (tag in self.global_vars.flags):
+                            item_satisfied = 0
+                            break
+                        elif self.global_vars.flags[tag] == False:
+                            item_satisfied = 0
+                            break
+                    if item_satisfied == 0:
+                        continue
+                    for tag in fl_items:
+                        if not (tag in self.global_vars.flags):
+                            pass
+                        elif self.global_vars.flags[tag] == True:
+                            item_satisfied = 0
+                            break
+                    if item_satisfied == 1:
+                        condition_satisfied = 1
+                        break
+                if condition_satisfied == 1:
+                    event=candidate
+                    break
+            return ("V",event)
+        return ("N",None)
 
