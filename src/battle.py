@@ -1146,7 +1146,10 @@ class Battle:
         if (self.shield_d()==1):
             self.att_shield=1
             self.log.append((-2,"Shield"))
-        dmg=(self.atka-self.defd)*(1-self.att_shield)*(1+2*self.att_crt)*self.combo_bonusa
+        if self.att_moon==1:
+            dmg = (self.atka ) * (1 - self.att_shield) * (1 + 2 * self.att_crt) * self.combo_bonusa
+        else:
+            dmg=(self.atka-self.defd)*(1-self.att_shield)*(1+2*self.att_crt)*self.combo_bonusa
         self.combo_bonusa = self.combo_bonusa * (1 + self.redseala)
         if (dmg<0):
             dmg=0
@@ -1274,7 +1277,10 @@ class Battle:
         if (self.shield_a()==1):
             self.att_shield=1
             self.log.append((-1,"Shield"))
-        dmg=(self.atkd-self.defa)*(1-self.att_shield)*(1+2*self.att_crt)*self.combo_bonusd
+        if self.att_moon==1:
+            dmg = (self.atkd) * (1 - self.att_shield) * (1 + 2 * self.att_crt) * self.combo_bonusd
+        else:
+            dmg=(self.atkd-self.defa)*(1-self.att_shield)*(1+2*self.att_crt)*self.combo_bonusd
         self.combo_bonusd = self.combo_bonusd * (1 + self.redseald)
         if (dmg<0):
             dmg=0
