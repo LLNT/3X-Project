@@ -1,4 +1,56 @@
 {
   "Background_Scene":"background_test.jpg",
-  "Villages":[]
+  "Villages":{
+    "5,0":[
+      {
+        "Event":"V990000",
+        "Character":"1",
+        "Condition": [
+
+      ],
+        "Text":["VT990-101","VT990-102","VT990-103","VT990-104"],
+        "Finish":[
+        {
+          "Condition":[],
+          "Execute":["CLV/5,0","I/15/1"],
+          "Jump":"F"
+        }]
+      },
+      {
+        "Event":"V990001",
+        "Character":null,
+        "Condition": [
+          [["D99010"],[]],
+          [["D99011"],[]]
+      ],
+        "Text":["VT990-105","VT990-106","VT990-107","VT990-108"],
+        "Finish":[
+        {
+          "Condition":[],
+          "Execute":["CLV/5,0"],
+          "Jump":"F"
+        }]
+      },
+      {
+        "Event":"V990002",
+        "Character":null,
+        "Condition": [
+
+      ],
+        "Text":["VT990-109","VT990-110","VT990-111","VT990-112"],
+        "Finish":[
+        {
+          "Condition":[[["VT990-111-A"],[]],[["VT990-111-B"],[]]],
+          "Execute":["CLV/5,0","I/19/V"],
+          "Jump":"F"
+        },
+        {
+          "Condition":[[["VT990-111-C"],[]]],
+          "Execute":["CLV/5,0","I/20/V"],
+          "Jump":"F"
+        }
+        ]
+      }
+    ]
+  }
 }

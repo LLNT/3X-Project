@@ -89,5 +89,15 @@
     "Id":18,
     "Itemtype":"Thief",
     "Use":4
+  },
+  {
+    "Id":19,
+    "Itemtype":"Iron Axe",
+    "Use":45
+  },
+  {
+    "Id":20,
+    "Itemtype":"Brave Axe",
+    "Use":30
   }
 ]
