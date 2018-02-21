@@ -45,7 +45,7 @@ class Animation(Layer):
         self.i = -1
         self.width = width
         self.height = height
-        self.map = arena.map
+        self.map = arena.map #type:map_controller.Main
         self.item = None
         self.getitem = None
         self.transtuple = None
@@ -56,13 +56,15 @@ class Animation(Layer):
         battlebefore = event[2]
         self.dialogafter = event[3]
         if len(battlebefore) > 0:
-            textlist = battlebefore[0]['Text']
+            _event = battlebefore[-1]
+            textlist = _event['Text']
             textsource = self.map.global_vars.text
             pid2dir = {}
             pid2dir[self.at.pid] = 'left'
             pid2dir[self.df.pid] = 'right'
             dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, 'before')
             self.add(dialog)
+            self.map.global_vars.flags[_event['Event']] = True
         else:
             self.get_next_action()
 
@@ -154,6 +156,7 @@ class Animation(Layer):
             pid2dir[self.df.pid] = 'right'
             dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, 'after')
             self.add(dialog)
+            self.map.global_vars.flags[self.dialogafter['Event']] = True
         else:
             self.growth()
 
