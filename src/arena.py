@@ -21,6 +21,7 @@ from display_item.ring import PerSpr
 from display_item.getitem import Getitem
 from display_item.action_control import Sequencial, Graphic
 from display_item.dialog import Dialogscene
+from display_item.eventdisplay import Eventdisplay
 
 import map_controller
 from global_vars import Main as Global
@@ -89,14 +90,13 @@ class Arena(ScrollableLayer):
 
 
     def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
-        print(getitem)
         if getitem is not None:
-            self.add(Getitem(person,getitem,self.map.global_vars.flags['Have Transporter'],self.map))
+            self.add(Getitem(person,getitem,self.map.global_vars.flags['Have Transporter'],
+                             self.map, callback=self.end_getitem))
             self.is_event_handler = False
         else:
             if transtuple is not None:
                 self.transtuple = transtuple
-            print(self.transtuple)
             if self.transtuple is not None:
                 pid, pos = self.transtuple
                 target = self.people[pid]
@@ -115,7 +115,7 @@ class Arena(ScrollableLayer):
                         _pid = defeat
                     if _type is 'I':
                         self.add(Getitem(self.people[_pid].person, self.map.global_vars.itemBank[int(_id)],
-                                         self.map.global_vars.flags['Have Transporter'], self.map))
+                                         self.map.global_vars.flags['Have Transporter'], self.map, callback=self.end_getitem))
 
                     pass
                 else:
@@ -128,9 +128,9 @@ class Arena(ScrollableLayer):
         for person in self.people.values():
             person.update_hp()
         self.state = 'default'
-        print("cleard")
 
     def end_getitem(self):
+        director.window.push_handlers(self)
         self.get_next_to_delete()
         self.map.take_turn(self)
         for person in self.people.values():
@@ -1098,6 +1098,26 @@ class Arena(ScrollableLayer):
         self.add(self.hitrate)
         self.hitrate.display([str(hitr_3)])
 
+    def visit_village(self, event):
+        pid = self.selected
+        dst = self._mapstate[0][self.selected][self.target][1]
+        self.is_event_handler = False
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
+        obj = self.people[pid]
+        self.textlist = event['Text']
+        obj.do(action + CallFunc(self.eventdisplay, event) + CallFunc(self._clear_map))
+        print(event)
+
+    def eventdisplay(self, event):
+        self.is_event_handler = False
+        self.add(Eventdisplay(event=event,
+                              map=self.map,
+                              dialog_type='S',
+                              left=self.people[self.selected].person,
+                              right=None,
+                              w=self.windowsize[0],
+                              h=self.windowsize[1],
+                              callback=self._clear_map))
 
 
     def remove(self, obj):
@@ -1156,7 +1176,7 @@ def map_init():
     global_vars = Global(data)
     terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)
     person_container_test = Person_Container(data.map_armylist, global_vars.personBank)
-    map = map_controller.Main(terrain_container_test, person_container_test, global_vars,general_eventlist=data.general_eventlist)
+    map = map_controller.Main(terrain_container_test, person_container_test, global_vars,eventlist=data.eventlist)
     w = terrain_container_test.M
     h = terrain_container_test.N
     return map, w, h

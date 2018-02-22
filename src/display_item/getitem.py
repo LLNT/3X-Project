@@ -11,7 +11,7 @@ from display_item.info import Info
 
 class Getitem(Layer):
     is_event_handler = True
-    def __init__(self, person, item, flag, map, maxitems=5):
+    def __init__(self, person, item, flag, map, maxitems=5, callback=None, **kwargs):
         '''
         the layer to process getitem displaying.
         pass the pid; if the length of items<maxitem then just add normally
@@ -33,6 +33,8 @@ class Getitem(Layer):
         self.maxitems = maxitems
         self.flag = flag
         self.map = map
+        self.callback = callback
+        self.kwargs = kwargs
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         self.person.item.append(self.item)
@@ -46,10 +48,15 @@ class Getitem(Layer):
 
 
     def exit(self):
+
         self.kill()
-        self.parent.end_getitem()
-        director.window.push_handlers(self.parent)
+        if self.callback:
+            self.callback.__call__(**self.kwargs)
+        else:
+            self.parent.end_getitem()
+            director.window.push_handlers(self.parent)
         del self
+
         pass
 
 class Listwand(Menu):

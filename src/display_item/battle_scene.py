@@ -17,6 +17,7 @@ from queue import Queue
 from display_item.info import Experience
 from wand import *
 from display_item.dialog import Battledialog
+from display_item.eventdisplay import Eventdisplay
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -56,13 +57,18 @@ class Animation(Layer):
         battlebefore = event[2]
         self.dialogafter = event[3]
         if len(battlebefore) > 0:
+
+
             _event = battlebefore[-1]
+            # should be replaced by condition
+            Eventdisplay(_event, self.map, Battledialog, self.at.pid, self.df.pid, self.width, self.height,
+                         self.get_next_action)
             textlist = _event['Text']
             textsource = self.map.global_vars.text
             pid2dir = {}
             pid2dir[self.at.pid] = 'left'
             pid2dir[self.df.pid] = 'right'
-            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, 'before')
+            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, self.get_next_action)
             self.add(dialog)
             self.map.global_vars.flags[_event['Event']] = True
         else:
@@ -154,7 +160,8 @@ class Animation(Layer):
             pid2dir = {}
             pid2dir[self.at.pid] = 'left'
             pid2dir[self.df.pid] = 'right'
-            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, 'after')
+            dialog = Battledialog(textlist, textsource, self.width, self.height,
+                                  pid2dir, self.growth)
             self.add(dialog)
             self.map.global_vars.flags[self.dialogafter['Event']] = True
         else:
@@ -354,6 +361,7 @@ class Wandtype3(Wandscene):
         self.at, wand, self.df, self.map, pos, item = arena.wandlist_type3
         self.battle = Type3(self.at, wand, self.df, self.map, pos, item)
         self.wandinit(wand, w, h, arena, maxsize)
+        self.item = item
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)

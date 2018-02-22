@@ -150,7 +150,7 @@ class Battle:
         self.d_def_event=None
         self.a_def_event=None
         self.def_event=None
-        for event in map.general_eventlist["Battle"]:
+        for event in map.eventlist["Battle"]:
             ch=event["Character"]
             cd=event["Condition"]
             person_coherent=0
@@ -194,12 +194,12 @@ class Battle:
                     break
             if condition_satisfied==1:
                 self.eventlist.append(event)
-        for event in map.general_eventlist["Defeated"]:
+        for event in map.eventlist["Defeated"]:
             if self.a_def_event==None:
                 if event["Person"]==self.a.pid:
                     if (event["Enemy"]==self.d.pid)or(event["Enemy"]==None):
                         condition_satisfied=0
-                        if len(event["Condition"]<1):
+                        if len(event["Condition"])<1:
                             condition_satisfied=1
                         for conj_item in event["Condition"]:
                             item_satisfied = 1

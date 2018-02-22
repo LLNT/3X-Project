@@ -53,6 +53,10 @@ class Ordermenu(Menu):
         if len(self.exc) > 0:
             l.append(MenuItem('Exchange', self.exchange))
 
+        _t, _e = map.get_grid_event(position, pid)
+        if _e is not None:
+            l.append(MenuItem('Visit', self.visitvillage, _e))
+
         self.allow_cancel = arena.allow_cancel
         if self.allow_cancel:
             l.append(MenuItem('Cancel', self.cancel))
@@ -91,6 +95,10 @@ class Ordermenu(Menu):
     def exchange(self):
         self.arena.exchange(self.exc)
         self.parent.remove(self)
+
+    def visitvillage(self, event):
+        self.arena.visit_village(event)
+        self.kill()
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4 :

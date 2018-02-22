@@ -11,7 +11,7 @@ from typing import List, Dict
 from map_controller import Main
 from display_item.text import Text
 from cocos.text import RichLabel
-
+from cocos.menu import Menu, MenuItem
 
 class BaseDialog(Layer):
 
@@ -37,23 +37,23 @@ class BaseDialog(Layer):
         else:
             self.exit()
 
-
-
 class Dialogscene(BaseDialog):
 
-    def __init__(self, arena, w, h, size=200):
-        map = arena.map #type:Main
-        textsource = map.global_vars.text
-        textlist = arena.textlist
-        super().__init__(textlist, textsource)
+    def __init__(self, text_list, text_source, map, w, h, size=200, left=None, right=None, callback=None, **kwargs):
+
+        super().__init__(text_list, text_source)
+        self.map = map
         self.w, self.h = w, h
         self.size = size
+        self.callback = callback
+        self.kwargs = kwargs
+        self._left, self._right = left, right
 
         # add background
         background = Sprite('background_test.jpg', position=(w // 2, h // 2))
-        textbackground = ColorLayer(0,0,200,255,w,h//3)
+        text_background = ColorLayer(0,0,200,255,w,h//3)
         self.add(background)
-        self.add(textbackground)
+        self.add(text_background)
 
         # add img
         self.left = Sprite('ring.png', position=(w // 6, h // 2))
@@ -73,19 +73,28 @@ class Dialogscene(BaseDialog):
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
-        if item['Text'] is not None:
-            self.text.element.text = item['Text']
-        if item['Left'] is not None:
-            self.changeleft(item['Left'])
-        if item['Right'] is not None:
-            self.changeright(item['Right'])
-        if item['Direction'] == 0:
-            self.label.position = (self.w // 6, self.h // 3)
+
+        if 'Branch' in item.keys():
+            self.add(Branch(self.map, item['Branch'], self.excute))
+            director.window.remove_handlers(self)
+            self.i += 1
         else:
-            self.label.position = (self.w * 5 // 6, self.h // 3)
-        if item['Tag'] is not None:
-            self.label.element.text = item['Tag']
-        super().excute()
+
+            if item['Text'] is not None:
+                self.text.element.text = item['Text']
+            if item['Left'] is not None:
+                if item['Left'] is 'V':
+                    item['Left'] = self._left.pic
+                self.changeleft(item['Left'])
+            if item['Right'] is not None:
+                self.changeright(item['Right'])
+            if item['Direction'] == 0:
+                self.label.position = (self.w // 6, self.h // 3)
+            else:
+                self.label.position = (self.w * 5 // 6, self.h // 3)
+            if item['Tag'] is not None:
+                self.label.element.text = item['Tag']
+            super().excute()
 
     def changeleft(self, source):
         self.left.kill()
@@ -103,15 +112,18 @@ class Dialogscene(BaseDialog):
 
     def exit(self):
         director.pop()
+        if self.callback:
+            self.callback.__call__(**self.kwargs)
 
 class Battledialog(BaseDialog):
 
-    def __init__(self, textlist, textsource, w, h, pid2dir, type):
+    def __init__(self, textlist, textsource, w, h, pid2dir, callback, **kwargs):
         super().__init__(textlist, textsource)
 
         self.w, self.h = w, h
         self.pid2dir = pid2dir
-        self.type = type
+        self.callback = callback
+        self.kwargs = kwargs
 
         # add label
         self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
@@ -124,7 +136,6 @@ class Battledialog(BaseDialog):
         self.add(self.label['left'])
         self.add(self.label['right'])
         self.excute()
-
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
@@ -142,9 +153,32 @@ class Battledialog(BaseDialog):
 
     def exit(self):
         self.kill()
-        if self.type is 'before':
-            self.parent.get_next_action()
-        elif self.type is 'after':
-            self.parent.growth()
+        self.callback.__call__(**self.kwargs)
 
     pass
+
+class Branch(Menu):
+    is_event_handler = True
+
+    def __init__(self, map, branches, callback, **kwargs):
+
+        super().__init__()
+        l = []
+        self.callback = callback
+        self.kwargs = kwargs
+        self.map = map
+        for branch in branches:
+            text = branch['Text']
+            flag = branch["Flag"]
+            l.append(MenuItem(text, self.action, flag))
+
+        self.create_menu(l, None, None)
+
+    def action(self, flag):
+        self.map.global_vars.flags[flag] = True
+        for obj in self.children_names:
+            self.remove(obj)
+
+        self.kill()
+        self.callback.__call__(**self.kwargs)
+        director.window.push_handlers(self.parent)
