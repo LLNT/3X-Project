@@ -1188,8 +1188,9 @@ class Battle:
                     hpadd=self.a.ability["MHP"]-self.a.ability["HP"]
             s+=str(hpadd)
             self.log.append((1,s))
-            self.weapon_rank_buf_a+=1
-            self.wear_buf_a-=1
+            self.weapon_rank_buf_a+=self.weapon_a.itemtype.weapexp
+            if not(self.weapon_a.itemtype.infinite==1):
+                self.wear_buf_a-=1
             self.att_sun=0
             self.att_moon=0
             self.att_wrath=0
@@ -1208,7 +1209,7 @@ class Battle:
                 return 2
             return 1
         else:
-            self.weapon_rank_buf_a+=1
+            self.weapon_rank_buf_a+=self.weapon_a.itemtype.weapexp
             self.att_sun=0
             self.att_moon=0
             self.att_wrath = 0
@@ -1319,8 +1320,9 @@ class Battle:
                     hpadd=self.d.ability["MHP"]-self.d.ability["HP"]
             s+=str(hpadd)
             self.log.append((2,s))
-            self.weapon_rank_buf_d+=1
-            self.wear_buf_d-=1
+            self.weapon_rank_buf_d+=self.weapon_d.itemtype.weapexp
+            if not (self.weapon_d.itemtype.infinite==1):
+                self.wear_buf_d-=1
             self.att_sun=0
             self.att_moon=0
             self.att_wrath=0
@@ -1339,7 +1341,7 @@ class Battle:
                 return 2
             return 1
         else:
-            self.weapon_rank_buf_d += 1
+            self.weapon_rank_buf_d += self.weapon_d.itemtype.weapexp
             self.att_sun = 0
             self.att_moon = 0
             self.att_wrath = 0

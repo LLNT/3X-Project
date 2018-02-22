@@ -59,7 +59,7 @@ class AI_Controller:
             for dst in dst_to_move_list:
                 if len(person.item) > 0:
                     for weap in person.item:
-                        if _map.attackable(weap.itemtype.weapontype):
+                        if _map.can_equip(p,weap):#attackable(weap.itemtype.weapontype):
                             minrange = weap.itemtype.min_range
                             maxrange = weap.itemtype.max_range
                             for enm in _enemy:

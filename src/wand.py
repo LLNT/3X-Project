@@ -69,11 +69,12 @@ class Type0(Wand):
             if func=="PROTECT":
                 self.obj.add_status("Immortal",1)
                 self.log.append((-1,"Protected"))
-        self.p.weapon_rank["Wand"]+=1
+        self.p.weapon_rank["Wand"]+=self.wand.itemtype.weapexp
         if self.p.weapon_rank["Wand"]>=400:
             self.p.weapon_rank["Wand"]=400
         self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
-        self.wand.use-=1
+        if not(self.wand.itemtype.infinite==1):
+            self.wand.use-=1
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
@@ -149,11 +150,12 @@ class Type1(Wand):
                 if func=="POISON":
                     self.obj.add_status("Poison", 5)
                     self.log.append((-1, "Poison"))
-            self.p.weapon_rank["Wand"] += 1
+            self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
-            self.wand.use -= 1
+            if not (self.wand.itemtype.infinite == 1):
+                self.wand.use -= 1
             if self.wand.use <= 0:
                 self.p.banish(self.wand)
                 self.log.append((-1, "Wand used out"))
@@ -177,7 +179,7 @@ class Type1(Wand):
             return self.log, growthtuple
         else:
             self.log.append((-1,"Miss"))
-            self.p.weapon_rank["Wand"] += 1
+            self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += 1
@@ -220,11 +222,12 @@ class Type2(Wand):
                 max_use=self.item_to_repair.itemtype.max_use
                 self.item_to_repair.use=max_use
                 self.log.append((-1,"Item repaired"))
-        self.p.weapon_rank["Wand"]+=1
-        if self.p.weapon_rank["Wand"]>=400:
-            self.p.weapon_rank["Wand"]=400
-        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
-        self.wand.use-=1
+        self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
+        if self.p.weapon_rank["Wand"] >= 400:
+            self.p.weapon_rank["Wand"] = 400
+        self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
+        if not (self.wand.itemtype.infinite == 1):
+            self.wand.use -= 1
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
@@ -291,11 +294,12 @@ class Type3(Wand):
                     self.obj.dequip(self.item_to_get)
                     self.obj.item.remove(self.item_to_get)
                     self.log.append((-1, "Getitem"))
-            self.p.weapon_rank["Wand"] += 1
+            self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
-            self.wand.use -= 1
+            if not (self.wand.itemtype.infinite == 1):
+                self.wand.use -= 1
             if self.wand.use <= 0:
                 self.p.banish(self.wand)
                 self.log.append((-1, "Wand used out"))
@@ -319,7 +323,7 @@ class Type3(Wand):
             return self.log, growthtuple
         else:
             self.log.append((-1,"Miss"))
-            self.p.weapon_rank["Wand"] += 1
+            self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += 1
@@ -365,11 +369,12 @@ class Type4(Wand):
                 pass
             if func=="UNLOCK":
                 pass
-        self.p.weapon_rank["Wand"]+=1
-        if self.p.weapon_rank["Wand"]>=400:
-            self.p.weapon_rank["Wand"]=400
-        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
-        self.wand.use-=1
+        self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
+        if self.p.weapon_rank["Wand"] >= 400:
+            self.p.weapon_rank["Wand"] = 400
+        self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
+        if not (self.wand.itemtype.infinite == 1):
+            self.wand.use -= 1
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
@@ -435,11 +440,12 @@ class Type5(Wand):
                 if func=="EXPEL":
                     self.map.person_container.position[self.obj.pid] = self.tarpos
                     self.log.append((-1, "%s Moved" % (self.obj.name)))
-            self.p.weapon_rank["Wand"] += 1
+            self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
-            self.wand.use -= 1
+            if not (self.wand.itemtype.infinite == 1):
+                self.wand.use -= 1
             if self.wand.use <= 0:
                 self.p.banish(self.wand)
                 self.log.append((-1, "Wand used out"))
@@ -463,7 +469,7 @@ class Type5(Wand):
             return self.log, growthtuple
         else:
             self.log.append((-1,"Miss"))
-            self.p.weapon_rank["Wand"] += 1
+            self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
             if self.p.weapon_rank["Wand"] >= 400:
                 self.p.weapon_rank["Wand"] = 400
             self.exp_buf += 1
@@ -509,11 +515,12 @@ class Type6(Wand):
             if func=="RESCUE":
                 self.map.person_container.position[self.obj.pid]=self.tarpos
                 self.log.append((-1,"%s Moved"%(self.obj.name)))
-        self.p.weapon_rank["Wand"]+=1
-        if self.p.weapon_rank["Wand"]>=400:
-            self.p.weapon_rank["Wand"]=400
-        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
-        self.wand.use-=1
+        self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
+        if self.p.weapon_rank["Wand"] >= 400:
+            self.p.weapon_rank["Wand"] = 400
+        self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
+        if not (self.wand.itemtype.infinite == 1):
+            self.wand.use -= 1
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
@@ -555,11 +562,12 @@ class Type7(Wand):
             if func=="WARP":
                 self.map.person_container.position[self.obj.pid]=self.tarpos
                 self.log.append((-1,"%s Moved"%(self.obj.name)))
-        self.p.weapon_rank["Wand"]+=1
-        if self.p.weapon_rank["Wand"]>=400:
-            self.p.weapon_rank["Wand"]=400
-        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
-        self.wand.use-=1
+        self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
+        if self.p.weapon_rank["Wand"] >= 400:
+            self.p.weapon_rank["Wand"] = 400
+        self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
+        if not (self.wand.itemtype.infinite == 1):
+            self.wand.use -= 1
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
@@ -637,11 +645,12 @@ class Type8(Wand):
                     if "Silence" in obj.status:
                         obj.status.pop("Silence")
                         self.log.append((-1, "Relief Silence"))
-        self.p.weapon_rank["Wand"]+=1
-        if self.p.weapon_rank["Wand"]>=400:
-            self.p.weapon_rank["Wand"]=400
-        self.exp_buf+=int((self.wand.itemtype.rank+50)/4)
-        self.wand.use-=1
+        self.p.weapon_rank["Wand"] += self.wand.itemtype.weapexp
+        if self.p.weapon_rank["Wand"] >= 400:
+            self.p.weapon_rank["Wand"] = 400
+        self.exp_buf += int((self.wand.itemtype.rank + 50) / 4)
+        if not (self.wand.itemtype.infinite == 1):
+            self.wand.use -= 1
         if self.wand.use<=0:
             self.p.banish(self.wand)
             self.log.append((-1,"Wand used out"))
