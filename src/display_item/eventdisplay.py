@@ -13,14 +13,14 @@ class Eventdisplay(Layer):
 
     is_event_handler = True
 
-    def __init__(self, event, map, dialog_type, left, right, w, h,
-                 callback, **kwargs):
+    def __init__(self, event, map, dialog_type, dialog_info, w=640, h=480,
+                 callback=None, **kwargs):
         super().__init__()
         self.map = map #type:map_controller.Main
         self.map.global_vars.flags[event['Event']] = True
         text_list = event['Text']
         text_source = map.global_vars.text
-        self.left, self.right = left, right
+        self.dialog_info = dialog_info
         self.w, self.h = w, h
         self.callback = callback
         self.kwargs = kwargs
@@ -31,9 +31,10 @@ class Eventdisplay(Layer):
         self.length = len(self.execute_event)
 
         if dialog_type is 'B':
-            self.add(Battledialog(text_list, text_source, w, h, {},self.execute))
+            self.add(Battledialog(text_list, text_source, w, h, dialog_info,self.execute))
         elif dialog_type is 'S':
-            director.push(Scene(Dialogscene(text_list, text_source, map, w, h, callback=self.execute, left=self.left)))
+            director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
+                                            callback=self.execute, info=dialog_info)))
 
 
     def execute(self, i=0):
@@ -45,6 +46,8 @@ class Eventdisplay(Layer):
                 self.execute(i+1)
             elif _type is 'I':
                 _, _itemid, _pid = event.split('/')
+                if _pid is 'E':
+                    _pid = self.dialog_info['E']
                 item = self.map.global_vars.itemBank[int(_itemid)]
                 person = self.map.global_vars.personBank[_pid]
                 flag = self.map.global_vars.flags['Have Transporter']

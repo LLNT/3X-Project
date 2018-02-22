@@ -39,7 +39,8 @@ class BaseDialog(Layer):
 
 class Dialogscene(BaseDialog):
 
-    def __init__(self, text_list, text_source, map, w, h, size=200, left=None, right=None, callback=None, **kwargs):
+    def __init__(self, text_list, text_source, map, w, h, info,
+                 size=200, callback=None, **kwargs):
 
         super().__init__(text_list, text_source)
         self.map = map
@@ -47,7 +48,7 @@ class Dialogscene(BaseDialog):
         self.size = size
         self.callback = callback
         self.kwargs = kwargs
-        self._left, self._right = left, right
+        self.info = info # dict of persons that stands for V or E
 
         # add background
         background = Sprite('background_test.jpg', position=(w // 2, h // 2))
@@ -84,9 +85,11 @@ class Dialogscene(BaseDialog):
                 self.text.element.text = item['Text']
             if item['Left'] is not None:
                 if item['Left'] is 'V':
-                    item['Left'] = self._left.pic
+                    item['Left'] = self.info['V'].pic
                 self.changeleft(item['Left'])
             if item['Right'] is not None:
+                if item['Right'] is 'V':
+                    item['Right'] = self.info['V'].pic
                 self.changeright(item['Right'])
             if item['Direction'] == 0:
                 self.label.position = (self.w // 6, self.h // 3)
@@ -117,11 +120,11 @@ class Dialogscene(BaseDialog):
 
 class Battledialog(BaseDialog):
 
-    def __init__(self, textlist, textsource, w, h, pid2dir, callback, **kwargs):
+    def __init__(self, textlist, textsource, w, h, dialog_info, callback, **kwargs):
         super().__init__(textlist, textsource)
 
         self.w, self.h = w, h
-        self.pid2dir = pid2dir
+        self.pid2dir = dialog_info['pid2dir']
         self.callback = callback
         self.kwargs = kwargs
 

@@ -309,6 +309,7 @@ class Arena(ScrollableLayer):
         self.excpid = None
         self.allow_cancel = True
         self.transtuple = None
+        self.dialog_info = {}
         try:
             self.remove(self.info)
             self.remove(self.wpinfo)
@@ -1105,6 +1106,7 @@ class Arena(ScrollableLayer):
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
         obj = self.people[pid]
         self.textlist = event['Text']
+        self.dialog_info['V'] = obj.person
         obj.do(action + CallFunc(self.eventdisplay, event) + CallFunc(self._clear_map))
         print(event)
 
@@ -1114,7 +1116,7 @@ class Arena(ScrollableLayer):
                               map=self.map,
                               dialog_type='S',
                               left=self.people[self.selected].person,
-                              right=None,
+                              dialog_info=self.dialog_info,
                               w=self.windowsize[0],
                               h=self.windowsize[1],
                               callback=self._clear_map))

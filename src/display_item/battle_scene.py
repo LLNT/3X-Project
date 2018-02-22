@@ -50,6 +50,11 @@ class Animation(Layer):
         self.item = None
         self.getitem = None
         self.transtuple = None
+        pid2dir = {}
+        pid2dir[self.at.pid] = 'left'
+        pid2dir[self.df.pid] = 'right'
+        self.dialog_info = {'pid2dir':pid2dir}
+        self.defeat = None
 
     def excute(self, event):
         self.events = event[0]
@@ -57,20 +62,13 @@ class Animation(Layer):
         battlebefore = event[2]
         self.dialogafter = event[3]
         if len(battlebefore) > 0:
-
-
             _event = battlebefore[-1]
             # should be replaced by condition
-            Eventdisplay(_event, self.map, Battledialog, self.at.pid, self.df.pid, self.width, self.height,
-                         self.get_next_action)
-            textlist = _event['Text']
-            textsource = self.map.global_vars.text
-            pid2dir = {}
-            pid2dir[self.at.pid] = 'left'
-            pid2dir[self.df.pid] = 'right'
-            dialog = Battledialog(textlist, textsource, self.width, self.height, pid2dir, self.get_next_action)
-            self.add(dialog)
-            self.map.global_vars.flags[_event['Event']] = True
+            self.add(Eventdisplay(
+                event=_event, map=self.map, dialog_type='B', dialog_info=self.dialog_info,
+                w=self.width, h=self.height, callback=self.get_next_action
+            ))
+
         else:
             self.get_next_action()
 
@@ -91,8 +89,10 @@ class Animation(Layer):
             if content is 'Defeatenemy':
                 if event[0] is -1:
                     self.map.defeated_character(self.df.pid)
+                    self.defeat = self.at.pid
                 elif event[0] is -2:
                     self.map.defeated_character(self.at.pid)
+                    self.defeat = self.df.pid
 
             elif content is 'Getitem':
                 self.getitem = self.item
@@ -155,14 +155,11 @@ class Animation(Layer):
         :return:
         '''
         if self.dialogafter is not None:
-            textlist = self.dialogafter['Text']
-            textsource = self.map.global_vars.text
-            pid2dir = {}
-            pid2dir[self.at.pid] = 'left'
-            pid2dir[self.df.pid] = 'right'
-            dialog = Battledialog(textlist, textsource, self.width, self.height,
-                                  pid2dir, self.growth)
-            self.add(dialog)
+            self.dialog_info['E'] = self.defeat
+            self.add(Eventdisplay(
+                event=self.dialogafter, map=self.map, dialog_type='B',w=self.width, h=self.height,
+                dialog_info=self.dialog_info, callback=self.growth
+            ))
             self.map.global_vars.flags[self.dialogafter['Event']] = True
         else:
             self.growth()
@@ -296,8 +293,10 @@ class Wandtype0(Wandscene):
             if content is 'Defeatenemy':
                 if event[0] is -1:
                     self.map.defeated_character(self.df.pid)
+                    self.defeat = self.at.pid
                 elif event[0] is -2:
                     self.map.defeated_character(self.at.pid)
+                    self.defeat = self.df.pid
             self.add_new_infos(content)
             pass
         else:
