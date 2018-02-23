@@ -377,7 +377,30 @@ class Main:
         return True
 
     def can_banish(self, pid, item):
+        if item.itemtype.cannot_banish==1:
+            return False
         return True
+
+    def find_attackable(self,pid,pos):
+        person=self.global_vars.personBank[pid]
+        minr=255
+        maxr=-255
+        enemy_list=[]
+        for i in person.item:
+            if self.can_equip(pid,i):
+                if minr>i.itemtype.min_range:
+                    minr=i.itemtype.min_range
+                if maxr<i.itemtype.max_range:
+                    maxr=i.itemtype.max_range
+        for p in self.person_container.position:
+            if p==pid:
+                continue
+            if (self.person_container.controller[p]%2==self.person_container.controller[pid]):
+                continue
+            d=calc_dist(self.person_container.position[p],pos)
+            if (d>=minr)and(d<=maxr):
+                enemy_list.append(d)
+        return enemy_list
 
     def available_wand(self,pid):
         wands=[]

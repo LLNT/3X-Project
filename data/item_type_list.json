@@ -34,6 +34,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Sword",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -71,6 +74,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Sword",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -108,6 +114,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Dark",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -145,6 +154,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Sword",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -182,6 +194,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Sword",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -219,6 +234,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Lance",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -256,6 +274,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Axe",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -293,6 +314,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Axe",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -330,6 +354,9 @@
     "Use":"HEAL 10",
     "Battle_type":"Usable",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":0,
     "Wand":{}
   },
   {
@@ -367,6 +394,9 @@
     "Use":"HEAL 10",
     "Battle_type":"Usable",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":0,
     "Wand":{}
   },
   {
@@ -404,6 +434,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Bow",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -441,6 +474,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Bow",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -478,6 +514,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Lance",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{}
   },
   {
@@ -515,6 +554,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -555,6 +597,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -595,6 +640,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -635,6 +683,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -675,6 +726,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"HEAL"
@@ -715,6 +769,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":8,
       "Effect":"HEAL"
@@ -755,6 +812,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":8,
       "Effect":"HEAL,RELIEF"
@@ -795,6 +855,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"RELIEF"
@@ -835,6 +898,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"HEAL,RELIEF"
@@ -875,6 +941,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":2,
       "Effect":"REPAIR"
@@ -915,6 +984,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":6,
       "Effect":"RESCUE"
@@ -955,6 +1027,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":7,
       "Effect":"WARP"
@@ -995,6 +1070,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":5,
       "Effect":"EXPEL"
@@ -1035,6 +1113,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":4,
       "Effect":"REWARP"
@@ -1075,6 +1156,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"POWER"
@@ -1115,6 +1199,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"RESTORE"
@@ -1155,6 +1242,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"BARRIER"
@@ -1195,6 +1285,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":1,
       "Effect":"BERSERK"
@@ -1235,6 +1328,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":1,
       "Effect":"SLEEP"
@@ -1275,6 +1371,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":1,
       "Effect":"POISON"
@@ -1315,6 +1414,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":1,
       "Effect":"SILENCE"
@@ -1355,6 +1457,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":1,
       "Effect":"STONE"
@@ -1395,6 +1500,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":0,
       "Effect":"PROTECT"
@@ -1435,6 +1543,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":4,
       "Effect":"UNLOCK"
@@ -1475,6 +1586,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":3,
       "Effect":"THIEF"
@@ -1515,6 +1629,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":4,
       "Effect":"TORCH"
@@ -1555,6 +1672,9 @@
     "Use":"UNAVAILABLE",
     "Battle_type":"Wand",
     "Icon":"",
+    "Infinite":0,
+    "Cannot_banish":0,
+    "Weapexp":1,
     "Wand":{
       "Type":9,
       "Effect":"ISTURIAS"

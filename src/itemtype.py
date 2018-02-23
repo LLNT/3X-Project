@@ -21,7 +21,10 @@ class Itemtype:
         self.icon=""        #type:str
         self.wand={}            #{"Type":int,"Effect":str}
         self.status=[]          #[{"Status":str,"Rest":int,"Chance":int},]
-    def __init__(self,name,use,weap,pw,wt,ht,ct,max_r,min_r,bonus,special,rk,sk,val,charonly,use_eff,wand,status,btype,ic):
+        self.infinite=0
+        self.cannot_banish=0
+        self.weapexp=0
+    def __init__(self,name,use,weap,pw,wt,ht,ct,max_r,min_r,bonus,special,rk,sk,val,charonly,use_eff,wand,status,btype,ic,inf,cannot_banish,weapexp):
         self.name=name
         self.max_use=use
         self.weapontype=weap
@@ -42,6 +45,9 @@ class Itemtype:
         self.status=status
         self.battletype=btype
         self.icon=ic
+        self.infinite=inf
+        self.cannot_banish=cannot_banish
+        self.weapexp=weapexp
 class ItemtypeBank:
     def __init__(self):
         self.itemtypebank={} #type:Dict[str,Itemtype]
@@ -53,7 +59,8 @@ class ItemtypeBank:
                               item["Critical"],item["Max_range"],item["Min_range"],
                               item["Ability_bonus"],item["Special_effect"],item["Rank"],
                               item["Skills"],item["Value"],item["Character_only"],item["Use"],item["Wand"],
-                              item["Status"],item["Battle_type"],item["Icon"])
+                              item["Status"],item["Battle_type"],item["Icon"],item["Infinite"],
+                              item["Cannot_banish"],item["Weapexp"])
             self.itemtypebank[item["Name"]]=itemtype
 
 class Main:

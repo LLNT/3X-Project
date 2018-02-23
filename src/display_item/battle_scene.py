@@ -339,7 +339,7 @@ class Wandtype0(Wandscene):
 class Wandtype1(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type1
-        self.battle = Type1(self.at, wand, self.df, self.map)
+        self.battle = Type1(self.at, wand, self.df, self.map,pos)
         self.wandinit(wand, w, h, arena, maxsize)
         event = self.battle.execute()
         del self.battle
