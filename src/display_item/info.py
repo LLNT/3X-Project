@@ -9,7 +9,8 @@ from battle import Battle
 
 class Info(ColorLayer):
 
-    def __init__(self, size=None, position=None, center=False, color=(200,200,200), alpha=200):
+    def __init__(self, size=None, position=None, center=False,
+                 color=(200,200,200), alpha=200):
         '''
 
         :param size: the size of info layer, equals to the director if none
@@ -77,6 +78,7 @@ class Personinfo(Info):
         content.append('MHP:' + str(p.ability['MHP']))
         content.append('LV:' + str(p.ability['LV']))
         content.append('EXP:' + str(p.ability['EXP']))
+        content.append('CLS:' + str(p.cls))
 
         self.display(content, ((0, 0), (self.width//2, self.height//2)))
         content = []
@@ -203,3 +205,42 @@ class Experience(Info):
         self.do(Delay(0.5) + CallFunc(self.bar_raise))
         self.i += 1
 
+class Experience2(Info):
+    is_event_handler = True
+    def __init__(self, promote_bonus, abl_ori, callback, **kwargs):
+        w, h = director.get_window_size()
+        width, height = w // 2, h // 2
+        self.callback = callback
+        self.kwargs = kwargs
+
+        super().__init__(size=(width, height), center=True, alpha=255)
+        content = ['LV']
+        abilities = ["MHP","STR","MGC","SPD","SKL","DEF","RES","LUK"]
+
+        for abl in abilities:
+            content.append(abl)
+        self.display(content, font_size=24,
+                     pos_range=((0, 0), (self.width // 3, self.height)))
+
+        content = [str(abl_ori['LV'])]
+        for ability in abilities:
+            content.append(str(abl_ori[ability]))
+        self.display(content, font_size=20, contentid=1,
+                     pos_range=((self.width // 3, 0), (self.width * 5 // 9, self.height)))
+
+        content = ['']
+        for ability in abilities:
+            content.append(str(promote_bonus[ability]))
+        self.display(content, font_size=20, contentid=1,
+                     pos_range=((self.width * 5 // 9, 0), (self.width * 7 // 9, self.height)))
+
+        content = [str(promote_bonus['LV'])]
+        for ability in abilities:
+            content.append(str(abl_ori[ability] + promote_bonus[ability]))
+        self.display(content, font_size=20, contentid=1,
+                     pos_range=((self.width * 7 // 9, 0), (self.width, self.height)))
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        self.kill()
+        self.callback(**self.kwargs)
+        del self

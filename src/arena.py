@@ -12,9 +12,8 @@ from cocos.actions import CallFunc, MoveTo, Delay, FadeTo, FadeIn, FadeOut, Plac
 from cocos.scenes import FadeTransition
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
-from display_item.info import Personinfo, Battleinfo, Info
-from display_item.menu import Ordermenu, Weaponmenu, Endturn, Menulayer, \
-    Showweapon, Showwand, Weaponexchange, Listwand
+from display_item.info import Personinfo, Battleinfo, Experience2
+from display_item.menu import *
 from display_item.background import Background
 from display_item.battle_scene import *
 from display_item.ring import PerSpr
@@ -1025,9 +1024,26 @@ class Arena(ScrollableLayer):
         person = self.people[pid].person
         obj = self.people[pid]
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
-        obj.do(action + CallFunc(person.use_item, item) + CallFunc(self._clear_map)
-               + CallFunc(self.map.take_turn, self))
+        use_effect = person.use_item(item)
+        print(use_effect)
+        if 'PROMOTE' in use_effect:
+            promote_cls_list = person.can_promote(self.map.global_vars)
+            self.menulayer.add(Listcls(promote_cls_list, self.promote, action=action, pid=pid))
+            pass
+        else:
+            obj.do(action + CallFunc(self._clear_map)+ CallFunc(self.map.take_turn, self))
         pass
+
+    def promote(self, cls, pid, action):
+        person = self.people[pid].person
+        obj = self.people[pid]
+        promote_bonus, abl_ori = person.promote(cls, self.map.global_vars)
+        print(promote_bonus, abl_ori)
+        def _act(self):
+            self.is_event_handler = False
+            self.add(Experience2(promote_bonus, abl_ori, self._clear_map))
+
+        obj.do(action + CallFunc(_act, self))
 
     def equip(self, item):
         pid = self.selected

@@ -29,7 +29,8 @@ class Eventdisplay(Layer):
 
 
         if dialog_type is 'B':
-            self.add(Battledialog(text_list, text_source, w, h, dialog_info,self.execute))
+            self.add(Battledialog(text_list, text_source, w, h,
+                                  dialog_info=dialog_info,callback=self.get_finish))
         elif dialog_type is 'S':
             director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
                                             callback=self.get_finish, info=dialog_info)))

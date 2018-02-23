@@ -390,3 +390,21 @@ class Listwand(Menu):
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:
             self.cancel()
+
+class Listcls(Menu):
+    is_event_handler = True
+
+    def __init__(self, cls_list, callback, **kwargs):
+        super().__init__(title='CHOOSE PROMOTE')
+        l = []
+        for cls in cls_list:
+            l.append(MenuItem(cls, self.promote, cls))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.position = - director.get_window_size()[0] * 6 // 8, 0
+        self.callback = callback
+        self.kwargs = kwargs
+
+    def promote(self, cls):
+        self.kill()
+        self.callback.__call__(cls, **self.kwargs)
+        del self

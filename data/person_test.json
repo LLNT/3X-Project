@@ -137,7 +137,7 @@
     "Cls":"Archer",
     "Ability":
     {
-      "LV":1,
+      "LV":10,
       "MHP":18,
       "STR":13,
       "MGC":0,
@@ -179,7 +179,7 @@
     [
 
     ],
-    "Init_item":[4,5,8,9,10],
+    "Init_item":[4,5,7,9,10],
     "Support":{
       "1":{
         "Base":51,

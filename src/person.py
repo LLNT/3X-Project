@@ -183,7 +183,7 @@ class Person:
         promote_tar=g_vars.cls_promotion[cl]
         abl_ori=self.ability.copy()
         promote_bonus={}
-        for abl in self.ability:
+        for abl in promote_tar:
             promote=promote_tar[abl]-promote_base[abl]
             if promote+self.ability[abl]>=self.ability_limit[abl]:
                 promote=self.ability_limit[abl]-self.ability[abl]

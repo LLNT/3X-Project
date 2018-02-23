@@ -66,7 +66,7 @@ class Animation(Layer):
             for item in battlebefore:
                 cd = item['Condition']
                 if check_condition(cd, self.map):
-                    _event = cd
+                    _event = item
                     break
             # _event = battlebefore[-1]
             # should be replaced by condition
