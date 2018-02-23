@@ -462,32 +462,7 @@ class Main:
                 if not(ch==p):
                     if not(ch==None):
                         continue
-                condition_satisfied=0
-                if len(cd)<1:
-                    condition_satisfied=1
-                for conj_item in cd:
-                    item_satisfied = 1
-                    tr_items = conj_item[0]
-                    fl_items = conj_item[1]
-                    for tag in tr_items:
-                        if not (tag in self.global_vars.flags):
-                            item_satisfied = 0
-                            break
-                        elif self.global_vars.flags[tag] == False:
-                            item_satisfied = 0
-                            break
-                    if item_satisfied == 0:
-                        continue
-                    for tag in fl_items:
-                        if not (tag in self.global_vars.flags):
-                            pass
-                        elif self.global_vars.flags[tag] == True:
-                            item_satisfied = 0
-                            break
-                    if item_satisfied == 1:
-                        condition_satisfied = 1
-                        break
-                if condition_satisfied == 1:
+                if check_condition(cd,self) == True:
                     event=candidate
                     break
             return ("V",event)

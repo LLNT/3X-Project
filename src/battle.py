@@ -3,6 +3,7 @@ import person
 import item
 import map_controller
 import random
+from utility import *
 from typing import List,Set,Dict
 
 def wp_buf_count(wpa,wpd):
@@ -154,7 +155,6 @@ class Battle:
             ch=event["Character"]
             cd=event["Condition"]
             person_coherent=0
-            condition_satisfied=0
             for pattern in ch:
                 if pattern[0]==None:
                     if pattern[1]==None:
@@ -168,92 +168,18 @@ class Battle:
                         person_coherent=1
             if person_coherent==0:
                 continue
-            if len(cd)<1:
-                condition_satisfied=1
-            for conj_item in cd:
-                item_satisfied=1
-                tr_items=conj_item[0]
-                fl_items=conj_item[1]
-                for tag in tr_items:
-                    if not (tag in map.global_vars.flags):
-                        item_satisfied=0
-                        break
-                    elif map.global_vars.flags[tag]==False:
-                        item_satisfied=0
-                        break
-                if item_satisfied==0:
-                    continue
-                for tag in fl_items:
-                    if not (tag in map.global_vars.flags):
-                        pass
-                    elif map.global_vars.flags[tag]==True:
-                        item_satisfied=0
-                        break
-                if item_satisfied==1:
-                    condition_satisfied=1
-                    break
-            if condition_satisfied==1:
+            if check_condition(cd,map)==True:
                 self.eventlist.append(event)
         for event in map.eventlist["Defeated"]:
             if self.a_def_event==None:
                 if event["Person"]==self.a.pid:
                     if (event["Enemy"]==self.d.pid)or(event["Enemy"]==None):
-                        condition_satisfied=0
-                        if len(event["Condition"])<1:
-                            condition_satisfied=1
-                        for conj_item in event["Condition"]:
-                            item_satisfied = 1
-                            tr_items = conj_item[0]
-                            fl_items = conj_item[1]
-                            for tag in tr_items:
-                                if not (tag in map.global_vars.flags):
-                                    item_satisfied = 0
-                                    break
-                                elif map.global_vars.flags[tag] == False:
-                                    item_satisfied = 0
-                                    break
-                            if item_satisfied == 0:
-                                continue
-                            for tag in fl_items:
-                                if not (tag in map.global_vars.flags):
-                                    pass
-                                elif map.global_vars.flags[tag] == True:
-                                    item_satisfied = 0
-                                    break
-                            if item_satisfied == 1:
-                                condition_satisfied = 1
-                                break
-                        if condition_satisfied == 1:
+                        if check_condition(event["Condition"],map) == True:
                             self.a_def_event=event
             if self.d_def_event==None:
                 if event["Person"]==self.d.pid:
                     if (event["Enemy"]==self.a.pid)or(event["Enemy"]==None):
-                        condition_satisfied=0
-                        if len(event["Condition"])<1:
-                            condition_satisfied=1
-                        for conj_item in event["Condition"]:
-                            item_satisfied = 1
-                            tr_items = conj_item[0]
-                            fl_items = conj_item[1]
-                            for tag in tr_items:
-                                if not (tag in map.global_vars.flags):
-                                    item_satisfied = 0
-                                    break
-                                elif map.global_vars.flags[tag] == False:
-                                    item_satisfied = 0
-                                    break
-                            if item_satisfied == 0:
-                                continue
-                            for tag in fl_items:
-                                if not (tag in map.global_vars.flags):
-                                    pass
-                                elif map.global_vars.flags[tag] == True:
-                                    item_satisfied = 0
-                                    break
-                            if item_satisfied == 1:
-                                condition_satisfied = 1
-                                break
-                        if condition_satisfied == 1:
+                        if check_condition(event["Condition"],map) == True:
                             self.d_def_event=event
         self.adjust_lv_a = 0
         self.adjust_lv_d = 0

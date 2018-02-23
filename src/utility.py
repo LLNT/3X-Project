@@ -8,6 +8,36 @@ def coordinate_t(x, y, size):
     j = y // size
     return i, j
 
+def check_condition(cd,map=None):
+    condition_satisfied = 0
+    if len(cd) < 1:
+        condition_satisfied = 1
+    for conj_item in cd:
+        item_satisfied = 1
+        tr_items = conj_item[0]
+        fl_items = conj_item[1]
+        for tag in tr_items:
+            if not (tag in map.global_vars.flags):
+                item_satisfied = 0
+                break
+            elif map.global_vars.flags[tag] == False:
+                item_satisfied = 0
+                break
+        if item_satisfied == 0:
+            continue
+        for tag in fl_items:
+            if not (tag in map.global_vars.flags):
+                pass
+            elif map.global_vars.flags[tag] == True:
+                item_satisfied = 0
+                break
+        if item_satisfied == 1:
+            condition_satisfied = 1
+            break
+    if condition_satisfied == 1:
+        return True
+    return False
+
 def is_weapon(s):
     if s in ["Sword","Lance","Bow","Axe","Light","Dark","Wind","Fire","Thunder"]:
         return True
