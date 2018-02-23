@@ -32,14 +32,17 @@ class Ordermenu(Menu):
     def __init__(self, arena):
         super(Ordermenu, self).__init__(title='Order')
         self.arena = arena
-        l = []
-        l.append(MenuItem('Move', self.move))
-        l.append(MenuItem('Attack', self.attack))
-        l.append(MenuItem('Item', self.item))
-
         map = arena.map
         pid = arena.selected
         position = arena.target
+
+        l = []
+        l.append(MenuItem('Move', self.move))
+        atk = map.find_attackable(pid, position)
+        if len(atk) > 0:
+            l.append(MenuItem('Attack', self.attack))
+
+        l.append(MenuItem('Item', self.item))
 
         self.avl = map.available_wand(pid)
         if len(self.avl) > 0:
