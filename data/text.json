@@ -1,4 +1,10 @@
 {
+  "SZT990-1":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"lyn_icon.png",
+    "Text":"好了，这局是我们赢了。"
+  },
   "BT990-1":{
     "Type":"B",
     "Speaker":"1",

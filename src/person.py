@@ -167,7 +167,7 @@ class Person:
         if not self.ability["LV"]>=10:
             return []
         if self.cls=="Archer":
-            return ["Sniper","Paladin"]
+            return ["Sniper"]
         if self.cls=="Cavalier":
             return ["Paladin"]
         return []

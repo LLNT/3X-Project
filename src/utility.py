@@ -10,8 +10,6 @@ def coordinate_t(x, y, size):
 
 def check_condition(cd,map=None):
     condition_satisfied = 0
-    if len(cd) < 1:
-        condition_satisfied = 1
     for conj_item in cd:
         item_satisfied = 1
         tr_items = conj_item[0]

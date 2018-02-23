@@ -514,6 +514,6 @@ class Main:
             if check_condition(cd, self) == True:
                 event = candidate
                 break
-        return ("V", event)
+        return event
 
 

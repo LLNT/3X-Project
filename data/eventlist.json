@@ -14,7 +14,7 @@
           "Pic":""},
         "Finish": [
           {
-            "Condition": [],
+            "Condition": [[[],[]]],
             "Execute": [
               "I/21/V"
             ],
@@ -31,11 +31,11 @@
         "Condition": [[[],["S990010"]]
         ],
         "Reconstruct":null,
-        "Text":[],
+        "Text":["SZT990-1"],
         "Finish":[
         {
-          "Condition":[],
-          "Execute":["SF/V99001"],
+          "Condition":[[[],[]]],
+          "Execute":["SF/VIC_FLAG99001"],
           "Jump":"F"
         }]
       }
@@ -46,13 +46,11 @@
       {
         "Event":"V990000",
         "Character":"1",
-        "Condition": [
-
-      ],
+        "Condition": [[[],[]]],
         "Text":["VT990-101","VT990-102","VT990-103","VT990-104"],
         "Finish":[
         {
-          "Condition":[],
+          "Condition":[[[],[]]],
           "Execute":["CLV/5,0","I/15/1"],
           "Jump":"F"
         }]
@@ -67,7 +65,7 @@
         "Text":["VT990-105","VT990-106","VT990-107","VT990-108"],
         "Finish":[
         {
-          "Condition":[],
+          "Condition":[[[],[]]],
           "Execute":["CLV/5,0"],
           "Jump":"F"
         }]
@@ -75,9 +73,7 @@
       {
         "Event":"V990002",
         "Character":null,
-        "Condition": [
-
-      ],
+        "Condition": [[[],[]]],
         "Text":["VT990-109","VT990-110","VT990-111","VT990-112"],
         "Finish":[
         {
@@ -91,7 +87,7 @@
           "Jump":"F"
         },
         {
-          "Condition":[],
+          "Condition":[[[],[]]],
           "Execute":["CLV/5,0"],
           "Jump":"F"
         }
@@ -110,7 +106,7 @@
       "Text":["BT990-1","BT990-2","BT990-3","BT990-4"],
       "Finish":[
         {
-          "Condition":[],
+          "Condition":[[[],[]]],
           "Execute":[],
           "Jump":"F"
         }
@@ -125,7 +121,7 @@
       "Text":["BT990-5","BT990-6","BT990-7","BT990-8","BT990-9","BT990-10","BT990-11"],
       "Finish":[
         {
-          "Condition":[],
+          "Condition":[[[],[]]],
           "Execute":[],
           "Jump":"F"
         }
@@ -140,7 +136,7 @@
       "Text":["BT990-12","BT990-13"],
       "Finish":[
         {
-          "Condition":[],
+          "Condition":[[[],[]]],
           "Execute":[],
           "Jump":"F"
         }
@@ -164,7 +160,7 @@
       "Text": ["DT990-11","DT990-12"],
       "Finish": [
         {
-          "Condition": [],
+          "Condition": [[[],[]]],
           "Execute":[],
           "Jump": "F"
         }
@@ -186,7 +182,7 @@
       "Text": ["DT990-13"],
       "Finish": [
         {
-          "Condition": [],
+          "Condition": [[[],[]]],
           "Execute":[],
           "Jump": "F"
         }
@@ -208,7 +204,7 @@
       "Text": ["DT990-21","DT990-22"],
       "Finish": [
         {
-          "Condition": [],
+          "Condition": [[[],[]]],
           "Execute":["I/7/E"],
           "Jump": "F"
         }
@@ -229,7 +225,7 @@
       "Text": ["DT990-23","DT990-24"],
       "Finish": [
         {
-          "Condition": [],
+          "Condition": [[[],[]]],
           "Execute":["I/7/E"],
           "Jump": "F"
         }
@@ -250,7 +246,7 @@
       "Text": [["DT990-31","DT990-32"]],
       "Finish": [
         {
-          "Condition": [],
+          "Condition": [[[],[]]],
           "Execute":[],
           "Jump": "F"
         }
@@ -271,7 +267,7 @@
       "Text": ["DT990-41"],
       "Finish": [
         {
-          "Condition": [],
+          "Condition": [[[],[]]],
           "Execute":[],
           "Jump": "F"
         }
