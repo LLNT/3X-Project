@@ -16,7 +16,7 @@ from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
 from display_item.info import Experience
 from wand import *
-from display_item.dialog import Battledialog
+from utility import check_condition
 from display_item.eventdisplay import Eventdisplay
 
 RED = (255, 0, 0)
@@ -63,6 +63,12 @@ class Animation(Layer):
         self.dialogafter = event[3]
         if len(battlebefore) > 0:
             _event = battlebefore[-1]
+            for item in battlebefore:
+                cd = item['Condition']
+                if check_condition(cd, self.map):
+                    _event = cd
+                    break
+            # _event = battlebefore[-1]
             # should be replaced by condition
             self.add(Eventdisplay(
                 event=_event, map=self.map, dialog_type='B', dialog_info=self.dialog_info,

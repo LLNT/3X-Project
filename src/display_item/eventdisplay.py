@@ -8,6 +8,7 @@ from cocos.scene import Scene
 import map_controller
 from display_item.dialog import *
 from display_item.getitem import Getitem
+from utility import check_condition
 
 class Eventdisplay(Layer):
 
@@ -24,18 +25,27 @@ class Eventdisplay(Layer):
         self.w, self.h = w, h
         self.callback = callback
         self.kwargs = kwargs
+        self.event = event
 
-        self.finish = event['Finish']
-        # get first condition_satisfied
-        self.execute_event = self.finish[-1]['Execute']
-        self.length = len(self.execute_event)
 
         if dialog_type is 'B':
             self.add(Battledialog(text_list, text_source, w, h, dialog_info,self.execute))
         elif dialog_type is 'S':
             director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
-                                            callback=self.execute, info=dialog_info)))
+                                            callback=self.get_finish, info=dialog_info)))
 
+    def get_finish(self):
+        self.finish = self.event['Finish']
+        # get first condition_satisfied
+        self.execute_event = self.finish[-1]['Execute']
+        for item in self.finish:
+            cd = item['Condition']
+            if check_condition(cd, self.map):
+                self.execute_event = item['Execute']
+                break
+
+        self.length = len(self.execute_event)
+        self.execute()
 
     def execute(self, i=0):
         if i < self.length:
@@ -49,6 +59,8 @@ class Eventdisplay(Layer):
                 _, _itemid, _pid = event.split('/')
                 if _pid is 'E':
                     _pid = self.dialog_info['E']
+                if _pid is 'V':
+                    _pid = self.dialog_info['V'].pid
                 item = self.map.global_vars.itemBank[int(_itemid)]
                 person = self.map.global_vars.personBank[_pid]
                 flag = self.map.global_vars.flags['Have Transporter']
