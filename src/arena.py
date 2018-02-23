@@ -640,7 +640,12 @@ class Arena(ScrollableLayer):
         else:
             self.wandlist_type3.pop()
             self.state = 'wand_type3'
-            self._add_menu(Listwand(self.wandlist_type3[2].item, self, type=3))
+            target = self.wandlist_type3[2]
+            eqp = target.get_equip()
+            target_item_list = target.item.copy()
+            if not eqp == None:
+                target_item_list.remove(eqp)
+            self._add_menu(Listwand(target_item_list, self, type=3))
             pass
         pass
 
@@ -1115,11 +1120,11 @@ class Arena(ScrollableLayer):
         self.add(Eventdisplay(event=event,
                               map=self.map,
                               dialog_type='S',
-                              left=self.people[self.selected].person,
                               dialog_info=self.dialog_info,
                               w=self.windowsize[0],
                               h=self.windowsize[1],
                               callback=self._clear_map))
+
 
 
     def remove(self, obj):

@@ -366,6 +366,7 @@ class Listwand(Menu):
         self.create_menu(l, zoom_in(), zoom_out())
         self.position = - director.get_window_size()[0] * 6 // 8, 0
         self.arena = arena
+        self.type = type
 
     def wandrpr(self, item):
         self.parent.remove(self)
@@ -376,8 +377,9 @@ class Listwand(Menu):
         self.arena.wandstl(item)
 
     def cancel(self):
-        self.arena.state = 'wand_type2'
         self.parent.remove(self)
+        avl = self.arena.map.available_wand(self.arena.selected)
+        self.arena.wand(avl)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:

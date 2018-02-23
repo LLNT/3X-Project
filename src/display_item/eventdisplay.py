@@ -40,6 +40,7 @@ class Eventdisplay(Layer):
     def execute(self, i=0):
         if i < self.length:
             event = self.execute_event[i]
+            print(event)
             _type = event.split('/')[0]
             if _type is 'CLV':
                 self.map.eventlist.pop(event.split('/')[1])
