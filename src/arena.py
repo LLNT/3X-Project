@@ -1038,7 +1038,7 @@ class Arena(ScrollableLayer):
     def banish(self, item):
         pid = self.selected
         person = self.people[pid].person
-        person.call_banish(item)
+        person.banish(item)
         self.item_show()
 
     def set_turn(self, turn):

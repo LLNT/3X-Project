@@ -8,6 +8,8 @@ from display_item.info import Info
 from cocos.director import director
 from cocos.layer import ColorLayer
 from cocos.actions import Delay, CallFunc
+import map_controller
+
 class Menulayer(ColorLayer):
     def __init__(self):
         w, h = director.get_window_size()
@@ -32,7 +34,7 @@ class Ordermenu(Menu):
     def __init__(self, arena):
         super(Ordermenu, self).__init__(title='Order')
         self.arena = arena
-        map = arena.map
+        map = arena.map  #type:map_controller.Main
         pid = arena.selected
         position = arena.target
 
@@ -42,7 +44,8 @@ class Ordermenu(Menu):
         if len(atk) > 0:
             l.append(MenuItem('Attack', self.attack))
 
-        l.append(MenuItem('Item', self.item))
+        if len(map.global_vars.personBank[pid].item) > 0:
+            l.append(MenuItem('Item', self.item))
 
         self.avl = map.available_wand(pid)
         if len(self.avl) > 0:
@@ -197,7 +200,7 @@ class Itemuse(Menu):
         pass
 
     def banish(self):
-        self.arena.call_banish(self.item)
+        self.arena.banish(self.item)
         self.parent.remove(self)
         pass
 
