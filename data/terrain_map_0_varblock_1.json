@@ -13,5 +13,6 @@
     ["Wall","Wall","Floor","Floor","Column","Floor","Floor"],
     ["Floor","Floor","Floor","Floor","Floor","Floor","Treasury"],
     ["Wall","Wall","Wall","Wall","Wall","Wall","Wall"]
-  ]
+  ],
+  "Pic":""
 }
