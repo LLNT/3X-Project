@@ -466,5 +466,51 @@ class Main:
                     event=candidate
                     break
             return ("V",event)
+        elif self.terrain_container.map[pos[0]][pos[1]].typename=="Treasury":
+            event=None
+            if not("%d,%d"%pos in self.eventlist["Treasures"]):
+                return ("T",None,None)
+            event=self.eventlist["Treasures"]["%d,%d"%pos]
+            person=self.global_vars.personBank[p]
+            if person.cls=="Rogue":
+                return ("T",event,None)
+            if self.global_vars.clsBank[person.cls].cls_group=="Cracksman":
+                for _i in person.item:
+                    if _i.itemtype.name=="Lockpick":
+                        return ("T",event,_i)
+            for _i in person.item:
+                if _i.itemtype.name=="Chestkey":
+                    return ("T",event,_i)
         return ("N",None)
+
+    def have_exchange_object(self,pid,pos):
+        exchange_objects=[]
+        for p in self.person_container.position:
+            if self.person_container.controller[p]==self.person_container.controller[pid]:
+                if calc_dist(self.person_container.position[p],pos)==1:
+                    exchange_objects.append(p)
+        return exchange_objects
+
+    def have_items(self,pid):
+        person=self.global_vars.personBank[pid]
+        if len(person.item)<1:
+            return False
+        return True
+
+    def get_seize_event(self,pid,pos):
+        if not ("%d,%d" % pos in self.eventlist["Seize"]):
+            return None
+        event = None
+        candidates = self.eventlist["Seize"]["%d,%d" % pos]
+        for candidate in candidates:
+            ch = candidate["Character"]
+            cd = candidate["Condition"]
+            if not (ch == pid):
+                if not (ch == None):
+                    continue
+            if check_condition(cd, self) == True:
+                event = candidate
+                break
+        return ("V", event)
+
 

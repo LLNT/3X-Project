@@ -1,5 +1,46 @@
 {
   "Background_Scene":"background_test.jpg",
+  "Treasures":{
+    "5,3":
+      {
+        "Event": "T99001",
+        "Reconstruct":{
+          "Name":"map_test_trs1",
+          "M":1,
+          "N":1,
+          "Anchor_X":5,
+          "Anchor_Y":3,
+          "Map":[["Plain"]],
+          "Pic":""},
+        "Finish": [
+          {
+            "Condition": [],
+            "Execute": [
+              "I/21/V"
+            ],
+            "Jump": "F"
+          }
+        ]
+      }
+  },
+  "Seize":{
+    "0,2":[
+      {
+        "Event":"S990010",
+        "Character":"1",
+        "Condition": [[[],["S990010"]]
+        ],
+        "Reconstruct":null,
+        "Text":[],
+        "Finish":[
+        {
+          "Condition":[],
+          "Execute":["SF/V99001"],
+          "Jump":"F"
+        }]
+      }
+    ]
+  },
   "Villages":{
     "5,0":[
       {

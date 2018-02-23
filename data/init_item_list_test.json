@@ -99,5 +99,10 @@
     "Id":20,
     "Itemtype":"Brave Axe",
     "Use":30
+  },
+  {
+    "Id":21,
+    "Itemtype":"Die Apokalypse",
+    "Use":80
   }
 ]
