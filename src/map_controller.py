@@ -361,6 +361,9 @@ class Main:
         if item.itemtype.use_effect.split(" ")[0]=="HEAL":
             if self.global_vars.personBank[pid].ability["HP"]>=self.global_vars.personBank[pid].ability["MHP"]:
                 return False
+        if "PROMOTE" in item.itemtype.use_effect.split(" "):
+            if len(self.global_vars.personBank[pid].can_promote(self.global_vars))==0:
+                return False
         if len(item.itemtype.character_only)>0:
             if not pid in item.itemtype.character_only:
                 return False

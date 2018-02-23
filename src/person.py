@@ -167,7 +167,9 @@ class Person:
         if not self.ability["LV"]>=10:
             return []
         if self.cls=="Archer":
-            return ["Sniper"]
+            return ["Sniper","Paladin"]
+        if self.cls=="Cavalier":
+            return ["Paladin"]
         return []
 
     def promote(self,cl,g_vars):
@@ -189,7 +191,7 @@ class Person:
             self.ability[abl]+=promote
         self.cls=cl
         self.ability["LV"]=1
-        self.ability["EXP"]=1
+        self.ability["EXP"]=0
         return promote_bonus,abl_ori
 
 

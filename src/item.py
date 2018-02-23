@@ -19,13 +19,15 @@ class Item:
         t=0
         while t<len(use_eff):
             if use_eff[t]=="UNAVAILABLE":
-                return 1
+                break
             if use_eff[t]=="HEAL":
                 p.ability["HP"]+=int(use_eff[t+1])
                 if p.ability["HP"]>p.ability["MHP"]:
                     p.ability["HP"]=p.ability["MHP"]
                 t+=2
-        return 0
+            if use_eff[t]=="PROMOTE":
+                t+=1
+        return use_eff
 
 class ItemBank:
     def __init__(self):

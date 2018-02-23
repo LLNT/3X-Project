@@ -431,7 +431,7 @@
     "Status":[],
     "Value":10000,
     "Character_only":[],
-    "Use":"HEAL 10",
+    "Use":"PROMOTE",
     "Battle_type":"Usable",
     "Icon":"",
     "Infinite":0,
