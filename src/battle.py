@@ -1112,6 +1112,7 @@ class Battle:
                 hpadd=dmg
                 if (hpadd>self.a.ability["MHP"]-self.a.ability["HP"]):
                     hpadd=self.a.ability["MHP"]-self.a.ability["HP"]
+                self.a.ability["HP"]+=hpadd
             s+=str(hpadd)
             self.log.append((1,s))
             self.weapon_rank_buf_a+=self.weapon_a.itemtype.weapexp
@@ -1244,6 +1245,7 @@ class Battle:
                 hpadd=dmg
                 if (hpadd>self.d.ability["MHP"]-self.d.ability["HP"]):
                     hpadd=self.d.ability["MHP"]-self.d.ability["HP"]
+                self.d.ability["HP"] += hpadd
             s+=str(hpadd)
             self.log.append((2,s))
             self.weapon_rank_buf_d+=self.weapon_d.itemtype.weapexp
