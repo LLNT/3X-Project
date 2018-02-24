@@ -5,6 +5,60 @@
     "Icon":"lyn_icon.png",
     "Text":"好了，这局是我们赢了。"
   },
+  "SZT990-2":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"lyn_icon.png",
+    "Text":"大家辛苦了！"
+  },
+  "SZT990-3":{
+    "Type":"M",
+    "Location":1,
+    "Icon":"serra_icon.png",
+    "Text":"琳，你今天可要请我们吃饭了！"
+  },
+  "SZT990-4":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"lyn_icon.png",
+    "Text":"没问题啦，话说回来"
+  },
+  "SZT990-5":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"lyn_icon.png",
+    "Text":"威尔是这次的大功臣啊。"
+  },
+  "SZT990-6":{
+    "Type":"M",
+    "Location":1,
+    "Icon":"weir_icon.png",
+    "Text":"哎呀，这个嘛……"
+  },
+  "SZT990-7":{
+    "Type":"M",
+    "Location":1,
+    "Icon":"weir_icon.png",
+    "Text":"还是琳迪斯小姐指挥得当。"
+  },
+  "SZT990-8":{
+    "Type":"M",
+    "Location":1,
+    "Icon":"serra_icon.png",
+    "Text":"哼！人家就没有功劳嘛！"
+  },
+  "SZT990-9":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"lyn_icon.png",
+    "Text":"好啦好啦，"
+  },
+  "SZT990-10":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"lyn_icon.png",
+    "Text":"大伙赶紧吃饭吧！"
+  },
   "BT990-1":{
     "Type":"B",
     "Speaker":"1",

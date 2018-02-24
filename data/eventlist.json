@@ -31,7 +31,7 @@
         "Condition": [[[],["S990010"]]
         ],
         "Reconstruct":null,
-        "Text":["SZT990-1"],
+        "Text":["SZT990-1","SZT990-2","SZT990-3","SZT990-4","SZT990-5","SZT990-6","SZT990-7","SZT990-8","SZT990-9","SZT990-10"],
         "Finish":[
         {
           "Condition":[[[],[]]],
