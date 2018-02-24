@@ -1025,7 +1025,6 @@ class Arena(ScrollableLayer):
         obj = self.people[pid]
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
         use_effect = person.use_item(item)
-        print(use_effect)
         if 'PROMOTE' in use_effect:
             promote_cls_list = person.can_promote(self.map.global_vars)
             self.menulayer.add(Listcls(promote_cls_list, self.promote, action=action, pid=pid))
@@ -1038,7 +1037,6 @@ class Arena(ScrollableLayer):
         person = self.people[pid].person
         obj = self.people[pid]
         promote_bonus, abl_ori = person.promote(cls, self.map.global_vars)
-        print(promote_bonus, abl_ori)
         def _act(self):
             self.is_event_handler = False
             self.add(Experience2(promote_bonus, abl_ori, self._clear_map))
@@ -1056,6 +1054,17 @@ class Arena(ScrollableLayer):
         person = self.people[pid].person
         person.banish(item)
         self.item_show()
+
+    def seize(self, event):
+        pid = self.selected
+        obj = self.people[pid]
+        dst = self._mapstate[0][self.selected][self.target][1]
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
+        obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                                 dialog_type='M', dialog_info=self.dialog_info,
+                                 w=self.windowsize[0], h=self.windowsize[1],
+                                 callback=self._clear_map))
+
 
     def set_turn(self, turn):
         # change the turn over the arena

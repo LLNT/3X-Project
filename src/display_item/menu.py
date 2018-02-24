@@ -68,6 +68,9 @@ class Ordermenu(Menu):
             _event, _item = event[1], event[2]
             if _event is not None:
                 l.append(MenuItem('Treasury', self.treasury, _event, _item))
+        seize = map.get_seize_event(pid, position)
+        if seize is not None:
+            l.append(MenuItem('Seize', self.seize, seize))
 
         self.allow_cancel = arena.allow_cancel
         if self.allow_cancel:
@@ -113,8 +116,11 @@ class Ordermenu(Menu):
         self.parent.remove(self)
 
     def treasury(self, event, item):
-        print(event)
         self.arena.treasury(event, item)
+        self.parent.remove(self)
+
+    def seize(self, event):
+        self.arena.seize(event)
         self.parent.remove(self)
 
     def on_mouse_press(self, x, y, buttons, modifiers):

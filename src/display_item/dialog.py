@@ -185,3 +185,42 @@ class Branch(Menu):
         self.kill()
         self.callback.__call__(**self.kwargs)
         director.window.push_handlers(self.parent)
+
+class Mapdialog(BaseDialog):
+    def __init__(self, textlist, textsource, w, h, dialog_info, callback, **kwargs):
+        super().__init__(textlist, textsource)
+
+        self.w, self.h = w, h
+        self.pid2dir = dialog_info['pid2dir']
+        self.callback = callback
+        self.kwargs = kwargs
+
+        # add label
+        self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
+        self.add(self.text)
+
+        # add text
+        self.label = {}
+        self.label['left'] = Text(text=' ', position=(w // 4, h // 4),font_size=25)
+        self.label['right'] = Text(text=' ', position=(w * 3 // 4, h // 4), font_size=25)
+        self.add(self.label['left'])
+        self.add(self.label['right'])
+        self.excute()
+
+    def excute(self):
+        item = self.textsource[self.textlist[self.i]]
+        dir = self.pid2dir[item['Speaker']]
+        self.label[dir].element.text = item['Tag']
+        self.text.element.text = item['Text']
+        if dir is 'left':
+            self.label['right'].visible = False
+            self.label['left'].visible = True
+        else:
+            self.label['right'].visible = True
+            self.label['left'].visible = False
+
+        super().excute()
+
+    def exit(self):
+        self.kill()
+        self.callback.__call__(**self.kwargs)

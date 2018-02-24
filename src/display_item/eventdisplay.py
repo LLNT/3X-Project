@@ -23,7 +23,7 @@ class Eventdisplay(Layer):
             text_list = event['Text']
             text_source = map.global_vars.text
         except:
-            pass
+            text_list, text_source = None, None
         self.dialog_info = dialog_info
         self.w, self.h = w, h
         self.callback = callback
@@ -37,7 +37,8 @@ class Eventdisplay(Layer):
         elif dialog_type is 'S':
             director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
                                             callback=self.get_finish, info=dialog_info)))
-
+        elif dialog_type is 'M':
+            self.get_finish()
         else:
             self.get_finish()
 
@@ -57,13 +58,13 @@ class Eventdisplay(Layer):
     def execute(self, i=0):
         if i < self.length:
             event = self.execute_event[i]
-            print(event)
-            _type = event.split('/')[0]
+            _event = event.split('/')
+            _type = _event[0]
             if _type is 'CLV':
-                self.map.eventlist.pop(event.split('/')[1])
+                self.map.eventlist.pop(_event[1])
                 self.execute(i+1)
             elif _type is 'I':
-                _, _itemid, _pid = event.split('/')
+                _, _itemid, _pid = _event
                 if _pid is 'E':
                     _pid = self.dialog_info['E']
                 if _pid is 'V':
@@ -72,6 +73,10 @@ class Eventdisplay(Layer):
                 person = self.map.global_vars.personBank[_pid]
                 flag = self.map.global_vars.flags['Have Transporter']
                 self.add(Getitem(person, item, flag, self.map, callback=self.execute, i=i+1))
+            elif _type is 'SF':
+                flag = _event[1]
+                self.map.global_vars.flags[flag] = True
+                self.execute(i+1)
             else:
                 print('Unknown event type')
                 self.execute(i+1)
