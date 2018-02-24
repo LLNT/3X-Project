@@ -234,7 +234,7 @@ class Experience2(Info):
         self.display(content, font_size=20, contentid=1,
                      pos_range=((self.width * 5 // 9, 0), (self.width * 7 // 9, self.height)))
 
-        content = [str(promote_bonus['LV'])]
+        content = [str(promote_bonus['LV'] + 1)]
         for ability in abilities:
             content.append(str(abl_ori[ability] + promote_bonus[ability]))
         self.display(content, font_size=20, contentid=1,

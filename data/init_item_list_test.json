@@ -104,5 +104,10 @@
     "Id":21,
     "Itemtype":"Die Apokalypse",
     "Use":80
+  },
+  {
+    "Id":22,
+    "Itemtype":"Chestkey",
+    "Use":3
   }
 ]

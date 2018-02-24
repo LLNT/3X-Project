@@ -1128,18 +1128,41 @@ class Arena(ScrollableLayer):
         obj = self.people[pid]
         self.textlist = event['Text']
         self.dialog_info['V'] = obj.person
-        obj.do(action + CallFunc(self.eventdisplay, event) + CallFunc(self._clear_map))
-        print(event)
-
-    def eventdisplay(self, event):
-        self.is_event_handler = False
-        self.add(Eventdisplay(event=event,
+        obj.do(action + CallFunc(self.eventdisplay, event=event,
                               map=self.map,
                               dialog_type='S',
                               dialog_info=self.dialog_info,
                               w=self.windowsize[0],
                               h=self.windowsize[1],
-                              callback=self._clear_map))
+                              callback=self._clear_map) + CallFunc(self._clear_map))
+        print(event)
+
+    def treasury(self, event, item):
+        pid = self.selected
+        person = self.people[pid].person
+        dst = self._mapstate[0][self.selected][self.target][1]
+        self.is_event_handler = False
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) \
+                 + CallFunc(self._clear_map)
+        obj = self.people[pid]
+        if item is not None:
+            if item.itemtype.infinite is not -1:
+                item.use -= 1
+                if item.use < 1:
+                    person.banish(item)
+            self.is_event_handler = False
+            self.dialog_info['V'] = obj.person
+            obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                                  dialog_type=None, dialog_info=self.dialog_info,
+                                  w=self.windowsize[0], h=self.windowsize[1],
+                                  callback=self._clear_map))
+            pass
+        else:
+            obj.do(action)
+
+    def eventdisplay(self, **kwargs):
+        self.is_event_handler = False
+        self.add(Eventdisplay(**kwargs))
 
 
 
