@@ -524,7 +524,9 @@ class Main:
         map_new=rec["Map"]
         for i in range(m):
             for j in range(n):
-                self.terrain_container.map[i+x][j+y]=map_new[i][j]
+                self.terrain_container.map[i+x][j+y]\
+                    =self.global_vars.terrainBank[map_new[i][j]]
+
         return
 
 

@@ -37,6 +37,9 @@ class BaseDialog(Layer):
         else:
             self.exit()
 
+    def source_error(self, info):
+        print('source error type ' + str(info))
+
 class Dialogscene(BaseDialog):
 
     def __init__(self, text_list, text_source, map, w, h, info,
@@ -74,7 +77,8 @@ class Dialogscene(BaseDialog):
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
-
+        if item['Type'] is not 'S':
+            self.source_error('S')
         if 'Branch' in item.keys():
             self.add(Branch(self.map, item['Branch'], self.excute))
             director.window.remove_handlers(self)
@@ -191,34 +195,42 @@ class Mapdialog(BaseDialog):
         super().__init__(textlist, textsource)
 
         self.w, self.h = w, h
-        self.pid2dir = dialog_info['pid2dir']
         self.callback = callback
         self.kwargs = kwargs
 
-        # add label
-        self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
-        self.add(self.text)
+        self.up = {
+            'Icon': Sprite('ring.png', position=(w // 8, h * 3 // 4), opacity=0),
+            'Text': Text(text=' ', position=(w // 2, h * 3 // 4),font_size=30),
+        }
+        self.down = {
+            'Icon': Sprite('ring.png', position=(w * 7 // 8, h  // 4), opacity=0),
+            'Text': Text(text=' ', position=(w // 2, h  // 4), font_size=30),
+        }
 
-        # add text
-        self.label = {}
-        self.label['left'] = Text(text=' ', position=(w // 4, h // 4),font_size=25)
-        self.label['right'] = Text(text=' ', position=(w * 3 // 4, h // 4), font_size=25)
-        self.add(self.label['left'])
-        self.add(self.label['right'])
+        for item in self.up.values():
+            self.add(item)
+        for item in self.down.values():
+            self.add(item)
+
         self.excute()
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
-        dir = self.pid2dir[item['Speaker']]
-        self.label[dir].element.text = item['Tag']
-        self.text.element.text = item['Text']
-        if dir is 'left':
-            self.label['right'].visible = False
-            self.label['left'].visible = True
+        if item['Type'] is not 'M':
+            self.source_error('M')
+        if item['Location'] is 0:
+            obj = self.up
+        elif item['Location'] is 1:
+            obj = self.down
         else:
-            self.label['right'].visible = True
-            self.label['left'].visible = False
-
+            self.source_error('Location')
+            return
+        pos = obj['Icon'].position
+        obj['Icon'].kill()
+        if item['Icon'] is not None:
+            obj['Icon'] = Sprite(item['Icon'], pos)
+            self.add(obj['Icon'])
+        obj['Text'].element.text = item['Text']
         super().excute()
 
     def exit(self):

@@ -19,6 +19,7 @@ class Eventdisplay(Layer):
         super().__init__()
         self.map = map #type:map_controller.Main
         self.map.global_vars.flags[event['Event']] = True
+        print(event)
         try:
             text_list = event['Text']
             text_source = map.global_vars.text
@@ -38,7 +39,7 @@ class Eventdisplay(Layer):
             director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
                                             callback=self.get_finish, info=dialog_info)))
         elif dialog_type is 'M':
-            self.get_finish()
+            self.add(Mapdialog(text_list, text_source, w, h, dialog_info, self.get_finish))
         else:
             self.get_finish()
 

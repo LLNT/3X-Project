@@ -7,11 +7,11 @@
         "Reconstruct":{
           "Name":"map_test_trs1",
           "M":1,
-          "N":1,
+          "N":2,
           "Anchor_X":5,
           "Anchor_Y":3,
-          "Map":[["Plain"]],
-          "Pic":""},
+          "Map":[["Plain", "Plain"]],
+          "Pic":"ring.png"},
         "Finish": [
           {
             "Condition": [[[],[]]],

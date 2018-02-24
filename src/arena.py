@@ -56,6 +56,8 @@ class Arena(ScrollableLayer):
         # add map elements
         self.cells = {}  #type:Dict[str,Cell]
         self.people = {} #type:Dict[str,PerSpr]
+        self.person_layer = Layer()
+        self.add(self.person_layer)
         for i in range(w):
             for j in range(h):
                 self.cells[(i, j)] = Cell(size, (i, j))
@@ -67,7 +69,7 @@ class Arena(ScrollableLayer):
         for person in people:
             pid = person.pid
             self.people[pid] = PerSpr(person, 1, size, position[pid], controller[pid], bk_color=(220,220,220))
-            self.add(self.people[pid])
+            self.person_layer.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
 
         self.menulayer = menulayer
@@ -851,7 +853,7 @@ class Arena(ScrollableLayer):
         pid = self.selected
         dst = self._mapstate[0][self.selected][self.target][1]
         self.is_event_handler = False
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
         obj = self.people[pid]
         obj.do(action + CallFunc(self._push_scene, layer))
 
@@ -962,7 +964,7 @@ class Arena(ScrollableLayer):
             self.battlelist = kwargs['battlelist']
             self._set_areastate(rng, 'in_enemy_moverange')
         self.is_event_handler = False
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
         obj = self.people[pid]
         obj.do(action + CallFunc(self._push_scene, Battlescene))
 
@@ -997,7 +999,7 @@ class Arena(ScrollableLayer):
             dst = kwargs['dst']
             rng = kwargs['rng']
             self._set_areastate(rng, 'in_enemy_moverange')
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
         obj = self.people[pid]
         obj.do(action + CallFunc(self._clear_map) + CallFunc(self.map.take_turn, self))
         pass
@@ -1059,7 +1061,7 @@ class Arena(ScrollableLayer):
         pid = self.selected
         obj = self.people[pid]
         dst = self._mapstate[0][self.selected][self.target][1]
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
         obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
                                  dialog_type='M', dialog_info=self.dialog_info,
                                  w=self.windowsize[0], h=self.windowsize[1],
@@ -1161,10 +1163,16 @@ class Arena(ScrollableLayer):
                     person.banish(item)
             self.is_event_handler = False
             self.dialog_info['V'] = obj.person
-            obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
-                                  dialog_type=None, dialog_info=self.dialog_info,
-                                  w=self.windowsize[0], h=self.windowsize[1],
-                                  callback=self._clear_map))
+            if 'Reconstruct' in event.keys():
+                obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                                         dialog_type=None, dialog_info=self.dialog_info,
+                                         w=self.windowsize[0], h=self.windowsize[1],
+                                         callback=self.reconstruct, rec=event['Reconstruct']))
+            else:
+                obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                                      dialog_type=None, dialog_info=self.dialog_info,
+                                      w=self.windowsize[0], h=self.windowsize[1],
+                                      callback=self._clear_map))
             pass
         else:
             obj.do(action)
@@ -1173,7 +1181,17 @@ class Arena(ScrollableLayer):
         self.is_event_handler = False
         self.add(Eventdisplay(**kwargs))
 
-
+    def reconstruct(self, rec):
+        self.map.map_reconstruct(rec)
+        x, y, m, n = rec["Anchor_X"], rec["Anchor_Y"], rec["M"], rec["N"]
+        width, height = m * self.size, n * self.size
+        _x, _y = (x * 2 + m - 1) / 2, (y * 2 + n - 1) / 2
+        recon = Sprite(rec['Pic'], position=coordinate(_x, _y, self.size))
+        recon.scale_x, recon.scale_y = width / recon.width, height / recon.height
+        self.remove(self.person_layer)
+        self.add(recon)
+        self.add(self.person_layer)
+        self._clear_map()
 
     def remove(self, obj):
         super().remove(obj)
