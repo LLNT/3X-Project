@@ -516,4 +516,15 @@ class Main:
                 break
         return event
 
+    def map_reconstruct(self,rec):
+        x=rec["Anchor_X"]
+        y=rec["Anchor_Y"]
+        m=rec["M"]
+        n=rec["N"]
+        map_new=rec["Map"]
+        for i in range(m):
+            for j in range(n):
+                self.terrain_container.map[i+x][j+y]=map_new[i][j]
+        return
+
 
