@@ -229,8 +229,9 @@ class Arena(ScrollableLayer):
         pass
 
     def on_mouse_drag(self, x, y, dx, dy, buttons, modifiers):
-        if buttons == 1 and self.state is 'default':
-            self.position = self.position[0] + dx, self.position[1] + dy
+        # if buttons == 1 and self.state is 'default':
+        #     self.position = self.position[0] + dx, self.position[1] + dy
+        pass
 
     def _reset(self):
         # reset to last state
@@ -862,7 +863,7 @@ class Arena(ScrollableLayer):
         pos = self.people[pid].pos
         self.people.pop(pid)
         self.cells[pos].person_on = None
-        self.remove(person)
+        self.person_layer.remove(person)
         del person
         self.get_next_to_delete()
 
@@ -1152,9 +1153,10 @@ class Arena(ScrollableLayer):
         pid = self.selected
         person = self.people[pid].person
         dst = self._mapstate[0][self.selected][self.target][1]
-        self.is_event_handler = False
+
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) \
                  + CallFunc(self._clear_map)
+
         obj = self.people[pid]
         if item is not None:
             if item.itemtype.infinite is not -1:
