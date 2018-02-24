@@ -22,7 +22,8 @@ class Scale_to(IntervalAction):
         self.target.scale_y = self.start_scale_y + self.delta_y * t
 
 class Bar(ColorLayer):
-    def __init__(self, **kwargs):
+
+    def __init__(self, position, size, prop=1, anchor=(0, 0), **kwargs):
         if 'color' in kwargs:
             r,g,b = kwargs['color']
         else:
@@ -31,8 +32,8 @@ class Bar(ColorLayer):
             a = kwargs['alpha']
         else:
             a = 255
-        w, h = kwargs['size']
+        w, h = size
         super().__init__(r,g,b,a,w,h)
-        self.scale_x = kwargs['prop']
-        self.position = kwargs['position']
-        self.anchor = (0, 0)
+        self.scale_x = prop
+        self.position = position
+        self.anchor = anchor

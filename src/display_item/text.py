@@ -11,7 +11,8 @@ class Text(RichLabel):
     def __init__(self, **kwargs):
         super(Text, self).__init__(anchor_x='center',anchor_y='center', **kwargs)
 
-def layout(content, pos_range=None, color=(127, 255, 170, 255), font_name='times new roman',font_size=36):
+def layout(content, pos_range=None, color=(127, 255, 170, 255),
+           font_name='times new roman',font_size=36):
     '''
 
     :param content: a list of text to be shown
@@ -36,3 +37,35 @@ def layout(content, pos_range=None, color=(127, 255, 170, 255), font_name='times
 
 
     pass
+
+def layout_multiply(content, row, column, pos_range=None, color=(127, 255, 170, 255),
+                    font_name='times new roman', font_size=36):
+    if pos_range is None:
+        from cocos.director import director
+        (x1, y1) = director.get_window_size()
+        (x0, y0) = (0, 0)
+    else:
+        (x0, y0), (x1, y1) = pos_range
+
+    _step = (x1 - x0) // (column + 1)
+    _pos_range = (x0, y0), (x0 + _step, y1)
+    _content = []
+    textmap = []
+    for i, text in enumerate(content):
+        _content.append(text)
+        if i % row == row - 1:
+            _column = (i + 1) // row
+            textmap.append(layout(_content, _pos_range, color, font_name, font_size))
+            _content = []
+            _pos_range = (x0 + _step * _column, y0), (x0 + _step * (_column + 1), y1)
+
+
+
+    while not i % row == row - 1:
+        i += 1
+        _content.append(' ')
+
+    _column = (i + 1) // row
+    _pos_range = (x0, y0), (x0 + _step * (_column + 1), y1)
+    textmap.append(layout(_content, _pos_range, color, font_name, font_size))
+    return textmap

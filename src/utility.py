@@ -44,6 +44,23 @@ def is_weapon(s):
 def calc_dist(A,B):
     return abs(A[0]-B[0])+abs(A[1]-B[1])
 
+def get_weapon_rank(exp):
+    if exp <= 0:
+        return '--'
+    elif exp < 30:
+        return 'E'
+    elif exp < 80:
+        return 'D'
+    elif exp < 150:
+        return 'C'
+    elif exp < 230:
+        return 'B'
+    elif exp < 320:
+        return 'A'
+    else:
+        return 'S'
+
+
 state = ['none', 'valid_select', 'invalid_select', 'ally_select', 'enemy_select', 'menu_display', 'info']
 
 WHITE = (255, 255, 255)

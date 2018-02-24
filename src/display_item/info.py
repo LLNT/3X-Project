@@ -3,9 +3,10 @@ from person import Person
 from cocos.sprite import Sprite
 from cocos.director import director
 from cocos.layer import ColorLayer
-from display_item.text import layout
+from display_item.text import layout, layout_multiply
 from cocos.actions import CallFunc, Delay
 from battle import Battle
+from utility import get_weapon_rank
 
 class Info(ColorLayer):
 
@@ -60,33 +61,62 @@ class Info(ColorLayer):
 
 class Personinfo(Info):
     # 显示个人的信息
-    def __init__(self, person):
+    def __init__(self, person, callback=None, **kwargs):
         super(Personinfo, self).__init__()
         self.person = person
         self.info_display(person)
+        self.add(Back(position=(self.width // 72, self.height // 20),
+                     size=(self.width // 24, int(self.height * 0.9))))
+        self.add(Back(position=(self.width * 17 // 18, self.height // 20),
+                     size=(self.width // 24, int(self.height * 0.9))))
+        self.callback = callback
+        self.kwargs = kwargs
 
     def info_display(self, person):
         p = person #type: Person
-        self.spr = Sprite(image=p.pic)
-        h, w = self.spr.height, self.spr.width
-        self.spr.scale_x, self.spr.scale_y = self.width/(w*2), self.height/(h*2)
-        self.spr.position = self.width*1//4, self.height*3//4
-        self.add(self.spr)
+        self.icon = Sprite(image=p.pic)
+        h, w = self.icon.height, self.icon.width
+        self.icon.scale_x, self.icon.scale_y = self.width / (w * 3), self.height / (h * 3)
+        self.icon.position = self.width * 1 // 4, self.height * 3 // 4
+        self.add(self.icon)
 
         content = []
-        content.append('HP:' + str(p.ability['HP']))
-        content.append('MHP:' + str(p.ability['MHP']))
-        content.append('LV:' + str(p.ability['LV']))
-        content.append('EXP:' + str(p.ability['EXP']))
-        content.append('CLS:' + str(p.cls))
+        content.append(p.name)
+        content.append(str(p.cls) + '  Lv.' + str(p.ability['LV']))
+        content.append('HP ' + str(p.ability['HP']) + '/' + str(p.ability['MHP']))
+        self.display(content, ((self.width // 18, self.height // 4),
+                               (self.width // 2, self.height * 5 // 8)))
 
-        self.display(content, ((0, 0), (self.width//2, self.height//2)))
-        content = []
-        for item in p.item:
-            content.append(item.itemtype.name + ' ' +
-                           str(item.use) + '/' + str(item.itemtype.max_use))
+        abilities_1 = ["MHP","STR","MGC","SPD","SKL"]
+        abilities_2 = ["DEF","RES","LUK","BLD","CRY"]
+        content = abilities_1.copy()
+        for ability in abilities_1:
+            content.append(str(p.ability[ability]))
+        content.extend(abilities_2)
+        for ability in abilities_2:
+            content.append(str(p.ability[ability]))
 
-        self.display(content, ((self.width//2, 0), (self.width, self.height)), 25)
+        content_map = layout_multiply(content, row=5, column=4, pos_range=(
+            (self.width // 2, self.height * 2 // 3), (self.width * 17 // 18, self.height)))
+        for column in content_map:
+            for item in column:
+                self.add(item)
+
+        wp_types_1 = ["Sword","Lance","Axe","Bow","Fire"]
+        wp_types_2 = ["Thunder","Wind","Light","Dark","Wand"]
+        content = wp_types_1.copy()
+        for wp_type in wp_types_1:
+            content.append(str(get_weapon_rank(p.weapon_rank[wp_type])))
+        content.extend(wp_types_2)
+        for wp_type in wp_types_2:
+            content.append(str(get_weapon_rank(p.weapon_rank[wp_type])))
+
+        content_map = layout_multiply(content, row=5, column=4, pos_range=(
+            (self.width // 2, self.height // 3), (self.width * 17 // 18, self.height * 2 // 3)))
+        for column in content_map:
+            for item in column:
+                self.add(item)
+
 
 
 class Battleinfo(Info):
@@ -244,3 +274,29 @@ class Experience2(Info):
         self.kill()
         self.callback(**self.kwargs)
         del self
+
+class Back(ColorLayer):
+
+    is_event_handler = True
+
+    def __init__(self, position, size, prop=1, color=(0, 0, 0), a=255,
+                 callback=None, **kwargs):
+        r, g, b = color
+        w, h = size
+        super().__init__(r,g,b,a,w,h)
+        self.scale_x = prop
+        self.position = position
+        self.callback = callback
+        self.kwargs = kwargs
+
+    def contains(self, x, y):
+        sx, sy = self.position
+        if x < sx or x > sx + self.width:
+            return False
+        if y < sy or y > sy + self.height:
+            return False
+        return True
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if self.contains(x, y):
+            print(True)
