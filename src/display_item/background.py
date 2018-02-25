@@ -10,7 +10,7 @@ from cocos.scene import Scene
 class Background(Layer):
     def __init__(self, w, h):
         super().__init__()
-        map = Sprite('map.png')
+        map = Sprite('map0_temp.jpg')
         map.scale_x, map.scale_y = w/map.width, h/map.height
         map.position = w//2, h//2
         self.add(map)

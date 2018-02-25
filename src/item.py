@@ -25,13 +25,16 @@ class Item:
                 if p.ability["HP"]>p.ability["MHP"]:
                     p.ability["HP"]=p.ability["MHP"]
                 t+=2
+                continue
             if use_eff[t] in p.ability:
-                p.ability[use_eff[t]]+=use_eff[t+1]
+                p.ability[use_eff[t]]+=int(use_eff[t+1])
                 if p.ability[use_eff[t]]>p.ability_limit[use_eff[t]]:
                     p.ability[use_eff[t]]=p.ability_limit[use_eff[t]]
                 t+=2
+                continue
             if use_eff[t]=="PROMOTE":
                 t+=1
+                continue
         return use_eff
 
 class ItemBank:
