@@ -5,5 +5,7 @@
   "Pegasus Knight":[],
   "Cleric":[],
   "Sniper":["Continue"],
-  "Paladin":["Ambush"]
+  "Paladin":["Charge"],
+  "Mercenary":[],
+  "Thief":[]
 }

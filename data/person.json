@@ -51,8 +51,8 @@
     "Init_item":[1],
     "Support":{
       "3":{
-        "Base":51,
-        "Growth":2
+        "Base":0,
+        "Growth":1
       }
     },
     "Color":"Green",
@@ -116,7 +116,7 @@
     [
       "Awareness"
     ],
-    "Init_item":[2],
+    "Init_item":[2,3],
     "Support":{
 
     },
@@ -127,6 +127,142 @@
     "Battlecard":{
       "Paladin":{
         "Lance":"",
+        "Sword":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "3":
+  {
+    "Id": 3,
+    "Name": "Lavrik",
+    "Cls":"Thief",
+    "Ability":
+    {
+      "LV":4,
+      "MHP":22,
+      "STR":8,
+      "MGC":0,
+      "SPD":11,
+      "SKL":9,
+      "DEF":7,
+      "RES":2,
+      "LUK":1,
+      "BLD":7,
+      "MOV":6,
+      "HP":22,
+      "CRY":6,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":25,
+      "STR":30,
+      "MGC":10,
+      "SPD":35,
+      "SKL":55,
+      "DEF":40,
+      "RES":40,
+      "LUK":10
+    },
+    "Weapon Rank Bonus":
+    {"Sword":80,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"tanya.jpg",
+    "Skills":
+    [
+      "Ambush",
+      "Promised"
+    ],
+    "Init_item":[4,6],
+    "Support":{
+      "1":{
+        "Base":0,
+        "Growth":1
+      }
+    },
+    "Color":"Blue",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Thief":{
+        "Sword":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+
+
+  "201":
+  {
+    "Id": 201,
+    "Name": "Dieter",
+    "Cls":"Mercenary",
+    "Ability":
+    {
+      "LV":8,
+      "MHP":34,
+      "STR":14,
+      "MGC":0,
+      "SPD":10,
+      "SKL":6,
+      "DEF":13,
+      "RES":0,
+      "LUK":3,
+      "BLD":15,
+      "MOV":5,
+      "HP":34,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":80,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"tanya.jpg",
+    "Skills":
+    [
+      "Wrath"
+    ],
+    "Init_item":[5],
+    "Support":{
+
+    },
+    "Color":"Black",
+    "Attribute":"Thunder",
+    "Coefficient":1.5,
+    "Bonus":40,
+    "Battlecard":{
+      "Mercenary":{
         "Sword":"",
         "Base":""
       },

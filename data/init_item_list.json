@@ -18,5 +18,15 @@
     "Id":4,
     "Itemtype":"Iron Knife",
     "Use":25
+  },
+  {
+    "Id":5,
+    "Itemtype":"Long Sword",
+    "Use":20
+  },
+  {
+    "Id":6,
+    "Itemtype":"Lockpick",
+    "Use":30
   }
 ]

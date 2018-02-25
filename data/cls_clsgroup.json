@@ -4,6 +4,8 @@
   "Lancer":"Infantry",
   "Warrior":"Infantry", 
   "Archer":"Bower",
+  "Thief":"Cracksman",
+  "Mercenary":"Infantry",
   "Cleric":"Magician",
   "Sniper":"Bower",
   "Cavalier":"Knight",
