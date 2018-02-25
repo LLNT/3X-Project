@@ -542,8 +542,9 @@ class Main:
                 continue
             ilist=[]
             for _i in self.global_vars.personBank[p].item:
-                if _i.itemtype.weight<=person.ability["CRY"]:
-                    ilist.append(_i)
+                if not _i==self.global_vars.personBank[p].get_equip():
+                    if _i.itemtype.weight<=person.ability["CRY"]:
+                        ilist.append(_i)
             obj[p]=ilist
             del(ilist)
         return obj

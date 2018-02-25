@@ -1,0 +1,162 @@
+{
+  "Background_Scene":"background_test.jpg",
+  "Treasures":{
+  },
+  "Seize":{
+
+  },
+  "Villages":{
+    "1,5":[
+      {
+        "Event":"V000010",
+        "Character":null,
+        "Condition": [[[],[]]],
+        "Text":["VT000-101","VT000-102","VT000-103","VT000-104","VT000-105","VT000-106","VT000-107","VT000-108",
+                "VT000-109","VT000-110","VT000-111","VT000-112","VT000-113","VT000-114","VT000-115","VT000-116",
+                "VT000-117","VT000-118","VT000-119","VT000-120","VT000-121","VT000-122","VT000-123"],
+        "Finish":[
+        {
+          "Condition":[[[],[]]],
+          "Execute":["CLV/1,5","I/8/V"],
+          "Jump":"F"
+        }]
+      }
+    ]
+  },
+  "Battle":
+  [
+    {
+      "Event": "B0000010",
+      "Character": [["1","201"],["201","1"]],
+      "Condition": [
+        [[],["B0000010"]]
+      ],
+      "Text":["BT000-1","BT000-2","BT000-3","BT000-4","BT000-5","BT000-6"],
+      "Finish":[
+        {
+          "Condition":[[[],[]]],
+          "Execute":[],
+          "Jump":"F"
+        }
+      ]
+    },
+    {
+      "Event": "B0000020",
+      "Character": [["2","201"],["201","2"]],
+      "Condition": [
+        [[],["B0000020"]]
+      ],
+      "Text":["BT000-7","BT000-8","BT000-9","BT00-10","BT000-11","BT00-12","BT000-13"],
+      "Finish":[
+        {
+          "Condition":[[[],[]]],
+          "Execute":[],
+          "Jump":"F"
+        }
+      ]
+    },
+    {
+      "Event": "B0000030",
+      "Character": [["3","201"],["201","3"]],
+      "Condition": [
+        [[],["B0000030"]]
+      ],
+      "Text":["BT000-14","BT000-15","BT000-16","BT00-17","BT000-18","BT00-19","BT000-20",
+      "BT000-21","BT000-22","BT000-23","BT00-24","BT000-25","BT00-26","BT000-27",
+      "BT000-28","BT000-29","BT000-30","BT00-31","BT000-32","BT00-33","BT000-34"],
+      "Finish":[
+        {
+          "Condition":[[[],[]]],
+          "Execute":[],
+          "Jump":"F"
+        }
+      ]
+    }
+  ],
+  "Defeated":[
+    {
+      "Event": "D00010",
+      "Person": "1",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00010"
+          ]
+        ]
+      ],
+      "Text": ["DT000-11","DT000-12","DT000-13","DT000-14","DT000-15","DT000-16","DT000-17"],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/GAOV_FLAG00001"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D00020",
+      "Person": "2",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00020"
+          ]
+        ]
+      ],
+      "Text": ["DT000-21","DT000-22","DT000-23","DT000-24","DT000-25","DT000-26"],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D00030",
+      "Person": "3",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00030"
+          ]
+        ]
+      ],
+      "Text": ["DT000-31","DT000-32","DT000-33"],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D0002010",
+      "Person": "2",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D99020"
+          ]
+        ]
+      ],
+      "Text": ["DT000-2011","DT000-2012","DT000-2013"],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    }
+    ]
+}

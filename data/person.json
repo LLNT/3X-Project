@@ -43,7 +43,7 @@
       "Light":0,
       "Dark":0,
       "Wand":0},
-    "Picture":"lin.png",
+    "Picture":"leaf.jpg",
     "Skills":
     [
 
@@ -177,7 +177,7 @@
       "Light":0,
       "Dark":0,
       "Wand":0},
-    "Picture":"tanya.jpg",
+    "Picture":"pirn.jpg",
     "Skills":
     [
       "Ambush",
@@ -248,12 +248,12 @@
       "Light":0,
       "Dark":0,
       "Wand":0},
-    "Picture":"tanya.jpg",
+    "Picture":"shiva.jpg",
     "Skills":
     [
       "Wrath"
     ],
-    "Init_item":[5],
+    "Init_item":[5,7],
     "Support":{
 
     },

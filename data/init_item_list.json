@@ -28,5 +28,15 @@
     "Id":6,
     "Itemtype":"Lockpick",
     "Use":30
+  },
+  {
+    "Id":7,
+    "Itemtype":"Vulnerary",
+    "Use":6
+  },
+  {
+    "Id":8,
+    "Itemtype":"Power Ring",
+    "Use":1
   }
 ]
