@@ -526,7 +526,26 @@ class Main:
             for j in range(n):
                 self.terrain_container.map[i+x][j+y]\
                     =self.global_vars.terrainBank[map_new[i][j]]
-
         return
+
+    def can_steal(self,pid,pos):
+        person=self.global_vars.personBank[pid]
+        if not (self.global_vars.clsBank[person.cls].cls_group=="Cracksman"):
+            return {}
+        obj={}
+        for p in self.person_container.position:
+            if self.person_container.controller[p]%2==self.person_container.controller[pid]%2:
+                continue
+            if person.ability["SPD"]<=self.global_vars.personBank[p].ability["SPD"]:
+                continue
+            if not calc_dist(pos,self.person_container.position[p])==1:
+                continue
+            ilist=[]
+            for _i in self.global_vars.personBank[p].item:
+                if _i.itemtype.weight<=person.ability["CRY"]:
+                    ilist.append(_i)
+            obj[p]=ilist
+            del(ilist)
+        return obj
 
 

@@ -37,4 +37,4 @@ class Main:
         self.cls_promote_bonus=json.load(open(path+"cls_promotion_bonus.json","r"))
         self.support_text_map=json.load(open(path+"support_text.json","r"))
         self.text=json.load(codecs.open(path+"text.json","r","utf-8"))
-        self.eventlist=json.load(open(path+"eventlist.json","r"))
+        self.eventlist=json.load(open(path+"eventlist_test.json","r"))

@@ -1,0 +1,15 @@
+{
+  "Name":"map_0",
+  "Armies":[
+    {
+      "Name": "Yury's Squad",
+      "Member": [{"Id":"1","X":7,"Y":0,"PRI":0,"AI":"NULL"},{"Id":"2","X":9,"Y":0,"PRI":0,"AI":"NULL"}],
+      "Controller": 0
+    },
+    {
+      "Name": "Lilse's Army",
+      "Member":[{"Id":"201","X":8,"Y":1,"PRI":0,"AI":"DEFENSIVE"}],
+      "Controller":1
+    }
+  ]
+}
