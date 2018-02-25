@@ -1,2 +1,2 @@
 # 3X-Project
-a py-based strategic game aimed to release in May 2018
+a py-based strategic game aimed to release in September 2018
