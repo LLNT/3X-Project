@@ -3,7 +3,30 @@
   "Treasures":{
   },
   "Seize":{
-
+  },
+  "Doors":{
+    "8,2":[
+      {
+        "Condition":[[[],[]]],
+        "Event": "O00001",
+        "Reconstruct":{
+          "Name":"map_0_door1",
+          "M":1,
+          "N":1,
+          "Anchor_X":8,
+          "Anchor_Y":2,
+          "Map":[["Floor"]],
+          "Pic":"ring.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+            ],
+            "Jump": "F"
+          }
+        ]
+      }
+    ]
   },
   "Villages":{
     "1,5":[

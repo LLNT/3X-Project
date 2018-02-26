@@ -549,4 +549,55 @@ class Main:
             del(ilist)
         return obj
 
+    def unlock_door(self,pos,p):
+        doors={}
+        x=pos[0]
+        y=pos[1]
+        item=None
+        has_key=0
+        person=self.global_vars.personBank[p]
+        if person.cls=="Rogue":
+            has_key=1
+        elif self.global_vars.clsBank[person.cls].cls_group=="Cracksman":
+            for _i in person.item:
+                if _i.itemtype.name=="Lockpick":
+                    item=_i
+                    has_key=1
+            if has_key==0:
+                for _i in person.item:
+                    if _i.itemtype.name=="Doorkey":
+                        item=_i
+                        has_key=1
+        else:
+            for _i in person.item:
+                if _i.itemtype.name=="Doorkey":
+                    item=_i
+                    has_key=1
+        if has_key==0:
+            return (doors,None)
+        if self.terrain_container.map[x-1][y].typename=="Door":
+            if ("%d,%d"%(x-1,y) in self.eventlist["Doors"]):
+                for event in self.eventlist["Doors"]["%d,%d"%(x-1,y)]:
+                    if check_condition(event["Condition"],self):
+                        doors[(x-1,y)]=event
+                        break
+        if self.terrain_container.map[x+1][y].typename=="Door":
+            if ("%d,%d"%(x+1,y) in self.eventlist["Doors"]):
+                for event in self.eventlist["Doors"]["%d,%d"%(x+1,y)]:
+                    if check_condition(event["Condition"],self):
+                        doors[(x+1,y)]=event
+                        break
+        if self.terrain_container.map[x][y-1].typename=="Door":
+            if ("%d,%d"%(x,y-1) in self.eventlist["Doors"]):
+                for event in self.eventlist["Doors"]["%d,%d"%(x,y-1)]:
+                    if check_condition(event["Condition"],self):
+                        doors[(x,y-1)]=event
+                        break
+        if self.terrain_container.map[x][y+1].typename=="Door":
+            if ("%d,%d"%(x,y+1) in self.eventlist["Doors"]):
+                for event in self.eventlist["Doors"]["%d,%d"%(x,y+1)]:
+                    if check_condition(event["Condition"],self):
+                        doors[(x,y+1)]=event
+                        break
+        return (doors,item)
 
