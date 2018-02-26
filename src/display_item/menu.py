@@ -63,13 +63,15 @@ class Ordermenu(Menu):
         if len(self.stl) > 0:
             l.append(MenuItem('Steal', self.steal, self.stl))
 
-        event = map.get_grid_event(position, pid)
-
         doors, key = map.unlock_door(position, pid)
-
         if len(doors) > 0:
             l.append(MenuItem('Doors', self.doors, doors, key))
 
+        talk_dict = map.find_talk_obj(pid, position)
+        if len(talk_dict) > 0:
+            l.append(MenuItem('Talk', self.talk, talk_dict))
+
+        event = map.get_grid_event(position, pid)
         _type = event[0]
         if (_type is 'V') and (not event[1] is None):
             l.append(MenuItem('Visit', self.visitvillage, event[1]))
@@ -140,6 +142,9 @@ class Ordermenu(Menu):
         self.arena.doors(doors, key)
         self.parent.remove(self)
 
+    def talk(self, talk_dict):
+        self.arena.talk(talk_dict)
+        self.parent.remove(self)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4 :

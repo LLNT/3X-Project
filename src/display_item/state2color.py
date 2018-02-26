@@ -59,7 +59,8 @@ self_state2color = {
     'target': RED,
     'can_support': PURPLE,
     'can_exchange': GOLD,
-    'can_wanduse': GOLD
+    'can_wanduse': GOLD,
+    'can_talk':GOLD,
 }
 
 ally_state2color = {
@@ -68,7 +69,10 @@ ally_state2color = {
     'selected': SKY_BLUE,
     'on_mouse_motion': VIOLET,
     'target': RED,
-    'can_support': PURPLE
+    'can_support': PURPLE,
+    'can_exchange': GOLD,
+    'can_wanduse': GOLD,
+    'can_talk':GOLD,
 }
 
 enemy_state2color = {

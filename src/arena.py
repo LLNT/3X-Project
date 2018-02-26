@@ -261,16 +261,20 @@ class Arena(ScrollableLayer):
                         cell.state = 'in_self_moverange'
                     else:
                         cell.state = 'default'
-        elif self.state in['choose_support', 'choose_exchange', 'choose_steal']:
-            if self.state is 'choose_support':
-                for pid in self.sup_dict:
-                    self.people[pid].state = self._reset_person[pid]
+        elif self.state in['choose_support', 'choose_exchange', 'choose_steal', 'choose_talk']:
+            for pid in self._reset_person.keys():
+                self.people[pid].state = self._reset_person[pid]
+            '''
             elif self.state is 'choose_exchange':
                 for pid in self.exc:
                     self.people[pid].state = self._reset_person[pid]
             elif self.state is 'choose_steal':
                 for pid in self.stl_dict:
                     self.people[pid].state = self._reset_person[pid]
+            elif self.state is 'choose_talk':
+                for pid in self.talk_dict:
+                    self.people[pid].state = self._reset_person[pid]
+            '''
             self.menu = Ordermenu(self)
             self._add_menu(self.menu)
             self.is_event_handler = False
@@ -377,10 +381,12 @@ class Arena(ScrollableLayer):
             'choose_exchange': self._choose_exchange,
             'choose_steal': self._choose_steal,
             'choose_door': self._choose_door,
+            'choose_talk': self._choose_talk,
         }
 
     def _callback(self, **kwargs):
         director.window.push_handlers(self)
+        self.is_event_handler = True
         self.state = 'default'
 
     def _default(self):
@@ -901,6 +907,27 @@ class Arena(ScrollableLayer):
                 self._reset()
             pass
 
+    def _choose_talk(self):
+        if self.mouse_btn == 4:
+            self._reset()
+            pass
+        elif self.mouse_btn == 1:
+            pid = self.cells[self.mouse_pos].person_on
+            if pid is not None and pid in self.talk_dict:
+                event = self.talk_dict[pid]
+                pid = self.selected
+                obj = self.people[pid]
+                dst = self._mapstate[0][pid][self.target][1]
+                director.window.remove_handlers(self)
+                action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
+                         CallFunc(self._clear_map) + Delay(0.1)
+                obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                                         dialog_type='S', dialog_info=self.dialog_info,
+                                         w=self.windowsize[0], h=self.windowsize[1],
+                                         callback=self._callback))
+
+            pass
+
     def get_next_to_delete(self):
         try:
             pid = next(self.iter)
@@ -1280,6 +1307,15 @@ class Arena(ScrollableLayer):
         self._doors = doors
         self._key = key
         self.is_event_handler = True
+
+    def talk(self, talk_dict):
+        self.is_event_handler = True
+        self.state = 'choose_talk'
+        for pid in talk_dict:
+            self._reset_person[pid] = self.people[pid].state
+            self.people[pid].state = 'can_talk'
+        self.talk_dict = talk_dict
+        self._repaint()
 
     def eventdisplay(self, **kwargs):
         self.is_event_handler = False
