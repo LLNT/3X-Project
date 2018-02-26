@@ -601,3 +601,25 @@ class Main:
                         break
         return (doors,item)
 
+    def find_talk_obj(self,pid,pos):
+        objs={}
+        for obj in self.person_container.position:
+            if not calc_dist(pos,self.person_container.position[obj])==1:
+                continue
+            if "Silence" in self.global_vars.personBank[obj].status:
+                continue
+            for event in self.eventlist["Dialogs"]:
+                ch_satisfied=0
+                for chtp in event["Character"]:
+                    if str(pid)==chtp[0] and str(obj)==chtp[1]:
+                        ch_satisfied=1
+                        break
+                if ch_satisfied==0:
+                    continue
+                if not check_condition(event["Condition"],self):
+                    continue
+                if not obj in objs:
+                    objs[obj]=event
+        return objs
+
+

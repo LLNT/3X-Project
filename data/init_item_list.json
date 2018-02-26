@@ -63,5 +63,10 @@
     "Id":13,
     "Itemtype":"Slim Sword",
     "Use":30
+  },
+  {
+    "Id":14,
+    "Itemtype":"Genya's Toy Sword",
+    "Use":80
   }
 ]
