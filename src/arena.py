@@ -61,7 +61,7 @@ class Arena(ScrollableLayer):
         for i in range(w):
             for j in range(h):
                 self.cells[(i, j)] = Cell(size, (i, j))
-                self.add(self.cells[(i, j)])
+                self.person_layer.add(self.cells[(i, j)])
 
         people = map.person_container.people
         position = map.person_container.position

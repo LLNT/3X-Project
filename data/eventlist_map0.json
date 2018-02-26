@@ -11,7 +11,7 @@
           "Anchor_X":12,
           "Anchor_Y":5,
           "Map":[["Floor"]],
-          "Pic":"ring.png"},
+          "Pic":"map_cell.png"},
         "Finish": [
           {
             "Condition": [[[],[]]],
@@ -32,7 +32,7 @@
           "Anchor_X":0,
           "Anchor_Y":8,
           "Map":[["Floor"]],
-          "Pic":"ring.png"},
+          "Pic":"map_cell.png"},
         "Finish": [
           {
             "Condition": [[[],[]]],
@@ -53,7 +53,7 @@
           "Anchor_X":0,
           "Anchor_Y":11,
           "Map":[["Floor"]],
-          "Pic":"ring.png"},
+          "Pic":"map_cell.png"},
         "Finish": [
           {
             "Condition": [[[],[]]],
@@ -74,7 +74,7 @@
           "Anchor_X":0,
           "Anchor_Y":17,
           "Map":[["Floor"]],
-          "Pic":"ring.png"},
+          "Pic":"map_cell.png"},
         "Finish": [
           {
             "Condition": [[[],[]]],
@@ -95,7 +95,7 @@
           "Anchor_X":6,
           "Anchor_Y":17,
           "Map":[["Floor"]],
-          "Pic":"ring.png"},
+          "Pic":"map_cell.png"},
         "Finish": [
           {
             "Condition": [[[],[]]],
@@ -121,7 +121,7 @@
           "Anchor_X":8,
           "Anchor_Y":2,
           "Map":[["Floor"]],
-          "Pic":"ring.png"},
+          "Pic":"map_cell.png"},
         "Finish": [
           {
             "Condition": [[[],[]]],
