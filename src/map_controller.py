@@ -575,30 +575,34 @@ class Main:
                     has_key=1
         if has_key==0:
             return (doors,None)
-        if self.terrain_container.map[x-1][y].typename=="Door":
-            if ("%d,%d"%(x-1,y) in self.eventlist["Doors"]):
-                for event in self.eventlist["Doors"]["%d,%d"%(x-1,y)]:
-                    if check_condition(event["Condition"],self):
-                        doors[(x-1,y)]=event
-                        break
-        if self.terrain_container.map[x+1][y].typename=="Door":
-            if ("%d,%d"%(x+1,y) in self.eventlist["Doors"]):
-                for event in self.eventlist["Doors"]["%d,%d"%(x+1,y)]:
-                    if check_condition(event["Condition"],self):
-                        doors[(x+1,y)]=event
-                        break
-        if self.terrain_container.map[x][y-1].typename=="Door":
-            if ("%d,%d"%(x,y-1) in self.eventlist["Doors"]):
-                for event in self.eventlist["Doors"]["%d,%d"%(x,y-1)]:
-                    if check_condition(event["Condition"],self):
-                        doors[(x,y-1)]=event
-                        break
-        if self.terrain_container.map[x][y+1].typename=="Door":
-            if ("%d,%d"%(x,y+1) in self.eventlist["Doors"]):
-                for event in self.eventlist["Doors"]["%d,%d"%(x,y+1)]:
-                    if check_condition(event["Condition"],self):
-                        doors[(x,y+1)]=event
-                        break
+        if x-1>=0:
+            if self.terrain_container.map[x-1][y].typename=="Door":
+                if ("%d,%d"%(x-1,y) in self.eventlist["Doors"]):
+                    for event in self.eventlist["Doors"]["%d,%d"%(x-1,y)]:
+                        if check_condition(event["Condition"],self):
+                            doors[(x-1,y)]=event
+                            break
+        if x+1<self.terrain_container.M:
+            if self.terrain_container.map[x+1][y].typename=="Door":
+                if ("%d,%d"%(x+1,y) in self.eventlist["Doors"]):
+                    for event in self.eventlist["Doors"]["%d,%d"%(x+1,y)]:
+                        if check_condition(event["Condition"],self):
+                            doors[(x+1,y)]=event
+                            break
+        if y-1>=0:
+            if self.terrain_container.map[x][y-1].typename=="Door":
+                if ("%d,%d"%(x,y-1) in self.eventlist["Doors"]):
+                    for event in self.eventlist["Doors"]["%d,%d"%(x,y-1)]:
+                        if check_condition(event["Condition"],self):
+                            doors[(x,y-1)]=event
+                            break
+        if x+1<self.terrain_container.N:
+            if self.terrain_container.map[x][y+1].typename=="Door":
+                if ("%d,%d"%(x,y+1) in self.eventlist["Doors"]):
+                    for event in self.eventlist["Doors"]["%d,%d"%(x,y+1)]:
+                        if check_condition(event["Condition"],self):
+                            doors[(x,y+1)]=event
+                            break
         return (doors,item)
 
     def find_talk_obj(self,pid,pos):

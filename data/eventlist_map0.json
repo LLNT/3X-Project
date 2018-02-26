@@ -151,7 +151,91 @@
           }
         ]
       }
-    ]
+    ],
+    "9,3":[
+      {
+        "Condition":[[[],[]]],
+        "Event": "O00002",
+        "Reconstruct":{
+          "Name":"map_0_door2",
+          "M":1,
+          "N":1,
+          "Anchor_X":9,
+          "Anchor_Y":3,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+            ],
+            "Jump": "F"
+          }
+        ]
+      }],
+    "13,12":[
+      {
+        "Condition":[[[],[]]],
+        "Event": "O00003",
+        "Reconstruct":{
+          "Name":"map_0_door3",
+          "M":1,
+          "N":1,
+          "Anchor_X":13,
+          "Anchor_Y":12,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+            ],
+            "Jump": "F"
+          }
+        ]
+      }],
+    "9,13":[
+      {
+        "Condition":[[[],[]]],
+        "Event": "O00004",
+        "Reconstruct":{
+          "Name":"map_0_door4",
+          "M":1,
+          "N":1,
+          "Anchor_X":9,
+          "Anchor_Y":13,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+            ],
+            "Jump": "F"
+          }
+        ]
+      }],
+    "11,15":[
+      {
+        "Condition":[[[],[]]],
+        "Event": "O00005",
+        "Reconstruct":{
+          "Name":"map_0_door5",
+          "M":1,
+          "N":1,
+          "Anchor_X":11,
+          "Anchor_Y":15,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+            ],
+            "Jump": "F"
+          }
+        ]
+      }]
   },
   "Villages":{
     "1,5":[
