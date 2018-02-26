@@ -36,7 +36,7 @@ class Arena(ScrollableLayer):
     # the holder of map and roles
     is_event_handler = True
 
-    def __init__(self, map, w, h, menulayer,size=80):
+    def __init__(self, map, w, h, menulayer,infolayer,size=80):
         super(Arena, self).__init__()
 
         # initialize the holder according to the map
@@ -73,11 +73,12 @@ class Arena(ScrollableLayer):
             self.cells[position[pid]].person_on = pid
 
         self.menulayer = menulayer
+        self.infolayer = infolayer
 
 
-        self.board = Board(self.width, self.height)
+        self.board = Board(self.windowsize[0], self.windowsize[1])
         self._update = (0, 0)
-        # self.schedule(self.update)
+        self.schedule(self.update)
 
         self.anchor = self.width//2, self.height//2
 
@@ -158,7 +159,7 @@ class Arena(ScrollableLayer):
     def _sequential_move(self, dst):
         # move person of pid through the trace dst
         self.is_event_handler = False
-        action = Delay(0.1)
+        action = CallFunc(self.menulayer.disapper)
         for x,y in dst:
             action = action + MoveTo(coordinate(x, y, self.size), 0.5)
         return action
@@ -200,7 +201,7 @@ class Arena(ScrollableLayer):
         # use _repaint
         if self.is_event_handler:
             pos = self._coordinate(x, y)
-            self._update = self.board.get_dir(pos[0], pos[1])
+            self._update = self.board.get_dir(x, y)
             i, j = self.coordinate_t(x, y)
             if self._in_arena(i, j):
                 self._repaint()
@@ -228,11 +229,6 @@ class Arena(ScrollableLayer):
         #     self.scale = self.scale * 0.9
         pass
 
-    def on_mouse_drag(self, x, y, dx, dy, buttons, modifiers):
-        # if buttons == 1 and self.state is 'default':
-        #     self.position = self.position[0] + dx, self.position[1] + dy
-        pass
-
     def _reset(self):
         # reset to last state
         # specificlly handle with choose_attack
@@ -250,12 +246,15 @@ class Arena(ScrollableLayer):
                         cell.state = 'default'
 
             self.item = None
-        elif self.state is 'choose_support' or self.state is 'choose_exchange':
+        elif self.state in['choose_support', 'choose_exchange', 'choose_steal']:
             if self.state is 'choose_support':
                 for pid in self.sup_dict:
                     self.people[pid].state = self._reset_person[pid]
-            else:
+            elif self.state is 'choose_exchange':
                 for pid in self.exc:
+                    self.people[pid].state = self._reset_person[pid]
+            elif self.state is 'choose_steal':
+                for pid in self.stl_dict:
                     self.people[pid].state = self._reset_person[pid]
             self.menu = Ordermenu(self)
             self._add_menu(self.menu)
@@ -313,7 +312,7 @@ class Arena(ScrollableLayer):
         self.transtuple = None
         self.dialog_info = {}
         try:
-            self.remove(self.info)
+            self.infolayer.remove(self.info)
             self.remove(self.wpinfo)
         except:
             pass
@@ -360,7 +359,8 @@ class Arena(ScrollableLayer):
             'wand_type7': self._wand_type7,
             'wand_type7_confirm': self._wand_type7_confirm,
             'wand_type8': self._wand_type8,
-            'choose_exchange': self._choose_exchange
+            'choose_exchange': self._choose_exchange,
+            'choose_steal': self._choose_steal,
         }
 
     def _default(self):
@@ -401,7 +401,7 @@ class Arena(ScrollableLayer):
                 pid = self.cells[self.mouse_pos].person_on
                 select = self.people[pid].person
                 self.info = Personinfo(select)
-                self.add(self.info)
+                self.infolayer.add(self.info)
                 self.state = 'person_info'
             else:
                 self.end = Endturn(self)
@@ -836,6 +836,19 @@ class Arena(ScrollableLayer):
                 self.excpid = pid
             pass
 
+    def _choose_steal(self):
+        if self.mouse_btn == 4:
+            self._reset()
+            pass
+        elif self.mouse_btn == 1:
+            pid = self.cells[self.mouse_pos].person_on
+            if pid is not None and pid in self.stl_dict:
+                can_steal = self.stl_dict[pid]
+                self.stl_obj = pid
+                self._add_menu(Liststeal(can_steal, self.exe_steal))
+                self.is_event_handler = False
+            pass
+
     def get_next_to_delete(self):
         try:
             pid = next(self.iter)
@@ -1132,6 +1145,19 @@ class Arena(ScrollableLayer):
         self.add(self.hitrate)
         self.hitrate.display([str(hitr_3)])
 
+    def exe_steal(self, item):
+        self.is_event_handler = True
+        obj = self.people[self.stl_obj].person #type:person.Person
+        obj.dequip(item)
+        obj.item.remove(item)
+        pid = self.selected
+        dst = self._mapstate[0][self.selected][self.target][1]
+        director.window.remove_handlers(self)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
+        act_obj = self.people[pid]
+        act_per = act_obj.person
+        act_obj.do(action + CallFunc(self.on_return, person=act_per, getitem=item))
+
     def visit_village(self, event):
         pid = self.selected
         dst = self._mapstate[0][self.selected][self.target][1]
@@ -1178,6 +1204,16 @@ class Arena(ScrollableLayer):
             pass
         else:
             obj.do(action)
+
+    def steal(self, stl_dict):
+        self.is_event_handler = True
+        self.state = 'choose_steal'
+        for pid in stl_dict:
+            self._reset_person[pid] = self.people[pid].state
+            self.people[pid].state = 'can_steal'
+        self.stl_dict = stl_dict
+        self._repaint()
+        pass
 
     def eventdisplay(self, **kwargs):
         self.is_event_handler = False
@@ -1275,9 +1311,9 @@ if __name__ == '__main__':
     size = 80
     director.init(caption='3X-Project', width=1280, height=720)
 
-
     menulayer = Menulayer()
-    director.run(Scene(Arena(map, w, h, menulayer, size), menulayer))
+    infolayer = Layer()
+    director.run(Scene(Arena(map, w, h, menulayer, infolayer, size), menulayer, infolayer))
 
 
 

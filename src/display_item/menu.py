@@ -59,6 +59,10 @@ class Ordermenu(Menu):
         if len(self.exc) > 0:
             l.append(MenuItem('Exchange', self.exchange))
 
+        self.stl = map.can_steal(pid, position)
+        if len(self.stl) > 0:
+            l.append(MenuItem('Steal', self.steal, self.stl))
+
         event = map.get_grid_event(position, pid)
 
         _type = event[0]
@@ -121,6 +125,10 @@ class Ordermenu(Menu):
 
     def seize(self, event):
         self.arena.seize(event)
+        self.parent.remove(self)
+
+    def steal(self, stl):
+        self.arena.steal(stl)
         self.parent.remove(self)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
@@ -424,4 +432,21 @@ class Listcls(Menu):
     def promote(self, cls):
         self.kill()
         self.callback.__call__(cls, **self.kwargs)
+        del self
+
+class Liststeal(Menu):
+    is_event_handler = True
+    def __init__(self, steallist, callback, **kwargs):
+        super().__init__(title='CHOOSE STEAL')
+        l = []
+        for item in steallist:
+            l.append(MenuItem(item.itemtype.name, self.steal, item))
+        self.create_menu(l, zoom_in(), zoom_out())
+        self.position = - director.get_window_size()[0] * 6 // 8, 0
+        self.callback = callback
+        self.kwargs = kwargs
+
+    def steal(self, item):
+        self.kill()
+        self.callback.__call__(item, **self.kwargs)
         del self

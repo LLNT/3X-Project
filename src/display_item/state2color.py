@@ -75,6 +75,7 @@ enemy_state2color = {
     'selected': GOLD,
     'on_mouse_motion': VIOLET,
     'target': RED,
+    'can_steal': PURPLE,
 }
 
 ctrl2map_moverange = {
