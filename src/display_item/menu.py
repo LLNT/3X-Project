@@ -65,10 +65,11 @@ class Ordermenu(Menu):
 
         event = map.get_grid_event(position, pid)
 
+
         _type = event[0]
-        if _type is 'V':
+        if (_type is 'V') and (not event[1] is None):
             l.append(MenuItem('Visit', self.visitvillage, event[1]))
-        elif _type is 'T':
+        elif _type is 'T'and (not event[1] is None):
             _event, _item = event[1], event[2]
             if _event is not None:
                 l.append(MenuItem('Treasury', self.treasury, _event, _item))
