@@ -20,17 +20,18 @@ class Eventdisplay(Layer):
         self.map = map #type:map_controller.Main
         self.map.global_vars.flags[event['Event']] = True
         print(event)
-        try:
-            text_list = event['Text']
-            text_source = map.global_vars.text
-        except:
-            text_list, text_source = None, None
+
         self.dialog_info = dialog_info
         self.w, self.h = w, h
         self.callback = callback
         self.kwargs = kwargs
         self.event = event
-
+        try:
+            text_list = event['Text']
+            text_source = map.global_vars.text
+        except:
+            self.get_finish()
+            return
 
         if dialog_type is 'B':
             self.add(Battledialog(text_list, text_source, w, h,

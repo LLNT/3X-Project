@@ -65,6 +65,10 @@ class Ordermenu(Menu):
 
         event = map.get_grid_event(position, pid)
 
+        doors, key = map.unlock_door(position, pid)
+
+        if len(doors) > 0:
+            l.append(MenuItem('Doors', self.doors, doors, key))
 
         _type = event[0]
         if (_type is 'V') and (not event[1] is None):
@@ -131,6 +135,11 @@ class Ordermenu(Menu):
     def steal(self, stl):
         self.arena.steal(stl)
         self.parent.remove(self)
+
+    def doors(self, doors, key):
+        self.arena.doors(doors, key)
+        self.parent.remove(self)
+
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4 :
@@ -276,6 +285,7 @@ class Weaponmenu(Menu):
         self.arena.add(info)
         info.display(content)
         self.parent.remove(self)
+        self.parent.disapper()
         self.arena.wpinfo = info
         self.arena.select_target(item)
 

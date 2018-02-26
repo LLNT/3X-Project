@@ -35,6 +35,7 @@ mapstate2color = {
     'in_enemy_wandrange':PURPLE,
     'in_ally_wandrange':PURPLE,
     'target': RED,
+    'door': PURPLE,
 }
 
 mapstate2color_motion = {
@@ -47,6 +48,7 @@ mapstate2color_motion = {
     'in_enemy_wandrange':PURPLE,
     'in_ally_wandrange':PURPLE,
     'target': RED,
+    'door': RED,
 }
 
 self_state2color = {
@@ -93,7 +95,8 @@ opacity ={
     'target': 80,
     'in_self_wandrange':80,
     'in_enemy_wandrange':80,
-    'in_ally_wandrange':80,
+    'in_ally,wandrange':80,
+    'door': 80,
 }
 
 def per_state2color(state, ctrl):

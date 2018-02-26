@@ -178,8 +178,11 @@ class Animation(Layer):
         exp = self.content[2]
         growthlist = self.content[3]
         origin = self.content[4]
-        self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin)
-        self.add(self.exp)
+        if len(origin) > 0:
+            self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin)
+            self.add(self.exp)
+        else:
+            director.window.push_handlers(self)
 
 class Battlescene(Animation):
     is_event_handler = False

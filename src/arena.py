@@ -248,6 +248,19 @@ class Arena(ScrollableLayer):
                         cell.state = 'default'
 
             self.item = None
+        elif self.state is 'choose_door':
+            self.menu = Ordermenu(self)
+            self._add_menu(self.menu)
+            self.is_event_handler = False
+            for (i, j) in self.cells.keys():
+                cell = self.cells[(i, j)]
+                pid = self.selected
+                valid = self._mapstate[0]
+                if cell.state is 'door':
+                    if (i, j) in valid[pid]:
+                        cell.state = 'in_self_moverange'
+                    else:
+                        cell.state = 'default'
         elif self.state in['choose_support', 'choose_exchange', 'choose_steal']:
             if self.state is 'choose_support':
                 for pid in self.sup_dict:
@@ -363,6 +376,7 @@ class Arena(ScrollableLayer):
             'wand_type8': self._wand_type8,
             'choose_exchange': self._choose_exchange,
             'choose_steal': self._choose_steal,
+            'choose_door': self._choose_door,
         }
 
     def _callback(self, **kwargs):
@@ -483,6 +497,7 @@ class Arena(ScrollableLayer):
                 self.battlelist = [at, df, wp, self.map, self.target]
                 self.add(self.info)
                 self.state = 'confirm_attack'
+                self.menulayer.disapper()
             else:
                 self._reset()
             pass
@@ -854,6 +869,36 @@ class Arena(ScrollableLayer):
                 self.stl_obj = pid
                 self._add_menu(Liststeal(self, can_steal, self.exe_steal))
                 self.is_event_handler = False
+            pass
+
+    def _choose_door(self):
+        if self.mouse_btn == 4:
+            self._reset()
+            pass
+        elif self.mouse_btn == 1:
+            if self.mouse_pos in self._doors.keys():
+                item = self._key
+                pid = self.selected
+                act_obj = self.people[pid]
+                person = act_obj.person
+                if item is not None:
+                    item.use -= 1
+                    if item.use == 0:
+                        person.banish(item)
+                event = self._doors[self.mouse_pos]
+
+                dst = self._mapstate[0][self.selected][self.target][1]
+
+                action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(
+                    self._clear_map)
+
+                act_obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                                  dialog_type=None, dialog_info=self.dialog_info,
+                                  w=self.windowsize[0], h=self.windowsize[1],
+                                  callback=self._clear_map))
+
+            else:
+                self._reset()
             pass
 
     def get_next_to_delete(self):
@@ -1228,6 +1273,13 @@ class Arena(ScrollableLayer):
         self.stl_dict = stl_dict
         self._repaint()
         pass
+
+    def doors(self, doors, key):
+        self.state = 'choose_door'
+        self._set_areastate(doors, 'door')
+        self._doors = doors
+        self._key = key
+        self.is_event_handler = True
 
     def eventdisplay(self, **kwargs):
         self.is_event_handler = False

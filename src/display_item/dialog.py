@@ -146,16 +146,21 @@ class Battledialog(BaseDialog):
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
-        dir = self.pid2dir[item['Speaker']]
-        self.label[dir].element.text = item['Tag']
-        self.text.element.text = item['Text']
+
+
+        try:
+            dir = self.pid2dir[item['Speaker']]
+        except:
+            dir = 'left'
+
         if dir is 'left':
             self.label['right'].visible = False
             self.label['left'].visible = True
         else:
             self.label['right'].visible = True
             self.label['left'].visible = False
-
+        self.label[dir].element.text = item['Tag']
+        self.text.element.text = item['Text']
         super().excute()
 
     def exit(self):
