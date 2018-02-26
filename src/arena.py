@@ -895,7 +895,7 @@ class Arena(ScrollableLayer):
                 act_obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
                                   dialog_type=None, dialog_info=self.dialog_info,
                                   w=self.windowsize[0], h=self.windowsize[1],
-                                  callback=self._clear_map))
+                                  callback=self.reconstruct, rec=event['Reconstruct']))
 
             else:
                 self._reset()
@@ -1291,6 +1291,8 @@ class Arena(ScrollableLayer):
         width, height = m * self.size, n * self.size
         _x, _y = (x * 2 + m - 1) / 2, (y * 2 + n - 1) / 2
         recon = Sprite(rec['Pic'], position=coordinate(_x, _y, self.size))
+
+        print(rec['Pic'])
         recon.scale_x, recon.scale_y = width / recon.width, height / recon.height
         self.remove(self.person_layer)
         self.add(recon)
