@@ -372,6 +372,7 @@ class Endturn(Menu):
     def cancel(self):
         self.arena.is_event_handler = True
         self.parent.remove(self)
+        self.parent.disapper()
 
     def end_turn(self):
         self.arena.end_turn()
@@ -434,19 +435,33 @@ class Listcls(Menu):
         self.callback.__call__(cls, **self.kwargs)
         del self
 
+
+
+
 class Liststeal(Menu):
     is_event_handler = True
-    def __init__(self, steallist, callback, **kwargs):
+    def __init__(self, arena, steallist, callback, **kwargs):
         super().__init__(title='CHOOSE STEAL')
         l = []
         for item in steallist:
-            l.append(MenuItem(item.itemtype.name, self.steal, item))
+            content = item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use)
+            l.append(MenuItem(content, self.steal, item))
+        l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.position = - director.get_window_size()[0] * 6 // 8, 0
         self.callback = callback
         self.kwargs = kwargs
+        self.arena = arena
 
     def steal(self, item):
         self.kill()
         self.callback.__call__(item, **self.kwargs)
         del self
+
+    def cancel(self):
+        self.arena.cancel_select()
+        self.parent.remove(self)
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()

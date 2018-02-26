@@ -2,7 +2,7 @@ from display_item.bar import Bar, Scale_to
 from person import Person
 from cocos.sprite import Sprite
 from cocos.director import director
-from cocos.layer import ColorLayer
+from cocos.layer import ColorLayer, Layer
 from display_item.text import layout, layout_multiply
 from cocos.actions import CallFunc, Delay
 from battle import Battle
@@ -63,14 +63,36 @@ class Personinfo(Info):
     # 显示个人的信息
     def __init__(self, person, callback=None, **kwargs):
         super(Personinfo, self).__init__()
-        self.person = person
-        self.info_display(person)
+
         self.add(Back(position=(self.width // 72, self.height // 20),
-                     size=(self.width // 24, int(self.height * 0.9))))
+                     size=(self.width // 24, int(self.height * 0.9)),callback=self._callback, switch=self.switch))
         self.add(Back(position=(self.width * 17 // 18, self.height // 20),
-                     size=(self.width // 24, int(self.height * 0.9))))
+                     size=(self.width // 24, int(self.height * 0.9)),callback=self._callback, switch=self.switch))
         self.callback = callback
         self.kwargs = kwargs
+        self.layer1 = Layer()
+        self.layer2 = Layer()
+        self.add(self.layer1)
+        self.add(self.layer2)
+
+        self.person = person
+        self.info_display(person)
+
+        self.layer2.visible = False
+
+
+    def switch(self):
+        if self.layer1.visible:
+            self.layer2.visible = True
+            self.layer1.visible = False
+        else:
+            self.layer1.visible = True
+            self.layer2.visible = False
+
+    def _callback(self):
+        self.parent.remove(self)
+        self.callback.__call__(**self.kwargs)
+        del self
 
     def info_display(self, person):
         p = person #type: Person
@@ -100,7 +122,7 @@ class Personinfo(Info):
             (self.width // 2, self.height * 2 // 3), (self.width * 17 // 18, self.height)))
         for column in content_map:
             for item in column:
-                self.add(item)
+                self.layer1.add(item)
 
         wp_types_1 = ["Sword","Lance","Axe","Bow","Fire"]
         wp_types_2 = ["Thunder","Wind","Light","Dark","Wand"]
@@ -115,8 +137,15 @@ class Personinfo(Info):
             (self.width // 2, self.height // 3), (self.width * 17 // 18, self.height * 2 // 3)))
         for column in content_map:
             for item in column:
-                self.add(item)
+                self.layer1.add(item)
 
+        content = []
+        for item in p.item:
+            content.append(item.itemtype.name + ' ' + str(item.use) + '/' + str(item.itemtype.max_use))
+        lay_out = layout(content, pos_range=((self.width // 2, self.height // 2),
+                                   (self.width * 17 // 18, self.height)))
+        for item in lay_out:
+            self.layer2.add(item)
 
 
 class Battleinfo(Info):
@@ -279,7 +308,7 @@ class Back(ColorLayer):
 
     is_event_handler = True
 
-    def __init__(self, position, size, prop=1, color=(0, 0, 0), a=255,
+    def __init__(self, position, size, switch, prop=1, color=(0, 0, 0), a=255,
                  callback=None, **kwargs):
         r, g, b = color
         w, h = size
@@ -288,6 +317,7 @@ class Back(ColorLayer):
         self.position = position
         self.callback = callback
         self.kwargs = kwargs
+        self.switch = switch
 
     def contains(self, x, y):
         sx, sy = self.position
@@ -298,5 +328,7 @@ class Back(ColorLayer):
         return True
 
     def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.callback.__call__(**self.kwargs)
         if self.contains(x, y):
-            print(True)
+            self.switch.__call__()

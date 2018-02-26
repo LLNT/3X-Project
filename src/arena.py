@@ -76,7 +76,7 @@ class Arena(ScrollableLayer):
         self.infolayer = infolayer
 
 
-        self.board = Board(self.windowsize[0], self.windowsize[1])
+        self.board = Board(self.windowsize[0], self.windowsize[1],25,-3)
         self._update = (0, 0)
         self.schedule(self.update)
 
@@ -201,7 +201,9 @@ class Arena(ScrollableLayer):
         # use _repaint
         if self.is_event_handler:
             pos = self._coordinate(x, y)
-            self._update = self.board.get_dir(x, y)
+            x1, y1 = self.board.get_dir(x, y)
+
+            self._update = x1, y1
             i, j = self.coordinate_t(x, y)
             if self._in_arena(i, j):
                 self._repaint()
@@ -363,6 +365,10 @@ class Arena(ScrollableLayer):
             'choose_steal': self._choose_steal,
         }
 
+    def _callback(self, **kwargs):
+        director.window.push_handlers(self)
+        self.state = 'default'
+
     def _default(self):
         # 0   default
         # not any army is selected.
@@ -400,9 +406,10 @@ class Arena(ScrollableLayer):
             if self.cells[self.mouse_pos].person_on is not None:
                 pid = self.cells[self.mouse_pos].person_on
                 select = self.people[pid].person
-                self.info = Personinfo(select)
+                self.info = Personinfo(select, callback=self._callback)
                 self.infolayer.add(self.info)
                 self.state = 'person_info'
+                director.window.remove_handlers(self)
             else:
                 self.end = Endturn(self)
                 self.menulayer.add(self.end)
@@ -845,7 +852,7 @@ class Arena(ScrollableLayer):
             if pid is not None and pid in self.stl_dict:
                 can_steal = self.stl_dict[pid]
                 self.stl_obj = pid
-                self._add_menu(Liststeal(can_steal, self.exe_steal))
+                self._add_menu(Liststeal(self, can_steal, self.exe_steal))
                 self.is_event_handler = False
             pass
 
@@ -1033,6 +1040,13 @@ class Arena(ScrollableLayer):
         self.cells[self.origin_pos].person_on = self.selected
         self.target = None
         pass
+
+    def cancel_select(self):
+        self.state = 'valid_dst'
+        for pid in self.stl_dict:
+            self.people[pid].state = self._reset_person[pid]
+        self._repaint()
+        self._add_menu(Ordermenu(self))
 
     def use(self, item):
         pid = self.selected
@@ -1242,15 +1256,21 @@ class Arena(ScrollableLayer):
         return i, j
 
     def update(self, dt):
-        self.position = self.position[0] + self._update[0], \
-                        self.position[1] + self._update[1]
+        x1, y1 = self._update
+        x0, y0 = self.position
+        if x0 > 0 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) and x0 < 0:
+            x1 = 0
+        if y0 > 0 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) and y1 < 0:
+            y1 = 0
+        self.position = self.position[0] + x1, \
+                        self.position[1] + y1
 
     def _coordinate(self,x, y):
         return ((x - self.anchor_x - self.position[0]) // self.scale + self.anchor_x) ,\
               ((y - self.anchor_y - self.position[1]) // self.scale + self.anchor_y)
 
 class Board():
-    def __init__(self, w=800, h=600, margin=20, step=2):
+    def __init__(self, w=800, h=600, margin=20, step=-2):
         self.w = w
         self.h = h
         self.margin = margin
@@ -1268,9 +1288,9 @@ class Board():
                 return (-self.step, 0)
         elif x > self.right:
             if y > self.up:
-                return (self.step, self.step)
-            elif y < self.margin:
                 return (self.step, -self.step)
+            elif y < self.margin:
+                return (self.step, self.step)
             else:
                 return (self.step, 0)
         else:
