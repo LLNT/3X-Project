@@ -1,6 +1,111 @@
 {
   "Background_Scene":"background_test.jpg",
   "Treasures":{
+    "12,5":
+      {
+        "Event": "T00001",
+        "Reconstruct":{
+          "Name":"map_test_trs1",
+          "M":1,
+          "N":1,
+          "Anchor_X":12,
+          "Anchor_Y":5,
+          "Map":[["Floor"]],
+          "Pic":"ring.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+              "I/9/V"
+            ],
+            "Jump": "F"
+          }
+        ]
+      },
+    "0,8":
+      {
+        "Event": "T00002",
+        "Reconstruct":{
+          "Name":"map_test_trs2",
+          "M":1,
+          "N":1,
+          "Anchor_X":0,
+          "Anchor_Y":8,
+          "Map":[["Floor"]],
+          "Pic":"ring.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+              "I/10/V"
+            ],
+            "Jump": "F"
+          }
+        ]
+      },
+    "0,11":
+      {
+        "Event": "T00003",
+        "Reconstruct":{
+          "Name":"map_test_trs3",
+          "M":1,
+          "N":1,
+          "Anchor_X":0,
+          "Anchor_Y":11,
+          "Map":[["Floor"]],
+          "Pic":"ring.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+              "I/11/V"
+            ],
+            "Jump": "F"
+          }
+        ]
+      },
+    "0,17":
+      {
+        "Event": "T00004",
+        "Reconstruct":{
+          "Name":"map_test_trs4",
+          "M":1,
+          "N":1,
+          "Anchor_X":0,
+          "Anchor_Y":17,
+          "Map":[["Floor"]],
+          "Pic":"ring.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+              "I/12/V"
+            ],
+            "Jump": "F"
+          }
+        ]
+      },
+    "6,17":
+      {
+        "Event": "T00005",
+        "Reconstruct":{
+          "Name":"map_test_trs5",
+          "M":1,
+          "N":1,
+          "Anchor_X":6,
+          "Anchor_Y":17,
+          "Map":[["Floor"]],
+          "Pic":"ring.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+              "I/13/V"
+            ],
+            "Jump": "F"
+          }
+        ]
+      }
   },
   "Seize":{
   },
