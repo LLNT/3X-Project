@@ -235,6 +235,27 @@
             "Jump": "F"
           }
         ]
+      }],
+    "5,9":[
+      {
+        "Condition":[[[],[]]],
+        "Event": "O00006",
+        "Reconstruct":{
+          "Name":"map_0_door6",
+          "M":1,
+          "N":1,
+          "Anchor_X":5,
+          "Anchor_Y":9,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+        "Finish": [
+          {
+            "Condition": [[[],[]]],
+            "Execute": [
+            ],
+            "Jump": "F"
+          }
+        ]
       }]
   },
   "Villages":{
