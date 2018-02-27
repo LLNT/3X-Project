@@ -68,5 +68,55 @@
     "Id":14,
     "Itemtype":"Zhenya's Toy Sword",
     "Use":80
+  },
+  {
+    "Id":15,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":16,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":17,
+    "Itemtype":"Iron Axe",
+    "Use":45
+  },
+  {
+    "Id":18,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":19,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":20,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":21,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":22,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":23,
+    "Itemtype":"Iron Axe",
+    "Use":45
+  },
+  {
+    "Id":24,
+    "Itemtype":"Iron Axe",
+    "Use":45
   }
 ]

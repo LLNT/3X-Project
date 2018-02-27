@@ -1,8 +1,8 @@
 {
   "Lord":"Infantry",
   "Swordman":"Infantry",
-  "Lancer":"Infantry",
-  "Warrior":"Infantry", 
+  "Lancer":"Hoplite",
+  "Warrior":"Hoplite",
   "Archer":"Bower",
   "Thief":"Cracksman",
   "Mercenary":"Infantry",
