@@ -43,7 +43,7 @@ class Arena(ScrollableLayer):
         self.width, self.height = w*size, h*size
         self.windowsize = director.get_window_size()
         self.anchor = self.width // 2, self.height // 2
-        self.add(Background(self.width, self.height))
+        self.add(Background(self.windowsize))
         # self.add(ColorLayer(100, 100, 100, 255, self.width, self.height))
 
         self.map = map  # type:map_controller.Main
@@ -79,8 +79,6 @@ class Arena(ScrollableLayer):
         self.board = Board(self.windowsize[0], self.windowsize[1],25,-3)
         self._update = (0, 0)
         self.schedule(self.update)
-
-        self.anchor = self.width//2, self.height//2
 
         self._clear_map()
 
