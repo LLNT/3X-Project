@@ -43,8 +43,11 @@ class Arena(ScrollableLayer):
         self.width, self.height = w*size, h*size
         self.windowsize = director.get_window_size()
         self.anchor = self.width // 2, self.height // 2
+        board_line = ColorLayer(255, 0, 0, 255, self.width + 10 + size,
+                            self.height + 10)
+        board_line.position =(-5, -5)
+        self.add(board_line)
         self.add(Background(self.windowsize))
-        # self.add(ColorLayer(100, 100, 100, 255, self.width, self.height))
 
         self.map = map  # type:map_controller.Main
         self.size = size
@@ -74,6 +77,8 @@ class Arena(ScrollableLayer):
 
         self.menulayer = menulayer
         self.infolayer = infolayer
+
+
 
 
         self.board = Board(self.windowsize[0], self.windowsize[1],25,-3)
@@ -120,6 +125,20 @@ class Arena(ScrollableLayer):
                     pass
                 else:
                     self.clear()
+
+    def set_target(self, value):
+        self._target = value
+        w = self.windowsize[0]
+        if value is not None:
+            if value[0] < self.w // 2:
+                self.menulayer.position = w - w //4, 0
+            else:
+                self.menulayer.position = 0, 0
+
+    def get_target(self):
+        return self._target
+
+    target = property(get_target, set_target)
 
     def clear(self):
         self.is_event_handler = True
@@ -1348,7 +1367,7 @@ class Arena(ScrollableLayer):
         x0, y0 = self.position
         if x0 > 0 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) and x0 < 0:
             x1 = 0
-        if y0 > 0 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) and y1 < 0:
+        if y0 > 5 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) - 5 and y1 < 0:
             y1 = 0
         self.position = self.position[0] + x1, \
                         self.position[1] + y1

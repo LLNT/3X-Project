@@ -14,7 +14,6 @@ class Menulayer(ColorLayer):
     def __init__(self):
         w, h = director.get_window_size()
         super().__init__(0,0,0,200,w//4, h)
-        self.position = w - w //4, 0
         self.opacity = 0
 
     def appear(self, opcacity=200):
