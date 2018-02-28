@@ -410,6 +410,27 @@
           "Jump": "F"
         }
       ]
+    },
+    {
+      "Event": "D00010000110",
+      "Person": "1000011",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00010000110"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["I/26/E"],
+          "Jump": "F"
+        }
+      ]
     }
     ]
 }

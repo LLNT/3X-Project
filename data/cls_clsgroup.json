@@ -3,6 +3,7 @@
   "Swordman":"Infantry",
   "Lancer":"Hoplite",
   "Warrior":"Hoplite",
+  "Armorknight":"Armor",
   "Archer":"Bower",
   "Thief":"Cracksman",
   "Mercenary":"Infantry",

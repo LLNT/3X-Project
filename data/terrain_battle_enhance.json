@@ -55,6 +55,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Wood":{
@@ -107,6 +115,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -171,6 +187,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":-10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Mountain":{
@@ -223,6 +247,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -287,6 +319,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Sea":{
@@ -339,6 +379,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":-10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":-10,
       "CRT":0,
@@ -403,6 +451,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Grass":{
@@ -455,6 +511,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -519,6 +583,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":-5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Column":{
@@ -571,6 +643,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -635,6 +715,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Avenue":{
@@ -687,6 +775,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":-5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":-5,
       "CRT":0,
@@ -751,6 +847,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Gate":{
@@ -795,6 +899,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":20,
       "CRT":0,
@@ -859,6 +971,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Fort":{
@@ -911,6 +1031,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -975,6 +1103,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":30,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Floor":{
@@ -1027,6 +1163,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -1091,6 +1235,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Empty Treasury":{
@@ -1143,6 +1295,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -1207,6 +1367,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Closed":{
@@ -1259,6 +1427,14 @@
       "DEF":0
     },
     "Hoplite":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Armor":{
       "HIT":0,
       "AVO":0,
       "CRT":0,

@@ -113,6 +113,21 @@
       "MOV":7,
       "HP":60,
       "CRY":20},
+  "Armorknight":{
+    "LV":20,
+      "MHP":60,
+      "STR":20,
+      "MGC":20,
+      "SPD":20,
+      "SKL":20,
+      "DEF":20,
+      "RES":20,
+      "LUK":20,
+      "BLD":20,
+      "MOV":7,
+      "HP":60,
+      "CRY":20
+  },
   "Warrior":
     { "LV":20,
       "MHP":60,

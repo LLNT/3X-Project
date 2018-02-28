@@ -118,5 +118,15 @@
     "Id":24,
     "Itemtype":"Iron Axe",
     "Use":45
+  },
+  {
+    "Id":25,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":26,
+    "Itemtype":"Javelin",
+    "Use":20
   }
 ]
