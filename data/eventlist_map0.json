@@ -1,7 +1,7 @@
 {
   "Background_Scene":"background_test.jpg",
-  "General":{
-    "G000001":{
+  "General":[
+    {
       "Event":"G000001",
       "Condition":[
         [["O00003"],["G000001"]],
@@ -20,7 +20,7 @@
       }
       ]
     }
-    },
+    ],
   "Dialogs":[
     {
       "Event": "I0000010",
