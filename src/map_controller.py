@@ -162,6 +162,71 @@ class Main:
                     dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy[p.pid]=dstlist
             return valid, self.global_vars.AIcontroller.enemy_single_movement(valid,invalid,ally,enemy,self)
+        if self.controller == 2:
+            for p in self.person_container.people:
+                if self.person_container.controller[p.pid] == 2:
+                    if self.person_container.movable[p.pid]:
+                        unstable = []
+                        uncross = []
+                        pos = self.person_container.position[p.pid]
+                        mov = p.ability["MOV"]
+                        for other in self.person_container.people:
+                            if not (p == other):
+                                if self.person_container.controller[other.pid] == 0:
+                                    unstable.append(self.person_container.position[other.pid])
+                                elif self.person_container.controller[other.pid] == 1:
+                                    uncross.append(self.person_container.position[other.pid])
+                                else:
+                                    unstable.append(self.person_container.position[other.pid])
+                        movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
+                        for i in range(self.terrain_container.M):
+                            for j in range(self.terrain_container.N):
+                                movmap[i, j] = self.terrain_container.map[i][j].decay[
+                                    self.global_vars.cls_clsgroup[p.cls]]
+                        dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
+                        valid[p.pid] = dstlist
+                    else:
+                        invalid[p.pid] = {
+                            self.person_container.position[p.pid]: (float(0), [self.person_container.position[p.pid]])}
+                elif self.person_container.controller[p.pid] == 1:
+                    unstable = []
+                    uncross = []
+                    pos = self.person_container.position[p.pid]
+                    mov = p.ability["MOV"]
+                    for other in self.person_container.people:
+                        if not (p == other):
+                            if self.person_container.controller[other.pid] == 0:
+                                uncross.append(self.person_container.position[other.pid])
+                            elif self.person_container.controller[other.pid] == 1:
+                                unstable.append(self.person_container.position[other.pid])
+                            else:
+                                uncross.append(self.person_container.position[other.pid])
+                    movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
+                    for i in range(self.terrain_container.M):
+                        for j in range(self.terrain_container.N):
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                    dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
+                    enemy[p.pid] = dstlist
+                else:
+                    unstable = []
+                    uncross = []
+                    pos = self.person_container.position[p.pid]
+                    mov = p.ability["MOV"]
+                    for other in self.person_container.people:
+                        if not (p == other):
+                            if self.person_container.controller[other.pid] == 0:
+                                unstable.append(self.person_container.position[other.pid])
+                            elif self.person_container.controller[other.pid] == 1:
+                                uncross.append(self.person_container.position[other.pid])
+                            else:
+                                unstable.append(self.person_container.position[other.pid])
+                    movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
+                    for i in range(self.terrain_container.M):
+                        for j in range(self.terrain_container.N):
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                    dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
+                    ally[p.pid] = dstlist
+            return valid, self.global_vars.AIcontroller.enemy_single_movement(valid,invalid,ally,enemy,self)
 
     def reset_state(self,cont):
         for p in self.person_container.people:
