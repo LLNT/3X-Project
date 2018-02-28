@@ -166,7 +166,6 @@ class Animation(Layer):
                 event=self.dialogafter, map=self.map, dialog_type='B',w=self.width, h=self.height,
                 dialog_info=self.dialog_info, callback=self.growth
             ))
-            self.map.global_vars.flags[self.dialogafter['Event']] = True
         else:
             self.growth()
 

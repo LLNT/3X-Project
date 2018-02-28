@@ -77,7 +77,7 @@ ally_state2color = {
 
 enemy_state2color = {
     'unmoved': ORANGE,  # unmoved
-    'moved': OLIVE,
+    'moved': PURPLE,
     'selected': GOLD,
     'on_mouse_motion': VIOLET,
     'target': RED,

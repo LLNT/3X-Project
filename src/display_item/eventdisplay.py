@@ -26,35 +26,36 @@ class Eventdisplay(Layer):
         self.callback = callback
         self.kwargs = kwargs
         self.event = event
-        try:
-            text_list = event['Text']
-            text_source = map.global_vars.text
-        except:
-            self.get_finish()
-            return
 
-        if dialog_type is 'B':
-            self.add(Battledialog(text_list, text_source, w, h,
-                                  dialog_info=dialog_info,callback=self.get_finish))
-        elif dialog_type is 'S':
-            director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
-                                            callback=self.get_finish, info=dialog_info)))
-        elif dialog_type is 'M':
-            self.add(Mapdialog(text_list, text_source, w, h, dialog_info, self.get_finish))
-        else:
-            self.get_finish()
 
-    def get_finish(self):
         self.finish = self.event['Finish']
         # get first condition_satisfied
         self.execute_event = self.finish[-1]['Execute']
+        self.length = len(self.execute_event)
+
+        if 'Text' in event.keys() and len(event['Text']) > 0:
+            text_list = event['Text']
+            text_source = map.global_vars.text
+            if dialog_type is 'B':
+                self.add(Battledialog(text_list, text_source, w, h,
+                                      dialog_info=dialog_info, callback=self.get_finish))
+            elif dialog_type is 'S':
+                director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
+                                                callback=self.get_finish, info=dialog_info)))
+            elif dialog_type is 'M':
+                self.add(Mapdialog(text_list, text_source, w, h, dialog_info, self.get_finish))
+            else:
+                self.get_finish()
+        else:
+            self.execute()
+
+    def get_finish(self):
         for item in self.finish:
             cd = item['Condition']
             if check_condition(cd, self.map):
                 self.execute_event = item['Execute']
                 break
 
-        self.length = len(self.execute_event)
         self.execute()
 
     def execute(self, i=0):
