@@ -54,6 +54,8 @@ class Arena(ScrollableLayer):
         self.size = size
         self.w, self.h = w, h
         self._state_control = self._get_state_control()
+        self.general = self.map.eventlist['General']
+        self.general_length = len(self.general)
 
         # add map elements
         self.cells = {}  #type:Dict[str,Cell]
@@ -132,26 +134,20 @@ class Arena(ScrollableLayer):
     target = property(get_target, set_target)
 
     def clear(self):
-        self.is_event_handler = True
         self.get_next_to_delete()
-        self.map.take_turn(self)
         for person in self.people.values():
             person.update_hp()
-        self.state = 'default'
+        self.get_next_event()
 
     def end_getitem(self):
         director.window.push_handlers(self)
         self.get_next_to_delete()
-        self.map.take_turn(self)
         for person in self.people.values():
             person.update_hp()
-        self.state = 'default'
-
+        self.get_next_event()
 
     def next_round(self):
-
         self.map.turn += 1
-
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
@@ -223,9 +219,9 @@ class Arena(ScrollableLayer):
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         # according to the state link to correct function
-        print(self.state)
+        print('off_handler')
         if self.is_event_handler:
-
+            print(self.state)
             self.mouse_pos = self.coordinate_t(x, y)
             self.mouse_btn = buttons
             self._state_control[self.state].__call__()
@@ -541,6 +537,8 @@ class Arena(ScrollableLayer):
 
         self.is_event_handler = False
         self.get_next_to_delete()
+
+        self.get_next_event()
 
     def _choose_support(self):
         # 8   show_battle_result
@@ -946,10 +944,27 @@ class Arena(ScrollableLayer):
         person = self.people[pid].person
         if person.ability['HP'] <= 0:
             self.people[pid].do(FadeOut(2)+CallFunc(self._delete_person, pid))
-
         else:
             self.get_next_to_delete()
         pass
+
+    def get_next_event(self, i=0):
+        if i < self.general_length:
+            event = self.general[i]
+            if check_condition(event['Condition'], self.map):
+                director.window.remove_handlers(self)
+                self.eventdisplay(
+                    event=event, map=self.map,
+                    dialog_type=event['Text_type'], dialog_info=self.dialog_info,
+                    w=self.windowsize[0], h=self.windowsize[1],
+                    callback=self.get_next_event, i=i+1
+                )
+            else:
+                self.get_next_event(i+1)
+        else:
+            self._clear_map()
+            pass
+
 
     def _battle(self, layer):
         pid = self.selected
@@ -1326,9 +1341,9 @@ class Arena(ScrollableLayer):
         self.talk_dict = talk_dict
         self._repaint()
 
-    def eventdisplay(self, **kwargs):
+    def eventdisplay(self, callback=None, **kwargs):
         self.is_event_handler = False
-        self.add(Eventdisplay(**kwargs))
+        self.add(Eventdisplay(callback=callback, **kwargs))
 
     def reconstruct(self, rec):
         self.map.map_reconstruct(rec)
@@ -1342,7 +1357,8 @@ class Arena(ScrollableLayer):
         self.remove(self.person_layer)
         self.add(recon)
         self.add(self.person_layer)
-        self._clear_map()
+        self.is_event_handler = False
+        self.get_next_event()
 
     def remove(self, obj):
         super().remove(obj)
