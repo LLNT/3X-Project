@@ -281,7 +281,6 @@ class Main:
             arena.next_round()
 
     def player_turn(self, arena):
-
         arena.is_event_handler = True
 
     def take_turn(self, arena):
