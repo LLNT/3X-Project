@@ -991,5 +991,261 @@
       },
       "Base":""
     }
+  },
+  "1000012":
+  {
+    "Id": 1000012,
+    "Name": "Kruberian Merchant",
+    "Cls":"Civilian",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":14,
+      "STR":2,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":4,
+      "BLD":5,
+      "MOV":4,
+      "HP":14,
+      "CRY":4,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"oliver.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":0.5,
+    "Bonus":0,
+    "Battlecard":{
+      "Civilian":{
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+   "1000013":
+  {
+    "Id": 1000013,
+    "Name": "Kruberian Merchant",
+    "Cls":"Civilian",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":32,
+      "STR":6,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":3,
+      "RES":0,
+      "LUK":0,
+      "BLD":15,
+      "MOV":4,
+      "HP":32,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"oliver.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":0.5,
+    "Bonus":0,
+    "Battlecard":{
+      "Civilian":{
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+   "1000014":
+  {
+    "Id": 1000014,
+    "Name": "Kruberian Merchant",
+    "Cls":"Civilian",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":8,
+      "STR":0,
+      "MGC":0,
+      "SPD":12,
+      "SKL":4,
+      "DEF":0,
+      "RES":0,
+      "LUK":1,
+      "BLD":5,
+      "MOV":4,
+      "HP":8,
+      "CRY":4,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"oliver.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":0.5,
+    "Bonus":0,
+    "Battlecard":{
+      "Civilian":{
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1000015":
+  {
+    "Id": 1000015,
+    "Name": "Kruberian Merchant",
+    "Cls":"Civilian",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":20,
+      "STR":3,
+      "MGC":0,
+      "SPD":6,
+      "SKL":3,
+      "DEF":2,
+      "RES":0,
+      "LUK":7,
+      "BLD":7,
+      "MOV":4,
+      "HP":20,
+      "CRY":6,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"oliver.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":0.5,
+    "Bonus":0,
+    "Battlecard":{
+      "Civilian":{
+        "Base":""
+      },
+      "Base":""
+    }
   }
 }

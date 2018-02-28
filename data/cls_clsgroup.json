@@ -17,5 +17,6 @@
   "Magician":"Infantry",
   "Summoner":"Infantry",
   "Rhymist":"Infantry",
-  "Monk":"Infantry" 
+  "Monk":"Infantry" ,
+  "Civilian":"Infantry"
 }

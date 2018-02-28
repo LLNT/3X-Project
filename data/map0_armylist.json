@@ -13,6 +13,14 @@
       {"Id":"1000007","X":4,"Y":9,"PRI":0,"AI":"PASSIVE"},{"Id":"1000008","X":9,"Y":14,"PRI":0,"AI":"PASSIVE"},{"Id":"1000009","X":8,"Y":14,"PRI":0,"AI":"PASSIVE"},
       {"Id":"1000010","X":10,"Y":14,"PRI":0,"AI":"PASSIVE"},{"Id":"1000011","X":13,"Y":11,"PRI":0,"AI":"DEFENSIVE"}],
       "Controller":1
+    },
+    {
+      "Name":"Kruberian Merchants",
+      "Member":[
+        {"Id":"1000012","X":14,"Y":16,"PRI":0,"AI":"DEFENSIVE"},{"Id":"1000014","X":14,"Y":17,"PRI":0,"AI":"DEFENSIVE"},{"Id":"1000015","X":13,"Y":17,"PRI":0,"AI":"DEFENSIVE"},
+        {"Id":"1000013","X":13,"Y":16,"PRI":0,"AI":"DEFENSIVE"}
+      ],
+      "Controller":2
     }
   ]
 }
