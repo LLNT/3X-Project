@@ -147,11 +147,12 @@ class PerSpr(Ring):
         self.right_ring.opacity = opacity
         self.mask_ring.opacity = opacity
         self.backend.opacity = opacity
+        self._opacity = opacity
 
     def _get_opacity(self):
         return self._opacity
 
-    opacity = property(_get_opacity, lambda self, opa: self._set_opacity(opa))
+    opacity = property(_get_opacity, _set_opacity)
 
 
 

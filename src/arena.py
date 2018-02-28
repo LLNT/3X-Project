@@ -49,12 +49,11 @@ class Arena(ScrollableLayer):
         self.add(board_line)
         self.add(Background(self.windowsize))
 
+        # initialize arena attributes
         self.map = map  # type:map_controller.Main
         self.size = size
         self.w, self.h = w, h
-        # initialize arena attributes
         self._state_control = self._get_state_control()
-
 
         # add map elements
         self.cells = {}  #type:Dict[str,Cell]
@@ -78,21 +77,13 @@ class Arena(ScrollableLayer):
         self.menulayer = menulayer
         self.infolayer = infolayer
 
-
-
-
         self.board = Board(self.windowsize[0], self.windowsize[1],25,-3)
         self._update = (0, 0)
         self.schedule(self.update)
 
         self._clear_map()
 
-
         self.next_round()
-
-        window = director.window
-
-
 
     def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
         if getitem is not None:
@@ -873,6 +864,7 @@ class Arena(ScrollableLayer):
         elif self.mouse_btn == 1:
             pid = self.cells[self.mouse_pos].person_on
             if pid is not None and pid in self.exc:
+
                 self.menulayer.add(Weaponexchange(self.people[self.selected].person.item, self,
                                                   (-self.windowsize[0], 0)), name='left')
                 self.menulayer.add(Weaponexchange(self.people[pid].person.item, self,

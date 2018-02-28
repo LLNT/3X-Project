@@ -332,6 +332,12 @@ class Weaponexchange(Menu):
         self.arena = arena
         self.selected = None
 
+    def on_enter(self):
+        super().on_enter()
+        if self.parent.position == (0, 0):
+            x, y = self.position
+            self.position = (x + director.get_window_size()[0] * 3//4, y)
+
     def item(self, item):
         if self.selected is not None:
             for name in self.parent.children_names:
