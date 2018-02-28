@@ -285,6 +285,7 @@ class Main:
         arena.is_event_handler = True
 
     def take_turn(self, arena):
+
         if self.controller == 0:
             self.player_turn(arena)
         else:
@@ -299,10 +300,16 @@ class Main:
             arena.move(pid=person_to_move, dst=command[3], rng=valid[person_to_move])
 
         elif command_type == "E":
-            self.reset_state(1)
-            self.controller = 0
-            print('player phase')
-            arena.next_round()
+
+            self.controller += 1
+            if self.controller == 3:
+                self.reset_state(1)
+                print('player phase')
+                arena.next_round()
+            else:
+                self.reset_state(2)
+                print('ally phase')
+                self.take_turn(arena)
 
         elif command_type == "A":
             person_to_move = command[1].pid
