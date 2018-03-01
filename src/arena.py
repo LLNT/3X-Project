@@ -193,21 +193,53 @@ class Arena(ScrollableLayer):
 
     target = property(get_target, set_target)
 
+    def focus(self, pid, set=True):
+        i, j = self.people[pid].pos
+        x, y = coordinate(i, j, self.size)
+        dis_x, dis_y = self.windowsize[0] // 2, self.windowsize[1] // 2
+        if x < dis_x:
+            x = dis_x
+        elif x > self.width - dis_x:
+            x = self.width - dis_x
+        if y < dis_y:
+            y = dis_y
+        elif y > self.height - dis_y:
+            y = self.height - dis_y
+        _position = -x + self.windowsize[0] // 2, -y + self.windowsize[1] // 2
+        if set:
+            self.position = _position
+        else:
+            return _position
+
     def next_round(self):
         self.map.turn += 1
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
-        for p in self.people.values():
+
+        self.person_list = list(self.people.values())
+        self.person_num = len(self.person_list)
+
+        self.update_person()
+
+    def update_person(self, i=0):
+        if i < self.person_num:
+            p = self.person_list[i]
             p.state = 'unmoved'
             p.moved = False
-        self._repaint()
-        if self.map.turn > 6:
-            director.pop()
+            log = self.map.refresh_person(p.pid)
+            prop = p.update_hp(False)
+            obj, action = p.set_angle_action(prop, min_duration=0, max_duration=2)
+            obj.do(CallFunc(self.focus, p.pid) + action + CallFunc(self.update_person, i+1))
         else:
-            self.player_turn()
+            if self.map.turn > 6:
+                director.pop()
+            else:
+                self._repaint()
+                self.player_turn()
 
     def player_turn(self):
+        self.position = (0, 0)
         # before executed, handlers should be removed
         director.window.push_handlers(self)
 
@@ -229,6 +261,7 @@ class Arena(ScrollableLayer):
         self.people[pid].moved = True
         self.people[pid].pos = dst[-1]
         self.cells[dst[-1]].person_on = pid
+        self.focus(pid)
 
     def _transfer(self, pos, duration=2):
         x, y = pos

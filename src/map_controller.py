@@ -293,9 +293,7 @@ class Main:
         if command_type == "M":
             person_to_move = command[1].pid  # type:person.Person
             arena.move(pid=person_to_move, dst=command[3], rng=valid[person_to_move])
-
         elif command_type == "E":
-
             self.controller += 1
             if self.controller == 3:
                 self.reset_state(1)
@@ -763,7 +761,7 @@ class Main:
             if hp_poi>=1:
                 person.ability["HP"]-=hp_poi
                 log.append(('Poison',hp_poi))
-        for sta in person.status.keys().copy():
+        for sta in list(person.status.keys()).copy():
             person.status[sta]-=1
             if person.status[sta]<1:
                 person.status.pop(sta)

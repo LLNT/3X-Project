@@ -156,7 +156,11 @@ class PerSpr(Ring):
 
 
 
-    def update_hp(self):
+    def update_hp(self, set=True):
         self.hp = self.person.ability['HP']
         self.mhp = self.person.ability['MHP']
-        self.set_prop(self.hp/self.mhp)
+        prop = self.hp/self.mhp
+        if set:
+            self.set_prop(prop)
+        else:
+            return prop
