@@ -321,18 +321,18 @@ class Main:
             if obj in self.person_container.position:
                 if self.person_container.controller[obj]==0:
                     if calc_dist(pos,self.person_container.position[obj])<2:
-                        if (p.supdata[obj][0]>50)and(p.suprank[obj]<1):
+                        if (p.supdata[obj][0]>=50)and(p.suprank[obj]<1):
                             sup_obj[obj]=self.person_container.position[obj]
-                        if (p.supdata[obj][0]>100)and(p.suprank[obj]<2):
+                        if (p.supdata[obj][0]>=100)and(p.suprank[obj]<2):
                             sup_obj[obj] = self.person_container.position[obj]
-                        if (p.supdata[obj][0]>200)and(p.suprank[obj]<3):
+                        if (p.supdata[obj][0]>=200)and(p.suprank[obj]<3):
                             sup_obj[obj]=self.person_container.position[obj]
         return sup_obj
 
     def build_support(self, pid1, pid2):
         p=self.global_vars.personBank[pid1]
         obj=self.global_vars.personBank[pid2]
-        if (p.supdata[pid2][0] > 50) and (p.suprank[pid2] < 1):
+        if (p.supdata[pid2][0] >= 50) and (p.suprank[pid2] < 1):
             p.suprank[pid2]=1
             obj.suprank[pid1]=1
             if pid1 in self.global_vars.support_text_map:
@@ -342,7 +342,7 @@ class Main:
                 if pid1 in self.global_vars.support_text_map[pid2]:
                     return self.global_vars.support_text_map[pid2][pid1]["C"]
             return []
-        if (p.supdata[pid2][0] > 100) and (p.suprank[pid2] < 2):
+        if (p.supdata[pid2][0] >= 100) and (p.suprank[pid2] < 2):
             p.suprank[pid2]=2
             obj.suprank[pid1]=2
             if pid1 in self.global_vars.support_text_map:
@@ -352,7 +352,7 @@ class Main:
                 if pid1 in self.global_vars.support_text_map[pid2]:
                     return self.global_vars.support_text_map[pid2][pid1]["B"]
             return []
-        if (p.supdata[pid2][0] > 200) and (p.suprank[pid2] < 3):
+        if (p.supdata[pid2][0] >= 200) and (p.suprank[pid2] < 3):
             p.suprank[pid2]=3
             obj.suprank[pid1]=3
             if pid1 in self.global_vars.support_text_map:
@@ -692,5 +692,105 @@ class Main:
                 if not obj in objs:
                     objs[obj]=event
         return objs
+
+    def refresh_person(self,pid):
+        pos=self.person_container.position[pid]
+        person=self.global_vars.personBank[pid]
+        hp_recov=0
+        sta_clear=[]
+        log=[]
+        if self.terrain_container.map[pos[0]][pos[1]].typename=="Fort":
+            hp_recov=5
+            if "Sleep" in person.status:
+                person.status.pop("Sleep")
+                sta_clear.append("Sleep")
+            if "Berserk" in person.status:
+                person.status.pop("Berserk")
+                sta_clear.append("Berserk")
+            if "Stone" in person.status:
+                person.status.pop("Stone")
+                sta_clear.append("Stone")
+            if "Poison" in person.status:
+                person.status.pop("Poison")
+                sta_clear.append("Poison")
+            if "Silence" in person.status:
+                person.status.pop("Silence")
+                sta_clear.append("Silence")
+        elif self.terrain_container.map[pos[0]][pos[1]].typename=="Gate":
+            hp_recov=10
+            if "Sleep" in person.status:
+                person.status.pop("Sleep")
+                sta_clear.append("Sleep")
+            if "Berserk" in person.status:
+                person.status.pop("Berserk")
+                sta_clear.append("Berserk")
+            if "Stone" in person.status:
+                person.status.pop("Stone")
+                sta_clear.append("Stone")
+            if "Poison" in person.status:
+                person.status.pop("Poison")
+                sta_clear.append("Poison")
+            if "Silence" in person.status:
+                person.status.pop("Silence")
+                sta_clear.append("Silence")
+        elif self.terrain_container.map[pos[0]][pos[1]].typename=="Throne":
+            hp_recov=10
+            if "Sleep" in person.status:
+                person.status.pop("Sleep")
+                sta_clear.append("Sleep")
+            if "Berserk" in person.status:
+                person.status.pop("Berserk")
+                sta_clear.append("Berserk")
+            if "Stone" in person.status:
+                person.status.pop("Stone")
+                sta_clear.append("Stone")
+            if "Poison" in person.status:
+                person.status.pop("Poison")
+                sta_clear.append("Poison")
+            if "Silence" in person.status:
+                person.status.pop("Silence")
+                sta_clear.append("Silence")
+        #if "Recover" in person.skills
+        if hp_recov>person.ability["MHP"]-person.ability["HP"]:
+            hp_recov=person.ability["MHP"]-person.ability["HP"]
+        if hp_recov>0:
+            person.ability["HP"]+=hp_recov
+            log.append(('Heal',hp_recov))
+        if "Poison" in person.status:
+            hp_poi=int(person.ability["MHP"]/8)
+            if hp_poi>=person.ability["HP"]:
+                hp_poi=person.ability["HP"]-1
+            if hp_poi>=1:
+                person.ability["HP"]-=hp_poi
+                log.append(('Poison',hp_poi))
+        for sta in person.status.keys().copy():
+            person.status[sta]-=1
+            if person.status[sta]<1:
+                person.status.pop(sta)
+                sta_clear.append(sta)
+        for sta in sta_clear:
+            log.append(('Relief',sta))
+        self.person_container.movable[pid]=True
+        for obj in person.supdata:
+            if obj in self.person_container.position:
+                if self.person_container.controller[obj]==self.person_container.controller[pid]:
+                    if calc_dist(self.person_container.position[obj],pos)<2:
+                        if person.suprank[obj]==3:
+                            continue
+                        if (person.suprank[obj]==2)and(person.supdata[obj]<200):
+                            person.supdata[obj]+=1
+                            continue
+                        if (person.suprank[obj]==1)and(person.supdata[obj]<100):
+                            person.supdata[obj]+=1
+                            continue
+                        if (person.suprank[obj]==0)and(person.supdata[obj]<50):
+                            person.supdata[obj]+=1
+                            continue
+        return log
+
+
+
+
+
 
 
