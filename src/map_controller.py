@@ -786,6 +786,17 @@ class Main:
                             continue
         return log
 
+    def reinforce_person(self,pid,controller,pos,army,pri,strategy):
+        person=self.global_vars.personBank[pid]
+        self.person_container.people.append(person)
+        pos_real=self.find_nearest_empty_block(pos)
+        self.person_container.controller[pid]=controller
+        self.person_container.position[pid]=pos_real
+        self.person_container.movable[pid]=True
+        self.person_container.army[pid]=army
+        self.person_container.AItype[pid]=(pri,strategy)
+        return
+
 
 
 
