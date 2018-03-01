@@ -56,6 +56,8 @@ class Arena(ScrollableLayer):
         self._state_control = self._get_state_control() #type: Dict[str, callable]
         self.general = self.map.eventlist['General']
         self.general_length = len(self.general)
+        self.turn_event = self.map.eventlist['Turns']
+        self.turn_length = len(self.turn_event)
 
         # add map elements
         self.cells = {}  #type:Dict[tuple,Cell]
@@ -241,7 +243,24 @@ class Arena(ScrollableLayer):
     def player_turn(self):
         self.position = (0, 0)
         # before executed, handlers should be removed
-        director.window.push_handlers(self)
+        self.execute_turn_event()
+
+    def execute_turn_event(self, i=0):
+        if i < self.turn_length:
+            event = self.turn_event[i]
+            if (event['Side'] is None or self.map.controller == event['Side']) \
+                and (event['Turn'] is None or self.map.turn == event['Turn']) \
+                    and check_condition(event['Condition'], self.map):
+                    self.eventdisplay(
+                        event=event, map=self.map,
+                        dialog_type=event['Text_type'], dialog_info=self.dialog_info,
+                        w=self.windowsize[0], h=self.windowsize[1],
+                        callback=self.execute_turn_event, i=i+1
+                    )
+            else:
+                self.execute_turn_event(i+1)
+        else:
+            director.window.push_handlers(self)
 
     def _sequential_move(self, dst):
         # move person of pid through the trace dst
@@ -938,11 +957,11 @@ class Arena(ScrollableLayer):
                 dst = self._mapstate[0][self.selected][self.target][1]
                 action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(
                     self._clear_map)
-                act_obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                act_obj.do(action + CallFunc(self.reconstruct, event['Reconstruct']) +
+                           CallFunc(self.eventdisplay, event=event, map=self.map,
                                   dialog_type=None, dialog_info=self.dialog_info,
                                   w=self.windowsize[0], h=self.windowsize[1],
-                                  callback=self.reconstruct, rec=event['Reconstruct']))
-
+                                  callback=self._clear))
             else:
                 self._reset()
             pass

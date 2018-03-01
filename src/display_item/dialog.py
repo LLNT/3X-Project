@@ -100,7 +100,12 @@ class Dialogscene(BaseDialog):
             else:
                 self.label.position = (self.w * 5 // 6, self.h // 3)
             if item['Tag'] is not None:
-                self.label.element.text = item['Tag']
+                if item['Tag'] is 'V':
+                    self.label.element.text = self.info['V'].name
+                else:
+                    self.label.element.text = item['Tag']
+            else:
+                self.label.element.text = ''
             super().excute()
 
     def changeleft(self, source):

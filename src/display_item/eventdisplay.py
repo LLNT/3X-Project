@@ -15,13 +15,14 @@ class Eventdisplay(Layer):
     is_event_handler = True
 
     def __init__(self, event, map, dialog_type, dialog_info, w=640, h=480,
-                 callback=None, **kwargs):
+                 call_before=None, callback=None, **kwargs):
         super().__init__()
         self.map = map #type:map_controller.Main
         self.map.global_vars.flags[event['Event']] = True
         print(event)
 
         self.dialog_info = dialog_info
+        self.dialog_type = dialog_type
         self.w, self.h = w, h
         self.callback = callback
         self.kwargs = kwargs
@@ -85,8 +86,25 @@ class Eventdisplay(Layer):
                 self.execute(i+1)
             pass
         else:
-            # add jump event here
-            self.callback.__call__(**self.kwargs)
+            jump = self.finish['Jump']
+            if jump is not 'F':
+                general = self.map.eventlist['General']
+                event = None
+                for item in general:
+                    if jump == item['Event']:
+                        event = item
+                        break
+                if event is not None:
+                    Eventdisplay(
+                        event=event, map=self.map, w=self.w, h=self.h,
+                        dialog_type=self.dialog_type, dialog_info=self.dialog_info,
+                        callback=self.callback, **self.kwargs
+                    )
+                else:
+                    print('Event %s not found' % jump)
+                    self.callback.__call__(**self.kwargs)
+            else:
+                self.callback.__call__(**self.kwargs)
         pass
 
 
