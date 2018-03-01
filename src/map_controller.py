@@ -280,15 +280,11 @@ class Main:
             print('player phase')
             arena.next_round()
 
-    def player_turn(self, arena):
-        arena.is_event_handler = True
-
     def take_turn(self, arena):
-
-        if self.controller == 0:
-            self.player_turn(arena)
-        else:
+        if self.controller is not 0:
             self.ai_turn2(arena)
+        else:
+            arena.player_turn()
 
     def ai_turn2(self, arena):
         valid, command = self.send_mapstate()

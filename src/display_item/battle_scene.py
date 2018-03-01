@@ -31,7 +31,7 @@ class Animation(Layer):
     recieves battle result and the playing object, plays them in the correct order
 
     '''
-    def __init__(self, obj1, obj2, at, df, arena, maxsize=2, width=640, height=480):
+    def __init__(self, obj1, obj2, at, df, arena, maxsize=2, width=640, height=480, callback=None, **kwargs):
         super().__init__()
         self.info = Queue(maxsize)
         self.flag = False
@@ -50,6 +50,8 @@ class Animation(Layer):
         self.item = None
         self.getitem = None
         self.transtuple = None
+        self.callback = callback
+        self.kwargs = kwargs
         pid2dir = {}
         pid2dir[self.at.pid] = 'left'
         pid2dir[self.df.pid] = 'right'
@@ -84,7 +86,6 @@ class Animation(Layer):
             return
         self.i += 1
         if self.i >= len(self.events):
-            print(self.i)
             self.exit()
             return
         event = self.events[self.i]
@@ -95,13 +96,13 @@ class Animation(Layer):
             if content is 'Defeatenemy':
                 if event[0] is -1:
                     self.map.defeated_character(self.df.pid)
-                    self.defeat = self.at.pid
+                    self.kwargs['defeat'] = self.at.pid
                 elif event[0] is -2:
                     self.map.defeated_character(self.at.pid)
-                    self.defeat = self.df.pid
+                    self.kwargs['defeat'] = self.df.pid
 
             elif content is 'Getitem':
-                self.getitem = self.item
+                self.kwargs['item'] = self.item
             self.add_new_infos(content)
         else:
             hit, dmg, amg = event[1].split(',')
@@ -185,7 +186,7 @@ class Animation(Layer):
 
 class Battlescene(Animation):
     is_event_handler = False
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, self.df, wp, self.map, pos = arena.battlelist
         self.at.equip(wp)
         wp_d = self.df.get_equip()
@@ -200,7 +201,7 @@ class Battlescene(Animation):
                                    back_color = BLACK, hp=self.hp2, mhp=self.mhp2)
 
         self.arena = arena
-        super(Battlescene, self).__init__(
+        super().__init__(
             obj1=self.attacker,
             obj2=self.defender,
             at=self.at,
@@ -208,7 +209,9 @@ class Battlescene(Animation):
             arena=arena,
             width=w,
             height=h,
-            maxsize=maxsize
+            maxsize=maxsize,
+            callback=callback,
+            **kwargs
         )
         self.add(self.attacker)
         self.add(self.defender)
@@ -218,11 +221,9 @@ class Battlescene(Animation):
         self.excute(event=event)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
-
-        self.arena.on_return(self.at, self.getitem, self.transtuple)
-        self.kill()
         director.window.remove_handlers(self)
         director.pop()
+        self.callback.__call__(**self.kwargs)
 
     def exit(self):
         if not self.flag:
@@ -249,7 +250,7 @@ class Wandscene(Battlescene):
             self.flag = True
             self.growth()
 
-    def wandinit(self, wand, w, h, arena, maxsize):
+    def wandinit(self, wand, w, h, arena, maxsize, callback, **kwargs):
 
         pos1 = w // 4, h // 4
         self.hp1, self.mhp1 = self.at.ability['HP'], self.at.ability['MHP']
@@ -269,7 +270,9 @@ class Wandscene(Battlescene):
             arena=arena,
             width=w,
             height=h,
-            maxsize=maxsize
+            maxsize=maxsize,
+            callback=callback,
+            **kwargs
         )
         self.add(self.attacker)
         self.add(self.defender)
@@ -277,7 +280,7 @@ class Wandscene(Battlescene):
 
 
 class Wandtype0(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map = arena.wandlist_type0
         self.battle = Type0(self.at, wand, self.df, self.map)
         self.wandinit(wand, w, h, arena, maxsize)
@@ -345,36 +348,36 @@ class Wandtype0(Wandscene):
             t2.do(a2 + CallFunc(t2.parent.set_busy) + CallFunc(self.get_next_action))
 
 class Wandtype1(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type1
         self.battle = Type1(self.at, wand, self.df, self.map,pos)
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback, **kwargs)
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
 
 class Wandtype2(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map, item = arena.wandlist_type2
         self.battle = Type2(self.at, wand, self.df, self.map, item)
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback, **kwargs)
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
 
 
 class Wandtype3(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map, pos, item = arena.wandlist_type3
         self.battle = Type3(self.at, wand, self.df, self.map, pos, item)
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback, **kwargs)
         self.item = item
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
 
 class Wandtype4(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         user, wand, target, self.map= arena.wandlist_type4
         self.battle = Type4(user, wand, self.map, target)
         super(Layer, self).__init__()
@@ -395,38 +398,38 @@ class Wandtype4(Wandscene):
         self.growth()
 
 class Wandtype5(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map, pos, tarpos = arena.wandlist_type5
         self.battle = Type5(self.at, wand, self.df, self.map, pos, tarpos)
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback, **kwargs)
         self.transtuple = self.df.pid, tarpos
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
 
 class Wandtype6(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type6
         self.battle = Type6(self.at,wand, self.df,self.map, pos)
         self.transtuple_c = self.df.pid, self.battle.get_target()
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback, **kwargs)
         self.transtuple = self.transtuple_c
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
 
 class Wandtype7(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type7
         self.battle = Type7(self.at,wand, self.df,self.map, pos)
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback, **kwargs)
         self.transtuple = self.df.pid, pos
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)
 
 class Wandtype8(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         user, wand, self.map, pos= arena.wandlist_type8
         self.battle = Type8(user, wand, self.map, pos)
         super(Layer, self).__init__()
@@ -447,7 +450,7 @@ class Wandtype8(Wandscene):
         self.growth()
 
 class Wandtype9(Wandscene):
-    def __init__(self, arena, w=640, h=480, maxsize=2):
+    def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map, pos = arena.wandlist_type9
         self.battle = Type9(self.at,wand, self.df,self.map, pos)
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback, **kwargs)

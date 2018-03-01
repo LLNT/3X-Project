@@ -6,21 +6,23 @@
 from cocos.menu import Menu, MenuItem, zoom_in, zoom_out, ToggleMenuItem, shake
 from display_item.info import Info
 from cocos.director import director
-from cocos.layer import ColorLayer
+from cocos.layer import ColorLayer, Layer
 from cocos.actions import Delay, CallFunc
 import map_controller
 
-class Menulayer(ColorLayer):
+class Menulayer(Layer):
     def __init__(self):
+        super().__init__()
         w, h = director.get_window_size()
-        super().__init__(0,0,0,200,w//4, h)
-        self.opacity = 0
+        self.menu_back = ColorLayer(0,0,0,200,w//4, h)
+        self.menu_back.opacity = 0
+        self.add(self.menu_back)
 
     def appear(self, opcacity=200):
-        self.opacity = opcacity
+        self.menu_back.opacity = opcacity
 
     def disapper(self):
-        self.opacity = 0
+        self.menu_back.opacity = 0
 
     def remove(self, obj):
         super().remove(obj)
@@ -28,7 +30,6 @@ class Menulayer(ColorLayer):
 
 class Ordermenu(Menu):
     is_event_handler = True
-
 
     def __init__(self, arena):
         super(Ordermenu, self).__init__(title='Order')
@@ -86,8 +87,11 @@ class Ordermenu(Menu):
         if self.allow_cancel:
             l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.position = - director.get_window_size()[0] * 3 // 8, 0
 
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
 
     def on_mouse_release(self, x, y, buttons, modifiers):
         if buttons == 1:
@@ -163,8 +167,12 @@ class Showwand(Menu):
             l.append(MenuItem(content, self.wanduse, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
 
     def wanduse(self, item):
         self.parent.remove(self)
@@ -174,7 +182,6 @@ class Showwand(Menu):
         self.arena.state = 'valid_dst'
         self.parent.add(Ordermenu(self.arena))
         self.parent.remove(self)
-        
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:
@@ -191,8 +198,12 @@ class Showweapon(Menu):
             l.append(MenuItem(content, self.itemuse, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
 
     def itemuse(self, item):
         self.parent.remove(self)
@@ -223,10 +234,14 @@ class Itemuse(Menu):
             l.append(MenuItem('Banish', self.banish))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.item = item
         self.menu = menu
         self.arena = arena
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
 
     def use(self):
         self.arena.use(self.item)
@@ -265,8 +280,12 @@ class Weaponmenu(Menu):
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.info = None
-        self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.arena = arena
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
 
     def on_mouse_release(self, x, y, buttons, modifiers):
         if buttons == 1:
@@ -286,19 +305,15 @@ class Weaponmenu(Menu):
         content.append('max_range: ' + str(it.max_range))
         content.append('min_range: ' + str(it.min_range))
         info = Info(size=(self.w // 2, self.h), position=(self.w // 2, 0))
-        self.arena.add(info)
         info.display(content)
         self.parent.remove(self)
         self.parent.disapper()
-        self.arena.wpinfo = info
-        self.arena.select_target(item)
-
+        self.arena.select_target(item, info)
 
     def cancel(self):
         self.arena.state = 'valid_dst'
-        self.parent.add(Ordermenu(self.arena))
+        self.arena.add_menu(Ordermenu(self.arena))
         self.parent.remove(self)
-        
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:
@@ -385,10 +400,13 @@ class Endturn(Menu):
         l = []
         l.append(MenuItem('Endturn', self.end_turn))
         l.append(MenuItem('Cancel', self.cancel))
-
-        self.position = - director.get_window_size()[0] * 3 // 8, 0
         self.create_menu(l, zoom_in(), zoom_out())
         self.arena = arena
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
 
     def cancel(self):
         self.arena.is_event_handler = True
@@ -417,7 +435,6 @@ class Listwand(Menu):
                 l.append(MenuItem(content, self.wandstl, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.position = - director.get_window_size()[0] * 6 // 8, 0
         self.arena = arena
         self.type = type
 
@@ -447,7 +464,6 @@ class Listcls(Menu):
         for cls in cls_list:
             l.append(MenuItem(cls, self.promote, cls))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.position = - director.get_window_size()[0] * 6 // 8, 0
         self.callback = callback
         self.kwargs = kwargs
 
@@ -469,7 +485,6 @@ class Liststeal(Menu):
             l.append(MenuItem(content, self.steal, item))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
-        self.position = - director.get_window_size()[0] * 6 // 8, 0
         self.callback = callback
         self.kwargs = kwargs
         self.arena = arena

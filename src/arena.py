@@ -53,12 +53,12 @@ class Arena(ScrollableLayer):
         self.map = map  # type:map_controller.Main
         self.size = size
         self.w, self.h = w, h
-        self._state_control = self._get_state_control()
+        self._state_control = self._get_state_control() #type: Dict[str, callable]
         self.general = self.map.eventlist['General']
         self.general_length = len(self.general)
 
         # add map elements
-        self.cells = {}  #type:Dict[str,Cell]
+        self.cells = {}  #type:Dict[tuple,Cell]
         self.people = {} #type:Dict[str,PerSpr]
         self.person_layer = Layer()
         self.add(self.person_layer)
@@ -86,6 +86,67 @@ class Arena(ScrollableLayer):
         self._clear_map()
 
         self.next_round()
+
+    # callback functions
+    def _getitem(self, **kwargs):
+        person = kwargs['defeat']
+        item = kwargs['item']
+        self.add(Getitem(person, item, self.map.global_vars.flags['Have Transporter'],
+                         self.map, callback=self._clear))
+
+    def _trans(self, **kwargs):
+        pid, pos = kwargs['transtuple']
+        target = self.people[pid]
+        action = self._transfer(pos, 1)
+        map = self.map
+        self.cells[map.person_container.position[pid]].person_on = None
+        map.person_container.position[pid] = pos
+        self.people[pid].pos = pos
+        self.cells[pos].person_on = pid
+        target.do(action + CallFunc(self._clear))
+
+    def _clear(self, **kwargs):
+        # handle the default execute after battle or a movement
+        self.get_next_to_delete()
+        for person in self.people.values():
+            person.update_hp()
+        self.get_next_event()
+
+    def _clear_map(self):
+        # should be executed after movement and before battle display
+        self.state = 'default' #type:
+        self.selected = None
+        self.target = None
+        self.mouse_pos = None
+        self.mouse_btn = 0
+        self.item = None
+        self.sup_dict = None
+        self._reset_person = {}
+        self.menulayer.disapper()
+        self.iter = iter(self.people)
+        self.item_w = None
+        self.avl = None
+        self.excpid = None
+        self.allow_cancel = True
+        self.transtuple = None
+        self.dialog_info = {}
+        try:
+            self.infolayer.remove(self.info)
+            self.remove(self.wpinfo)
+        except:
+            pass
+
+        self._mapstate = self.map.send_mapstate()
+        for cell in self.cells.values():
+            cell.state = 'default'
+        for person in self.people.values(): #type:Charactor
+            if not person.moved:
+                person.state = 'unmoved'
+            else:
+                person.state = 'moved'
+            person.update_hp()
+
+        self._repaint()
 
     def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
         if getitem is not None:
@@ -123,28 +184,14 @@ class Arena(ScrollableLayer):
         w = self.windowsize[0]
         if value is not None:
             if value[0] < self.w // 2:
-                self.menulayer.position = w - w //4, 0
+                self.menulayer.menu_back.position = w - w //4, 0
             else:
-                self.menulayer.position = 0, 0
+                self.menulayer.menu_back.position = 0, 0
 
     def get_target(self):
         return self._target
 
     target = property(get_target, set_target)
-
-    def clear(self):
-        self.get_next_to_delete()
-        for person in self.people.values():
-            person.update_hp()
-        self.get_next_event()
-        self.map.take_turn(self)
-
-    def end_getitem(self):
-        self.get_next_to_delete()
-        for person in self.people.values():
-            person.update_hp()
-        self.get_next_event()
-        self.map.take_turn(self)
 
     def next_round(self):
         self.map.turn += 1
@@ -158,10 +205,15 @@ class Arena(ScrollableLayer):
         if self.map.turn > 6:
             director.pop()
         else:
-            director.window.push_handlers(self)
+            self.player_turn()
+
+    def player_turn(self):
+        # before executed, handlers should be removed
+        director.window.push_handlers(self)
 
     def _sequential_move(self, dst):
         # move person of pid through the trace dst
+        # at start of this period, remove handlers to avoid events
         director.window.remove_handlers(self)
         action = CallFunc(self.menulayer.disapper)
         for x,y in dst:
@@ -179,7 +231,6 @@ class Arena(ScrollableLayer):
         self.cells[dst[-1]].person_on = pid
 
     def _transfer(self, pos, duration=2):
-        director.window.remove_handlers(self)
         x, y = pos
         action = FadeOut(duration) + Delay(0.5) + \
                  Place(coordinate(x, y, self.size)) + FadeIn(duration)
@@ -215,14 +266,12 @@ class Arena(ScrollableLayer):
             cell.opacity = opacity[cell.state]
         pass
 
-
     def on_mouse_press(self, x, y, buttons, modifiers):
         # according to the state link to correct function
         print(self.state)
         self.mouse_pos = self.coordinate_t(x, y)
         self.mouse_btn = buttons
         self._state_control[self.state].__call__()
-        pass
 
     def on_mouse_scroll(self, x, y, scroll_x, scroll_y):
 
@@ -236,7 +285,7 @@ class Arena(ScrollableLayer):
         # reset to last state
         # specificlly handle with choose_attack
         if self.state is 'choose_attack':
-            self.remove(self.wpinfo)
+            self.infolayer.remove(self.wpinfo)
             self.attack()
             pid = self.selected
             valid = self._mapstate[0]
@@ -251,8 +300,7 @@ class Arena(ScrollableLayer):
             self.item = None
         elif self.state is 'choose_door':
             self.menu = Ordermenu(self)
-            self._add_menu(self.menu)
-            director.window.remove_handlers(self)
+            self.add_menu(self.menu)
             for (i, j) in self.cells.keys():
                 cell = self.cells[(i, j)]
                 pid = self.selected
@@ -277,8 +325,7 @@ class Arena(ScrollableLayer):
                     self.people[pid].state = self._reset_person[pid]
             '''
             self.menu = Ordermenu(self)
-            self._add_menu(self.menu)
-            director.window.remove_handlers(self)
+            self.add_menu(self.menu)
 
         elif self.state in ['wand_type0','wand_type1','wand_type2','wand_type3',
                             'wand_type4', 'wand_type5', 'wand_type6', 'wand_type7_confirm',
@@ -298,55 +345,30 @@ class Arena(ScrollableLayer):
         self._repaint()
         pass
 
-    def _seq_add(self, item):
-        self.menulayer.add(item)
-
     def _set_state(self, state):
         self.state = state
 
-    def _add_menu(self, menu, dt=0.1):
+    def add_menu(self, menu, dt=0.2):
         self.menulayer.appear()
-        self.do(Delay(dt) + CallFunc(self._seq_add, menu))
+        director.window.remove_handlers(self)
+        self.do(Delay(dt) + CallFunc(self.menulayer.add, menu))
+
+    def set_pos(self, menu):
+        menu.position = self.menulayer.menu_back.position
 
     def _set_areastate(self, area, state):
         for i, j in area:
             self.cells[(i, j)].state = state
         self._repaint()
 
-    def _clear_map(self):
-        self.state = 'default'
-        self.selected = None
-        self.target = None
-        self.mouse_pos = None
-        self.mouse_btn = 0
-        self.item = None
-        self.sup_dict = None
-        self._reset_person = {}
-        self.menulayer.disapper()
-        self.iter = iter(self.people)
-        self.item_w = None
-        self.avl = None
-        self.excpid = None
-        self.allow_cancel = True
-        self.transtuple = None
-        self.dialog_info = {}
-        try:
-            self.infolayer.remove(self.info)
-            self.remove(self.wpinfo)
-        except:
-            pass
-
-        self._mapstate = self.map.send_mapstate()
-        for cell in self.cells.values():
-            cell.state = 'default'
-        for person in self.people.values(): #type:Charactor
-            if not person.moved:
-                person.state = 'unmoved'
-            else:
-                person.state = 'moved'
-            person.update_hp()
-
-        self._repaint()
+    def _push_scene(self, layer, callback=None, **kwargs):
+        if callback is None:
+            callback_func = self._clear
+        else:
+            callback_func = callback
+        scene = Scene((layer(self, self.windowsize[0], self.windowsize[1],
+                             callback=callback_func, **kwargs)))
+        director.push(FadeTransition(scene, duration=1.5))
 
     def _get_state_control(self):
         '''
@@ -436,7 +458,6 @@ class Arena(ScrollableLayer):
                 self.state = 'end_turn'
             pass
 
-
     def _valid_select(self):
         # 1   valid_select
         # a self army is selected. highlight the move range and wait for another command
@@ -447,8 +468,7 @@ class Arena(ScrollableLayer):
                 self.target = self.mouse_pos
                 self._set_areastate([self.target], 'target')
                 self.menu = Ordermenu(self)
-                self._add_menu(self.menu)
-                director.window.remove_handlers(self)
+                self.add_menu(self.menu)
                 self.state = 'valid_dst'
                 self.cells[self.target].person_on = self.selected
                 self.cells[self.origin_pos].person_on = None
@@ -478,7 +498,6 @@ class Arena(ScrollableLayer):
         # move: execute action and turn to 0
         # cancel: turn to 1
         # attack: show menu of weapon select
-
         # at present has nothing to do
         pass
 
@@ -494,15 +513,15 @@ class Arena(ScrollableLayer):
             cell = self.cells[self.mouse_pos]
             if cell.state is 'in_self_attackrange' and cell.person_on is not None\
                 and self.people[cell.person_on].controller is 1:
-                self.wpinfo.visible = False
+                self.menulayer.disapper()
+                self.infolayer.remove(self.wpinfo)
                 at = self.people[self.selected].person
                 df = self.people[cell.person_on].person
                 wp = self.item
                 self.info = Battleinfo(at, df, wp, self.map, self.target)
                 self.battlelist = [at, df, wp, self.map, self.target]
-                self.add(self.info)
+                self.infolayer.add(self.info)
                 self.state = 'confirm_attack'
-                self.menulayer.disapper()
             else:
                 self._reset()
             pass
@@ -512,27 +531,19 @@ class Arena(ScrollableLayer):
         # 6   confirm_attack
         # showing battle_simulate info
         # if confirm, push battle scene and then return to 1, else turn to 5
-        self.remove(self.info)
+        self.infolayer.remove(self.info)
         if self.mouse_btn is 4:
             self.state = 'choose_attack'
-            self.wpinfo.visible = True
+            self.infolayer.add(self.wpinfo)
         elif self.mouse_btn is 1:
             self.attacking()
             pass
-
-    def _push_scene(self, layer):
-        scene = Scene((layer(self, self.windowsize[0], self.windowsize[1])))
-        director.window.remove_handlers(self)
-        director.push(FadeTransition(scene, duration=1.5))
 
     def _show_battle_result(self):
         # 7   show_battle_result
         # showing battle result, push to another scene
         # if confirm, push battle scene and then return to 1, else turn to 5
-
-        
         self.get_next_to_delete()
-
         self.get_next_event()
 
     def _choose_support(self):
@@ -633,8 +644,7 @@ class Arena(ScrollableLayer):
                 target = self.people[cell.person_on].person
                 wand = self.item_w
                 self.wandlist_type2 = [user, wand, target, self.map]
-                self.menulayer.add(Listwand(target.item, self, type=2))
-                director.window.remove_handlers(self)
+                self.add_menu(Listwand(target.item, self, type=2))
             else:
                 self._reset()
             pass
@@ -657,8 +667,7 @@ class Arena(ScrollableLayer):
                 target_item_list=target.item.copy()
                 if not eqp==None:
                     target_item_list.remove(eqp)
-                self._add_menu(Listwand(target_item_list, self, type=3))
-                director.window.remove_handlers(self)
+                self.add_menu(Listwand(target_item_list, self, type=3))
             else:
                 self._reset()
             pass
@@ -676,7 +685,7 @@ class Arena(ScrollableLayer):
             target_item_list = target.item.copy()
             if not eqp == None:
                 target_item_list.remove(eqp)
-            self._add_menu(Listwand(target_item_list, self, type=3))
+            self.add_menu(Listwand(target_item_list, self, type=3))
             pass
         pass
 
@@ -692,11 +701,7 @@ class Arena(ScrollableLayer):
                 target = self.mouse_pos
                 wand = self.item_w
                 self.wandlist_type4 = [user, wand, target, self.map]
-                pid = self.selected
-                obj = self.people[pid]
-                dst = self._mapstate[0][self.selected][self.target][1]
-                obj.do(self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) +
-                       CallFunc(self._push_scene, Wandtype4))
+                self._battle(Wandtype4)
             else:
                 self._reset()
             pass
@@ -745,6 +750,7 @@ class Arena(ScrollableLayer):
             Sequencial(
                 (self.people[self.selected], self._sequential_move(dst)),
                 (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
+                (self.people[self.selected], CallFunc(self._clear_map)),
                 (self.people[self.selected], CallFunc(self._push_scene, Wandtype5))
             ).excute()
             '''Graphic(
@@ -774,7 +780,6 @@ class Arena(ScrollableLayer):
                 target = self.people[cell.person_on].person
                 wand = self.item_w
                 self.wandlist_type6 = [user, wand, target, self.map, self.target]
-                self.transtuple = None
                 self._battle(Wandtype6)
             else:
                 self._reset()
@@ -835,6 +840,7 @@ class Arena(ScrollableLayer):
                 Sequencial(
                     (self.people[self.selected], self._sequential_move(dst)),
                     (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
+                    (self.people[self.selected], CallFunc(self._clear_map)),
                     (self.people[self.selected], CallFunc(self._push_scene, Wandtype7))
                 ).excute()
         pass
@@ -872,11 +878,13 @@ class Arena(ScrollableLayer):
             pass
         elif self.mouse_btn == 1:
             pid = self.cells[self.mouse_pos].person_on
-            if pid is not None and pid in self.stl_dict:
+            if pid in self.stl_dict:
                 can_steal = self.stl_dict[pid]
                 self.stl_obj = pid
-                self._add_menu(Liststeal(self, can_steal, self.exe_steal))
-                director.window.remove_handlers(self)
+                self.add_menu(Liststeal(self, can_steal, self.exe_steal))
+                self.menulayer.disapper()
+            else:
+                self._reset()
             pass
 
     def _choose_door(self):
@@ -894,12 +902,9 @@ class Arena(ScrollableLayer):
                     if item.use == 0:
                         person.banish(item)
                 event = self._doors[self.mouse_pos]
-
                 dst = self._mapstate[0][self.selected][self.target][1]
-
                 action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(
                     self._clear_map)
-
                 act_obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
                                   dialog_type=None, dialog_info=self.dialog_info,
                                   w=self.windowsize[0], h=self.windowsize[1],
@@ -920,7 +925,6 @@ class Arena(ScrollableLayer):
                 pid = self.selected
                 obj = self.people[pid]
                 dst = self._mapstate[0][pid][self.target][1]
-                director.window.remove_handlers(self)
                 action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
                          CallFunc(self._clear_map) + Delay(0.1)
                 obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
@@ -947,7 +951,6 @@ class Arena(ScrollableLayer):
         if i < self.general_length:
             event = self.general[i]
             if check_condition(event['Condition'], self.map):
-                director.window.remove_handlers(self)
                 self.eventdisplay(
                     event=event, map=self.map,
                     dialog_type=event['Text_type'], dialog_info=self.dialog_info,
@@ -957,17 +960,17 @@ class Arena(ScrollableLayer):
             else:
                 self.get_next_event(i+1)
         else:
-            self._clear_map()
+            self.map.take_turn(self)
             pass
 
 
-    def _battle(self, layer):
+    def _battle(self, layer, **kwargs):
         pid = self.selected
         dst = self._mapstate[0][self.selected][self.target][1]
-        director.window.remove_handlers(self)
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) +\
+                 CallFunc(self._clear_map) + CallFunc(self._push_scene, layer, **kwargs)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._push_scene, layer))
+        obj.do(action)
 
     def _delete_person(self, pid):
         person = self.people[pid]
@@ -978,15 +981,8 @@ class Arena(ScrollableLayer):
         del person
         self.get_next_to_delete()
 
-
-
-    def _simplefied_battle(self):
-        director.window.remove_handlers(self)
-        self.add(BattleSim())
-        self._set_state('show_battle_result')
-        pass
-
-    def select_target(self, item):
+    def select_target(self, item, info):
+        director.window.push_handlers(self)
         area = []
         max_range = item.itemtype.max_range
         min_range = item.itemtype.min_range
@@ -1000,7 +996,8 @@ class Arena(ScrollableLayer):
         self._set_areastate(area, 'in_self_attackrange')
         self.state = 'choose_attack'
         self.item = item
-        director.window.push_handlers(self)
+        self.wpinfo = info
+        self.infolayer.add(info)
 
     def support(self, sup_dict):
         director.window.push_handlers(self)
@@ -1051,7 +1048,7 @@ class Arena(ScrollableLayer):
             else:
                 self.state = 'wand_type' + str(wandtype)
         else:
-            self._add_menu(Showwand(self.avl, self))
+            self.add_menu(Showwand(self.avl, self))
         '''if item_w.itemtype.wand['Type'] == 0:
             self.state = 'wand_type0'
         elif item_w.itemtype.wand['Type'] == 1:
@@ -1064,34 +1061,35 @@ class Arena(ScrollableLayer):
             self.state = 'wand_type4_rewarp'
         '''
 
-
     def attacking(self, **kwargs):
-        if len(kwargs) is 0:
+        if 'pid' not in kwargs:
+            # this is from self movements
             pid = self.selected
             dst = self._mapstate[0][self.selected][self.target][1]
         else:
+            # from ai movements
             pid = kwargs['pid']
             dst = kwargs['dst']
             rng = kwargs['rng']
             self.battlelist = kwargs['battlelist']
             self._set_areastate(rng, 'in_enemy_moverange')
-        director.window.remove_handlers(self)
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) \
+                 + CallFunc(self._clear_map) + CallFunc(self._push_scene, Battlescene, callback=self._clear)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._push_scene, Battlescene))
+        obj.do(action)
 
     def attack(self):
-        director.window.remove_handlers(self)
+        director.window.push_handlers(self)
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
-        self._add_menu(Weaponmenu(items, self.map, self))
+        self.add_menu(Weaponmenu(items, self.map, self))
         pass
 
     def item_show(self):
-        director.window.remove_handlers(self)
+        director.window.push_handlers(self)
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
-        self._add_menu(Showweapon(items, self))
+        self.add_menu(Showweapon(items, self))
         pass
 
     def end_turn(self):
@@ -1102,24 +1100,25 @@ class Arena(ScrollableLayer):
         self.map.ai_turn2(self)
 
     def move(self, **kwargs):
-        director.window.remove_handlers(self)
         if len(kwargs) is 0:
             pid = self.selected
             dst = self._mapstate[0][self.selected][self.target][1]
+            director.window.push_handlers(self)
         else:
             pid = kwargs['pid']
             dst = kwargs['dst']
             rng = kwargs['rng']
             self._set_areastate(rng, 'in_enemy_moverange')
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
+                 CallFunc(self._clear_map) + CallFunc(self._clear)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._clear_map) + CallFunc(self.map.take_turn, self))
+        obj.do(action)
         pass
 
     def wand(self, avl):
-        director.window.remove_handlers(self)
+        director.window.push_handlers(self)
         self._set_areastate([self.target], 'target')
-        self._add_menu(Showwand(avl, self))
+        self.add_menu(Showwand(avl, self))
         self.avl = avl
 
     def cancel(self):
@@ -1137,7 +1136,7 @@ class Arena(ScrollableLayer):
         for pid in self.stl_dict:
             self.people[pid].state = self._reset_person[pid]
         self._repaint()
-        self._add_menu(Ordermenu(self))
+        self.add_menu(Ordermenu(self))
 
     def use(self, item):
         pid = self.selected
@@ -1203,6 +1202,7 @@ class Arena(ScrollableLayer):
         return exc_obj
 
     def exchange(self, exc):
+        director.window.push_handlers(self)
         self._set_areastate([self.target], 'target')
         self.state = 'choose_exchange'
         for pid in exc:
@@ -1211,7 +1211,6 @@ class Arena(ScrollableLayer):
         self.exc = exc
         self._repaint()
         self.menulayer.disapper()
-        director.window.push_handlers(self)
 
     def exchange_item(self, item1, item2, name=None):
         print(item1, item2)
@@ -1228,21 +1227,22 @@ class Arena(ScrollableLayer):
                                           (-self.windowsize[0], 0)), name='left')
         self.menulayer.add(Weaponexchange(self.people[self.excpid].person.item, self,
                                           (-self.windowsize[0]//2, 0)), name='right')
-        director.window.remove_handlers(self)
+
         self.allow_cancel = False
 
     def wandrpr(self, item):
+        director.window.push_handlers(self)
         self.wandlist_type2.append(item)
         pid = self.selected
         dst = self._mapstate[0][self.selected][self.target][1]
-        director.window.remove_handlers(self)
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
+        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)\
+                 + CallFunc(self._push_scene, Wandtype2)
         obj = self.people[pid]
-        obj.do(action + CallFunc(self._push_scene, Wandtype2))
+        obj.do(action)
 
     def wandstl(self, item):
-        self.wandlist_type3.append(item)
         director.window.push_handlers(self)
+        self.wandlist_type3.append(item)
         self.state = 'wand_type3_confirm'
         user, wand, target, self.map, self.target, _ = self.wandlist_type3
         hitr_3 = Type3(user, wand, target, self.map, self.target, item).simulate()
@@ -1321,11 +1321,11 @@ class Arena(ScrollableLayer):
         pass
 
     def doors(self, doors, key):
+        director.window.push_handlers(self)
         self.state = 'choose_door'
         self._set_areastate(doors, 'door')
         self._doors = doors
         self._key = key
-        director.window.push_handlers(self)
 
     def talk(self, talk_dict):
         director.window.push_handlers(self)
@@ -1337,7 +1337,6 @@ class Arena(ScrollableLayer):
         self._repaint()
 
     def eventdisplay(self, callback=None, **kwargs):
-        director.window.remove_handlers(self)
         self.add(Eventdisplay(callback=callback, **kwargs))
 
     def reconstruct(self, rec):
@@ -1346,14 +1345,11 @@ class Arena(ScrollableLayer):
         width, height = m * self.size, n * self.size
         _x, _y = (x * 2 + m - 1) / 2, (y * 2 + n - 1) / 2
         recon = Sprite(rec['Pic'], position=coordinate(_x, _y, self.size))
-
-        print(rec['Pic'])
         recon.scale_x, recon.scale_y = width / recon.width, height / recon.height
         self.remove(self.person_layer)
         self.add(recon)
         self.add(self.person_layer)
-        director.window.remove_handlers(self)
-        self.get_next_event()
+        self._clear()
 
     def remove(self, obj):
         super().remove(obj)
