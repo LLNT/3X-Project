@@ -215,14 +215,12 @@ class Arena(ScrollableLayer):
 
     def next_round(self):
         self.map.turn += 1
+        if self.map.turn > 6:
+            director.pop()
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
-
-        self.person_list = list(self.people.values())
-        self.person_num = len(self.person_list)
-
-        self.update_person()
+        self.execute_turn_event(callback_func=self.player_phase)
 
     def update_person(self, i=0):
         if i < self.person_num:
@@ -234,18 +232,25 @@ class Arena(ScrollableLayer):
             obj, action = p.set_angle_action(prop, min_duration=0, max_duration=2)
             obj.do(CallFunc(self.focus, p.pid) + action + CallFunc(self.update_person, i+1))
         else:
-            if self.map.turn > 6:
-                director.pop()
-            else:
-                self._repaint()
-                self.player_turn()
+            self.player_turn()
 
     def player_turn(self):
         self.position = (0, 0)
+        self._repaint()
+        director.window.push_handlers(self)
         # before executed, handlers should be removed
-        self.execute_turn_event()
 
-    def execute_turn_event(self, i=0):
+    def player_phase(self):
+        self.person_list = list(self.people.values())
+        self.person_num = len(self.person_list)
+        self.update_person()
+        pass
+
+    def ai_phase(self):
+        self.execute_turn_event(callback_func=self.map.ai_turn2, arena=self)
+        pass
+
+    def execute_turn_event(self, i=0, callback_func=None, **kwargs):
         if i < self.turn_length:
             event = self.turn_event[i]
             if (event['Side'] is None or self.map.controller == event['Side']) \
@@ -255,12 +260,13 @@ class Arena(ScrollableLayer):
                         event=event, map=self.map,
                         dialog_type=event['Text_type'], dialog_info=self.dialog_info,
                         w=self.windowsize[0], h=self.windowsize[1],
-                        callback=self.execute_turn_event, i=i+1
+                        callback=self.execute_turn_event, i=i+1,
+                        callback_func=callback_func, **kwargs
                     )
             else:
-                self.execute_turn_event(i+1)
+                self.execute_turn_event(i + 1, callback_func, **kwargs)
         else:
-            director.window.push_handlers(self)
+            callback_func.__call__(**kwargs)
 
     def _sequential_move(self, dst):
         # move person of pid through the trace dst
@@ -1149,7 +1155,7 @@ class Arena(ScrollableLayer):
         self.map.controller = 1
         self.map.reset_state(0)
         director.window.remove_handlers(self)
-        self.map.ai_turn2(self)
+        self.ai_phase()
 
     def move(self, **kwargs):
         if len(kwargs) is 0:

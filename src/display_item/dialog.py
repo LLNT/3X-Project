@@ -40,6 +40,14 @@ class BaseDialog(Layer):
     def source_error(self, info):
         print('source error type ' + str(info))
 
+    def callback(self):
+        # handle callback from branches
+        if not self.i < self.length:
+            print('Finished')
+            self.exit()
+        else:
+            director.window.push_handlers(self)
+
 class Dialogscene(BaseDialog):
 
     def __init__(self, text_list, text_source, map, w, h, info,
@@ -80,7 +88,7 @@ class Dialogscene(BaseDialog):
         if item['Type'] is not 'S':
             self.source_error('S')
         if 'Branch' in item.keys():
-            self.add(Branch(self.map, item['Branch'], self.excute))
+            self.add(Branch(self.map, item['Branch'], self.callback))
             director.window.remove_handlers(self)
             self.i += 1
         else:
@@ -151,8 +159,6 @@ class Battledialog(BaseDialog):
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
-
-
         try:
             dir = self.pid2dir[item['Speaker']]
         except:
@@ -195,18 +201,18 @@ class Branch(Menu):
         self.map.global_vars.flags[flag] = True
         for obj in self.children_names:
             self.remove(obj)
-
         self.kill()
         self.callback.__call__(**self.kwargs)
-        director.window.push_handlers(self.parent)
 
 class Mapdialog(BaseDialog):
-    def __init__(self, textlist, textsource, w, h, dialog_info, callback, **kwargs):
+    def __init__(self, textlist, textsource, w, h, map, callback, size=(200,200),**kwargs):
         super().__init__(textlist, textsource)
 
         self.w, self.h = w, h
         self.callback = callback
         self.kwargs = kwargs
+        self.size = size
+        self.map = map
 
         self.up = {
             'Icon': Sprite('ring.png', position=(w // 8, h * 3 // 4), opacity=0),
@@ -225,23 +231,34 @@ class Mapdialog(BaseDialog):
         self.excute()
 
     def excute(self):
-        item = self.textsource[self.textlist[self.i]]
-        if item['Type'] is not 'M':
-            self.source_error('M')
-        if item['Location'] is 0:
-            obj = self.up
-        elif item['Location'] is 1:
-            obj = self.down
+        if self.i < self.length:
+            item = self.textsource[self.textlist[self.i]]
+            if 'Branch' in item.keys():
+                self.add(Branch(self.map, item['Branch'], self.callback))
+                director.window.remove_handlers(self)
+                super().excute()
+            else:
+                if item['Type'] is not 'M':
+                    self.source_error('M')
+                if item['Location'] is 0:
+                    obj = self.up
+                elif item['Location'] is 1:
+                    obj = self.down
+                else:
+                    self.source_error('Location')
+                    return
+                pos = obj['Icon'].position
+                obj['Icon'].kill()
+                if item['Icon'] is not None:
+                    obj['Icon'] = Sprite(item['Icon'], pos)
+                    obj['Icon'].scale_x = self.size[0] / obj['Icon'].width
+                    obj['Icon'].scale_y = self.size[1] / obj['Icon'].height
+                    self.add(obj['Icon'])
+                obj['Text'].element.text = item['Text']
+                super().excute()
         else:
-            self.source_error('Location')
-            return
-        pos = obj['Icon'].position
-        obj['Icon'].kill()
-        if item['Icon'] is not None:
-            obj['Icon'] = Sprite(item['Icon'], pos)
-            self.add(obj['Icon'])
-        obj['Text'].element.text = item['Text']
-        super().excute()
+            director.window.remove_handlers(self)
+            self.exit()
 
     def exit(self):
         self.kill()

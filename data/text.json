@@ -1945,13 +1945,13 @@
   "UT000-021":{
     "Type":"M",
     "Location":0,
-    "Icon":"tanya.png",
+    "Icon":"tanya.jpg",
     "Text":"王子，"
   },
   "UT000-022":{
     "Type":"M",
     "Location":0,
-    "Icon":"tanya.png",
+    "Icon":"tanya.jpg",
     "Text":"您知道如何指挥战斗吧。"
   },
   "UT000-023":{
@@ -1975,13 +1975,13 @@
   "GT000-051":{
     "Type":"M",
     "Location":0,
-    "Icon":"tanya.png",
+    "Icon":"tanya.jpg",
     "Text":"那么，祝您武运昌隆。"
   },
   "GT000-061":{
     "Type":"M",
     "Location":0,
-    "Icon":"tanya.png",
+    "Icon":"tanya.jpg",
     "Text":"首先，把光标移动到"
   }
 

@@ -294,15 +294,14 @@ class Main:
             person_to_move = command[1].pid  # type:person.Person
             arena.move(pid=person_to_move, dst=command[3], rng=valid[person_to_move])
         elif command_type == "E":
+            self.reset_state(self.controller)
             self.controller += 1
             if self.controller == 3:
-                self.reset_state(1)
                 print('player phase')
                 arena.next_round()
             else:
-                self.reset_state(2)
                 print('ally phase')
-                self.take_turn(arena)
+                arena.ai_phase()
 
         elif command_type == "A":
             person_to_move = command[1].pid

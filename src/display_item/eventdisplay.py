@@ -27,36 +27,37 @@ class Eventdisplay(Layer):
         self.callback = callback
         self.kwargs = kwargs
         self.event = event
-
-
-        self.finish = self.event['Finish']
         # get first condition_satisfied
-        self.execute_event = self.finish[-1]['Execute']
-        self.length = len(self.execute_event)
 
-        if 'Text' in event.keys() and len(event['Text']) > 0:
-            text_list = event['Text']
-            text_source = map.global_vars.text
-            if dialog_type is 'B':
-                self.add(Battledialog(text_list, text_source, w, h,
-                                      dialog_info=dialog_info, callback=self.get_finish))
-            elif dialog_type is 'S':
-                director.push(Scene(Dialogscene(text_list, text_source, map, w, h,
-                                                callback=self.get_finish, info=dialog_info)))
-            elif dialog_type is 'M':
-                self.add(Mapdialog(text_list, text_source, w, h, dialog_info, self.get_finish))
+    def on_enter(self):
+        super().on_enter()
+        if 'Text' in self.event.keys() and len(self.event['Text']) > 0:
+            text_list = self.event['Text']
+            text_source = self.map.global_vars.text
+            if self.dialog_type is 'B':
+                self.add(Battledialog(text_list, text_source, self.w, self.h,
+                                      dialog_info=self.dialog_info, callback=self.get_finish))
+            elif self.dialog_type is 'S':
+                director.push(Scene(Dialogscene(text_list, text_source, self.map, self.w, self.h,
+                                                callback=self.get_finish, info=self.dialog_info)))
+            elif self.dialog_type is 'M':
+                self.add(Mapdialog(text_list, text_source, self.w, self.h, self.map, self.get_finish))
             else:
                 self.get_finish()
         else:
-            self.execute()
+            self.get_finish()
 
     def get_finish(self):
+        self.finish = self.event['Finish']
+        self.execute_finish = self.finish[-1]
+        self.execute_event = self.finish[-1]['Execute']
         for item in self.finish:
             cd = item['Condition']
             if check_condition(cd, self.map):
                 self.execute_event = item['Execute']
+                self.execute_finish = item
                 break
-
+        self.length = len(self.execute_event)
         self.execute()
 
     def execute(self, i=0):
@@ -86,7 +87,7 @@ class Eventdisplay(Layer):
                 self.execute(i+1)
             pass
         else:
-            jump = self.finish['Jump']
+            jump = self.execute_finish['Jump']
             if jump is not 'F':
                 general = self.map.eventlist['General']
                 event = None
@@ -95,16 +96,21 @@ class Eventdisplay(Layer):
                         event = item
                         break
                 if event is not None:
-                    Eventdisplay(
+                    jump_event = Eventdisplay(
                         event=event, map=self.map, w=self.w, h=self.h,
                         dialog_type=self.dialog_type, dialog_info=self.dialog_info,
                         callback=self.callback, **self.kwargs
                     )
+                    self.kill()
+                    self.parent.add(jump_event)
+
                 else:
                     print('Event %s not found' % jump)
                     self.callback.__call__(**self.kwargs)
+                    self.kill()
             else:
                 self.callback.__call__(**self.kwargs)
+                self.kill()
         pass
 
 
