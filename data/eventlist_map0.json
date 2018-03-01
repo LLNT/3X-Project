@@ -1,5 +1,35 @@
 {
   "Background_Scene":"background_test.jpg",
+  "Turns":[
+    {
+        "Event":"U00001",
+        "Side":1,
+        "Turn":null,
+        "Condition":[
+            [["G00001"],["U00001"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":"terrain_map_0_varblock_1.json",
+        "Finish":[
+        {
+            "Condition":[[["T00003"],[]]],
+            "Execute":["R/201/1/3,17/Lilse Army/0/DEFENSIVE"],
+            "Jump":"G000002"
+        },
+        {
+            "Condition":[[["O00003"],[]]],
+            "Execute":["R/201/1/3,17/Lilse Army/0/DEFENSIVE"],
+            "Jump":"G000003"
+        },
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/201/1/3,17/Lilse Army/0/DEFENSIVE"],
+            "Jump":"G000004"
+        }
+        ]
+    }
+  ],
   "General":[
     {
       "Event":"G000001",
@@ -13,6 +43,74 @@
       "GT000-00117","GT000-00118","GT000-00119","GT000-00120","GT000-00121","GT000-00122","GT000-00123","GT000-00124",
       "GT000-00125","GT000-00126","GT000-00127"],
       "Reconstruct":null,
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"F"
+      }
+      ]
+    },
+    {
+      "Event":"G000002",
+      "Condition":[
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_test_trs3",
+          "M":1,
+          "N":1,
+          "Anchor_X":0,
+          "Anchor_Y":11,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+      "Finish":[{
+        "Condition":[[["O00003"],[]]],
+        "Execute":[],
+        "Jump":"G000003"
+      },
+      {
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"G000004"
+      }
+      ]
+    },
+    {
+      "Event":"G000003",
+      "Condition":[
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_0_door5",
+          "M":1,
+          "N":1,
+          "Anchor_X":11,
+          "Anchor_Y":15,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"F"
+      }
+      ]
+    },
+    {
+      "Event":"G000004",
+      "Condition":[
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_0_door3",
+          "M":1,
+          "N":1,
+          "Anchor_X":13,
+          "Anchor_Y":12,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
       "Finish":[{
         "Condition":[[[],[]]],
         "Execute":[],
