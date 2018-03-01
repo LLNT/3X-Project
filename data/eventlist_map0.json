@@ -43,13 +43,18 @@
             [[],["U00002"]]
         ],
         "Text_type":"M",
-        "Text":[],
+        "Text":["UT000-021","UT000-022","UT000-023"],
         "Reconstruct":null,
         "Finish":[
         {
+            "Condition":[[["UT000-023-B"],[]]],
+            "Execute":[],
+            "Jump":"G000006"
+        },
+          {
             "Condition":[[[],[]]],
             "Execute":[],
-            "Jump":"F"
+            "Jump":"G000005"
         }
         ]
     }
@@ -135,6 +140,34 @@
           "Anchor_Y":12,
           "Map":[["Floor"]],
           "Pic":"map_cell.png"},
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"F"
+      }
+      ]
+    },
+    {
+      "Event":"G000005",
+      "Condition":[
+      ],
+      "Text_type":"M",
+      "Text":["GT000-051"],
+      "Reconstruct":null,
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"F"
+      }
+      ]
+    },
+    {
+      "Event":"G000006",
+      "Condition":[
+      ],
+      "Text_type":"M",
+      "Text":["GT000-061"],
+      "Reconstruct":null,
       "Finish":[{
         "Condition":[[[],[]]],
         "Execute":[],

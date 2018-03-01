@@ -288,7 +288,7 @@
     "Scene":null
   },
   "VT990-111":{
-    "Type":"B",
+    "Type":"R",
     "Branch":[
       {
         "Tag":"A",
@@ -1941,6 +1941,48 @@
     "Right":null,
     "Direction":0,
     "Scene":null
+  },
+  "UT000-021":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"tanya.png",
+    "Text":"王子，"
+  },
+  "UT000-022":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"tanya.png",
+    "Text":"您知道如何指挥战斗吧。"
+  },
+  "UT000-023":{
+    "Type":"R",
+    "Branch":[
+      {
+        "Tag":"A",
+        "Flag":"UT000-023-A",
+        "Text":"没有问题，我已经胸有成竹。"
+      },
+      {
+        "Tag":"B",
+        "Flag":"UT000-023-B",
+        "Text":"还是再确认一下吧。"
+      }
+    ],
+    "Left":null,
+    "Right":null,
+    "Scene":null
+  },
+  "GT000-051":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"tanya.png",
+    "Text":"那么，祝您武运昌隆。"
+  },
+  "GT000-061":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"tanya.png",
+    "Text":"首先，把光标移动到"
   }
 
 }
