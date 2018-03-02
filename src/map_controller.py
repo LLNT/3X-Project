@@ -776,14 +776,14 @@ class Main:
                     if calc_dist(self.person_container.position[obj],pos)<2:
                         if person.suprank[obj]==3:
                             continue
-                        if (person.suprank[obj]==2)and(person.supdata[obj]<200):
-                            person.supdata[obj]+=1
+                        if (person.suprank[obj]==2)and(person.supdata[obj][0]<200):
+                            person.supdata[obj][0]+=person.supdata[obj][1]
                             continue
-                        if (person.suprank[obj]==1)and(person.supdata[obj]<100):
-                            person.supdata[obj]+=1
+                        if (person.suprank[obj]==1)and(person.supdata[obj][0]<100):
+                            person.supdata[obj][0]+=person.supdata[obj][1]
                             continue
-                        if (person.suprank[obj]==0)and(person.supdata[obj]<50):
-                            person.supdata[obj]+=1
+                        if (person.suprank[obj]==0)and(person.supdata[obj][0]<50):
+                            person.supdata[obj][0]+=person.supdata[obj][1]
                             continue
         return log
 
