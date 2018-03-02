@@ -334,32 +334,32 @@ class Main:
         if (p.supdata[pid2][0] >= 50) and (p.suprank[pid2] < 1):
             p.suprank[pid2]=1
             obj.suprank[pid1]=1
-            if pid1 in self.global_vars.support_text_map:
-                if pid2 in self.global_vars.support_text_map[pid1]:
-                    return self.global_vars.support_text_map[pid1][pid2]["C"]
-            if pid2 in self.global_vars.support_text_map:
-                if pid1 in self.global_vars.support_text_map[pid2]:
-                    return self.global_vars.support_text_map[pid2][pid1]["C"]
+            if pid1 in self.global_vars.data.support_text_map:
+                if pid2 in self.global_vars.data.support_text_map[pid1]:
+                    return self.global_vars.data.support_text_map[pid1][pid2]["C"]
+            if pid2 in self.global_vars.data.support_text_map:
+                if pid1 in self.global_vars.data.support_text_map[pid2]:
+                    return self.global_vars.data.support_text_map[pid2][pid1]["C"]
             return []
         if (p.supdata[pid2][0] >= 100) and (p.suprank[pid2] < 2):
             p.suprank[pid2]=2
             obj.suprank[pid1]=2
-            if pid1 in self.global_vars.support_text_map:
-                if pid2 in self.global_vars.support_text_map[pid1]:
-                    return self.global_vars.support_text_map[pid1][pid2]["B"]
-            if pid2 in self.global_vars.support_text_map:
-                if pid1 in self.global_vars.support_text_map[pid2]:
-                    return self.global_vars.support_text_map[pid2][pid1]["B"]
+            if pid1 in self.global_vars.data.support_text_map:
+                if pid2 in self.global_vars.data.support_text_map[pid1]:
+                    return self.global_vars.data.support_text_map[pid1][pid2]["B"]
+            if pid2 in self.global_vars.data.support_text_map:
+                if pid1 in self.global_vars.data.support_text_map[pid2]:
+                    return self.global_vars.data.support_text_map[pid2][pid1]["B"]
             return []
         if (p.supdata[pid2][0] >= 200) and (p.suprank[pid2] < 3):
             p.suprank[pid2]=3
             obj.suprank[pid1]=3
-            if pid1 in self.global_vars.support_text_map:
-                if pid2 in self.global_vars.support_text_map[pid1]:
-                    return self.global_vars.support_text_map[pid1][pid2]["A"]
-            if pid2 in self.global_vars.support_text_map:
-                if pid1 in self.global_vars.support_text_map[pid2]:
-                    return self.global_vars.support_text_map[pid2][pid1]["A"]
+            if pid1 in self.global_vars.data.support_text_map:
+                if pid2 in self.global_vars.data.support_text_map[pid1]:
+                    return self.global_vars.data.support_text_map[pid1][pid2]["A"]
+            if pid2 in self.global_vars.data.support_text_map:
+                if pid1 in self.global_vars.data.support_text_map[pid2]:
+                    return self.global_vars.data.support_text_map[pid2][pid1]["A"]
             return []
         return []
 
@@ -795,7 +795,7 @@ class Main:
         self.person_container.position[pid]=pos_real
         self.person_container.movable[pid]=True
         self.person_container.army[pid]=army
-        self.person_container.AItype[pid]=(pri,self.global_vars.ai_configs[strategy])
+        self.person_container.AItype[pid]=(pri,self.global_vars.data.ai_configs[strategy])
         return
 
 

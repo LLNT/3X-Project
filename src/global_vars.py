@@ -5,6 +5,10 @@ import person
 import ai_controller
 import itemtype
 import item
+import data_loader
+import terrain_container
+import person_container
+import map_controller
 class Main:
     def __init__(self):
         self.terrainBank={}                 #type:Dict[str,terrain.Terrain]
@@ -21,9 +25,9 @@ class Main:
         self.flags={}                       #type:Dict[str,bool]
         self.transporter={}                 #type:Dict[str,List[item.Item]]
         self.cls_promotion={}               #type:Dict[str,Dict[str,int]]
-        self.support_text_map={}            #type:Dict[str,Dict[str,Dict[str,List[str]]]]
         self.text={}                        #type:Dict[str,Dict[str,str]]
-        self.ai_configs={}
+        self.maps=[]
+        self.data=None                     #type:data_loader.Main
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -38,10 +42,23 @@ class Main:
         self.cls_rank=data.cls_rank
         self.flags=data.flags
         self.transporter={}
+        self.data=data                     #type:data_loader.Main
         for _type in data.itemtype_typenames:
             self.transporter[_type]=[]
         self.cls_promotion=data.cls_promote_bonus
-        self.support_text_map=data.support_text_map
         self.text=data.text
-        self.ai_configs=data.ai_configs
+        self.maps=[]
+
+    def new_game(self):
+        terrain0=terrain_container.Main(self.data.get_obj(self.data.startmeta["Terrain_map"]))
+        person0 = person_container.Main(self.data.get_obj(self.data.startmeta["Armylist"]),self.personBank, self.data.ai_configs)
+        map0 = map_controller.Main(terrain0, person0, self,self.data.get_obj(self.data.startmeta["Eventlist"]))
+        self.maps.append((map0,self.data.startmeta))
+        self.flags=self.data.flags
+        self.player_character_status=self.data.player_character_init
+        self.transporter={}
+        return map0
+
+
+
 

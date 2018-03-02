@@ -1,7 +1,13 @@
 {
+  "Id":"000",
   "Background_Scene":"background_test.jpg",
   "Armylist":"map0_armylist.json",
   "Terrain_map":"terrain_map_0.json",
   "Eventlist":"eventlist_map0.json",
-  "Map_pic":"map0_temp.jpg"
+  "Map_pic":"map0_temp.jpg",
+  "Title":"First Battle",
+  "Prelude":"map0_pre.json",
+  "Preparation":null,
+  "Afterscene":"map0_after.json",
+  "Basement":null
 }

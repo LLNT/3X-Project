@@ -39,3 +39,13 @@ class Main:
         self.text=json.load(codecs.open(path+"text.json","r","utf-8"))
         self.eventlist=json.load(open(path+"eventlist_map0.json","r"))
         self.ai_configs=json.load(open(path+"ai_configs.json","r"))
+        self.startmeta=json.load(open(path+"map0_meta.json","r"))
+    def get_obj(self,fname):
+        ostype = platform.platform()
+        path = os.getcwd()
+        path = path[:-3]
+        if ostype[:7] == "Windows":
+            path = path + "data\\"
+        else:
+            path = path + "data/"
+        return json.load(open(path+fname,"r"))
