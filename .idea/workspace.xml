@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7542160e-759e-440b-a79f-bcb920a66485" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/data/eventlist_map0.json" afterPath="$PROJECT_DIR$/data/eventlist_map0.json" />
-      <change beforePath="$PROJECT_DIR$/data/text.json" afterPath="$PROJECT_DIR$/data/text.json" />
       <change beforePath="$PROJECT_DIR$/src/arena.py" afterPath="$PROJECT_DIR$/src/arena.py" />
-      <change beforePath="$PROJECT_DIR$/src/display_item/dialog.py" afterPath="$PROJECT_DIR$/src/display_item/dialog.py" />
-      <change beforePath="$PROJECT_DIR$/src/display_item/eventdisplay.py" afterPath="$PROJECT_DIR$/src/display_item/eventdisplay.py" />
-      <change beforePath="$PROJECT_DIR$/src/map_controller.py" afterPath="$PROJECT_DIR$/src/map_controller.py" />
     </list>
     <ignored path=".idea/" />
     <ignored path="*.pyc" />
@@ -21,30 +16,29 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/3X_Project$arena.coverage" NAME="arena Coverage Results" MODIFIED="1519918474282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/3X_Project$arena.coverage" NAME="arena Coverage Results" MODIFIED="1519956894045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/3X_Project$menu.coverage" NAME="menu Coverage Results" MODIFIED="1519631503378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/display_item" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="arena.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="arena.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/arena.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="1398" column="0" lean-forward="true" selection-start-line="1398" selection-start-column="0" selection-end-line="1398" selection-end-column="0" />
+            <state relative-caret-position="322">
+              <caret line="1018" column="40" lean-forward="true" selection-start-line="1018" selection-start-column="40" selection-end-line="1018" selection-end-column="40" />
               <folding>
-                <element signature="e#4185#5229#0" expanded="false" />
-                <element signature="e#5329#6721#0" expanded="false" />
-                <element signature="e#10718#10873#0" expanded="false" />
-                <element signature="e#10907#11285#0" expanded="false" />
-                <element signature="e#11507#11888#0" expanded="false" />
-                <element signature="e#12230#12368#0" expanded="false" />
-                <element signature="e#13057#13502#0" expanded="false" />
-                <element signature="e#13611#14294#0" expanded="false" />
-                <element signature="e#14538#14972#0" expanded="false" />
-                <element signature="e#16070#17691#0" expanded="false" />
-                <element signature="e#20748#20949#0" expanded="false" />
-                <element signature="e#20987#21113#0" expanded="false" />
-                <element signature="e#28511#28867#0" expanded="false" />
+                <element signature="e#5225#6617#0" expanded="false" />
+                <element signature="e#10657#10812#0" expanded="false" />
+                <element signature="e#10846#11224#0" expanded="false" />
+                <element signature="e#11446#11827#0" expanded="false" />
+                <element signature="e#12169#12307#0" expanded="false" />
+                <element signature="e#12996#13441#0" expanded="false" />
+                <element signature="e#13550#14233#0" expanded="false" />
+                <element signature="e#14477#14911#0" expanded="false" />
+                <element signature="e#16009#17630#0" expanded="false" />
+                <element signature="e#20727#20928#0" expanded="false" />
+                <element signature="e#20966#21092#0" expanded="false" />
+                <element signature="e#28490#28846#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -53,8 +47,8 @@
       <file leaf-file-name="map_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/map_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="286" column="22" lean-forward="false" selection-start-line="286" selection-start-column="22" selection-end-line="286" selection-end-column="22" />
+            <state relative-caret-position="375">
+              <caret line="286" column="21" lean-forward="true" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
               <folding>
                 <element signature="e#1511#5700#0" expanded="false" />
                 <element signature="e#5744#9996#0" expanded="false" />
@@ -68,11 +62,10 @@
       <file leaf-file-name="eventdisplay.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/eventdisplay.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-457">
-              <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+            <state relative-caret-position="1746">
+              <caret line="103" column="29" lean-forward="false" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="29" />
               <folding>
                 <element signature="e#2295#3308#0" expanded="false" />
-                <element signature="e#3418#4208#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -81,14 +74,14 @@
       <file leaf-file-name="dialog.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/dialog.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
+            <state relative-caret-position="6183">
               <caret line="236" column="71" lean-forward="false" selection-start-line="236" selection-start-column="71" selection-end-line="236" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eventlist_map0.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="eventlist_map0.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/eventlist_map0.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
@@ -114,8 +107,8 @@
       <file leaf-file-name="text.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/text.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="1954" column="24" lean-forward="true" selection-start-line="1954" selection-start-column="24" selection-end-line="1954" selection-end-column="24" />
+            <state relative-caret-position="52758">
+              <caret line="1954" column="24" lean-forward="false" selection-start-line="1954" selection-start-column="24" selection-end-line="1954" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -124,7 +117,7 @@
       <file leaf-file-name="menu.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/display_item/menu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11016">
+            <state relative-caret-position="10881">
               <caret line="408" column="69" lean-forward="false" selection-start-line="408" selection-start-column="69" selection-end-line="408" selection-end-column="69" />
               <folding>
                 <element signature="e#64#143#0" expanded="true" />
@@ -155,6 +148,7 @@
       <find>self.is_event_handler = True</find>
       <find>branch</find>
       <find>tanya.png</find>
+      <find>director.window.push_handlers</find>
     </findStrings>
     <replaceStrings>
       <replace>director.window.push_handlers(self)</replace>
@@ -183,9 +177,9 @@
         <option value="$PROJECT_DIR$/data/text.json" />
         <option value="$PROJECT_DIR$/src/display_item/dialog.py" />
         <option value="$PROJECT_DIR$/src/map_controller.py" />
-        <option value="$PROJECT_DIR$/src/arena.py" />
         <option value="$PROJECT_DIR$/src/display_item/eventdisplay.py" />
         <option value="$PROJECT_DIR$/data/eventlist_map0.json" />
+        <option value="$PROJECT_DIR$/src/arena.py" />
       </list>
     </option>
   </component>
@@ -215,7 +209,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -238,7 +232,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,117 +244,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hasee\git\3X-Project\src\history" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/eventlist_map0.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/data/text.json</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -488,49 +371,41 @@
       <option name="project" value="LOCAL" />
       <updated>1519882996478</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="turn event">
+      <created>1519918505737</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1519918505737</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08896034" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="0" y="0" width="434" height="856" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40089586" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23068309" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20268758" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26091826" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26203808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19346195" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19614148" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1800643" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39977604" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39977604" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08896034" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="0" y="0" width="434" height="856" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26203808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23068309" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20268758" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19346195" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1800643" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39977604" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +451,9 @@
     <MESSAGE value="好像没错" />
     <MESSAGE value="battle reconstruct" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="turn event" />
+    <MESSAGE value="adjust handlers" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjust handlers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -856,7 +733,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/display_item/menu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11016">
+        <state relative-caret-position="10881">
           <caret line="408" column="69" lean-forward="false" selection-start-line="408" selection-start-column="69" selection-end-line="408" selection-end-column="69" />
           <folding>
             <element signature="e#64#143#0" expanded="true" />
@@ -901,14 +778,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="937">
           <caret line="168" column="4" lean-forward="false" selection-start-line="168" selection-start-column="4" selection-end-line="168" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/text.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="1954" column="24" lean-forward="true" selection-start-line="1954" selection-start-column="24" selection-end-line="1954" selection-end-column="24" />
+        <state relative-caret-position="52758">
+          <caret line="1954" column="24" lean-forward="false" selection-start-line="1954" selection-start-column="24" selection-end-line="1954" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -923,55 +799,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/display_item/dialog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
+        <state relative-caret-position="6183">
           <caret line="236" column="71" lean-forward="false" selection-start-line="236" selection-start-column="71" selection-end-line="236" selection-end-column="71" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/map_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="286" column="22" lean-forward="false" selection-start-line="286" selection-start-column="22" selection-end-line="286" selection-end-column="22" />
-          <folding>
-            <element signature="e#1511#5700#0" expanded="false" />
-            <element signature="e#5744#9996#0" expanded="false" />
-            <element signature="e#32906#37040#0" expanded="false" />
-            <element signature="e#37119#37537#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/display_item/eventdisplay.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-457">
-          <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding>
-            <element signature="e#2295#3308#0" expanded="false" />
-            <element signature="e#3418#4208#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/arena.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="1398" column="0" lean-forward="true" selection-start-line="1398" selection-start-column="0" selection-end-line="1398" selection-end-column="0" />
-          <folding>
-            <element signature="e#4185#5229#0" expanded="false" />
-            <element signature="e#5329#6721#0" expanded="false" />
-            <element signature="e#10718#10873#0" expanded="false" />
-            <element signature="e#10907#11285#0" expanded="false" />
-            <element signature="e#11507#11888#0" expanded="false" />
-            <element signature="e#12230#12368#0" expanded="false" />
-            <element signature="e#13057#13502#0" expanded="false" />
-            <element signature="e#13611#14294#0" expanded="false" />
-            <element signature="e#14538#14972#0" expanded="false" />
-            <element signature="e#16070#17691#0" expanded="false" />
-            <element signature="e#20748#20949#0" expanded="false" />
-            <element signature="e#20987#21113#0" expanded="false" />
-            <element signature="e#28511#28867#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -992,6 +822,50 @@
             <element signature="e#10843#11192#0" expanded="false" />
             <element signature="e#11198#11718#0" expanded="false" />
             <element signature="e#11737#13670#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/display_item/eventdisplay.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1746">
+          <caret line="103" column="29" lean-forward="false" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="29" />
+          <folding>
+            <element signature="e#2295#3308#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/map_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="286" column="21" lean-forward="true" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
+          <folding>
+            <element signature="e#1511#5700#0" expanded="false" />
+            <element signature="e#5744#9996#0" expanded="false" />
+            <element signature="e#32906#37040#0" expanded="false" />
+            <element signature="e#37119#37537#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/arena.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="1018" column="40" lean-forward="true" selection-start-line="1018" selection-start-column="40" selection-end-line="1018" selection-end-column="40" />
+          <folding>
+            <element signature="e#5225#6617#0" expanded="false" />
+            <element signature="e#10657#10812#0" expanded="false" />
+            <element signature="e#10846#11224#0" expanded="false" />
+            <element signature="e#11446#11827#0" expanded="false" />
+            <element signature="e#12169#12307#0" expanded="false" />
+            <element signature="e#12996#13441#0" expanded="false" />
+            <element signature="e#13550#14233#0" expanded="false" />
+            <element signature="e#14477#14911#0" expanded="false" />
+            <element signature="e#16009#17630#0" expanded="false" />
+            <element signature="e#20727#20928#0" expanded="false" />
+            <element signature="e#20966#21092#0" expanded="false" />
+            <element signature="e#28490#28846#0" expanded="false" />
           </folding>
         </state>
       </provider>

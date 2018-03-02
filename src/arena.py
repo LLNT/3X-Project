@@ -110,9 +110,7 @@ class Arena(ScrollableLayer):
     def _clear(self, **kwargs):
         # handle the default execute after battle or a movement
         self.get_next_to_delete()
-        for person in self.people.values():
-            person.update_hp()
-        self.get_next_event()
+
 
     def _clear_map(self):
         # should be executed after movement and before battle display
@@ -238,6 +236,7 @@ class Arena(ScrollableLayer):
         self.position = (0, 0)
         self._repaint()
         director.window.push_handlers(self)
+        print('player_turn push_handlers')
         # before executed, handlers should be removed
 
     def player_phase(self):
@@ -466,6 +465,7 @@ class Arena(ScrollableLayer):
 
     def _callback(self, **kwargs):
         director.window.push_handlers(self)
+        print('callback push_handlers')
         self.state = 'default'
 
     def _default(self):
@@ -505,10 +505,10 @@ class Arena(ScrollableLayer):
             if self.cells[self.mouse_pos].person_on is not None:
                 pid = self.cells[self.mouse_pos].person_on
                 select = self.people[pid].person
+                director.window.remove_handlers(self)
                 self.info = Personinfo(select, callback=self._callback)
                 self.infolayer.add(self.info)
                 self.state = 'person_info'
-                director.window.remove_handlers(self)
             else:
                 self.end = Endturn(self)
                 self.menulayer.add(self.end)
@@ -996,7 +996,7 @@ class Arena(ScrollableLayer):
         try:
             pid = next(self.iter)
         except:
-            self._clear_map()
+            self.get_next_event()
             return
         person = self.people[pid].person
         if person.ability['HP'] <= 0:
@@ -1395,7 +1395,8 @@ class Arena(ScrollableLayer):
         self._repaint()
 
     def eventdisplay(self, callback=None, **kwargs):
-        self.add(Eventdisplay(callback=callback, **kwargs))
+        display = Eventdisplay(callback=callback, **kwargs)
+        self.add(display)
 
     def reconstruct(self, rec):
         self.map.map_reconstruct(rec)
@@ -1407,7 +1408,6 @@ class Arena(ScrollableLayer):
         self.remove(self.person_layer)
         self.add(recon)
         self.add(self.person_layer)
-        self._clear()
 
     def remove(self, obj):
         super().remove(obj)
