@@ -399,6 +399,7 @@ class Endturn(Menu):
         super().__init__(title='Endturn')
         l = []
         l.append(MenuItem('Endturn', self.end_turn))
+        l.append(MenuItem('Flags', self.flag))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.arena = arena
@@ -413,6 +414,10 @@ class Endturn(Menu):
         self.arena.state = 'default'
         self.parent.remove(self)
         self.parent.disapper()
+
+    def flag(self):
+        self.arena.flag()
+        self.parent.remove(self)
 
     def end_turn(self):
         self.arena.end_turn()

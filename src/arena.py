@@ -1189,6 +1189,14 @@ class Arena(ScrollableLayer):
         director.window.remove_handlers(self)
         self.execute_turn_event(callback_func=self.ai_turn)
 
+    def flag(self):
+        self.menulayer.disapper()
+        flags = self.map.global_vars.flags
+        for item in flags:
+            print(item, flags[item])
+        self.state = 'default'
+        director.window.push_handlers(self)
+
     def move(self, **kwargs):
         director.window.remove_handlers(self)
         if len(kwargs) is 0:

@@ -3,7 +3,7 @@
   "M":8,
   "N":7,
   "Anchor_X":0,
-  "Anchor_Y":11,
+  "Anchor_Y":12,
   "Map":[
     ["Treasury","Wall","Floor","Floor","Floor","Floor","Treasury"],
     ["Floor","Wall","Floor","Floor","Column","Floor","Floor"],
