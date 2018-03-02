@@ -1039,6 +1039,8 @@ class Arena(ScrollableLayer):
         if i < self.general_length:
             event = self.general[i]
             if check_condition(event['Condition'], self.map):
+                if 'Reconstruct' in event.keys():
+                    self.reconstruct(event['Reconstruct'])
                 self.eventdisplay(
                     event=event, map=self.map,
                     dialog_type=event['Text_type'], dialog_info=self.dialog_info,
