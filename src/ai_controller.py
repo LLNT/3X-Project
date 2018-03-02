@@ -55,7 +55,7 @@ class AI_Controller:
 
     def individual_movement(self,_valid,_invalid,_ally,_enemy,_map,_person_to_move):
         p=_person_to_move
-        strategy=_map.person_container.AItype[p][1]
+        strategy=_map.person_container.AItype[p][1]["Strategy"]
         person=_map.global_vars.personBank[p]
         pos = _map.person_container.position[p]
         if strategy=="STAY":

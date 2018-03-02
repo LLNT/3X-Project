@@ -213,7 +213,7 @@ class Arena(ScrollableLayer):
 
     def next_round(self):
         self.map.turn += 1
-        if self.map.turn > 6:
+        if self.map.turn > 20:
             director.pop()
         self.set_turn(self.map.turn)
         self.map.controller = 0
@@ -1158,10 +1158,10 @@ class Arena(ScrollableLayer):
         self.ai_phase()
 
     def move(self, **kwargs):
+        director.window.remove_handlers(self)
         if len(kwargs) is 0:
             pid = self.selected
             dst = self._mapstate[0][self.selected][self.target][1]
-            director.window.push_handlers(self)
         else:
             pid = kwargs['pid']
             dst = kwargs['dst']
@@ -1463,7 +1463,7 @@ def map_init():
     data = Data()
     global_vars = Global(data)
     terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)
-    person_container_test = Person_Container(data.map_armylist, global_vars.personBank)
+    person_container_test = Person_Container(data.map_armylist, global_vars.personBank,global_vars.ai_configs)
     map = map_controller.Main(terrain_container_test, person_container_test, global_vars,eventlist=data.eventlist)
     w = terrain_container_test.M
     h = terrain_container_test.N

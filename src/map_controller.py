@@ -795,7 +795,7 @@ class Main:
         self.person_container.position[pid]=pos_real
         self.person_container.movable[pid]=True
         self.person_container.army[pid]=army
-        self.person_container.AItype[pid]=(pri,strategy)
+        self.person_container.AItype[pid]=(pri,self.global_vars.ai_configs[strategy])
         return
 
 
