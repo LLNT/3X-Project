@@ -234,7 +234,7 @@ class Arena(ScrollableLayer):
 
     def player_turn(self):
         self.position = (0, 0)
-        self._repaint()
+        self._clear_map()
         director.window.push_handlers(self)
         print('player_turn push_handlers')
         # before executed, handlers should be removed
@@ -270,7 +270,6 @@ class Arena(ScrollableLayer):
     def _sequential_move(self, dst):
         # move person of pid through the trace dst
         # at start of this period, remove handlers to avoid events
-        director.window.remove_handlers(self)
         action = CallFunc(self.menulayer.disapper)
         for x,y in dst:
             action = action + MoveTo(coordinate(x, y, self.size), 0.5)
@@ -951,6 +950,7 @@ class Arena(ScrollableLayer):
             pass
         elif self.mouse_btn == 1:
             if self.mouse_pos in self._doors.keys():
+                director.window.remove_handlers(self)
                 item = self._key
                 pid = self.selected
                 act_obj = self.people[pid]
@@ -1040,7 +1040,6 @@ class Arena(ScrollableLayer):
         self.get_next_to_delete()
 
     def select_target(self, item, info):
-        director.window.push_handlers(self)
         area = []
         max_range = item.itemtype.max_range
         min_range = item.itemtype.min_range
@@ -1056,6 +1055,7 @@ class Arena(ScrollableLayer):
         self.item = item
         self.wpinfo = info
         self.infolayer.add(info)
+        director.window.push_handlers(self)
 
     def support(self, sup_dict):
         director.window.push_handlers(self)
@@ -1120,6 +1120,7 @@ class Arena(ScrollableLayer):
         '''
 
     def attacking(self, **kwargs):
+        director.window.remove_handlers(self)
         if 'pid' not in kwargs:
             # this is from self movements
             pid = self.selected
@@ -1137,14 +1138,13 @@ class Arena(ScrollableLayer):
         obj.do(action)
 
     def attack(self):
-        director.window.push_handlers(self)
+        print('attack push_handlers')
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
         self.add_menu(Weaponmenu(items, self.map, self))
         pass
 
     def item_show(self):
-        director.window.push_handlers(self)
         self._set_areastate([self.target], 'target')
         items = self.people[self.selected].person.item
         self.add_menu(Showweapon(items, self))
@@ -1309,13 +1309,11 @@ class Arena(ScrollableLayer):
         self.hitrate.display([str(hitr_3)])
 
     def exe_steal(self, item):
-        director.window.push_handlers(self)
         obj = self.people[self.stl_obj].person #type:person.Person
         obj.dequip(item)
         obj.item.remove(item)
         pid = self.selected
         dst = self._mapstate[0][self.selected][self.target][1]
-        director.window.remove_handlers(self)
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
         act_obj = self.people[pid]
         act_per = act_obj.person
@@ -1335,7 +1333,7 @@ class Arena(ScrollableLayer):
                               dialog_info=self.dialog_info,
                               w=self.windowsize[0],
                               h=self.windowsize[1],
-                              callback=self._clear_map) + CallFunc(self._clear_map))
+                              callback=self._clear_map))
         print(event)
 
     def treasury(self, event, item):
@@ -1352,18 +1350,13 @@ class Arena(ScrollableLayer):
                 item.use -= 1
                 if item.use < 1:
                     person.banish(item)
-            director.window.remove_handlers(self)
             self.dialog_info['V'] = obj.person
             if 'Reconstruct' in event.keys():
-                obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
-                                         dialog_type=None, dialog_info=self.dialog_info,
-                                         w=self.windowsize[0], h=self.windowsize[1],
-                                         callback=self.reconstruct, rec=event['Reconstruct']))
-            else:
-                obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
-                                      dialog_type=None, dialog_info=self.dialog_info,
-                                      w=self.windowsize[0], h=self.windowsize[1],
-                                      callback=self._clear_map))
+                action = action + CallFunc(self.reconstruct, event['Reconstruct'])
+            obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+                                  dialog_type=None, dialog_info=self.dialog_info,
+                                  w=self.windowsize[0], h=self.windowsize[1],
+                                  callback=self._clear))
             pass
         else:
             obj.do(action)

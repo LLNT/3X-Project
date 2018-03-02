@@ -292,6 +292,7 @@ class Main:
         print(command)
         if command_type == "M":
             person_to_move = command[1].pid  # type:person.Person
+            arena.focus(person_to_move)
             arena.move(pid=person_to_move, dst=command[3], rng=valid[person_to_move])
         elif command_type == "E":
             self.reset_state(self.controller)
@@ -305,6 +306,7 @@ class Main:
 
         elif command_type == "A":
             person_to_move = command[1].pid
+            arena.focus(person_to_move)
             battlelist = [command[1], command[4], command[5], self, command[3][-1]]
             arena.attacking(pid=person_to_move, dst=command[3], rng=valid[person_to_move], battlelist=battlelist)
 
