@@ -20,17 +20,38 @@
         "Finish":[
         {
             "Condition":[[["T00003"],[]]],
-            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base"],
+            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base","R/1000016/1/1,16/Lilse Army/1/AI000-Passive-Base",
+              "R/1000017/1/5,16/Lilse Army/0/AI000-Passive-Base","R/1000019/1/1,15/Lilse Army/0/AI000-Passive-Base",
+            "R/1000018/1/5,15/Lilse Army/1/AI000-Passive-Base","R/1000021/1/4,14/Lilse Army/2/AI000-Active-Base",
+            "R/1000020/1/4,13/Lilse Army/2/AI000-Active-Base","R/1000022/1/5,14/Lilse Army/0/AI000-Active-Base",
+            "R/1000023/1/5,13/Lilse Army/0/AI000-Active-Base","R/1000024/1/6,14/Lilse Army/0/AI000-Active-Base",
+            "R/1000025/1/6,13/Lilse Army/0/AI000-Active-Base","R/1000026/1/1,1/Lilse Army/1/AI000-Active-Base",
+            "R/1000027/1/1,2/Lilse Army/1/AI000-Active-Base","R/1000028/1/1,3/Lilse Army/1/AI000-Active-Base",
+            "R/1000029/1/1,4/Lilse Army/1/AI000-Active-Base","R/1000030/1/0,3/Lilse Army/2/AI000-Active-Base"],
             "Jump":"G000002"
         },
         {
             "Condition":[[["O00003"],[]]],
-            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base"],
+            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base","R/1000016/1/1,16/Lilse Army/1/AI000-Passive-Base",
+              "R/1000017/1/5,16/Lilse Army/0/AI000-Passive-Base","R/1000019/1/1,15/Lilse Army/0/AI000-Passive-Base",
+            "R/1000018/1/5,15/Lilse Army/1/AI000-Passive-Base","R/1000021/1/4,14/Lilse Army/2/AI000-Active-Base",
+            "R/1000020/1/4,13/Lilse Army/2/AI000-Active-Base","R/1000022/1/5,14/Lilse Army/0/AI000-Active-Base",
+            "R/1000023/1/5,13/Lilse Army/0/AI000-Active-Base","R/1000024/1/6,14/Lilse Army/0/AI000-Active-Base",
+            "R/1000025/1/6,13/Lilse Army/0/AI000-Active-Base","R/1000026/1/1,1/Lilse Army/1/AI000-Active-Base",
+            "R/1000027/1/1,2/Lilse Army/1/AI000-Active-Base","R/1000028/1/1,3/Lilse Army/1/AI000-Active-Base",
+            "R/1000029/1/1,4/Lilse Army/1/AI000-Active-Base","R/1000030/1/0,3/Lilse Army/2/AI000-Active-Base"],
             "Jump":"G000003"
         },
         {
             "Condition":[[[],[]]],
-            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base"],
+            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base","R/1000016/1/1,16/Lilse Army/1/AI000-Passive-Base",
+              "R/1000017/1/5,16/Lilse Army/0/AI000-Passive-Base","R/1000019/1/1,15/Lilse Army/0/AI000-Passive-Base",
+            "R/1000018/1/5,15/Lilse Army/1/AI000-Passive-Base","R/1000021/1/4,14/Lilse Army/2/AI000-Active-Base",
+            "R/1000020/1/4,13/Lilse Army/2/AI000-Active-Base","R/1000022/1/5,14/Lilse Army/0/AI000-Active-Base",
+            "R/1000023/1/5,13/Lilse Army/0/AI000-Active-Base","R/1000024/1/6,14/Lilse Army/0/AI000-Active-Base",
+            "R/1000025/1/6,13/Lilse Army/0/AI000-Active-Base","R/1000026/1/1,1/Lilse Army/1/AI000-Active-Base",
+            "R/1000027/1/1,2/Lilse Army/1/AI000-Active-Base","R/1000028/1/1,3/Lilse Army/1/AI000-Active-Base",
+            "R/1000029/1/1,4/Lilse Army/1/AI000-Active-Base","R/1000030/1/0,3/Lilse Army/2/AI000-Active-Base"],
             "Jump":"G000004"
         }
         ]

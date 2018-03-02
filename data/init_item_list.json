@@ -128,5 +128,80 @@
     "Id":26,
     "Itemtype":"Javelin",
     "Use":20
+  },
+  {
+    "Id":27,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":28,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":29,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":30,
+    "Itemtype":"Slim Lance",
+    "Use":30
+  },
+  {
+    "Id":31,
+    "Itemtype":"Poison Bow",
+    "Use":40
+  },
+  {
+    "Id":32,
+    "Itemtype":"Iron Bow",
+    "Use":45
+  },
+  {
+    "Id":33,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":34,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":35,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":36,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":37,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":38,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":39,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":40,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":41,
+    "Itemtype":"Horse Slayer",
+    "Use":20
   }
 ]
