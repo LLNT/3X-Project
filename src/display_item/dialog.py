@@ -40,7 +40,7 @@ class BaseDialog(Layer):
     def source_error(self, info):
         print('source error type ' + str(info))
 
-    def callback(self):
+    def _callback(self):
         # handle callback from branches
         if not self.i < self.length:
             print('Finished')
@@ -92,7 +92,6 @@ class Dialogscene(BaseDialog):
             director.window.remove_handlers(self)
             self.i += 1
         else:
-
             if item['Text'] is not None:
                 self.text.element.text = item['Text']
             if item['Left'] is not None:
@@ -134,6 +133,7 @@ class Dialogscene(BaseDialog):
         director.pop()
         if self.callback:
             self.callback.__call__(**self.kwargs)
+        del self
 
 class Battledialog(BaseDialog):
 
@@ -202,6 +202,7 @@ class Branch(Menu):
         for obj in self.children_names:
             self.remove(obj)
         self.kill()
+        director.window.remove_handlers(self)
         self.callback.__call__(**self.kwargs)
 
 class Mapdialog(BaseDialog):
@@ -234,7 +235,7 @@ class Mapdialog(BaseDialog):
         if self.i < self.length:
             item = self.textsource[self.textlist[self.i]]
             if 'Branch' in item.keys():
-                self.add(Branch(self.map, item['Branch'], self.callback))
+                self.add(Branch(self.map, item['Branch'], self._callback))
                 director.window.remove_handlers(self)
                 super().excute()
             else:

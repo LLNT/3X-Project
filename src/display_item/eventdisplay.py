@@ -12,8 +12,6 @@ from utility import check_condition
 
 class Eventdisplay(Layer):
 
-    is_event_handler = True
-
     def __init__(self, event, map, dialog_type, dialog_info, w=640, h=480,
                  call_before=None, callback=None, **kwargs):
         super().__init__()
@@ -29,8 +27,7 @@ class Eventdisplay(Layer):
         self.event = event
         # get first condition_satisfied
 
-    def on_enter(self):
-        super().on_enter()
+    def display(self):
         if 'Text' in self.event.keys() and len(self.event['Text']) > 0:
             text_list = self.event['Text']
             text_source = self.map.global_vars.text
@@ -65,20 +62,20 @@ class Eventdisplay(Layer):
             event = self.execute_event[i]
             _event = event.split('/')
             _type = _event[0]
-            if _type is 'CLV':
-                self.map.eventlist.pop(_event[1])
+            if _type == 'CLV':
+                self.map.eventlist['Villages'].pop(_event[1])
                 self.execute(i+1)
-            elif _type is 'I':
+            elif _type == 'I':
                 _, _itemid, _pid = _event
-                if _pid is 'E':
+                if _pid == 'E':
                     _pid = self.dialog_info['E']
-                if _pid is 'V':
+                if _pid == 'V':
                     _pid = self.dialog_info['V'].pid
                 item = self.map.global_vars.itemBank[int(_itemid)]
                 person = self.map.global_vars.personBank[_pid]
                 flag = self.map.global_vars.flags['Have Transporter']
                 self.add(Getitem(person, item, flag, self.map, callback=self.execute, i=i+1))
-            elif _type is 'SF':
+            elif _type == 'SF':
                 flag = _event[1]
                 self.map.global_vars.flags[flag] = True
                 self.execute(i+1)
@@ -88,7 +85,7 @@ class Eventdisplay(Layer):
             pass
         else:
             jump = self.execute_finish['Jump']
-            if jump is not 'F':
+            if jump != 'F':
                 general = self.map.eventlist['General']
                 event = None
                 for item in general:
@@ -103,7 +100,7 @@ class Eventdisplay(Layer):
                     )
                     self.kill()
                     self.parent.add(jump_event)
-
+                    jump_event.display()
                 else:
                     print('Event %s not found' % jump)
                     self.callback.__call__(**self.kwargs)

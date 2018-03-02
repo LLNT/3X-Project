@@ -609,8 +609,8 @@ class Arena(ScrollableLayer):
         # if confirm, push battle scene and then return to 1, else turn to 5
         if self.mouse_btn is 1:
             if self.mouse_pos in self.sup_dict.values():
+                director.window.remove_handlers(self)
                 self.textlist = self.map.build_support(self.selected, self.cells[self.mouse_pos].person_on)
-
                 for pid in self.sup_dict:
                     self.people[pid].state = self._reset_person[pid]
                 dst = self._mapstate[0][self.selected][self.target][1]
@@ -920,12 +920,11 @@ class Arena(ScrollableLayer):
         elif self.mouse_btn == 1:
             pid = self.cells[self.mouse_pos].person_on
             if pid is not None and pid in self.exc:
-
+                director.window.remove_handlers(self)
                 self.menulayer.add(Weaponexchange(self.people[self.selected].person.item, self,
                                                   (-self.windowsize[0], 0)), name='left')
                 self.menulayer.add(Weaponexchange(self.people[pid].person.item, self,
                                                   (-self.windowsize[0]//2, 0)), name='right')
-                director.window.remove_handlers(self)
                 self.excpid = pid
             pass
 
@@ -936,6 +935,7 @@ class Arena(ScrollableLayer):
         elif self.mouse_btn == 1:
             pid = self.cells[self.mouse_pos].person_on
             if pid in self.stl_dict:
+                director.window.remove_handlers(self)
                 can_steal = self.stl_dict[pid]
                 self.stl_obj = pid
                 self.add_menu(Liststeal(self, can_steal, self.exe_steal))
@@ -979,6 +979,7 @@ class Arena(ScrollableLayer):
         elif self.mouse_btn == 1:
             pid = self.cells[self.mouse_pos].person_on
             if pid is not None and pid in self.talk_dict:
+                director.window.remove_handlers(self)
                 event = self.talk_dict[pid]
                 pid = self.selected
                 obj = self.people[pid]
@@ -988,7 +989,7 @@ class Arena(ScrollableLayer):
                 obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
                                          dialog_type='S', dialog_info=self.dialog_info,
                                          w=self.windowsize[0], h=self.windowsize[1],
-                                         callback=self._callback))
+                                         callback=self._clear))
 
             pass
 
@@ -1320,21 +1321,22 @@ class Arena(ScrollableLayer):
         act_obj.do(action + CallFunc(self.on_return, person=act_per, getitem=item))
 
     def visit_village(self, event):
+        director.window.remove_handlers(self)
         pid = self.selected
         dst = self._mapstate[0][self.selected][self.target][1]
-        director.window.remove_handlers(self)
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst)
         obj = self.people[pid]
         self.textlist = event['Text']
         self.dialog_info['V'] = obj.person
-        obj.do(action + CallFunc(self.eventdisplay, event=event,
+        _event = Eventdisplay(event=event,
                               map=self.map,
                               dialog_type='S',
                               dialog_info=self.dialog_info,
                               w=self.windowsize[0],
                               h=self.windowsize[1],
-                              callback=self._clear_map))
-        print(event)
+                              callback=self._clear)
+        self.add(_event)
+        obj.do(action + CallFunc(_event.display))
 
     def treasury(self, event, item):
         pid = self.selected
@@ -1390,6 +1392,7 @@ class Arena(ScrollableLayer):
     def eventdisplay(self, callback=None, **kwargs):
         display = Eventdisplay(callback=callback, **kwargs)
         self.add(display)
+        display.display()
 
     def reconstruct(self, rec):
         self.map.map_reconstruct(rec)
