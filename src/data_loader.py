@@ -38,3 +38,4 @@ class Main:
         self.support_text_map=json.load(open(path+"support_text.json","r"))
         self.text=json.load(codecs.open(path+"text.json","r","utf-8"))
         self.eventlist=json.load(open(path+"eventlist_map0.json","r"))
+        self.ai_configs=json.load(open(path+"ai_configs.json","r"))

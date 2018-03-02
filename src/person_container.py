@@ -9,7 +9,7 @@ class Main:
         self.movable={} #type:Dict[str,bool]
         self.army={} #type:Dict[str,str]
         self.AItype={} #type:Dict[str,Tuple[int,str]]
-    def __init__(self,armylist,personbank):
+    def __init__(self,armylist,personbank,ai_config):
         self.name=armylist["Name"]
         self.people=[]
         self.controller={}
@@ -24,4 +24,4 @@ class Main:
                 self.position[p["Id"]]=(p["X"],p["Y"])
                 self.movable[p["Id"]]=True
                 self.army[p["Id"]]=item["Name"]
-                self.AItype[p["Id"]]=(p["PRI"],p["AI"])
+                self.AItype[p["Id"]]=(p["PRI"],ai_config[p["AI"]])

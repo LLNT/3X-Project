@@ -1,0 +1,30 @@
+{
+"No-AI-Base":{
+  "Strategy":"NULL",
+  "Push":[],
+  "Attack_Obj":[],
+  "Not_Attack":[],
+  "Attack_Selection":["Any"]
+},
+"AI000-Passive-Base":{
+  "Strategy":"PASSIVE",
+  "Push":[],
+  "Attack_Obj":["1000012","1000013","1000014","1000015","1"],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+},
+"AI000-Defensive-Base":{
+  "Strategy":"DEFENSIVE",
+  "Push":[],
+  "Attack_Obj":["1000012","1000013","1000014","1000015","1"],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+},
+  "AI000-Stay-Base":{
+  "Strategy":"STAY",
+  "Push":[],
+  "Attack_Obj":[],
+  "Not_Attack":[],
+  "Attack_Selection":[]
+}
+}

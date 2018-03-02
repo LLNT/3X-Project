@@ -26,31 +26,48 @@ class AI_Controller:
         person_to_move=random.choice(candidates)
         return self.individual_movement(valid,invalid,ally,enemy,map,person_to_move)
 
-    def choose_attack_obj(self,attack_candidate):
+    def choose_attack_obj(self,strategy,attack_candidate):
         obj=None
-        for candidate in attack_candidate:
-            if candidate[3][5]*(1+candidate[3][2])>=candidate[1].ability["HP"]:
-                if obj is None:
-                    obj=candidate
-                else:
-                    if candidate[3][3]>=obj[3][3]:
-                        obj=candidate
-        if obj is None:
-            for candidate in attack_candidate:
-                if candidate[3][0]==1:
-                    if obj is None:
-                        obj=candidate
-                    else:
-                        if candidate[3][5]*(1+candidate[3][2])>=obj[3][5]*(1+obj[3][2]):
+        for ao in strategy["Attack_Selection"]:
+            if ao=="Fatal":
+                for candidate in attack_candidate:
+                    if candidate[1].pid in strategy["Not_Attack"]:
+                        continue
+                    if candidate[3][5]*(1+candidate[3][2])>=candidate[1].ability["HP"]:
+                        if obj is None:
                             obj=candidate
-        if obj is None:
-            minhp=999
-            for candidate in attack_candidate:
-                if candidate[1].ability["HP"]-candidate[3][5]*(1+candidate[3][2])<minhp:
-                    minhp=candidate[1].ability["HP"]-candidate[3][5]*(1+candidate[3][2])
-                    obj=candidate
-        if obj is None:
-            obj=random.choice(attack_candidate)
+                        else:
+                            if candidate[3][3]>=obj[3][3]:
+                                obj=candidate
+                if not (obj==None):
+                    break
+            if ao=="Object":
+                rank=9999
+                for candidate in attack_candidate:
+                    if candidate[1].pid in strategy["Attack_Obj"]:
+                        if strategy["Attack_Obj"].index(candidate[1].pid)<rank:
+                            rank=strategy["Attack_Obj"].index(candidate[1].pid)
+                            obj=candidate
+                if not(obj==None):
+                    break
+            if ao=="Uncountered":
+                for candidate in attack_candidate:
+                    if candidate[3][0]==1:
+                        if obj is None:
+                            obj=candidate
+                        else:
+                            if candidate[3][5]*(1+candidate[3][2])>=obj[3][5]*(1+obj[3][2]):
+                                obj=candidate
+                if not(obj==None):
+                    break
+            if ao=="Any":
+                minhp=999
+                for candidate in attack_candidate:
+                    if candidate[1].ability["HP"]-candidate[3][5]*(1+candidate[3][2])<minhp:
+                        minhp=candidate[1].ability["HP"]-candidate[3][5]*(1+candidate[3][2])
+                        obj=candidate
+                if obj is None:
+                    obj=random.choice(attack_candidate)
         return obj
 
     def individual_movement(self,_valid,_invalid,_ally,_enemy,_map,_person_to_move):
@@ -58,9 +75,9 @@ class AI_Controller:
         strategy=_map.person_container.AItype[p][1]
         person=_map.global_vars.personBank[p]
         pos = _map.person_container.position[p]
-        if strategy=="STAY":
+        if strategy["Strategy"]=="STAY":
             return ["M",person,pos,[pos]]
-        if strategy=="DEFENSIVE":
+        if strategy["Strategy"]=="DEFENSIVE":
             attack_candidate=[]
             if len(person.item)>0:
                 for weap in person.item:
@@ -76,11 +93,14 @@ class AI_Controller:
                                 del(bat)
                                 attack_candidate.append((pos,enemy_person,weap,sim))
             if len(attack_candidate)>0:
-                attack_object=self.choose_attack_obj(attack_candidate)
-                return ["A",person,pos,[pos],attack_object[1],attack_object[2]]
+                attack_object=self.choose_attack_obj(strategy,attack_candidate)
+                if not (attack_object==None):
+                    return ["A",person,pos,[pos],attack_object[1],attack_object[2]]
+                else:
+                    return ["M",person,pos,[pos]]
             else:
                 return ["M",person,pos,[pos]]
-        if strategy=="PASSIVE":
+        if strategy["Strategy"]=="PASSIVE":
             movement_candidate=[]
             dst_to_move_list=_valid[p]
             for dst in dst_to_move_list:
@@ -98,13 +118,16 @@ class AI_Controller:
                                     del(bat)
                                     movement_candidate.append((dst,enemy_person, weap, sim))
             if len(movement_candidate)>0:
-                attack_object=self.choose_attack_obj(movement_candidate)
-                dst=attack_object[0]
-                track=dst_to_move_list[dst][1]
-                return ["A",person,dst,track,attack_object[1],attack_object[2]]
+                attack_object=self.choose_attack_obj(strategy,movement_candidate)
+                if not (attack_object==None):
+                    dst=attack_object[0]
+                    track=dst_to_move_list[dst][1]
+                    return ["A",person,dst,track,attack_object[1],attack_object[2]]
+                else:
+                    return ["M",person,pos,[pos]]
             else:
                 return ["M",person,pos,[pos]]
-        if strategy=="NULL":
+        if strategy["Strategy"]=="NULL":
             dst_to_move_list=_valid[p]
             dst_to_move=random.choice(list(dst_to_move_list.keys()))
             track=dst_to_move_list[dst_to_move][1]

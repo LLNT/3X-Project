@@ -23,6 +23,7 @@ class Main:
         self.cls_promotion={}               #type:Dict[str,Dict[str,int]]
         self.support_text_map={}            #type:Dict[str,Dict[str,Dict[str,List[str]]]]
         self.text={}                        #type:Dict[str,Dict[str,str]]
+        self.ai_configs={}
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -42,4 +43,5 @@ class Main:
         self.cls_promotion=data.cls_promote_bonus
         self.support_text_map=data.support_text_map
         self.text=data.text
+        self.ai_configs=data.ai_configs
 

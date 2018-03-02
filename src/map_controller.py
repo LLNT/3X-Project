@@ -776,14 +776,14 @@ class Main:
                     if calc_dist(self.person_container.position[obj],pos)<2:
                         if person.suprank[obj]==3:
                             continue
-                        if (person.suprank[obj]==2)and(person.supdata[obj]<200):
-                            person.supdata[obj]+=1
+                        if (person.suprank[obj]==2)and(person.supdata[obj][0]<200):
+                            person.supdata[obj][0]+=person.supdata[obj][1]
                             continue
-                        if (person.suprank[obj]==1)and(person.supdata[obj]<100):
-                            person.supdata[obj]+=1
+                        if (person.suprank[obj]==1)and(person.supdata[obj][0]<100):
+                            person.supdata[obj][0]+=person.supdata[obj][1]
                             continue
-                        if (person.suprank[obj]==0)and(person.supdata[obj]<50):
-                            person.supdata[obj]+=1
+                        if (person.suprank[obj]==0)and(person.supdata[obj][0]<50):
+                            person.supdata[obj][0]+=person.supdata[obj][1]
                             continue
         return log
 
@@ -795,7 +795,7 @@ class Main:
         self.person_container.position[pid]=pos_real
         self.person_container.movable[pid]=True
         self.person_container.army[pid]=army
-        self.person_container.AItype[pid]=(pri,strategy)
+        self.person_container.AItype[pid]=(pri,self.global_vars.ai_configs[strategy])
         return
 
 
