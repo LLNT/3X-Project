@@ -9,7 +9,7 @@
     {
       "Name": "Lilse Army",
       "Member":[{"Id":"1000001","X":8,"Y":1,"PRI":0,"AI":"AI000-Defensive-Base"},{"Id":"1000002","X":7,"Y":6,"PRI":1,"AI":"AI000-Passive-Base"},{"Id":"1000003","X":8,"Y":6,"PRI":0,"AI":"AI000-Passive-Base"},
-      {"Id":"1000004","X":10,"Y":3,"PRI":0,"AI":"AI000-Passive-Base"},{"Id":"1000005","X":6,"Y":10,"PRI":0,"AI":"AI000-Passive-Base"},{"Id":"1000006","X":9,"Y":11,"PRI":0,"AI":"AI000-Passive-Base"},
+      {"Id":"1000004","X":10,"Y":3,"PRI":0,"AI":"AI000-Passive-Base"},{"Id":"1000005","X":6,"Y":10,"PRI":0,"AI":"AI000-Passive-Base"},{"Id":"1000006","X":9,"Y":11,"PRI":0,"AI":"AI000-Active-Base"},
       {"Id":"1000007","X":4,"Y":9,"PRI":0,"AI":"AI000-Passive-Base"},{"Id":"1000008","X":9,"Y":14,"PRI":0,"AI":"AI000-Passive-Base"},{"Id":"1000009","X":8,"Y":14,"PRI":0,"AI":"AI000-Passive-Base"},
       {"Id":"1000010","X":10,"Y":14,"PRI":0,"AI":"AI000-Passive-Base"},{"Id":"1000011","X":13,"Y":11,"PRI":0,"AI":"AI000-Defensive-Base"}],
       "Controller":1

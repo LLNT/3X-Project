@@ -26,5 +26,12 @@
   "Attack_Obj":[],
   "Not_Attack":[],
   "Attack_Selection":[]
-}
+},
+  "AI000-Active-Base":{
+     "Strategy":"ACTIVE",
+  "Push":["1000012","1000013","1000014","1000015","1"],
+  "Attack_Obj":["1000012","1000013","1000014","1000015","1"],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+  }
 }
