@@ -72,10 +72,12 @@ class Animation(Layer):
                     break
             # _event = battlebefore[-1]
             # should be replaced by condition
-            self.add(Eventdisplay(
+            display = Eventdisplay(
                 event=_event, map=self.map, dialog_type='B', dialog_info=self.dialog_info,
                 w=self.width, h=self.height, callback=self.get_next_action
-            ))
+            )
+            self.add(display)
+            display.display()
 
         else:
             self.get_next_action()
@@ -96,10 +98,10 @@ class Animation(Layer):
             if content is 'Defeatenemy':
                 if event[0] is -1:
                     self.map.defeated_character(self.df.pid)
-                    self.kwargs['defeat'] = self.at.pid
+                    self.dialog_info['E'] = self.at.pid
                 elif event[0] is -2:
                     self.map.defeated_character(self.at.pid)
-                    self.kwargs['defeat'] = self.df.pid
+                    self.dialog_info['E'] = self.df.pid
 
             elif content is 'Getitem':
                 self.kwargs['item'] = self.item
@@ -162,11 +164,13 @@ class Animation(Layer):
         :return:
         '''
         if self.dialogafter is not None:
-            self.dialog_info['E'] = self.defeat
-            self.add(Eventdisplay(
+            print(self.dialog_info)
+            event = Eventdisplay(
                 event=self.dialogafter, map=self.map, dialog_type='B',w=self.width, h=self.height,
                 dialog_info=self.dialog_info, callback=self.growth
-            ))
+            )
+            self.add(event)
+            event.display()
         else:
             self.growth()
 
