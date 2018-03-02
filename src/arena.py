@@ -213,7 +213,7 @@ class Arena(ScrollableLayer):
 
     def next_round(self):
         self.map.turn += 1
-        if self.map.turn > 6:
+        if self.map.turn > 20:
             director.pop()
         self.set_turn(self.map.turn)
         self.map.controller = 0
@@ -1158,10 +1158,10 @@ class Arena(ScrollableLayer):
         self.ai_phase()
 
     def move(self, **kwargs):
+        director.window.remove_handlers(self)
         if len(kwargs) is 0:
             pid = self.selected
             dst = self._mapstate[0][self.selected][self.target][1]
-            director.window.push_handlers(self)
         else:
             pid = kwargs['pid']
             dst = kwargs['dst']
