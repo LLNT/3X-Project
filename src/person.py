@@ -45,7 +45,7 @@ class Person:
         if len(support)>0:
             for obj in support:
                 self.suprank[obj]=0
-                self.supdata[obj]=(support[obj]["Base"],support[obj]["Growth"])
+                self.supdata[obj]=[support[obj]["Base"],support[obj]["Growth"]]
                 '''if self.supdata[obj][0]>50:
                     self.suprank[obj]+=1
                 if self.supdata[obj][0]>100:
