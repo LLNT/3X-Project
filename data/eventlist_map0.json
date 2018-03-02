@@ -25,12 +25,12 @@
         },
         {
             "Condition":[[["O00003"],[]]],
-            "Execute":["R/201/1/3,17/Lilse Army/0/DEFENSIVE"],
+            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base"],
             "Jump":"G000003"
         },
         {
             "Condition":[[[],[]]],
-            "Execute":["R/201/1/3,17/Lilse Army/0/DEFENSIVE"],
+            "Execute":["R/201/1/3,17/Lilse Army/0/AI000-Defensive-Base"],
             "Jump":"G000004"
         }
         ]
