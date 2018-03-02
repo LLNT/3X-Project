@@ -37,7 +37,7 @@
     },
     {
         "Event":"U00002",
-        "Side":1,
+        "Side":0,
         "Turn":1,
         "Condition":[
             [[],["U00002"]]
