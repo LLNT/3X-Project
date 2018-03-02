@@ -4,7 +4,7 @@
 @time: 2018/2/1 19:02
 '''
 import pyglet
-
+import json
 from cocos.layer import Layer, ColorLayer, ScrollableLayer
 from cocos.director import director
 from cocos.scene import Scene
@@ -21,7 +21,7 @@ from display_item.getitem import Getitem
 from display_item.action_control import Sequencial, Graphic
 from display_item.dialog import Dialogscene
 from display_item.eventdisplay import Eventdisplay
-
+import os
 import map_controller
 from global_vars import Main as Global
 from data_loader import Main as Data
@@ -29,8 +29,6 @@ from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
 from wand import Type1, Type3, Type5
 from typing import Dict
-
-
 
 class Arena(ScrollableLayer):
     # the holder of map and roles
@@ -86,6 +84,7 @@ class Arena(ScrollableLayer):
         self.schedule(self.update)
 
         self._clear_map()
+        self.position = (0, 0)
 
         self.next_round()
 
@@ -110,7 +109,6 @@ class Arena(ScrollableLayer):
     def _clear(self, **kwargs):
         # handle the default execute after battle or a movement
         self.get_next_to_delete()
-
 
     def _clear_map(self):
         # should be executed after movement and before battle display
@@ -199,8 +197,8 @@ class Arena(ScrollableLayer):
         dis_x, dis_y = self.windowsize[0] // 2, self.windowsize[1] // 2
         if x < dis_x:
             x = dis_x
-        elif x > self.width - dis_x:
-            x = self.width - dis_x
+        elif x > self.width + self.size - dis_x:
+            x = self.width + self.size - dis_x
         if y < dis_y:
             y = dis_y
         elif y > self.height - dis_y:
@@ -232,29 +230,40 @@ class Arena(ScrollableLayer):
         else:
             self.player_turn()
 
-    def player_turn(self):
+    def player_turn(self, **kwargs):
+
         self.position = (0, 0)
         self._clear_map()
         director.window.push_handlers(self)
         print('player_turn push_handlers')
         # before executed, handlers should be removed
 
-    def player_phase(self):
+    def ai_turn(self, **kwargs):
+        if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
+            events = kwargs['Reinforce']
+            self._reinforce(events, callback=self.map.ai_turn2, arena=self)
+        else:
+            self.map.ai_turn2(self)
+
+    def player_phase(self, **kwargs):
         self.person_list = list(self.people.values())
         self.person_num = len(self.person_list)
         self.update_person()
         pass
 
     def ai_phase(self):
-        self.execute_turn_event(callback_func=self.map.ai_turn2, arena=self)
+        self.execute_turn_event(callback_func=self.ai_turn)
         pass
 
     def execute_turn_event(self, i=0, callback_func=None, **kwargs):
+
         if i < self.turn_length:
             event = self.turn_event[i]
             if (event['Side'] is None or self.map.controller == event['Side']) \
                 and (event['Turn'] is None or self.map.turn == event['Turn']) \
                     and check_condition(event['Condition'], self.map):
+                    if 'Reconstruct' in event.keys():
+                        self.reconstruct(event['Reconstruct'])
                     self.eventdisplay(
                         event=event, map=self.map,
                         dialog_type=event['Text_type'], dialog_info=self.dialog_info,
@@ -291,6 +300,27 @@ class Arena(ScrollableLayer):
         action = FadeOut(duration) + Delay(0.5) + \
                  Place(coordinate(x, y, self.size)) + FadeIn(duration)
         return action
+
+    def _reinforce(self, events, callback, **kwargs):
+        people = self.map.global_vars.personBank
+        position = self.map.person_container.position
+        controller = self.map.person_container.controller
+        actionlist = []
+        for event in events:
+            _, pid, clr, _pos, army, pri, strategy = event
+            _str = _pos.split(',')
+            pos = int(_str[0]), int(_str[1])
+            self.map.reinforce_person(pid, int(clr), pos, army, int(pri), strategy)
+            person = people[pid]
+            self.people[pid] = PerSpr(person, 1, self.size, position[pid],
+                                      controller[pid], bk_color=(220, 220, 220))
+            self.person_layer.add(self.people[pid])
+            self.focus(pid)
+            self.cells[position[pid]].person_on = pid
+            actionlist.append((self.people[pid], CallFunc(self.focus, pid) + FadeIn(1.5)))
+        self._repaint()
+        actionlist.append((self, CallFunc(callback.__call__, **kwargs)))
+        Sequencial(actionlist).excute()
 
     def _repaint(self):
         for cell in self.cells.values():
@@ -500,7 +530,7 @@ class Arena(ScrollableLayer):
             else:
                 self._clear_map()
                 pass
-        else:
+        elif self.mouse_btn == 4:
             if self.cells[self.mouse_pos].person_on is not None:
                 pid = self.cells[self.mouse_pos].person_on
                 select = self.people[pid].person
@@ -510,8 +540,7 @@ class Arena(ScrollableLayer):
                 self.state = 'person_info'
             else:
                 self.end = Endturn(self)
-                self.menulayer.add(self.end)
-                self.menulayer.appear()
+                self.add_menu(self.end)
                 self.state = 'end_turn'
             pass
 
@@ -805,10 +834,10 @@ class Arena(ScrollableLayer):
         if self.mouse_btn is 1:
             dst = self._mapstate[0][self.selected][self.target][1]
             Sequencial(
-                (self.people[self.selected], self._sequential_move(dst)),
+                [(self.people[self.selected], self._sequential_move(dst)),
                 (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
                 (self.people[self.selected], CallFunc(self._clear_map)),
-                (self.people[self.selected], CallFunc(self._push_scene, Wandtype5))
+                (self.people[self.selected], CallFunc(self._push_scene, Wandtype5))]
             ).excute()
             '''Graphic(
                 (self.people[self.selected],
@@ -895,10 +924,10 @@ class Arena(ScrollableLayer):
                 self.wandlist_type7 = [user, wand, target, self.map, self.mouse_pos]
                 dst = self._mapstate[0][self.selected][self.target][1]
                 Sequencial(
-                    (self.people[self.selected], self._sequential_move(dst)),
+                    [(self.people[self.selected], self._sequential_move(dst)),
                     (self.people[self.selected], CallFunc(self._set_moved, self.selected, dst)),
                     (self.people[self.selected], CallFunc(self._clear_map)),
-                    (self.people[self.selected], CallFunc(self._push_scene, Wandtype7))
+                    (self.people[self.selected], CallFunc(self._push_scene, Wandtype7))]
                 ).excute()
         pass
 
@@ -1006,7 +1035,7 @@ class Arena(ScrollableLayer):
             self.get_next_to_delete()
         pass
 
-    def get_next_event(self, i=0):
+    def get_next_event(self, i=0, **kwargs):
         if i < self.general_length:
             event = self.general[i]
             if check_condition(event['Condition'], self.map):
@@ -1156,7 +1185,7 @@ class Arena(ScrollableLayer):
         self.map.controller = 1
         self.map.reset_state(0)
         director.window.remove_handlers(self)
-        self.ai_phase()
+        self.execute_turn_event(callback_func=self.ai_turn)
 
     def move(self, **kwargs):
         director.window.remove_handlers(self)
@@ -1395,15 +1424,23 @@ class Arena(ScrollableLayer):
         display.display()
 
     def reconstruct(self, rec):
-        self.map.map_reconstruct(rec)
-        x, y, m, n = rec["Anchor_X"], rec["Anchor_Y"], rec["M"], rec["N"]
-        width, height = m * self.size, n * self.size
-        _x, _y = (x * 2 + m - 1) / 2, (y * 2 + n - 1) / 2
-        recon = Sprite(rec['Pic'], position=coordinate(_x, _y, self.size))
-        recon.scale_x, recon.scale_y = width / recon.width, height / recon.height
-        self.remove(self.person_layer)
-        self.add(recon)
-        self.add(self.person_layer)
+        if rec is not None:
+            if type(rec) is str:
+                path = os.getcwd()[:-3] + "data\\"
+                _rec = json.load(open(path + rec, "r"))
+            else:
+                _rec = rec
+            self.map.map_reconstruct(_rec)
+            x, y, m, n = _rec["Anchor_X"], _rec["Anchor_Y"], _rec["M"], _rec["N"]
+            width, height = m * self.size, n * self.size
+            _x, _y = (x * 2 + m - 1) / 2, (y * 2 + n - 1) / 2
+            recon = Sprite(_rec['Pic'], position=coordinate(_x, _y, self.size))
+            recon.scale_x, recon.scale_y = width / recon.width, height / recon.height
+            self.remove(self.person_layer)
+            self.add(recon)
+            self.add(self.person_layer)
+        else:
+            pass
 
     def remove(self, obj):
         super().remove(obj)

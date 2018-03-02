@@ -68,8 +68,8 @@ class Dialogscene(BaseDialog):
         self.add(text_background)
 
         # add img
-        self.left = Sprite('ring.png', position=(w // 6, h // 2))
-        self.right = Sprite('ring.png', position=(w * 5 // 6, h // 2))
+        self.left = Sprite('ring.png', position=(w // 6, h // 2), opacity=0)
+        self.right = Sprite('ring.png', position=(w * 5 // 6, h // 2), opacity=0)
         self.add(self.left)
         self.add(self.right)
 

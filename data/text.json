@@ -1865,8 +1865,8 @@
     "Type":"S",
     "Tag":"尤里",
     "Text":"这样吗……",
-    "Left":null,
-    "Right":"leaf.jpg",
+    "Left":"leaf.jpg",
+    "Right":null,
     "Direction":0,
     "Scene":null
   },

@@ -409,7 +409,8 @@ class Endturn(Menu):
         self.position = x - director.get_window_size()[0] * 3 // 8, 0
 
     def cancel(self):
-        self.arena.is_event_handler = True
+        director.window.push_handlers(self.arena)
+        self.arena.state = 'default'
         self.parent.remove(self)
         self.parent.disapper()
 

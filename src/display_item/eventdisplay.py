@@ -79,9 +79,14 @@ class Eventdisplay(Layer):
                 flag = _event[1]
                 self.map.global_vars.flags[flag] = True
                 self.execute(i+1)
-            else:
-                print('Unknown event type')
+            elif _type == 'R':
+                if 'Reinforce' not in self.kwargs:
+                    self.kwargs['Reinforce'] = []
+                self.kwargs['Reinforce'].append(_event)
                 self.execute(i+1)
+            else:
+                print('Unknown event %s' % _event)
+                self.execute(i + 1)
             pass
         else:
             jump = self.execute_finish['Jump']
@@ -102,10 +107,11 @@ class Eventdisplay(Layer):
                     self.parent.add(jump_event)
                     jump_event.display()
                 else:
-                    print('Event %s not found' % jump)
+                    print('Jump Event %s not found' % jump)
                     self.callback.__call__(**self.kwargs)
                     self.kill()
             else:
+                print(self.callback, self.kwargs)
                 self.callback.__call__(**self.kwargs)
                 self.kill()
         pass

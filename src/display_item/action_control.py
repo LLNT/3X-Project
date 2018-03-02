@@ -9,7 +9,7 @@ from cocos.cocosnode import CocosNode
 from typing import Set
 
 class Sequencial():
-    def __init__(self, *args):
+    def __init__(self, args):
         '''
 
         :param args: list of tuple(target, action)

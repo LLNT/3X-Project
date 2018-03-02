@@ -3,7 +3,7 @@
   "M":8,
   "N":7,
   "Anchor_X":0,
-  "Anchor_Y":13,
+  "Anchor_Y":11,
   "Map":[
     ["Treasury","Wall","Floor","Floor","Floor","Floor","Treasury"],
     ["Floor","Wall","Floor","Floor","Column","Floor","Floor"],
@@ -14,5 +14,5 @@
     ["Floor","Floor","Floor","Floor","Floor","Floor","Treasury"],
     ["Wall","Wall","Wall","Wall","Wall","Wall","Wall"]
   ],
-  "Pic":""
+  "Pic":"map_varblock.png"
 }
