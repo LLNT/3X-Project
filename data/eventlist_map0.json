@@ -204,7 +204,8 @@
     },
     {
       "Event":"G000007",
-      "Condition":[[["GAOV_FLAG00001"],["G000007"]]
+      "Condition":[[["GAOV_FLAG00001"],["G000007"]],
+        [["GAOV_FLAG00002"],["G000007"]]
       ],
       "Text_type":"S",
       "Text":[],
@@ -227,7 +228,21 @@
         "Condition":[[[],[]]],
         "Execute":[],
         "Jump":"W"
+      },
+        {
+      "Event":"G000009",
+      "Condition":[[["D00010000150","D00010000140","D00010000130","D00010000120"],["G000009"]]
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":null,
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":["SF/GAOV_FLAG00002"],
+        "Jump":"L"
       }
+      ]
+    }
       ]
     }
     ],
@@ -675,6 +690,90 @@
         {
           "Condition": [[[],[]]],
           "Execute":["I/26/E"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D00010000120",
+      "Person": "1000012",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00010000120"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/NPC_FALL_FLAG000"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D00010000130",
+      "Person": "1000013",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00010000130"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/NPC_FALL_FLAG000"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D00010000140",
+      "Person": "1000014",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00010000140"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/NPC_FALL_FLAG000"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D00010000150",
+      "Person": "1000015",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D00010000150"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/NPC_FALL_FLAG000"],
           "Jump": "F"
         }
       ]

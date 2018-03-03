@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "Event":"A00001",
+    "Tag":"Residenz Alburg - Night",
+    "Condition":[[[],[]]],
+    "Text_type":"S",
+    "Text":[],
+    "Execute":[],
+    "Keep":1
+  },
+  {
+    "Event":"A00002",
+    "Tag":null,
+    "Condition":[[[],["NPC_FALL_FLAG000"]]],
+    "Text_type":"S",
+    "Text":[],
+    "Execute":[],
+    "Keep":1
+  },
+  {
+    "Event":"A00003",
+    "Tag":null,
+    "Condition":[[["NPC_FALL_FLAG000"],[]]],
+    "Text_type":"S",
+    "Text":[],
+    "Execute":[],
+    "Keep":1
+  }
+]
