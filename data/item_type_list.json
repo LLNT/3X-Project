@@ -1387,7 +1387,7 @@
     "Special_effect":["Pegasus","Dragoon"],
     "Rank":30,
     "Skills":[],
-    "Status":["Poison"],
+    "Status":[{"Status":"Poison","Chance":100,"Rest":5}],
     "Value":540,
     "Character_only":[],
     "Use":"UNAVAILABLE",
