@@ -1,0 +1,40 @@
+Mountain,Mountain,River,River,Plain,Plain,Plain,Plain,Plain,Fort,Plain,Plain,Wood,Forest,Forest,Wood,Wood,Wood,Plain,Plain,Avenue,Fort,
+High Mountain,Mountain,Mountain,River,Village,Plain,Plain,Plain,Plain,Avenue,Avenue,Plain,Wood,Forest,Wood,Plain,Plain,Wood,Plain,Avenue,Avenue,,
+High Mountain,Mountain,River,River,River,Wood,Wood,Plain,Plain,Plain,Avenue,Plain,Wood,Wood,Wood,Plain,Plain,Plain,Avenue,Avenue,,,
+Mountain,Mountain,River,River,River,Wood,Wood,Plain,Plain,Plain,Avenue,Avenue,Plain,Wood,Plain,Plain,Plain,Avenue,Avenue,,,,
+Mountain,Mountain,River,River,River,Plain,Plain,Fort,Plain,Plain,Plain,Avenue,Plain,Plain,Plain,Plain,Avenue,Avenue,Wood,,,,
+High Mountain,Mountain,Mountain,River,River,Plain,Plain,Plain,Plain,Plain,Plain,Avenue,Plain,Plain,Avenue,Avenue,Avenue,Plain,Plain,,,,
+High Mountain,Mountain,Mountain,River,River,Plain,Plain,Plain,Plain,Wood,Plain,Avenue,Plain,Plain,Avenue,Plain,Grass,Plain,Plain,,,,
+Mountain,Mountain,River,River,River,Plain,Fort,Plain,Wood,Wood,Wood,Avenue,Avenue,Plain,Avenue,Plain,Grass,Grass,Plain,,,,
+Mountain,Plain,River,River,Plain,Plain,Plain,Plain,Plain,Plain,Wood,Plain,Avenue,Avenue,Avenue,Wood,Grass,Grass,Plain,,,,
+Plain,Plain,River,River,Wood,Plain,Plain,Plain,Plain,Fort,Plain,Plain,Wood,Avenue,Avenue,Wood,Grass,Plain,Plain,,,,
+Plain,River,River,Fort,Mountain,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Wood,Wood,Avenue,Wood,Wood,Plain,Plain,,,,
+Plain,River,River,Fort,Wood,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Avenue,Wood,Wood,Plain,Plain,Plain,Plain,Plain,Wood
+Plain,Plain,River,Fort,Wood,Wood,Plain,Wood,Plain,Plain,Plain,Plain,Plain,Plain,Avenue,Wood,Wood,Plain,Plain,Plain,Plain,Plain,Wood
+Plain,Plain,River,River,Wood,Wood,Wood,Fort,Plain,Plain,Plain,Fort,Plain,Avenue,Avenue,Mountain,Wood,Fort,Plain,Wood,Wood,Forest,Wood
+Wood,Plain,River,River,Plain,Plain,Wood,Plain,Plain,Plain,Plain,Wood,Plain,Avenue,Mountain,Wood,Plain,Plain,Plain,Plain,Plain,Wood,Forest
+Wood,Plain,River,River,River,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Avenue,Mountain,Mountain,Wood,Plain,Plain,Plain,Wood,Forest,Forest
+Wood,Plain,River,River,Plain,Plain,Fence,Fence,Fence,Fence,Fence,Fence,Avenue,Avenue,Mountain,Mountain,Wood,Grass,Plain,Wood,Wood,Forest,Forest
+Wood,Wood,River,River,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Avenue,Grass,Wood,Wood,Grass,Grass,Grass,Plain,Wood,Forest,Mountain
+Wood,Wood,River,River,Village,Plain,Plain,Plain,Plain,Fence,Fence,Fence,Fence,Fence,Fence,Grass,Grass,Grass,Grass,Grass,Grass,Mountain,Mountain
+Plain,River,River,Plain,Plain,Plain,Plain,Fort,Plain,Plain,Plain,Plain,Avenue,Plain,Grass,Grass,Fort,Grass,Grass,Grass,Wood,Wood,Mountain
+River,River,River,River,River,Plain,Plain,Plain,Plain,Plain,Plain,River,Bridge,River,River,Grass,Grass,Grass,Grass,Grass,Wood,Mountain,Mountain
+River,River,Mountain,Plain,River,Plain,Plain,Plain,Plain,Plain,River,Plain,Avenue,Plain,River,River,Grass,Grass,Grass,Wood,Wood,Wood,Mountain
+River,River,Mountain,Plain,Plain,River,Plain,River,River,River,Plain,Plain,Avenue,Plain,Plain,Grass,River,Grass,Grass,Wood,Wood,River,Mountain
+River,River,River,Mountain,Plain,Plain,River,Plain,Plain,River,Plain,Closed,Avenue,Closed,Plain,Plain,Grass,River,River,Grass,Wood,River,Mountain
+Plain,River,River,Plain,River,River,River,Plain,Plain,River,Plain,Closed,Gate,Closed,Plain,Grass,Grass,Grass,River,River,River,River,Mountain
+Plain,River,River,River,Wood,Plain,Plain,Plain,Fort,Bridge,Plain,Plain,Avenue,Plain,Plain,Fort,Plain,Grass,Grass,River,Wood,Wood,Wood
+Plain,River,River,Plain,Wood,Plain,Plain,Plain,Plain,River,River,Plain,Avenue,Plain,Plain,Plain,Grass,Grass,River,Wood,Wood,Mountain,Mountain
+Wood,River,River,Plain,Plain,Plain,Plain,Plain,Plain,Plain,River,Plain,Avenue,Plain,Plain,Plain,Grass,River,Grass,Grass,Wood,Mountain,Wood
+Wood,Plain,River,Plain,Plain,Plain,Wood,Plain,Plain,Plain,Plain,River,River,River,River,River,River,River,Grass,Grass,Wood,Wood,Wood
+Forest,Wood,River,Plain,Plain,Plain,Wood,Wood,Plain,Plain,Plain,Plain,Avenue,Plain,Grass,Grass,River,Grass,Grass,Grass,Wood,Wood,Wood
+Forest,Wood,River,River,Wood,Wood,Plain,Plain,Plain,Plain,Plain,Plain,Avenue,Plain,Grass,Fort,Bridge,Grass,Grass,Wood,Grass,Grass,Mountain
+Wood,Plain,River,River,Wood,Plain,Plain,Plain,Plain,Plain,Plain,Plain,Avenue,Plain,Plain,Plain,River,Plain,Village,Grass,Grass,Wood,Mountain
+Plain,River,River,Plain,Plain,Plain,Plain,Wood,Wood,Plain,Wood,Plain,Avenue,Plain,Plain,River,Plain,Plain,Avenue,Avenue,Avenue,Avenue,Wood
+River,River,River,Wood,Wood,Plain,Plain,Wood,Plain,Plain,Wood,Plain,Avenue,Avenue,Wood,River,Plain,Plain,Avenue,Grass,Grass,Avenue,Avenue
+River,River,River,River,Wood,Plain,Plain,Plain,Plain,Plain,Plain,Wood,Plain,Avenue,Plain,River,Plain,Avenue,Avenue,Wood,Grass,Grass,Wood
+River,River,River,River,River,Wood,Wood,Plain,River,Plain,Plain,Plain,Plain,Avenue,Avenue,River,Avenue,Avenue,Plain,Wood,Wood,Wood,Forest
+River,River,River,River,River,River,River,River,River,River,Plain,Wood,Wood,Wood,River,River,River,River,Plain,Plain,Plain,Wood,Forest
+Plain,River,River,Plain,River,RIver,River,RIver,River,River,River,River,Wood,River,River,River,River,River,River,River,Plain,Plain,Wood
+Plain,River,River,Plain,Plain,Plain,Plain,Plain,River,River,River,River,River,River,Plain,River,River,River,River,River,River,River,Plain
+Plain,River,River,Plain,Mountain,Plain,Plain,Plain,Plain,River,River,Plain,River,Plain,Plain,Plain,Plain,Plain,River,River,River,River,River
