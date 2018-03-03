@@ -798,6 +798,10 @@ class Main:
         self.person_container.AItype[pid]=(pri,self.global_vars.data.ai_configs[strategy])
         return
 
+    def map_save(self):
+        return self.global_vars.map_save()
+
+
 
 
 

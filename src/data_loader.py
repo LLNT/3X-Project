@@ -23,7 +23,7 @@ class Main:
         self.cls_skills=json.load(open(path+"cls_skills.json","r"))
         self.cls_ability_limit=json.load(open(path+"cls_ability_limit.json","r"))
         self.persondata=json.load(open(path+"person.json","r"))
-        self.pidlist=self.persondata.keys()
+        self.pidlist=list(self.persondata.keys())
         self.terrain_map=json.load(open(path+"terrain_map_0.json","r"))
         self.map_armylist=json.load(open(path+"map0_armylist.json","r"))
         self.item_type_list=json.load(open(path+"item_type_list.json","r"))
@@ -49,3 +49,13 @@ class Main:
         else:
             path = path + "data/"
         return json.load(open(path+fname,"r"))
+
+    def get_root(self,directory):
+        ostype = platform.platform()
+        path = os.getcwd()
+        path = path[:-3]
+        if ostype[:7] == "Windows":
+            path = path + directory+"\\"
+        else:
+            path = path + directory+"/"
+        return path

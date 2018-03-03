@@ -9,6 +9,8 @@ import data_loader
 import terrain_container
 import person_container
 import map_controller
+import pickle
+
 class Main:
     def __init__(self):
         self.terrainBank={}                 #type:Dict[str,terrain.Terrain]
@@ -58,6 +60,12 @@ class Main:
         self.player_character_status=self.data.player_character_init
         self.transporter={}
         return map0
+
+    def map_save(self):
+        path=self.data.get_root("save")
+        obj=pickle.dump(self,open(path+"map_save.sav","wb"))
+        return obj
+
 
 
 

@@ -1185,6 +1185,7 @@ class Arena(ScrollableLayer):
     def end_turn(self):
         self._clear_map()
         self.map.controller = 1
+        self.map.map_save()
         self.map.reset_state(0)
         director.window.remove_handlers(self)
         self.execute_turn_event(callback_func=self.ai_turn)
