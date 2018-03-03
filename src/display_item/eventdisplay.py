@@ -30,7 +30,7 @@ class Eventdisplay(Layer):
     def display(self):
         if 'Text' in self.event.keys() and len(self.event['Text']) > 0:
             text_list = self.event['Text']
-            text_source = self.map.global_vars.text
+            text_source = self.map.global_vars.data.text
             if self.dialog_type is 'B':
                 self.add(Battledialog(text_list, text_source, self.w, self.h,
                                       dialog_info=self.dialog_info, callback=self.get_finish))

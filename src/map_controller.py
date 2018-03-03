@@ -55,7 +55,7 @@ class Main:
                         movmap=numpy.zeros((self.terrain_container.M,self.terrain_container.N))
                         for i in range(self.terrain_container.M):
                             for j in range(self.terrain_container.N):
-                                movmap[i,j]=self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                                movmap[i,j]=self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                         dstlist=move_range_person.calc_move(unstable,uncross,movmap,pos,mov)
                         valid[p.pid]=dstlist
                     else:
@@ -76,7 +76,7 @@ class Main:
                     movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
-                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                     dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy[p.pid]=dstlist
                 else:
@@ -95,7 +95,7 @@ class Main:
                     movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
-                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                     dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     ally[p.pid]=dstlist
             return valid, invalid, ally, enemy
@@ -118,7 +118,7 @@ class Main:
                         movmap=numpy.zeros((self.terrain_container.M,self.terrain_container.N))
                         for i in range(self.terrain_container.M):
                             for j in range(self.terrain_container.N):
-                                movmap[i,j]=self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                                movmap[i,j]=self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                         dstlist=move_range_person.calc_move(unstable,uncross,movmap,pos,mov)
                         valid[p.pid]=dstlist
                     else:
@@ -139,7 +139,7 @@ class Main:
                     movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
-                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                     dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy[p.pid]=dstlist
                 else:
@@ -158,7 +158,7 @@ class Main:
                     movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
-                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                     dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy[p.pid]=dstlist
             return valid, self.global_vars.AIcontroller.enemy_single_movement(valid,invalid,ally,enemy,self)
@@ -182,7 +182,7 @@ class Main:
                         for i in range(self.terrain_container.M):
                             for j in range(self.terrain_container.N):
                                 movmap[i, j] = self.terrain_container.map[i][j].decay[
-                                    self.global_vars.cls_clsgroup[p.cls]]
+                                    self.global_vars.data.cls_clsgroup[p.cls]]
                         dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                         valid[p.pid] = dstlist
                     else:
@@ -204,7 +204,7 @@ class Main:
                     movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
-                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                     dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     enemy[p.pid] = dstlist
                 else:
@@ -223,7 +223,7 @@ class Main:
                     movmap = numpy.zeros((self.terrain_container.M, self.terrain_container.N))
                     for i in range(self.terrain_container.M):
                         for j in range(self.terrain_container.N):
-                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.cls_clsgroup[p.cls]]
+                            movmap[i, j] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
                     dstlist = move_range_person.calc_move(unstable, uncross, movmap, pos, mov)
                     ally[p.pid] = dstlist
             return valid, self.global_vars.AIcontroller.enemy_single_movement(valid,invalid,ally,enemy,self)
@@ -311,7 +311,7 @@ class Main:
             arena.attacking(pid=person_to_move, dst=command[3], rng=valid[person_to_move], battlelist=battlelist)
 
     def attackable(self, weapon):
-        return weapon in self.global_vars.attackable_weapon_types
+        return weapon in self.global_vars.data.attackable_weapon_types
 
     def can_support(self,pid,pos):
         sup_obj={}   #type:Dict[str,Tuple[int,int]]

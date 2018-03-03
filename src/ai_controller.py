@@ -104,7 +104,7 @@ class AI_Controller:
             if tpos[0] > 0:
                 npos = (tpos[0] - 1, tpos[1])
                 if not (npos in dst):
-                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.cls_clsgroup[p.cls]]
+                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.data.cls_clsgroup[p.cls]]
                     newtrack = track.copy()
                     newtrack.append(npos)
                     if True:
@@ -117,7 +117,7 @@ class AI_Controller:
             if tpos[0] < M - 1:
                 npos = (tpos[0] + 1, tpos[1])
                 if not (npos in dst):
-                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.cls_clsgroup[p.cls]]
+                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.data.cls_clsgroup[p.cls]]
                     newtrack = track.copy()
                     newtrack.append(npos)
                     if True:
@@ -130,7 +130,7 @@ class AI_Controller:
             if tpos[1] > 0:
                 npos = (tpos[0], tpos[1] - 1)
                 if not (npos in dst):
-                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.cls_clsgroup[p.cls]]
+                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.data.cls_clsgroup[p.cls]]
                     newtrack = track.copy()
                     newtrack.append(npos)
                     if True:
@@ -143,7 +143,7 @@ class AI_Controller:
             if tpos[1] < N - 1:
                 npos = (tpos[0], tpos[1] + 1)
                 if not (npos in dst):
-                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.cls_clsgroup[p.cls]]
+                    tr = r - _map.terrain_container.map[npos[0]][npos[1]].decay[_map.global_vars.data.cls_clsgroup[p.cls]]
                     newtrack = track.copy()
                     newtrack.append(npos)
                     if True:

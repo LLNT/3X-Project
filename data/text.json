@@ -2337,6 +2337,66 @@
     "Location":1,
     "Icon":"leaf.jpg",
     "Text":"我们出发！"
+  },
+  "GT000-091":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"pirn.jpg",
+    "Text":"王子！不幸的消息，"
+  },
+  "GT000-092":{
+    "Type":"M",
+    "Location":0,
+    "Icon":"prin.jpg",
+    "Text":"被关押的商人已经全部遇害了。"
+  },
+  "GT000-093":{
+    "Type":"M",
+    "Location":1,
+    "Icon":"leaf.jpg",
+    "Text":"我的第一次任务"
+  },
+  "GT000-094":{
+    "Type":"M",
+    "Location":1,
+    "Icon":"leaf.jpg",
+    "Text":"就这么失败了吗……"
+  },
+  "AT000-11":{
+    "Type":"S",
+    "Tag":"尤里",
+    "Text":"大家都怎么样了？",
+    "Left":"leaf.jpg",
+    "Right":null,
+    "Direction":0,
+    "Scene":"background_test.jpg"
+  },
+  "AT000-21":{
+    "Type":"S",
+    "Tag":"塔尼娅",
+    "Text":"王子，商人们都没有什么损伤。",
+    "Left":null,
+    "Right":"tanya.jpg",
+    "Direction":1,
+    "Scene":null
+  },
+  "AT000-31":{
+    "Type":"S",
+    "Tag":"塔尼娅",
+    "Text":"虽然有一些伤亡，",
+    "Left":null,
+    "Right":"tanya.jpg",
+    "Direction":1,
+    "Scene":null
+  },
+  "AT000-41":{
+    "Type":"S",
+    "Tag":"尤里",
+    "Text":"好，大家先休整一下，",
+    "Left":null,
+    "Right":null,
+    "Direction":0,
+    "Scene":null
   }
 
 }

@@ -183,13 +183,13 @@ class Battle:
                             self.d_def_event=event
         self.adjust_lv_a = 0
         self.adjust_lv_d = 0
-        if self.a.cls in map.global_vars.cls_rank["High"]:
+        if self.a.cls in map.global_vars.data.cls_rank["High"]:
             self.adjust_lv_a=20
-        if self.a.cls in map.global_vars.cls_rank["SHigh"]:
+        if self.a.cls in map.global_vars.data.cls_rank["SHigh"]:
             self.adjust_lv_a=20
-        if self.d.cls in map.global_vars.cls_rank["High"]:
+        if self.d.cls in map.global_vars.data.cls_rank["High"]:
             self.adjust_lv_d=20
-        if self.d.cls in map.global_vars.cls_rank["SHigh"]:
+        if self.d.cls in map.global_vars.data.cls_rank["SHigh"]:
             self.adjust_lv_d=20
         self.weapon_a=_wpa               #type:item.Item
         self.weapon_d=_wpd               #type:item.Item
@@ -280,32 +280,32 @@ class Battle:
                 self.bspd_d+=(self.d.ability["BLD"]-self.weapon_d.itemtype.weight)
         self.su_a=[]
         self.su_d=[]
-        self.su_a=map.terrain_container.map[posa[0]][posa[1]].enhance[map.global_vars.cls_clsgroup[self.a.cls]].copy()
-        self.su_d=map.terrain_container.map[posd[0]][posd[1]].enhance[map.global_vars.cls_clsgroup[self.d.cls]].copy()
+        self.su_a=map.terrain_container.map[posa[0]][posa[1]].enhance[map.global_vars.data.cls_clsgroup[self.a.cls]].copy()
+        self.su_d=map.terrain_container.map[posd[0]][posd[1]].enhance[map.global_vars.data.cls_clsgroup[self.d.cls]].copy()
         for unit in map.person_container.people:
             if unit.pid in self.a.suprank:
                 if (abs(posa[0]-map.person_container.position[unit.pid][0])+abs(posa[1]-map.person_container.position[unit.pid][1])<4):
                     rank=str(self.a.suprank[unit.pid])
                     for key in self.su_a:
-                        self.su_a[key]+=(map.global_vars.support_cube[self.a.attribute][rank][key]
-                                         +map.global_vars.support_cube[self.a.color][rank][key]
-                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].attribute][rank][key]
-                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].color][rank][key])
+                        self.su_a[key]+=(map.global_vars.data.support_cube[self.a.attribute][rank][key]
+                                         +map.global_vars.data.support_cube[self.a.color][rank][key]
+                                         +map.global_vars.data.support_cube[map.global_vars.personBank[unit.pid].attribute][rank][key]
+                                         +map.global_vars.data.support_cube[map.global_vars.personBank[unit.pid].color][rank][key])
         for unit in map.person_container.people:
             if unit.pid in self.d.suprank:
                 if (abs(posd[0]-map.person_container.position[unit.pid][0])+abs(posd[1]-map.person_container.position[unit.pid][1])<4):
                     rank=str(self.d.suprank[unit.pid])
                     for key in self.su_d:
-                        self.su_d[key]+=(map.global_vars.support_cube[self.d.attribute][rank][key]
-                                         +map.global_vars.support_cube[self.d.color][rank][key]
-                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].attribute][rank][key]
-                                         +map.global_vars.support_cube[map.global_vars.personBank[unit.pid].color][rank][key])
+                        self.su_d[key]+=(map.global_vars.data.support_cube[self.d.attribute][rank][key]
+                                         +map.global_vars.data.support_cube[self.d.color][rank][key]
+                                         +map.global_vars.data.support_cube[map.global_vars.personBank[unit.pid].attribute][rank][key]
+                                         +map.global_vars.data.support_cube[map.global_vars.personBank[unit.pid].color][rank][key])
         self.sup_eff_a=0
         self.sup_eff_d=0
-        if (map.global_vars.cls_clsgroup[self.d.cls] in self.weapon_a.itemtype.special_effect):
+        if (map.global_vars.data.cls_clsgroup[self.d.cls] in self.weapon_a.itemtype.special_effect):
             self.sup_eff_a=1
         if (self.battleround==0):
-            if (map.global_vars.cls_clsgroup[self.a.cls] in self.weapon_d.itemtype.special_effect):
+            if (map.global_vars.data.cls_clsgroup[self.a.cls] in self.weapon_d.itemtype.special_effect):
                 self.sup_eff_d=1
         self.redseala=0
         self.redseald=0

@@ -203,5 +203,10 @@
     "Id":41,
     "Itemtype":"Horse Slayer",
     "Use":20
+  },
+  {
+    "Id":42,
+    "Itemtype":"Power Stuff",
+    "Use":1
   }
 ]

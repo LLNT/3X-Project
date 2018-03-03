@@ -179,8 +179,8 @@ class Person:
             if self.weapon_rank[wptype]>400:
                 self.weapon_rank[wptype]=400
         self.ability_limit=c_tar.ability_limit.copy()
-        promote_base=g_vars.cls_promotion[self.cls]
-        promote_tar=g_vars.cls_promotion[cl]
+        promote_base=g_vars.data.cls_promote_bonus[self.cls]
+        promote_tar=g_vars.data.cls_promote_bonus[cl]
         abl_ori=self.ability.copy()
         promote_bonus={}
         for abl in promote_tar:
