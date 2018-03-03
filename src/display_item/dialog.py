@@ -217,11 +217,11 @@ class Mapdialog(BaseDialog):
 
         self.up = {
             'Icon': Sprite('ring.png', position=(w // 8, h * 3 // 4), opacity=0),
-            'Text': Text(text=' ', position=(w // 2, h * 3 // 4),font_size=30),
+            'Text': Text(text=' ', position=(w // 2, h * 3 // 4),font_size=30, color=(0,0,0,255)),
         }
         self.down = {
             'Icon': Sprite('ring.png', position=(w * 7 // 8, h  // 4), opacity=0),
-            'Text': Text(text=' ', position=(w // 2, h  // 4), font_size=30),
+            'Text': Text(text=' ', position=(w // 2, h  // 4), font_size=30, color=(0,0,0,255)),
         }
 
         for item in self.up.values():

@@ -98,6 +98,8 @@ class Eventdisplay(Layer):
                         event = item
                         break
                 if event is not None:
+                    if 'Reconstruct' in event.keys():
+                        self.parent.reconstruct(event['Reconstruct'])
                     jump_event = Eventdisplay(
                         event=event, map=self.map, w=self.w, h=self.h,
                         dialog_type=self.dialog_type, dialog_info=self.dialog_info,
@@ -111,7 +113,6 @@ class Eventdisplay(Layer):
                     self.callback.__call__(**self.kwargs)
                     self.kill()
             else:
-                print(self.callback, self.kwargs)
                 self.callback.__call__(**self.kwargs)
                 self.kill()
         pass
