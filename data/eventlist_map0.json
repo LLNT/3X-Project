@@ -85,7 +85,7 @@
     {
       "Event":"G000001",
       "Condition":[
-        [["O00001"],["G000001"]],
+        [["O00003"],["G000001"]],
         [["O00005"],["G000001"]]
       ],
       "Text_type":"S",
@@ -199,6 +199,34 @@
         "Condition":[[[],[]]],
         "Execute":[],
         "Jump":"F"
+      }
+      ]
+    },
+    {
+      "Event":"G000007",
+      "Condition":[[["GAOV_FLAG00001"],["G000007"]]
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":null,
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"L"
+      }
+      ]
+    },
+    {
+      "Event":"G000008",
+      "Condition":[[["VIC_FLAG00001"],["G000008"]]],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":null,
+      "Finish":[
+        {
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"W"
       }
       ]
     }
@@ -331,6 +359,22 @@
       }
   },
   "Seize":{
+    "3,17":[
+      {
+        "Event":"S000010",
+        "Character":"1",
+        "Condition": [[["U00001"],["S000010"]]
+        ],
+        "Reconstruct":null,
+        "Text":[],
+        "Finish":[
+        {
+          "Condition":[[[],[]]],
+          "Execute":["SF/VIC_FLAG00001"],
+          "Jump":"F"
+        }]
+      }
+    ]
   },
   "Doors":{
     "8,2":[

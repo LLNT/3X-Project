@@ -1,5 +1,5 @@
 import json
-mapname="map_0"
+mapname="map_1"
 lines=open("%s.csv"%(mapname),"r").readlines()
 n=len(lines)
 m=len(lines[0].split(","))
