@@ -49,10 +49,17 @@ class Main:
         self.transporter={}
         return map0
 
-    def map_save(self):
+    def map_save(self,fname):
         path=self.data.get_root("save")
-        obj=pickle.dump(self,open(path+"map_save.sav","wb"))
+        obj=pickle.dump(self,open(path+fname,"wb"))
         return obj
+
+    def map_load(self,fname):
+        path=self.data.get_root("save")
+        obj=pickle.load(open(path+fname,"rb"))
+        map_active=obj.maps[len(obj.maps)-1]
+        return map_active
+
 
 
 

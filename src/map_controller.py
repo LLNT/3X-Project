@@ -799,7 +799,10 @@ class Main:
         return
 
     def map_save(self):
-        return self.global_vars.map_save()
+        return self.global_vars.map_save("map_save.sav")
+
+    def map_load(self):
+        return self.global_vars.map_load("map_load.sav")
 
 
 
