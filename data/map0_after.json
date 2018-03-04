@@ -34,5 +34,14 @@
     "Text":["AT000-41"],
     "Execute":[],
     "Keep":0
+  },
+  {
+    "Event":"A00005",
+    "Tag":null,
+    "Condition":[[[],[]]],
+    "Text_type":"S",
+    "Text":[],
+    "Execute":["MAP/map1_meta.json"],
+    "Keep":0
   }
 ]

@@ -1,0 +1,13 @@
+{
+  "Id":"010",
+  "Background_Scene":"background_test.jpg",
+  "Armylist":"map1_armylist.json",
+  "Terrain_map":"terrain_map_1.json",
+  "Eventlist":"eventlist_map1.json",
+  "Map_pic":"map_1.png",
+  "Title":"Chapter 1. Overture of the War",
+  "Prelude":"map1_pre.json",
+  "Preparation":null,
+  "Afterscene":"map1_after.json",
+  "Basement":null
+}
