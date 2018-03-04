@@ -62,7 +62,8 @@ class Dialogscene(BaseDialog):
         self.info = info # dict of persons that stands for V or E
 
         # add background
-        background = Sprite('background_test.jpg', position=(w // 2, h // 2))
+
+        background = Sprite(map.scene, position=(w // 2, h // 2))
         text_background = ColorLayer(0,0,200,255,w,h//3)
         self.add(background)
         self.add(text_background)

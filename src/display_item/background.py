@@ -8,9 +8,9 @@ from cocos.sprite import Sprite
 from cocos.scene import Scene
 
 class Background(Layer):
-    def __init__(self, window_size):
+    def __init__(self, window_size, pic):
         super().__init__()
-        map = Sprite('map_0.png')
+        map = Sprite(pic)
         w, h = window_size
         # map.scale_x, map.scale_y = w/map.width, h/map.height
         map.position = map.width//2, map.height//2

@@ -44,11 +44,8 @@ class Arena(ScrollableLayer):
         self.width, self.height = self.w*size, self.h*size
         self.windowsize = director.get_window_size()
         self.anchor = self.width // 2, self.height // 2
-        board_line = ColorLayer(255, 0, 0, 255, self.width + 10 + size,
-                            self.height + 10)
-        board_line.position =(-5, -5)
-        self.add(board_line)
-        self.add(Background(self.windowsize))
+
+        self.add(Background(self.windowsize, self.map.pic))
 
         # initialize arena attributes
         self._state_control = self._get_state_control() #type: Dict[str, callable]
@@ -146,7 +143,6 @@ class Arena(ScrollableLayer):
             if not person.moved:
                 person.state = 'unmoved'
             else:
-                print(person.pid)
                 person.state = 'moved'
             person.update_hp()
 
@@ -1248,15 +1244,15 @@ class Arena(ScrollableLayer):
         map = self.map.map_load()[0] #type:map_controller.Main
         menulayer = Menulayer()
         infolayer = Layer()
-        arena = Arena(map, menulayer, infolayer, size)
-        class transition(FadeTransition):
+        arena = Arena(map, menulayer, infolayer, self.size)
+        class Transition(FadeTransition):
             def finish(self):
                 super().finish()
                 for rec in map.reconstruct_log:
                     arena.reconstruct(rec, ty='load')
                 arena.map.take_turn(arena)
 
-        director.replace(transition(Scene(arena, menulayer, infolayer), duration=1))
+        director.replace(Transition(Scene(arena, menulayer, infolayer), duration=1))
         self.kill()
         del self
 
@@ -1485,6 +1481,26 @@ class Arena(ScrollableLayer):
         else:
             pass
 
+    def defeated(self):
+        center = self.windowsize[0] // 2, self.windowsize[1] // 2
+        class Defeatlayer(Layer):
+            def __init__(self):
+                super().__init__()
+                self.position = center
+                self.add(Text(text='Defeated', font_size=40))
+            def on_mouse_press(self, x, y, buttons, modifiers):
+                director.pop()
+
+        layer = Defeatlayer()
+
+        class Transition(FadeTransition):
+            def finish(self):
+                super().finish()
+                director.window.push_handlers(layer)
+
+        director.window.remove_handlers(self)
+        director.replace(Transition(Scene(layer)))
+
     def remove(self, obj):
         super().remove(obj)
         del obj
@@ -1558,20 +1574,35 @@ def coordinate(i, j, size):
     y = j * size + size // 2
     return x, y
 
-
-
-if __name__ == '__main__':
-    pyglet.resource.path = ['../img']
-    pyglet.resource.reindex()
-    map = map_init()
-    size = 80
-    director.init(caption='3X-Project', width=1280, height=720)
-
+def new_game(map, size=80):
     menulayer = Menulayer()
     infolayer = Layer()
     arena = Arena(map, menulayer, infolayer, size)
-    arena.next_round()
-    director.run(Scene(arena, menulayer, infolayer))
+
+    class Transition(FadeTransition):
+        def finish(self):
+            super().finish()
+            arena.next_round()
+
+    director.push(Transition(Scene(arena, menulayer, infolayer)))
+
+def load_game(map, size=80):
+    menulayer = Menulayer()
+    infolayer = Layer()
+    arena = Arena(map, menulayer, infolayer, size)
+
+    class Transition(FadeTransition):
+        def finish(self):
+            super().finish()
+            for rec in map.reconstruct_log:
+                arena.reconstruct(rec, ty='load')
+            arena.map.take_turn(arena)
+
+    director.push(Transition(Scene(arena, menulayer, infolayer), duration=1))
+
+
+if __name__ == '__main__':
+    pass
 
 
 

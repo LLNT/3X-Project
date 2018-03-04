@@ -90,7 +90,11 @@ class Eventdisplay(Layer):
             pass
         else:
             jump = self.execute_finish['Jump']
-            if jump != 'F':
+            if jump is 'F':
+                self.callback.__call__(**self.kwargs)
+            elif jump is 'L':
+                self.parent.defeated()
+            else:
                 general = self.map.eventlist['General']
                 event = None
                 for item in general:
@@ -105,16 +109,12 @@ class Eventdisplay(Layer):
                         dialog_type=self.dialog_type, dialog_info=self.dialog_info,
                         callback=self.callback, **self.kwargs
                     )
-                    self.kill()
                     self.parent.add(jump_event)
                     jump_event.display()
                 else:
                     print('Jump Event %s not found' % jump)
                     self.callback.__call__(**self.kwargs)
-                    self.kill()
-            else:
-                self.callback.__call__(**self.kwargs)
-                self.kill()
+            self.kill()
         pass
 
 

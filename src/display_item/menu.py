@@ -403,6 +403,7 @@ class Endturn(Menu):
         l.append(MenuItem('Save', self.save))
         l.append(MenuItem('Load', self.load))
         l.append(MenuItem('Cancel', self.cancel))
+        l.append(MenuItem('Quit', self.quit))
         self.create_menu(l, zoom_in(), zoom_out())
         self.arena = arena
 
@@ -432,6 +433,10 @@ class Endturn(Menu):
     def end_turn(self):
         self.arena.end_turn()
         self.parent.remove(self)
+
+    def quit(self):
+        self.parent.remove(self)
+        director.pop()
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:

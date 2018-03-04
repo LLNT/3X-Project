@@ -91,7 +91,7 @@ class Banish(Menu):
     def banish(self, item):
         self.kill()
         self.parent.person.banish(item)
-        self.parent.exit()
+        self.parent.quit()
         pass
 
     def transport(self, item):
@@ -99,7 +99,7 @@ class Banish(Menu):
         self.parent.map.send_to_transporter(item)
         if item in self.parent.person.item:
             self.parent.person.item.remove(item)
-        self.parent.exit()
+        self.parent.quit()
 
     def cancel(self):
         self.kill()
