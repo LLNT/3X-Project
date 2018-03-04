@@ -34,11 +34,14 @@ class Arena(ScrollableLayer):
     # the holder of map and roles
     is_event_handler = False
 
-    def __init__(self, map, w, h, menulayer,infolayer,size=80):
+    def __init__(self, map, menulayer,infolayer,size=80):
         super(Arena, self).__init__()
 
         # initialize the holder according to the map
-        self.width, self.height = w*size, h*size
+        self.map = map  # type:map_controller.Main
+        self.size = size
+        self.w, self.h = map.terrain_container.M, map.terrain_container.N
+        self.width, self.height = self.w*size, self.h*size
         self.windowsize = director.get_window_size()
         self.anchor = self.width // 2, self.height // 2
         board_line = ColorLayer(255, 0, 0, 255, self.width + 10 + size,
@@ -48,9 +51,6 @@ class Arena(ScrollableLayer):
         self.add(Background(self.windowsize))
 
         # initialize arena attributes
-        self.map = map  # type:map_controller.Main
-        self.size = size
-        self.w, self.h = w, h
         self._state_control = self._get_state_control() #type: Dict[str, callable]
         self.general = self.map.eventlist['General']
         self.general_length = len(self.general)
@@ -62,17 +62,21 @@ class Arena(ScrollableLayer):
         self.people = {} #type:Dict[str,PerSpr]
         self.person_layer = Layer()
         self.add(self.person_layer)
-        for i in range(w):
-            for j in range(h):
+        for i in range(self.w):
+            for j in range(self.h):
                 self.cells[(i, j)] = Cell(size, (i, j))
                 self.person_layer.add(self.cells[(i, j)])
 
         people = map.person_container.people
         position = map.person_container.position
         controller = map.person_container.controller
+        print(position, people, controller)
         for person in people:
             pid = person.pid
-            self.people[pid] = PerSpr(person, 1, size, position[pid], controller[pid], bk_color=(220,220,220))
+            self.people[pid] = PerSpr(person, scale=1, size=size, pos=position[pid],
+                                      controller=controller[pid], bk_color=(220,220,220))
+            self.people[pid].moved = not map.person_container.movable[pid]
+
             self.person_layer.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
 
@@ -85,8 +89,6 @@ class Arena(ScrollableLayer):
 
         self._clear_map()
         self.position = (0, 0)
-
-        self.next_round()
 
     # callback functions
     def _getitem(self, **kwargs):
@@ -137,10 +139,11 @@ class Arena(ScrollableLayer):
         self._mapstate = self.map.send_mapstate()
         for cell in self.cells.values():
             cell.state = 'default'
-        for person in self.people.values(): #type:Charactor
+        for person in self.people.values(): #type:PerSpr
             if not person.moved:
                 person.state = 'unmoved'
             else:
+                print(person.pid)
                 person.state = 'moved'
             person.update_hp()
 
@@ -1227,7 +1230,22 @@ class Arena(ScrollableLayer):
         self.cells[self.target].person_on = None
         self.cells[self.origin_pos].person_on = self.selected
         self.target = None
-        pass
+
+    def save(self):
+        director.window.push_handlers(self)
+        self.menulayer.disapper()
+        self.state = 'default'
+        self.map.map_save()
+
+    def load(self):
+        map = self.map.map_load()[0]
+        menulayer = Menulayer()
+        infolayer = Layer()
+        arena = Arena(map, menulayer, infolayer, size)
+        director.replace(FadeTransition(Scene(arena, menulayer, infolayer), duration=1))
+        self.kill()
+        del self
+        arena.map.take_turn(arena)
 
     def cancel_select(self):
         self.state = 'valid_dst'
@@ -1512,12 +1530,8 @@ class Board():
 def map_init():
     data = Data()
     global_vars = Global(data)
-    terrain_container_test = Terrain_Container(data.terrain_map, global_vars.terrainBank)
-    person_container_test = Person_Container(data.map_armylist, global_vars.personBank,global_vars.data.ai_configs)
-    map = map_controller.Main(terrain_container_test, person_container_test, global_vars,eventlist=data.eventlist)
-    w = terrain_container_test.M
-    h = terrain_container_test.N
-    return map, w, h
+    map = global_vars.new_game()
+    return map
 
 def coordinate_t(x, y, size):
     i = x // size
@@ -1534,13 +1548,16 @@ def coordinate(i, j, size):
 if __name__ == '__main__':
     pyglet.resource.path = ['../img']
     pyglet.resource.reindex()
-    map, w, h = map_init()
+    map = map_init()
     size = 80
     director.init(caption='3X-Project', width=1280, height=720)
 
     menulayer = Menulayer()
     infolayer = Layer()
-    director.run(Scene(Arena(map, w, h, menulayer, infolayer, size), menulayer, infolayer))
+    arena = Arena(map, menulayer, infolayer, size)
+    arena.next_round()
+    director.run(Scene(arena, menulayer, infolayer))
+
 
 
 

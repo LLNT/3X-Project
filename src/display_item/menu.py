@@ -400,6 +400,8 @@ class Endturn(Menu):
         l = []
         l.append(MenuItem('Endturn', self.end_turn))
         l.append(MenuItem('Flags', self.flag))
+        l.append(MenuItem('Save', self.save))
+        l.append(MenuItem('Load', self.load))
         l.append(MenuItem('Cancel', self.cancel))
         self.create_menu(l, zoom_in(), zoom_out())
         self.arena = arena
@@ -417,6 +419,14 @@ class Endturn(Menu):
 
     def flag(self):
         self.arena.flag()
+        self.parent.remove(self)
+
+    def save(self):
+        self.arena.save()
+        self.parent.remove(self)
+
+    def load(self):
+        self.arena.load()
         self.parent.remove(self)
 
     def end_turn(self):

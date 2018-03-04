@@ -40,7 +40,7 @@ class Main:
         self.maps=[]
 
     def new_game(self):
-        terrain0=terrain_container.Main(self.data.get_obj(self.data.startmeta["Terrain_map"]))
+        terrain0=terrain_container.Main(self.data.get_obj(self.data.startmeta["Terrain_map"]), self.terrainBank)
         person0 = person_container.Main(self.data.get_obj(self.data.startmeta["Armylist"]),self.personBank, self.data.ai_configs)
         map0 = map_controller.Main(terrain0, person0, self,self.data.get_obj(self.data.startmeta["Eventlist"]))
         self.maps.append((map0,self.data.startmeta))
@@ -57,7 +57,7 @@ class Main:
     def map_load(self,fname):
         path=self.data.get_root("save")
         obj=pickle.load(open(path+fname,"rb"))
-        map_active=obj.maps[len(obj.maps)-1]
+        map_active=obj.maps[-1]
         return map_active
 
 

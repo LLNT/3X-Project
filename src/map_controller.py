@@ -34,12 +34,14 @@ class Main:
         for p in self.person_container.people:
             p.status.clear()
             p.ability["HP"]=p.ability["MHP"]
-            if (self.person_container.controller[p.pid]==0)or(self.person_container.controller[p.pid]==2):
-                self.person_container.controller.pop(p.pid)
-                self.person_container.position.pop(p.pid)
-                self.person_container.movable.pop(p.pid)
-                self.person_container.army.pop(p.pid)
-                self.person_container.AItype.pop(p.pid)
+            if (self.person_container.controller[p.pid]==0) and (p.pid in self.global_vars.player_character_status):
+                if (self.global_vars.player_character_status[p.pid]==0)\
+                        or(self.global_vars.player_character_status[p.pid]==2):
+                    self.person_container.controller.pop(p.pid)
+                    self.person_container.position.pop(p.pid)
+                    self.person_container.movable.pop(p.pid)
+                    self.person_container.army.pop(p.pid)
+                    self.person_container.AItype.pop(p.pid)
     def send_mapstate(self):
         valid={}                       #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
         invalid={}                     #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
@@ -813,7 +815,7 @@ class Main:
         return self.global_vars.map_save("map_save.sav")
 
     def map_load(self):
-        return self.global_vars.map_load("map_load.sav")
+        return self.global_vars.map_load("map_save.sav")
 
 
 
