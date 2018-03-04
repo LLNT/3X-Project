@@ -31,6 +31,15 @@ class Main:
         self.controller=0
         self.global_vars=glb
         self.eventlist=eventlist
+        for p in self.person_container.people:
+            p.status.clear()
+            p.ability["HP"]=p.ability["MHP"]
+            if (self.person_container.controller[p.pid]==0)or(self.person_container.controller[p.pid]==2):
+                self.person_container.controller.pop(p.pid)
+                self.person_container.position.pop(p.pid)
+                self.person_container.movable.pop(p.pid)
+                self.person_container.army.pop(p.pid)
+                self.person_container.AItype.pop(p.pid)
     def send_mapstate(self):
         valid={}                       #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
         invalid={}                     #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
@@ -367,6 +376,8 @@ class Main:
         self.person_container.position.pop(pid)
         self.person_container.movable.pop(pid)
         c=self.person_container.controller.pop(pid)
+        self.person_container.army.pop(pid)
+        self.person_container.AItype.pop(pid)
         if (c==0):
             if self.global_vars.player_character_status[pid]==1:
                 self.global_vars.player_character_status[pid]=2
