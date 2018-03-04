@@ -392,6 +392,8 @@ class Main:
                 return
 
     def exchange_item(self,p1,p2,i1,i2):
+        if (p1==p2)and(i1==i2):
+            return
         person1=self.global_vars.personBank[p1]
         person2=self.global_vars.personBank[p2]
         if i1<len(person1.item):
