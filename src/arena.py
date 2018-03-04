@@ -198,7 +198,11 @@ class Arena(ScrollableLayer):
     target = property(get_target, set_target)
 
     def focus(self, pid, set=True):
-        i, j = self.people[pid].pos
+        if not pid in self.people:
+            i=0
+            j=0
+        else:
+            i, j = self.people[pid].pos
         x, y = coordinate(i, j, self.size)
         dis_x, dis_y = self.windowsize[0] // 2, self.windowsize[1] // 2
         if x < dis_x:
