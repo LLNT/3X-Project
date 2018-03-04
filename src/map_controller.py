@@ -24,13 +24,13 @@ class Main:
         self.turn=0
         self.controller=0
         self.eventlist={}
-        self.pre=None
-        self.after=None
-        self.pic=None
-        self.scene=None
-        self.title=None
+        self.pre=[]
+        self.after=[]
+        self.pic=""
+        self.scene=""
+        self.title=""
         self.reconstruct_log=[]
-    def __init__(self,terrain_map,person_container,glb,reconstruct_log,eventlist={},pre=None,after=None,pic=None,scene=None,title=None):
+    def __init__(self,terrain_map,person_container,glb,reconstruct_log,eventlist={},pre=[],after=[],pic="",scene="",title=""):
         self.terrain_container=terrain_map
         self.person_container=person_container
         self.turn=0
