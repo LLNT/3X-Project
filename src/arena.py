@@ -217,8 +217,8 @@ class Arena(ScrollableLayer):
 
     def next_round(self):
         self.map.turn += 1
-        if self.map.turn > 20:
-            director.pop()
+        # if self.map.turn > 20:
+        #     director.pop()
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
@@ -238,7 +238,7 @@ class Arena(ScrollableLayer):
 
     def player_turn(self, **kwargs):
 
-        self.position = (0, 0)
+        self.focus('1')
         self._clear_map()
         director.window.push_handlers(self)
         print('player_turn push_handlers')
