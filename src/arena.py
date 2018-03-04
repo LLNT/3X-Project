@@ -70,7 +70,6 @@ class Arena(ScrollableLayer):
         people = map.person_container.people
         position = map.person_container.position
         controller = map.person_container.controller
-        print(position, people, controller)
         for person in people:
             pid = person.pid
             self.people[pid] = PerSpr(person, scale=1, size=size, pos=position[pid],
@@ -89,6 +88,10 @@ class Arena(ScrollableLayer):
 
         self._clear_map()
         self.position = (0, 0)
+
+        print('loaded turn %s' % self.map.turn)
+        print('loaded map reconstruct ', self.map.reconstruct_log)
+
 
     # callback functions
     def _getitem(self, **kwargs):
@@ -1238,14 +1241,20 @@ class Arena(ScrollableLayer):
         self.map.map_save()
 
     def load(self):
-        map = self.map.map_load()[0]
+        map = self.map.map_load()[0] #type:map_controller.Main
         menulayer = Menulayer()
         infolayer = Layer()
         arena = Arena(map, menulayer, infolayer, size)
-        director.replace(FadeTransition(Scene(arena, menulayer, infolayer), duration=1))
+        class transition(FadeTransition):
+            def finish(self):
+                super().finish()
+                for rec in map.reconstruct_log:
+                    arena.reconstruct(rec, ty='load')
+                arena.map.take_turn(arena)
+
+        director.replace(transition(Scene(arena, menulayer, infolayer), duration=1))
         self.kill()
         del self
-        arena.map.take_turn(arena)
 
     def cancel_select(self):
         self.state = 'valid_dst'
@@ -1451,8 +1460,10 @@ class Arena(ScrollableLayer):
         self.add(display)
         display.display()
 
-    def reconstruct(self, rec):
+    def reconstruct(self, rec, ty='default'):
         if rec is not None:
+            if ty is 'default':
+                self.map.reconstruct_log.append(rec)
             if type(rec) is str:
                 path = os.getcwd()[:-3] + "data\\"
                 _rec = json.load(open(path + rec, "r"))

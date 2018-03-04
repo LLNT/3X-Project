@@ -24,13 +24,15 @@ class Main:
         self.turn=0
         self.controller=0
         self.eventlist={}
-    def __init__(self,terrain_map,person_container,glb,eventlist={}):
+        self.reconstruct_log=[]
+    def __init__(self,terrain_map,person_container,glb,reconstruct_log,eventlist={}):
         self.terrain_container=terrain_map
         self.person_container=person_container
         self.turn=0
         self.controller=0
         self.global_vars=glb
         self.eventlist=eventlist
+        self.reconstruct_log = reconstruct_log
         for p in self.person_container.people:
             p.status.clear()
             p.ability["HP"]=p.ability["MHP"]

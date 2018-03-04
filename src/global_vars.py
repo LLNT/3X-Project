@@ -42,7 +42,7 @@ class Main:
     def new_game(self):
         terrain0=terrain_container.Main(self.data.get_obj(self.data.startmeta["Terrain_map"]), self.terrainBank)
         person0 = person_container.Main(self.data.get_obj(self.data.startmeta["Armylist"]),self.personBank, self.data.ai_configs)
-        map0 = map_controller.Main(terrain0, person0, self,self.data.get_obj(self.data.startmeta["Eventlist"]))
+        map0 = map_controller.Main(terrain0, person0, self,[],self.data.get_obj(self.data.startmeta["Eventlist"]))
         self.maps.append((map0,self.data.startmeta))
         self.flags=self.data.flags
         self.player_character_status=self.data.player_character_init
