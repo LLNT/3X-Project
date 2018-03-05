@@ -1,1 +1,9 @@
-[]
+[{
+    "Event":"P01001",
+    "Tag":null,
+    "Condition":[[[],[]]],
+    "Text_type":"N",
+    "Text":["PT010-11","PT010-12"],
+    "Execute":[],
+    "Keep":1
+  }]

@@ -2397,6 +2397,20 @@
     "Right":null,
     "Direction":0,
     "Scene":null
+  },
+  "PT010-11":{
+    "Type":"N",
+    "Text":"奥尔堡事件爆发后，克鲁贝尔王内斯托尔震怒，",
+    "Scene":"",
+    "Left":null,
+    "Right":null
+  },
+  "PT010-12":{
+    "Type":"N",
+    "Text":"为了国家和人民的利益，向利尔斯帝国宣战。",
+    "Scene":"",
+    "Left":null,
+    "Right":null
   }
 
 }
