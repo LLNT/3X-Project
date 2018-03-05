@@ -63,6 +63,15 @@ class Main:
         map_active=obj.maps[-1]
         return map_active
 
+    def new_map(self,fname):
+        meta=self.data.get_obj(fname)
+        _terrain = terrain_container.Main(self.data.get_obj(meta["Terrain_map"]), self.terrainBank)
+        _person = person_container.Main(self.data.get_obj(meta["Armylist"]), self.personBank,self.data.ai_configs)
+        _map = map_controller.Main(_terrain, _person, self, [], self.data.get_obj(meta["Eventlist"]),
+                                   self.data.get_obj(meta["Prelude"]),self.data.get_obj(meta["Afterscene"]),meta["Map_pic"],
+                                   meta["Background_Scene"],meta["Title"])
+        self.maps.append((_map, meta))
+        return self.maps[-1]
 
 
 

@@ -33,5 +33,12 @@
   "Attack_Obj":["1000012","1000013","1000014","1000015","1"],
   "Not_Attack":[],
   "Attack_Selection":["Fatal","Object","Uncountered","Any"]
-  }
+  },
+  "AI010-Passive-Base":{
+  "Strategy":"PASSIVE",
+  "Push":[],
+  "Attack_Obj":["1","4"],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+}
 }

@@ -208,5 +208,10 @@
     "Id":42,
     "Itemtype":"Power Stuff",
     "Use":1
+  },
+  {
+    "Id":43,
+    "Itemtype":"Silver Sword",
+    "Use":20
   }
 ]
