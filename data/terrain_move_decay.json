@@ -218,5 +218,15 @@
     "Cracksman":255,
     "Hoplite":255,
     "Armor":255
+  },
+  "Fence":{
+    "Infantry":255,
+    "Knight":255,
+    "Bower":255,
+    "Pegasus":1,
+    "Magician":255,
+    "Cracksman":5,
+    "Hoplite":255,
+    "Armor":255
   }
 }

@@ -1,1 +1,38 @@
-[]
+[{
+    "Event":"P00001",
+    "Tag":null,
+    "Condition":[[[],[]]],
+    "Text_type":"N",
+    "Text":["PT000-11","PT000-12","PT000-13","PT000-14","PT000-15","PT000-16","PT000-17","PT000-18",
+    "PT000-19","PT000-110","PT000-111","PT000-112","PT000-113","PT000-114"],
+    "Execute":[],
+    "Keep":0
+  },
+  {
+    "Event":"P00002",
+    "Tag":"Krubersky Korolevsky Dvorets - Royal Meeting",
+    "Condition":[[[],[]]],
+    "Text_type":"S",
+    "Text":[],
+    "Execute":[],
+    "Keep":0
+  },
+  {
+    "Event":"P00003",
+    "Tag":null,
+    "Condition":[[[],[]]],
+    "Text_type":"S",
+    "Text":[],
+    "Execute":[],
+    "Keep":0
+  },
+  {
+    "Event":"P00004",
+    "Tag":null,
+    "Condition":[[[],[]]],
+    "Text_type":"S",
+    "Text":[],
+    "Execute":[],
+    "Keep":0
+  }
+]

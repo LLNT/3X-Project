@@ -3,7 +3,7 @@
   "Armies":[
     {
       "Name": "Yury's Squad",
-      "Member": [{"Id":"1","X":3,"Y":17,"PRI":0,"AI":"No-AI-Base"},{"Id":"2","X":9,"Y":0,"PRI":0,"AI":"No-AI-Base"},{"Id":"3","X":13,"Y":0,"PRI":0,"AI":"No-AI-Base"}],
+      "Member": [{"Id":"1","X":7,"Y":0,"PRI":0,"AI":"No-AI-Base"},{"Id":"2","X":9,"Y":0,"PRI":0,"AI":"No-AI-Base"},{"Id":"3","X":13,"Y":0,"PRI":0,"AI":"No-AI-Base"}],
       "Controller": 0
     },
     {
