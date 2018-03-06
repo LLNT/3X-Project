@@ -1518,21 +1518,23 @@ class Arena(ScrollableLayer):
         after.display()
 
     def _next(self, **kwargs):
-        map = self.map.global_vars.new_map(kwargs['Map'])[0]
-        menulayer = Menulayer()
-        infolayer = Layer()
-        arena = Arena(map, menulayer, infolayer, self.size)
+        map, metadata = self.map.global_vars.new_map(kwargs['Map'])
+        if 'Preparation' in metadata.keys():
+            pass
+        else:
+            menulayer = Menulayer()
+            infolayer = Layer()
+            arena = Arena(map, menulayer, infolayer, self.size)
 
-        class Transition(FadeTransition):
-            def finish(self):
-                super().finish()
-                for rec in map.reconstruct_log:
-                    arena.reconstruct(rec, ty='load')
-                arena.map.take_turn(arena)
+            class Transition(FadeTransition):
+                def finish(self):
+                    super().finish()
+                    arena.next_round()
 
-        director.replace(Transition(Scene(arena, menulayer, infolayer), duration=1))
-        self.kill()
-        del self
+            director.pop()
+            director.push(Transition(Scene(arena, menulayer, infolayer)))
+            self.kill()
+            del self
 
     def remove(self, obj):
         super().remove(obj)
