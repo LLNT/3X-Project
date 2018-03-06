@@ -20,7 +20,7 @@ from display_item.ring import PerSpr
 from display_item.getitem import Getitem
 from display_item.action_control import Sequencial, Graphic
 from display_item.dialog import Dialogscene
-from display_item.eventdisplay import Eventdisplay
+from display_item.eventdisplay import *
 import os
 import map_controller
 from global_vars import Main as Global
@@ -146,6 +146,7 @@ class Arena(ScrollableLayer):
                 person.state = 'moved'
             person.update_hp()
 
+        self.position = (0, 0)
         self._repaint()
 
     def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
@@ -1301,14 +1302,15 @@ class Arena(ScrollableLayer):
         self.item_show()
 
     def seize(self, event):
+        director.window.remove_handlers(self)
         pid = self.selected
         obj = self.people[pid]
         dst = self._mapstate[0][self.selected][self.target][1]
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + CallFunc(self._clear_map)
-        obj.do(action + CallFunc(self.eventdisplay, event=event, map=self.map,
+        obj.do(action +  CallFunc(self.eventdisplay, event=event, map=self.map,
                                  dialog_type='M', dialog_info=self.dialog_info,
                                  w=self.windowsize[0], h=self.windowsize[1],
-                                 callback=self._clear_map))
+                                 callback=self._clear))
 
 
     def set_turn(self, turn):
@@ -1456,6 +1458,7 @@ class Arena(ScrollableLayer):
         self._repaint()
 
     def eventdisplay(self, callback=None, **kwargs):
+        self.position = (0, 0)
         display = Eventdisplay(callback=callback, **kwargs)
         self.add(display)
         display.display()
@@ -1500,6 +1503,36 @@ class Arena(ScrollableLayer):
 
         director.window.remove_handlers(self)
         director.replace(Transition(Scene(layer)))
+
+    def win(self):
+        director.window.remove_handlers(self)
+        event = self.map.after
+        print(event)
+        after = Afterevent(event=event, map=self.map,
+                    dialog_type='S', dialog_info=self.dialog_info,
+                    w=self.windowsize[0], h=self.windowsize[1],
+                    callback=self._next)
+        self.add(after)
+        x, y = self.position
+        after.position = -x, -y
+        after.display()
+
+    def _next(self, **kwargs):
+        map = self.map.global_vars.new_map(kwargs['Map'])[0]
+        menulayer = Menulayer()
+        infolayer = Layer()
+        arena = Arena(map, menulayer, infolayer, self.size)
+
+        class Transition(FadeTransition):
+            def finish(self):
+                super().finish()
+                for rec in map.reconstruct_log:
+                    arena.reconstruct(rec, ty='load')
+                arena.map.take_turn(arena)
+
+        director.replace(Transition(Scene(arena, menulayer, infolayer), duration=1))
+        self.kill()
+        del self
 
     def remove(self, obj):
         super().remove(obj)

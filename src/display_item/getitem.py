@@ -23,7 +23,6 @@ class Getitem(Layer):
         '''
         super().__init__()
         self.items = person.item
-
         # display the item just get first
         self.info = Info()
         self.add(self.info)
@@ -36,6 +35,10 @@ class Getitem(Layer):
         self.callback = callback
         self.kwargs = kwargs
 
+    def on_enter(self):
+        super().on_enter()
+
+
     def on_mouse_press(self, x, y, buttons, modifiers):
         self.person.item.append(self.item)
         director.window.remove_handlers(self)
@@ -46,9 +49,7 @@ class Getitem(Layer):
             del self.info
             self.add(Listwand(self.items, self.flag))
 
-
     def exit(self):
-
         self.kill()
         if self.callback:
             self.callback.__call__(**self.kwargs)

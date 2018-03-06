@@ -7,6 +7,7 @@
 from cocos.layer import Layer, ColorLayer
 from cocos.sprite import Sprite
 from cocos.director import director
+from cocos.actions import Delay, CallFunc
 from typing import List, Dict
 from map_controller import Main
 from display_item.text import Text
@@ -25,7 +26,7 @@ class BaseDialog(Layer):
         self.i = 0
 
     def excute(self):
-        # print(self.textsource[self.textlist[self.i]])
+        print(self.textsource[self.textlist[self.i]])
         self.i += 1
 
     def exit(self):
@@ -63,9 +64,9 @@ class Dialogscene(BaseDialog):
 
         # add background
 
-        background = Sprite(map.scene, position=(w // 2, h // 2))
+        self.background = Sprite(map.scene, position=(w // 2, h // 2))
         text_background = ColorLayer(0,0,200,255,w,h//3)
-        self.add(background)
+        self.add(self.background)
         self.add(text_background)
 
         # add img
@@ -265,3 +266,63 @@ class Mapdialog(BaseDialog):
     def exit(self):
         self.kill()
         self.callback.__call__(**self.kwargs)
+
+class Afterdialog(Dialogscene):
+    '''
+    def __init__(self, text_list, text_source, map, w, h, info, tag, size=200,
+                 left=None, right=None, callback=None, **kwargs):
+        super(Dialogscene, self).__init__(text_list, text_source)
+        self.map = map
+        self.w, self.h = w, h
+        self.size = size
+        self.callback = callback
+        self.kwargs = kwargs
+        self.info = info  # dict of persons that stands for V or E
+
+        # add background
+
+        self.background = Sprite(map.scene, position=(w // 2, h // 2))
+        text_background = ColorLayer(0, 0, 200, 255, w, h // 3)
+        self.add(self.background)
+        self.add(text_background)
+
+        # add img
+        self.left = Sprite('ring.png', position=(w // 6, h // 2), opacity=0)
+        self.right = Sprite('ring.png', position=(w * 5 // 6, h // 2), opacity=0)
+        self.add(self.left)
+        self.add(self.right)
+
+        # add label
+        self.label = Text(text=' ', position=(w // 6, h // 3), font_size=24)
+        self.add(self.label)
+
+        # add text
+        self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
+        self.add(self.text)
+
+        self.left_text, self.right_text = None, None
+        if left is not None:
+            self.changeleft(left)
+        if right is not None:
+            self.changeright(right)
+
+        if tag is not None:
+            self.tag = Text(text=tag, position=(w * 5 // 6, h * 2 // 3), font_size=24)
+            self.add(self.tag)
+
+        self.excute()
+
+
+    def changeleft(self, source):
+        super().changeleft(source)
+        self.left_text = source
+
+    def changeright(self, source):
+        super().changeright(source)
+        self.right_text = source
+    '''
+
+    def exit(self):
+        self.callback.__call__(keep = self)
+        director.window.remove_handlers(self)
+        director.pop()
