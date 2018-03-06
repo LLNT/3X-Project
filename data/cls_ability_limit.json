@@ -99,6 +99,21 @@
       "HP":80,
       "CRY":20
   },
+  "Mage Knight":{
+      "LV":20,
+      "MHP":60,
+      "STR":21,
+      "MGC":27,
+      "SPD":25,
+      "SKL":25,
+      "DEF":25,
+      "RES":29,
+      "LUK":30,
+      "BLD":20,
+      "MOV":15,
+      "HP":80,
+      "CRY":20
+  },
   "Swordman":
     { "LV":20,
       "MHP":40,

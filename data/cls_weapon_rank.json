@@ -87,6 +87,17 @@
       "Light":0,
       "Dark":0,
       "Wand":0},
+  "Mage Knight":
+    {"Sword":1,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":1,
+      "Thunder":1,
+      "Wind":1,
+      "Light":0,
+      "Dark":0,
+      "Wand":1},
   "Thief":
     {"Sword":1,
       "Lance":0,

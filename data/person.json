@@ -202,6 +202,77 @@
       "Base":""
     }
   },
+  "4":
+  {
+    "Id": 4,
+    "Name": "Misha",
+    "Cls":"Mage Knight",
+    "Ability":
+    {
+      "LV":8,
+      "MHP":36,
+      "STR":4,
+      "MGC":24,
+      "SPD":16,
+      "SKL":14,
+      "DEF":15,
+      "RES":22,
+      "LUK":12,
+      "BLD":13,
+      "MOV":8,
+      "HP":36,
+      "CRY":12,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":35,
+      "STR":20,
+      "MGC":45,
+      "SPD":55,
+      "SKL":40,
+      "DEF":30,
+      "RES":60,
+      "LUK":55
+    },
+    "Weapon Rank Bonus":
+    {"Sword":30,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":80,
+      "Thunder":0,
+      "Wind":230,
+      "Light":0,
+      "Dark":0,
+      "Wand":150},
+    "Picture":"reinhard.jpg",
+    "Skills":
+    [
+      "Continue",
+      "Ambush",
+      "Charge",
+      "Shield"
+    ],
+    "Init_item":[44,45,46],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Fire",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Mage Knight":{
+        "Sword":"",
+        "Fire":"",
+        "Thunder":"",
+        "Wind":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
 
 
   "201":
