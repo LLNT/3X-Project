@@ -213,5 +213,20 @@
     "Id":43,
     "Itemtype":"Silver Sword",
     "Use":20
+  },
+  {
+    "Id":44,
+    "Itemtype":"Veterlopast",
+    "Use":60
+  },
+  {
+    "Id":45,
+    "Itemtype":"Elfire",
+    "Use":35
+  },
+  {
+    "Id":46,
+    "Itemtype":"Iron Blade",
+    "Use":35
   }
 ]
