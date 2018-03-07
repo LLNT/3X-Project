@@ -3987,15 +3987,30 @@
     "Text":"奥尔堡事件爆发后，克鲁贝尔王内斯托尔震怒，",
     "Scene":"background_test.jpg",
     "Left":null,
-    "Right":null
+    "Right":["dighinsea.jpg"]
   },
   "PT010-12":{
     "Type":"N",
     "Text":"为了国家和人民的利益，向利尔斯帝国宣战。",
-    "Scene":"",
+    "Scene":"background_test.jpg",
     "Left":null,
-    "Right":null
+    "Right":["dighinsea.jpg"]
+  },
+  "PT010-13":{
+    "Type":"N",
+    "Text":"由第二军团司令米哈伊尔·尼古拉耶维奇带领第二军团先行",
+    "Scene":"background_test.jpg",
+    "Left":null,
+    "Right":["reinhard.jpg"]
+  },
+  "PT010-14":{
+    "Type":"N",
+    "Text":"前往接应被困在奥尔堡的二王子格奥尔吉·内斯托罗维奇。",
+    "Scene":"background_test.jpg",
+    "Left":["leaf.jpg"],
+    "Right":["dighinsea.jpg"]
   }
+
 
 
 }
