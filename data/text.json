@@ -4009,6 +4009,41 @@
     "Scene":"background_test.jpg",
     "Left":["leaf.jpg"],
     "Right":["dighinsea.jpg"]
+  },
+  "PT010-15":{
+    "Type":"N",
+    "Text":"同年，由于边境摩擦，",
+    "Scene":"background_test.jpg",
+    "Left":null,
+    "Right":null
+  },
+  "PT010-16":{
+    "Type":"N",
+    "Text":"克鲁贝尔王国又向北方的维尔纽斯大公国宣战，",
+    "Scene":"background_test.jpg",
+    "Left":null,
+    "Right":null
+  },
+  "PT010-17":{
+    "Type":"N",
+    "Text":"由大王子瓦西里·内斯托罗维奇带领帝国第三、第七军团开始进攻。",
+    "Scene":"background_test.jpg",
+    "Left":null,
+    "Right":["pelleas.jpg"]
+  },
+  "PT010-18":{
+    "Type":"N",
+    "Text":"在长久的和平后，",
+    "Scene":"background_test.jpg",
+    "Left":null,
+    "Right":null
+  },
+  "PT010-19":{
+    "Type":"N",
+    "Text":"大陆战火再燃，逐渐蔓延……",
+    "Scene":"background_test.jpg",
+    "Left":null,
+    "Right":null
   }
 
 
