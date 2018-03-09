@@ -211,7 +211,7 @@
     },
     {
       "Event":"G000008",
-      "Condition":[[["VIC_FLAG00001"],["G000008"]]],
+      "Condition":[[["VIC_FLAG00001"],["G000008"]],[["VIC_FLAG00000"],["G000008"]]],
       "Text_type":"S",
       "Text":[],
       "Reconstruct":null,
