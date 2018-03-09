@@ -26,13 +26,14 @@ class BaseDialog(Layer):
         self.i = 0
 
     def excute(self):
-        print(self.textsource[self.textlist[self.i]])
+        # print(self.textsource[self.textlist[self.i]])
         self.i += 1
 
     def exit(self):
         pass
 
     def on_mouse_press(self, x, y, buttons, modifiers):
+        print('dialog_click at ', self)
         if self.i < self.length:
             self.excute()
         else:
@@ -83,39 +84,48 @@ class Dialogscene(BaseDialog):
         self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
         self.add(self.text)
 
-        self.excute()
-
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
-        if item['Type'] is not 'S':
-            self.source_error('S')
+        super().excute()
         if 'Branch' in item.keys():
             self.add(Branch(self.map, item['Branch'], self.callback))
             director.window.remove_handlers(self)
-            self.i += 1
         else:
-            if item['Text'] is not None:
-                self.text.element.text = item['Text']
-            if item['Left'] is not None:
-                if item['Left'] is 'V':
-                    item['Left'] = self.info['V'].pic
-                self.changeleft(item['Left'])
-            if item['Right'] is not None:
-                if item['Right'] is 'V':
-                    item['Right'] = self.info['V'].pic
-                self.changeright(item['Right'])
-            if item['Direction'] == 0:
-                self.label.position = (self.w // 6, self.h // 3)
-            else:
-                self.label.position = (self.w * 5 // 6, self.h // 3)
-            if item['Tag'] is not None:
-                if item['Tag'] is 'V':
-                    self.label.element.text = self.info['V'].name
+            if item['Type'] is 'S':
+                if item['Text'] is not None:
+                    self.text.element.text = item['Text']
+                if item['Left'] is not None:
+                    if item['Left'] is 'V':
+                        item['Left'] = self.info['V'].pic
+                    self.changeleft(item['Left'])
+                if item['Right'] is not None:
+                    if item['Right'] is 'V':
+                        item['Right'] = self.info['V'].pic
+                    self.changeright(item['Right'])
+                if item['Direction'] == 0:
+                    self.label.position = (self.w // 6, self.h // 3)
                 else:
-                    self.label.element.text = item['Tag']
+                    self.label.position = (self.w * 5 // 6, self.h // 3)
+                if item['Tag'] is not None:
+                    if item['Tag'] is 'V':
+                        self.label.element.text = self.info['V'].name
+                    else:
+                        self.label.element.text = item['Tag']
+                else:
+                    self.label.element.text = ''
+            elif item['Type'] is 'N':
+                if item['Text'] is not None:
+                    self.text.element.text = item['Text']
+                if item['Left'] is not None:
+                    if item['Left'] is 'V':
+                        item['Left'] = self.info['V'].pic
+                    self.changeleft(item['Left'])
+                if item['Right'] is not None:
+                    if item['Right'] is 'V':
+                        item['Right'] = self.info['V'].pic
+                    self.changeright(item['Right'])
             else:
-                self.label.element.text = ''
-            super().excute()
+                self.source_error(item['Type'])
 
     def changeleft(self, source):
         self.left.kill()
@@ -132,10 +142,9 @@ class Dialogscene(BaseDialog):
         self.add(self.right)
 
     def exit(self):
-        director.pop()
+        self.kill()
         if self.callback:
             self.callback.__call__(**self.kwargs)
-        del self
 
 class Battledialog(BaseDialog):
 
@@ -321,8 +330,3 @@ class Afterdialog(Dialogscene):
         super().changeright(source)
         self.right_text = source
     '''
-
-    def exit(self):
-        self.callback.__call__(keep = self)
-        director.window.remove_handlers(self)
-        director.pop()

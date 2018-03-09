@@ -40,6 +40,7 @@ class Getitem(Layer):
 
 
     def on_mouse_press(self, x, y, buttons, modifiers):
+        print('getitem_click')
         self.person.item.append(self.item)
         director.window.remove_handlers(self)
         if len(self.items) <= self.maxitems:

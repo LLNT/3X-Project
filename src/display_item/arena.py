@@ -30,7 +30,7 @@ from terrain_container import Main as Terrain_Container
 from wand import Type1, Type3, Type5
 from typing import Dict
 
-class Arena(ScrollableLayer):
+class Arena(Layer):
     # the holder of map and roles
     is_event_handler = False
 
@@ -217,7 +217,9 @@ class Arena(ScrollableLayer):
             return _position
 
     def next_round(self):
+
         self.map.turn += 1
+        print(self.map.turn)
         # if self.map.turn > 20:
         #     director.pop()
         self.set_turn(self.map.turn)
@@ -1505,9 +1507,7 @@ class Arena(ScrollableLayer):
         director.replace(Transition(Scene(layer)))
 
     def win(self):
-        director.window.remove_handlers(self)
         event = self.map.after
-        print(event)
         after = Afterevent(event=event, map=self.map,
                     dialog_type='S', dialog_info=self.dialog_info,
                     w=self.windowsize[0], h=self.windowsize[1],
@@ -1517,24 +1517,35 @@ class Arena(ScrollableLayer):
         after.position = -x, -y
         after.display()
 
+    def before(self):
+        event = self.map.pre
+        before = Afterevent(event=event, map=self.map,
+                    dialog_type='S', dialog_info=self.dialog_info,
+                    w=self.windowsize[0], h=self.windowsize[1],
+                    callback=self.next_round)
+        self.add(before)
+        x, y = self.position
+        before.position = -x, -y
+        self.do(Delay(0.5) + CallFunc(before.display))
+
+
     def _next(self, **kwargs):
-        map, metadata = self.map.global_vars.new_map(kwargs['Map'])
+
+        map, metadata = self.map.global_vars.new_map(kwargs['Map']) #type: map_controller.Main, dict
+        print(map.pic, map.pre, map.after, map.title)
         if 'Preparation' in metadata.keys():
-            pass
-        else:
-            menulayer = Menulayer()
-            infolayer = Layer()
-            arena = Arena(map, menulayer, infolayer, self.size)
+            print(metadata['Preparation'])
+        menulayer = Menulayer()
+        infolayer = Layer()
+        arena = Arena(map, menulayer, infolayer, self.size)
 
-            class Transition(FadeTransition):
-                def finish(self):
-                    super().finish()
-                    arena.next_round()
+        class Transition(FadeTransition):
+            def finish(self):
+                super().finish()
+                arena.before()
 
-            director.pop()
-            director.push(Transition(Scene(arena, menulayer, infolayer)))
-            self.kill()
-            del self
+        director.pop()
+        director.run(Transition(Scene(arena, menulayer, infolayer)))
 
     def remove(self, obj):
         super().remove(obj)
@@ -1617,9 +1628,9 @@ def new_game(map, size=80):
     class Transition(FadeTransition):
         def finish(self):
             super().finish()
-            arena.next_round()
+            arena.before()
 
-    director.push(Transition(Scene(arena, menulayer, infolayer)))
+    director.push(Transition(Scene(arena, menulayer, infolayer), duration=1.5))
 
 def load_game(map, size=80):
     menulayer = Menulayer()

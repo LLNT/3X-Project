@@ -130,11 +130,14 @@ class Afterevent(Eventdisplay):
         text_source = self.map.global_vars.data.text
         tag = self.event[self.i]['Tag']
         self.event_length = len(self.event)
-        director.push(Scene(Afterdialog(text_list, text_source, self.map, self.w, self.h, tag=tag,
-                                        callback=self._callback, info=self.dialog_info)))
+        self.keep = Afterdialog(text_list, text_source, self.map, self.w, self.h, tag=tag,
+                                        callback=self._callback, info=self.dialog_info)
+        self.scene = Layer()
+        director.push(Scene(self.scene))
+        self.scene.add(self.keep)
+        self.keep.excute()
 
-    def _callback(self, keep):
-        self.keep = keep
+    def _callback(self, **kwargs):
         self.length = len(self.event[self.i]['Execute'])
         self.execute()
 
@@ -157,8 +160,8 @@ class Afterevent(Eventdisplay):
                 flag = self.map.global_vars.flags['Have Transporter']
                 getitem = Getitem(person, item, flag, self.map,
                                  callback=self.execute, i=i+1)
-                self.add(getitem)
-
+                self.scene.add(getitem)
+                director.window.remove_handlers(self)
             elif _type == 'SF':
                 flag = _event[1]
                 self.map.global_vars.flags[flag] = True
@@ -192,17 +195,20 @@ class Afterevent(Eventdisplay):
                     scene.textlist = text_list
                     scene.textsource = text_source
                     scene.i = 0
-                    director.push(Scene(scene))
-                    scene.excute()
+                    print('Keep')
                 else:
+
                     scene = Afterdialog(text_list, text_source, self.map, self.w, self.h,
                                         callback=self._callback, info=self.dialog_info)
-                director.push(Scene(scene))
+                self.scene.add(scene)
+                self.keep = scene
+                scene.excute()
             else:
-                self._callback(keep=self.keep)
+                self._callback()
         else:
-            self.callback.__call__(**self.kwargs)
+            director.pop()
             self.kill()
+            self.callback.__call__(**self.kwargs)
 
 if __name__ == '__main__':
     pass
