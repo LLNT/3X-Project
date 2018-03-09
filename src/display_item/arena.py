@@ -84,7 +84,7 @@ class Arena(Layer):
         self.schedule(self.update)
 
         self._clear_map()
-        self.position = (0, 0)
+        self.focus('1')
 
         print('loaded turn %s' % self.map.turn)
         print('loaded map reconstruct ', self.map.reconstruct_log)
@@ -146,7 +146,7 @@ class Arena(Layer):
                 person.state = 'moved'
             person.update_hp()
 
-        self.position = (0, 0)
+        self.focus('1')
         self._repaint()
 
     def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
@@ -1528,6 +1528,11 @@ class Arena(Layer):
         before.position = -x, -y
         self.do(Delay(0.5) + CallFunc(before.display))
 
+    def jump(self):
+        self.menulayer.disapper()
+        director.window.push_handlers(self)
+        self.map.global_vars.flags['VIC_FLAG00001'] = True
+        self.state = 'default'
 
     def _next(self, **kwargs):
 

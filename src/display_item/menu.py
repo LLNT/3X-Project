@@ -404,6 +404,7 @@ class Endturn(Menu):
         l.append(MenuItem('Load', self.load))
         l.append(MenuItem('Cancel', self.cancel))
         l.append(MenuItem('Quit', self.quit))
+        l.append(MenuItem('Jump', self.jump))
         self.create_menu(l, zoom_in(), zoom_out())
         self.arena = arena
 
@@ -432,6 +433,10 @@ class Endturn(Menu):
 
     def end_turn(self):
         self.arena.end_turn()
+        self.parent.remove(self)
+
+    def jump(self):
+        self.arena.jump()
         self.parent.remove(self)
 
     def quit(self):
