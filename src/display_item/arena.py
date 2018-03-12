@@ -43,7 +43,7 @@ class Arena(Layer):
         self.w, self.h = map.terrain_container.M, map.terrain_container.N
         self.width, self.height = self.w*size, self.h*size
         self.windowsize = director.get_window_size()
-        self.anchor = self.width // 2, self.height // 2
+        # self.anchor = self.width // 2, self.height // 2
 
         self.add(Background(self.windowsize, self.map.pic))
 
@@ -79,15 +79,15 @@ class Arena(Layer):
         self.menulayer = menulayer
         self.infolayer = infolayer
 
-        self.board = Board(self.windowsize[0], self.windowsize[1],25,-3)
+        self.board = Board(self.windowsize[0], self.windowsize[1],25,-5)
         self._update = (0, 0)
         self.schedule(self.update)
 
         self._clear_map()
-        self.focus('1')
 
         print('loaded turn %s' % self.map.turn)
         print('loaded map reconstruct ', self.map.reconstruct_log)
+        print('map size %d, %d'% (self.width, self.height))
 
 
     # callback functions
@@ -146,7 +146,6 @@ class Arena(Layer):
                 person.state = 'moved'
             person.update_hp()
 
-        self.focus('1')
         self._repaint()
 
     def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
@@ -241,7 +240,6 @@ class Arena(Layer):
 
     def player_turn(self, **kwargs):
 
-        self.focus('1')
         self._clear_map()
         director.window.push_handlers(self)
         print('player_turn push_handlers')
@@ -1565,7 +1563,7 @@ class Arena(Layer):
     def update(self, dt):
         x1, y1 = self._update
         x0, y0 = self.position
-        if x0 > 0 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) and x0 < 0:
+        if x0 > 5 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) - 5 and x0 < 0:
             x1 = 0
         if y0 > 5 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) - 5 and y1 < 0:
             y1 = 0

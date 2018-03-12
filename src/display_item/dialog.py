@@ -34,10 +34,22 @@ class BaseDialog(Layer):
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         print('dialog_click at ', self)
-        if self.i < self.length:
-            self.excute()
-        else:
-            self.exit()
+        if buttons is 1:
+            if self.i < self.length:
+                self.excute()
+            else:
+                self.exit()
+        elif buttons is 4:
+            while self.i < self.length:
+                item = self.textsource[self.textlist[self.i]]
+                if 'Branch' in item.keys():
+                    self.add(Branch(self.map, item['Branch'], self._callback))
+                    director.window.remove_handlers(self)
+                    break
+                self.i += 1
+            if not self.i < self.length:
+                self.exit()
+
 
     def source_error(self, info):
         print('source error type ' + str(info))

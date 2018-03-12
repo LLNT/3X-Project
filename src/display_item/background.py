@@ -13,7 +13,8 @@ class Background(Layer):
         map = Sprite(pic)
         w, h = window_size
         # map.scale_x, map.scale_y = w/map.width, h/map.height
-        map.position = map.width//2, map.height//2
+        map.image_anchor = (0, 0)
+        # map.position = map.width//2, map.height//2
         self.add(map)
 
 if __name__ == '__main__':
