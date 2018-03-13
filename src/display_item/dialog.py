@@ -141,16 +141,34 @@ class Dialogscene(BaseDialog):
 
     def changeleft(self, source):
         self.left.kill()
-        self.left = Sprite(source, position=(self.w // 6, self.h // 2))
-        self.left.scale_x, self.left.scale_y = \
-            480 / self.left.width, 640 / self.left.height
+        if type(source) is str:
+            self.left = Sprite(source, position=(self.w // 6, self.h // 2))
+            self.left.scale_x, self.left.scale_y = \
+                480 / self.left.width, 640 / self.left.height
+        else:
+            self.left = Layer()
+            pos1, pos2 = (300, self.h // 2), (640, self.h // 2)
+            spr1, spr2 = Sprite(source[0], position=pos1), Sprite(source[1], position=pos2)
+            spr1.scale_x, spr1.scale_y = 480 / spr1.width, 640 / spr1.height
+            spr2.scale_x, spr2.scale_y = 480 / spr2.width, 640 / spr2.height
+            self.left.add(spr1)
+            self.left.add(spr2)
         self.add(self.left)
 
     def changeright(self, source):
         self.right.kill()
-        self.right = Sprite(source, position=(self.w * 5 // 6, self.h // 2))
-        self.right.scale_x, self.right.scale_y = \
-            480 / self.right.width, 640 / self.right.height
+        if type(source) is str:
+            self.right = Sprite(source, position=(self.w * 5 // 6, self.h // 2))
+            self.right.scale_x, self.right.scale_y = \
+                480 / self.right.width, 640 / self.right.height
+        else:
+            self.right = Layer()
+            pos1, pos2 = (self.w-640, self.h // 2), (self.w-300, self.h // 2)
+            spr1, spr2 = Sprite(source[0], position=pos1), Sprite(source[1], position=pos2)
+            spr1.scale_x, spr1.scale_y = 480 / spr1.width, 640 / spr1.height
+            spr2.scale_x, spr2.scale_y = 480 / spr2.width, 640 / spr2.height
+            self.right.add(spr1)
+            self.right.add(spr2)
         self.add(self.right)
 
     def exit(self):
