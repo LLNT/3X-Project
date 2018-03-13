@@ -143,14 +143,14 @@ class Dialogscene(BaseDialog):
         self.left.kill()
         self.left = Sprite(source, position=(self.w // 6, self.h // 2))
         self.left.scale_x, self.left.scale_y = \
-            self.size / self.left.width, self.size / self.left.height
+            480 / self.left.width, 640 / self.left.height
         self.add(self.left)
 
     def changeright(self, source):
         self.right.kill()
         self.right = Sprite(source, position=(self.w * 5 // 6, self.h // 2))
         self.right.scale_x, self.right.scale_y = \
-            self.size / self.right.width, self.size / self.right.height
+            480 / self.right.width, 640 / self.right.height
         self.add(self.right)
 
     def exit(self):

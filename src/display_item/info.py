@@ -96,9 +96,9 @@ class Personinfo(Info):
 
     def info_display(self, person):
         p = person #type: Person
-        self.icon = Sprite(image=p.pic)
+        self.icon = Sprite(image=p.icon)
         h, w = self.icon.height, self.icon.width
-        self.icon.scale_x, self.icon.scale_y = self.width / (w * 3), self.height / (h * 3)
+        self.icon.scale_x, self.icon.scale_y = 240 / w, 240/ h
         self.icon.position = self.width * 1 // 4, self.height * 3 // 4
         self.add(self.icon)
 
