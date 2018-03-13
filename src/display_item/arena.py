@@ -1563,7 +1563,7 @@ class Arena(Layer):
     def update(self, dt):
         x1, y1 = self._update
         x0, y0 = self.position
-        if x0 > 5 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) - 5 and x0 < 0:
+        if x0 > 5 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) - 5 and x1 < 0:
             x1 = 0
         if y0 > 5 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) - 5 and y1 < 0:
             y1 = 0
