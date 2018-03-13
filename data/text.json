@@ -3994,7 +3994,7 @@
     "Text":"为了国家和人民的利益，向利尔斯帝国宣战。",
     "Scene":"background_test.jpg",
     "Left":null,
-    "Right":["dighinsea.jpg"]
+    "Right":["deghinsea.jpg"]
   },
   "PT010-13":{
     "Type":"N",
@@ -4008,7 +4008,7 @@
     "Text":"前往接应被困在奥尔堡的二王子格奥尔吉·内斯托罗维奇。",
     "Scene":"background_test.jpg",
     "Left":["leaf.jpg"],
-    "Right":["dighinsea.jpg"]
+    "Right":["deghinsea.jpg"]
   },
   "PT010-15":{
     "Type":"N",
