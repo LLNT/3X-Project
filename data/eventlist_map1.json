@@ -1,4 +1,11 @@
 {
   "General":[],
-  "Turns":[]
+  "Turns":[],
+  "Dialogs":[],
+  "Treasures":{},
+  "Seize":{},
+  "Doors":{},
+  "Villages":{},
+  "Battle":[],
+  "Defeated":[]
 }

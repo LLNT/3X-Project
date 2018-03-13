@@ -3,12 +3,12 @@
   "Armies":[
     {
       "Name": "Kruberian 2ND Legion",
-      "Member": [{"Id":"1","X":15,"Y":15,"PRI":0,"AI":"No-AI-Base"},{"Id":"2","X":15,"Y":14,"PRI":0,"AI":"No-AI-Base"}],
+      "Member": [{"Id":"1","X":12,"Y":15,"PRI":0,"AI":"No-AI-Base"},{"Id":"2","X":12,"Y":14,"PRI":0,"AI":"No-AI-Base"},{"Id":"4","X":12,"Y":22,"PRI":0,"AI":"No-AI-Base"}],
       "Controller": 0
     },
     {
       "Name": "Lilse Army",
-      "Member":[{"Id":"202","X":14,"Y":26,"PRI":0,"AI":"AI010-Passive-Base"}],
+      "Member":[{"Id":"202","X":11,"Y":26,"PRI":0,"AI":"AI010-Passive-Base"}],
       "Controller":1
     }
   ]
