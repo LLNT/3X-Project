@@ -43,7 +43,8 @@
       "Light":0,
       "Dark":0,
       "Wand":0},
-    "Picture":"leaf.jpg",
+    "Picture":"yury.jpg",
+    "Icon":"yury.jpg",
     "Skills":
     [
 
@@ -112,6 +113,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"tanya.jpg",
+    "Icon":"tanya_icon.jpg",
     "Skills":
     [
       "Awareness"
@@ -178,6 +180,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"pirn.jpg",
+    "Icon":"pirn.jpg",
     "Skills":
     [
       "Ambush",
@@ -247,6 +250,7 @@
       "Dark":0,
       "Wand":150},
     "Picture":"reinhard.jpg",
+    "Icon":"reinhard.jpg",
     "Skills":
     [
       "Continue",
@@ -320,6 +324,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
       "Wrath"
@@ -385,6 +390,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
       "Continue"
@@ -458,6 +464,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -523,6 +530,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -588,6 +596,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -653,6 +662,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -718,6 +728,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -783,6 +794,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -848,6 +860,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -913,6 +926,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -978,6 +992,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1043,6 +1058,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1108,6 +1124,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1173,6 +1190,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"oliver.jpg",
+    "Icon":"oliver.jpg",
     "Skills":
     [
 
@@ -1237,6 +1255,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"oliver.jpg",
+    "Icon":"oliver.jpg",
     "Skills":
     [
 
@@ -1301,6 +1320,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"oliver.jpg",
+    "Icon":"oliver.jpg",
     "Skills":
     [
 
@@ -1365,6 +1385,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"oliver.jpg",
+    "Icon":"oliver.jpg",
     "Skills":
     [
 
@@ -1429,6 +1450,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1494,6 +1516,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1559,6 +1582,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1624,6 +1648,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1689,6 +1714,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1754,6 +1780,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1819,6 +1846,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1885,6 +1913,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -1951,6 +1980,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -2017,6 +2047,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -2083,6 +2114,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -2149,6 +2181,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -2215,6 +2248,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -2281,6 +2315,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 
@@ -2347,6 +2382,7 @@
       "Dark":0,
       "Wand":0},
     "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
     "Skills":
     [
 

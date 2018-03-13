@@ -8,6 +8,7 @@ class Person:
         self.name = ""       #type:str
         self.cls = ""        #type:str
         self.pic = ""        #type:str
+        self.icon = ""       #type:str
         self.ability ={}     #type:Dict[str,int]
         self.skills = []     #type:List[str]
         self.ability_limit={}#type:Dict[str,int]
@@ -23,7 +24,7 @@ class Person:
         self.coefficient=0.0 #type:float
         self.bonus=0         #type:int
         self.battlecard={}
-    def __init__(self,pid,name,cls,ability,skills,pic,weapon_rank_bonus,items,support,cls_weapon_rank,color,attr,growth,
+    def __init__(self,pid,name,cls,ability,skills,pic,icon,weapon_rank_bonus,items,support,cls_weapon_rank,color,attr,growth,
                  cls_abl_limit,coe,bon,battlecard):
         self.pid=pid
         self.name=name
@@ -32,6 +33,7 @@ class Person:
         self.growth=growth
         self.skills=skills
         self.pic=pic
+        self.icon=icon
         self.weapon_rank=cls_weapon_rank[self.cls].copy()
         self.ability_limit=cls_abl_limit[self.cls].copy()
         self.suprank={}
@@ -205,7 +207,7 @@ class PersonBank:
             for item in persondict[pid]["Init_item"]:
                 items.append(itembank[item])
             person=Person(pid,persondict[pid]["Name"],persondict[pid]["Cls"],persondict[pid]["Ability"],
-                          persondict[pid]["Skills"],persondict[pid]["Picture"],persondict[pid]["Weapon Rank Bonus"],
+                          persondict[pid]["Skills"],persondict[pid]["Picture"],persondict[pid]["Icon"],persondict[pid]["Weapon Rank Bonus"],
                           items,persondict[pid]["Support"],cls_weapon_rank,persondict[pid]["Color"],
                           persondict[pid]["Attribute"],persondict[pid]["Growth"],cls_abl_lmt,
                           persondict[pid]["Coefficient"],persondict[pid]["Bonus"],persondict[pid]["Battlecard"])
