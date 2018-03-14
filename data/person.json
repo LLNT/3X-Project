@@ -147,7 +147,7 @@
       "STR":8,
       "MGC":0,
       "SPD":12,
-      "SKL":9,
+      "SKL":11,
       "DEF":7,
       "RES":2,
       "LUK":1,
@@ -2397,6 +2397,140 @@
     "Bonus":0,
     "Battlecard":{
       "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1010001":
+  {
+    "Id": 1010001,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":2,
+      "MHP":28,
+      "STR":11,
+      "MGC":0,
+      "SPD":13,
+      "SKL":10,
+      "DEF":7,
+      "RES":7,
+      "LUK":6,
+      "BLD":12,
+      "MOV":8,
+      "HP":28,
+      "CRY":13,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[47,48],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+   "1010002":
+  {
+    "Id": 1010002,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":3,
+      "MHP":30,
+      "STR":13,
+      "MGC":0,
+      "SPD":12,
+      "SKL":14,
+      "DEF":10,
+      "RES":8,
+      "LUK":7,
+      "BLD":11,
+      "MOV":8,
+      "HP":30,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[49,50],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
         "Sword":"",
         "Lance":"",
         "Base":""

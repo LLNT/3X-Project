@@ -228,5 +228,25 @@
     "Id":46,
     "Itemtype":"Iron Blade",
     "Use":35
+  },
+  {
+    "Id":47,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":48,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":49,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":50,
+    "Itemtype":"Wind Edge",
+    "Use":20
   }
 ]

@@ -393,8 +393,9 @@ class Main:
         self.person_container.army.pop(pid)
         self.person_container.AItype.pop(pid)
         if (c==0):
-            if self.global_vars.player_character_status[pid]==1:
-                self.global_vars.player_character_status[pid]=2
+            if pid in self.global_vars.player_character_status:
+                if self.global_vars.player_character_status[pid]==1:
+                    self.global_vars.player_character_status[pid]=2
 
         for p in self.person_container.people:
             if p.pid == pid:
