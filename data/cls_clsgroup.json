@@ -2,7 +2,7 @@
   "Lord":"Infantry",
   "Swordman":"Infantry",
   "Lancer":"Hoplite",
-  "Warrior":"Hoplite",
+  "Fighter":"Hoplite",
   "Armorknight":"Armor",
   "Archer":"Bower",
   "Thief":"Cracksman",

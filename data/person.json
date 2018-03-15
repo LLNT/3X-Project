@@ -489,7 +489,7 @@
   {
     "Id": 1000002,
     "Name": "Lilse Warrior",
-    "Cls":"Warrior",
+    "Cls":"Fighter",
     "Ability":
     {
       "LV":3,
@@ -544,7 +544,7 @@
     "Coefficient":0.5,
     "Bonus":0,
     "Battlecard":{
-      "Warrior":{
+      "Fighter":{
         "Axe":"",
         "Base":""
       },
@@ -555,7 +555,7 @@
   {
     "Id": 1000003,
     "Name": "Lilse Warrior",
-    "Cls":"Warrior",
+    "Cls":"Fighter",
     "Ability":
     {
       "LV":2,
@@ -610,7 +610,7 @@
     "Coefficient":0.5,
     "Bonus":0,
     "Battlecard":{
-      "Warrior":{
+      "Fighter":{
         "Axe":"",
         "Base":""
       },
@@ -951,7 +951,7 @@
   {
     "Id": 1000009,
     "Name": "Lilse Warrior",
-    "Cls":"Warrior",
+    "Cls":"Fighter",
     "Ability":
     {
       "LV":3,
@@ -1006,7 +1006,7 @@
     "Coefficient":0.5,
     "Bonus":0,
     "Battlecard":{
-      "Warrior":{
+      "Fighter":{
         "Axe":"",
         "Base":""
       },
@@ -1017,7 +1017,7 @@
   {
     "Id": 1000010,
     "Name": "Lilse Warrior",
-    "Cls":"Warrior",
+    "Cls":"Fighter",
     "Ability":
     {
       "LV":2,
@@ -1072,7 +1072,7 @@
     "Coefficient":0.5,
     "Bonus":0,
     "Battlecard":{
-      "Warrior":{
+      "Fighter":{
         "Axe":"",
         "Base":""
       },
@@ -2483,6 +2483,7 @@
       "STR":13,
       "MGC":0,
       "SPD":12,
+
       "SKL":14,
       "DEF":10,
       "RES":8,
