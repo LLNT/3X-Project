@@ -309,9 +309,156 @@ class AI_Controller:
                     if push_pid in _map.person_container.position:
                         (move_to, track) = self.find_push_action(person, _map, push_pid)
                         if not move_to == None:
+                            attack_candidate = []
+                            if len(person.item) > 0:
+                                for weap in person.item:
+                                    if _map.can_equip(p,weap):
+                                        minrange = weap.itemtype.min_range
+                                        maxrange = weap.itemtype.max_range
+                                        for enm in _enemy:
+                                            pose = _map.person_container.position[enm]
+                                            if (calc_dist(pose, move_to) >= minrange) and (
+                                                calc_dist(pose, move_to) <= maxrange):
+                                                enemy_person = _map.global_vars.personBank[enm]
+                                                bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
+                                                             move_to)
+                                                sim = bat.simulate()
+                                                del (bat)
+                                                attack_candidate.append((move_to, enemy_person, weap, sim))
+                            if len(attack_candidate) > 0:
+                                attack_object = self.choose_attack_obj(strategy, attack_candidate)
+                                if not (attack_object == None):
+                                    return ["A",person,move_to,track,attack_object[1],attack_object[2]]
                             return ["M", person, move_to, track]
                 else:
-                    return ["M", person, pos, [pos]]
+                    tarpos = (int(tartp[0]), int(tartp[1]))
+                    dst_g, track_g, rem_mov_g, moveto_g, occupied_g = self.find_geographical_shortest(person, _map,
+                                                                                                      tarpos)
+                    dst_r, track_r, rem_mov_r, moveto_r, occupied_r = self.find_relative_shortest(person, _map, tarpos)
+                    # print(tarpos,rem_mov_g,rem_mov_r)
+                    if (rem_mov_r - rem_mov_g <= person.ability["MOV"]) and (rem_mov_r >= -100):
+                        while not ((rem_mov_r >= float(0)) and occupied_r == 0):
+                            moveto_r = track_r[-2]
+                            rem_mov_r = dst_r[moveto_r][0]
+                            track_r = dst_r[moveto_r][1]
+                            occupied_r = 0
+                            for _p in _map.person_container.position:
+                                if not (_p == person.pid):
+                                    if _map.person_container.position[_p] == moveto_r:
+                                        occupied_r = 1
+                                        break
+                        attack_candidate = []
+                        if len(person.item) > 0:
+                            for weap in person.item:
+                                if _map.can_equip(p, weap):
+                                    minrange = weap.itemtype.min_range
+                                    maxrange = weap.itemtype.max_range
+                                    for enm in _enemy:
+                                        pose = _map.person_container.position[enm]
+                                        if (calc_dist(pose, moveto_r) >= minrange) and (
+                                                    calc_dist(pose, moveto_r) <= maxrange):
+                                            enemy_person = _map.global_vars.personBank[enm]
+                                            bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
+                                                         moveto_r)
+                                            sim = bat.simulate()
+                                            del (bat)
+                                            attack_candidate.append((moveto_r, enemy_person, weap, sim))
+                        if len(attack_candidate) > 0:
+                            attack_object = self.choose_attack_obj(strategy, attack_candidate)
+                            if not (attack_object == None):
+                                return ["A", person, moveto_r, track_r, attack_object[1], attack_object[2]]
+                        return ["M", person, moveto_r, track_r]
+                        # find way on relative best route
+                    else:
+                        step = 0
+                        direction = 0
+                        while True:
+                            moveto_g = track_g[step]
+                            rem_mov_g = dst_g[moveto_g][0]
+                            if rem_mov_g < 0:
+                                direction = 1
+                                step -= 1
+                                continue
+                            for _p in _map.person_container.position:
+                                if not (_p == person.pid):
+                                    if _map.person_container.position[_p] == moveto_g:
+                                        if _map.person_container.controller[_p] % 2 == _map.person_container.controller[
+                                            person.pid] % 2:
+                                            if direction == 0:
+                                                step += 1
+                                            else:
+                                                step -= 1
+                                            break
+                                        else:
+                                            movement_candidate = []
+                                            dst_to_move_list = _valid[p]
+                                            for dst in dst_to_move_list:
+                                                if len(person.item) > 0:
+                                                    for weap in person.item:
+                                                        if _map.can_equip(p,
+                                                                          weap):  # attackable(weap.itemtype.weapontype):
+                                                            minrange = weap.itemtype.min_range
+                                                            maxrange = weap.itemtype.max_range
+                                                            for enm in _enemy:
+                                                                if not enm == _p:
+                                                                    continue
+                                                                pose = _map.person_container.position[enm]
+                                                                if (calc_dist(pose, dst) >= minrange) and (
+                                                                            calc_dist(pose, dst) <= maxrange):
+                                                                    enemy_person = _map.global_vars.personBank[enm]
+                                                                    bat = Battle(person, enemy_person, weap,
+                                                                                 enemy_person.get_equip(), _map, dst)
+                                                                    sim = bat.simulate()
+                                                                    del (bat)
+                                                                    movement_candidate.append(
+                                                                        (dst, enemy_person, weap, sim))
+                                            if len(movement_candidate) > 0:
+                                                attack_object = self.choose_attack_obj(strategy, movement_candidate)
+                                                if not (attack_object == None):
+                                                    dst = attack_object[0]
+                                                    track = dst_to_move_list[dst][1]
+                                                    return ["A", person, dst, track, attack_object[1], attack_object[2]]
+                                            while not ((rem_mov_r >= float(0)) and occupied_r == 0):
+                                                moveto_r = track_r[-2]
+                                                rem_mov_r = dst_r[moveto_r][0]
+                                                track_r = dst_r[moveto_r][1]
+                                                occupied_r = 0
+                                                for _p in _map.person_container.position:
+                                                    if not (_p == person.pid):
+                                                        if _map.person_container.position[_p] == moveto_r:
+                                                            occupied_r = 1
+                                                            break
+                                            attack_candidate = []
+                                            if len(person.item) > 0:
+                                                for weap in person.item:
+                                                    if _map.can_equip(p, weap):
+                                                        minrange = weap.itemtype.min_range
+                                                        maxrange = weap.itemtype.max_range
+                                                        for enm in _enemy:
+                                                            pose = _map.person_container.position[enm]
+                                                            if (calc_dist(pose, moveto_r) >= minrange) and (
+                                                                        calc_dist(pose, moveto_r) <= maxrange):
+                                                                enemy_person = _map.global_vars.personBank[enm]
+                                                                bat = Battle(person, enemy_person, weap,
+                                                                             enemy_person.get_equip(), _map,
+                                                                             moveto_r)
+                                                                sim = bat.simulate()
+                                                                del (bat)
+                                                                attack_candidate.append(
+                                                                    (moveto_r, enemy_person, weap, sim))
+                                            if len(attack_candidate) > 0:
+                                                attack_object = self.choose_attack_obj(strategy, attack_candidate)
+                                                if not (attack_object == None):
+                                                    return ["A", person, moveto_r, track_r, attack_object[1],
+                                                            attack_object[2]]
+                                            return ["M", person, moveto_r, track_r]
+                                            # push the enemy
+                            if step == len(track_g) - 1:
+                                return ["M", person, moveto_g, dst_g[moveto_g][1]]
+                            if direction == 1:
+                                return ["M", person, moveto_g, dst_g[moveto_g][1]]
+                            step += 1
+                            # go maximum at geographical best route and attack blocker
             return ["M", person, pos, [pos]]
         if strategy["Strategy"]=="ACTIVE":
             movement_candidate = []
@@ -420,6 +567,29 @@ class AI_Controller:
                                                         if _map.person_container.position[_p] == moveto_r:
                                                             occupied_r = 1
                                                             break
+                                            attack_candidate = []
+                                            if len(person.item) > 0:
+                                                for weap in person.item:
+                                                    if _map.can_equip(p, weap):
+                                                        minrange = weap.itemtype.min_range
+                                                        maxrange = weap.itemtype.max_range
+                                                        for enm in _enemy:
+                                                            pose = _map.person_container.position[enm]
+                                                            if (calc_dist(pose, moveto_r) >= minrange) and (
+                                                                        calc_dist(pose, moveto_r) <= maxrange):
+                                                                enemy_person = _map.global_vars.personBank[enm]
+                                                                bat = Battle(person, enemy_person, weap,
+                                                                             enemy_person.get_equip(), _map,
+                                                                             moveto_r)
+                                                                sim = bat.simulate()
+                                                                del (bat)
+                                                                attack_candidate.append(
+                                                                    (moveto_r, enemy_person, weap, sim))
+                                            if len(attack_candidate) > 0:
+                                                attack_object = self.choose_attack_obj(strategy, attack_candidate)
+                                                if not (attack_object == None):
+                                                    return ["A", person, moveto_r, track_r, attack_object[1],
+                                                            attack_object[2]]
                                             return ["M", person, moveto_r, track_r]
                                             #push the enemy
                             if step==len(track_g)-1:
@@ -435,7 +605,7 @@ class AI_Controller:
             attack_candidate=[]
             if len(person.item)>0:
                 for weap in person.item:
-                    if _map.attackable(weap.itemtype.weapontype):
+                    if _map.can_equip(p,weap):
                         minrange=weap.itemtype.min_range
                         maxrange=weap.itemtype.max_range
                         for enm in _enemy:

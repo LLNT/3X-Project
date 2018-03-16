@@ -76,17 +76,17 @@
     "Ability":
     {
       "LV":7,
-      "MHP":31,
-      "STR":19,
+      "MHP":30,
+      "STR":14,
       "MGC":2,
       "SPD":15,
       "SKL":21,
       "DEF":13,
       "RES":6,
-      "LUK":9,
+      "LUK":6,
       "BLD":10,
       "MOV":8,
-      "HP":31,
+      "HP":30,
       "CRY":15,
       "EXP":0
     },
