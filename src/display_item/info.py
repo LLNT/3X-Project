@@ -147,6 +147,26 @@ class Personinfo(Info):
         for item in lay_out:
             self.layer2.add(item)
 
+        content = p.skills.copy()
+        content.extend(self.kwargs['map'].global_vars.clsBank[p.cls].cls_skills)
+
+
+        content_map = layout_multiply(content, row=4, column=2, pos_range=(
+            (self.width // 2, self.height // 6), (self.width * 17 // 18, self.height // 3)))
+        for column in content_map:
+            for item in column:
+                self.layer1.add(item)
+
+        content = []
+        for state in p.status:
+            content.append(state)
+            content.append(p.status[state])
+        content_map = layout_multiply(content, row=4, column=2, pos_range=(
+            (self.width // 2, 0), (self.width * 17 // 18, self.height // 6)))
+        for column in content_map:
+            for item in column:
+                self.layer1.add(item)
+
 
 class Battleinfo(Info):
     def __init__(self, at, df, wp, map, pos):

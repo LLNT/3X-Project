@@ -40,6 +40,9 @@ def layout(content, pos_range=None, color=(127, 255, 170, 255),
 
 def layout_multiply(content, row, column, pos_range=None, color=(127, 255, 170, 255),
                     font_name='times new roman', font_size=36):
+
+    if len(content) == 0:
+        return []
     if pos_range is None:
         from cocos.director import director
         (x1, y1) = director.get_window_size()

@@ -542,7 +542,7 @@ class Arena(Layer):
                 pid = self.cells[self.mouse_pos].person_on
                 select = self.people[pid].person
                 director.window.remove_handlers(self)
-                self.info = Personinfo(select, callback=self._callback)
+                self.info = Personinfo(select, callback=self._callback, map=self.map)
                 self.infolayer.add(self.info)
                 self.state = 'person_info'
             else:
