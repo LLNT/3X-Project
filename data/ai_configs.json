@@ -40,5 +40,19 @@
   "Attack_Obj":["1","4"],
   "Not_Attack":[],
   "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+},
+  "AI010-Active-Base":{
+  "Strategy":"ACTIVE",
+  "Push":["12,15"],
+  "Attack_Obj":["1","4"],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+},
+  "AI010-Pursue-Base":{
+  "Strategy":"PURSUE",
+  "Push":["12,15"],
+  "Attack_Obj":["1","4"],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
 }
 }
