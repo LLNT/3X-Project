@@ -63,6 +63,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Wood":{
@@ -123,6 +131,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -195,6 +211,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":-10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Mountain":{
@@ -261,6 +285,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":10,
+      "AVO":15,
+      "CRT":5,
+      "CRA":0,
+      "ATK":2,
+      "DEF":2
     }
   },
   "High Mountain":{
@@ -327,6 +359,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":20,
+      "AVO":30,
+      "CRT":10,
+      "CRA":5,
+      "ATK":4,
+      "DEF":4
     }
   },
   "Sea":{
@@ -387,6 +427,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":-10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":-10,
       "CRT":0,
@@ -459,6 +507,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Grass":{
@@ -519,6 +575,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -591,6 +655,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":-5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Column":{
@@ -651,6 +723,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -723,6 +803,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Avenue":{
@@ -783,6 +871,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":-5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":-5,
       "CRT":0,
@@ -855,6 +951,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Gate":{
@@ -907,6 +1011,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":20,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":20,
       "CRT":0,
@@ -979,6 +1091,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":5,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Fort":{
@@ -1039,6 +1159,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":10,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":10,
       "CRT":0,
@@ -1111,6 +1239,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":30,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Floor":{
@@ -1171,6 +1307,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -1243,6 +1387,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Empty Treasury":{
@@ -1303,6 +1455,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":0,
       "CRT":0,
@@ -1375,6 +1535,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Closed":{
@@ -1441,6 +1609,14 @@
       "CRA":0,
       "ATK":0,
       "DEF":0
+    },
+    "Mountainer":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
     }
   },
   "Fence":{
@@ -1501,6 +1677,14 @@
       "DEF":0
     },
     "Armor":{
+      "HIT":0,
+      "AVO":0,
+      "CRT":0,
+      "CRA":0,
+      "ATK":0,
+      "DEF":0
+    },
+    "Mountainer":{
       "HIT":0,
       "AVO":0,
       "CRT":0,

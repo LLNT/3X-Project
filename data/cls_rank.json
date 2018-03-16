@@ -2,7 +2,10 @@
   "High":[
     "Sniper",
     "Paladin",
-    "Mage Knight"
+    "Mage Knight",
+    "Ranger",
+    "Swordsmaster",
+    "Hero"
   ],
   "Low":[
     "Lord",
@@ -15,7 +18,11 @@
     "Lancer",
     "Fighter",
     "Armorknight",
-    "Civilian"
+    "Civilian",
+    "Brigand",
+    "Swordsman",
+    "Nomad",
+    "Priest Knight"
 ],
   "SHigh":[],
   "SLow":[]

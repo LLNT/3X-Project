@@ -7,7 +7,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Wood":{
     "Infantry":2,
@@ -17,7 +18,8 @@
     "Magician":1.5,
     "Cracksman":1,
     "Hoplite":2,
-    "Armor":4
+    "Armor":4,
+    "Mountainer":2
   },
   "River":{
     "Infantry":5,
@@ -27,7 +29,8 @@
     "Magician":255,
     "Cracksman":3,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":5
   },
   "Mountain":{
     "Infantry":3,
@@ -37,7 +40,8 @@
     "Magician":3,
     "Cracksman":2,
     "Hoplite":5,
-    "Armor":5
+    "Armor":5,
+    "Mountainer":1
   },
   "High Mountain":{
     "Infantry":255,
@@ -47,7 +51,8 @@
     "Magician":255,
     "Cracksman":5,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":2.5
   },
   "Sea":{
     "Infantry":255,
@@ -57,7 +62,8 @@
     "Magician":255,
     "Cracksman":5,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":255
   },
   "Forest":{
     "Infantry":5,
@@ -67,7 +73,8 @@
     "Magician":2,
     "Cracksman":2.5,
     "Hoplite":5,
-    "Armor":5
+    "Armor":5,
+    "Mountainer":3
   },
   "Grass":{
     "Infantry":1,
@@ -77,7 +84,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Bridge":{
     "Infantry":1,
@@ -87,7 +95,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Column":{
     "Infantry":1,
@@ -97,7 +106,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Wall":{
     "Infantry":255,
@@ -107,7 +117,8 @@
     "Magician":255,
     "Cracksman":255,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":255
   },
   "Avenue":{
     "Infantry":1,
@@ -117,7 +128,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Cliff":{
     "Infantry":255,
@@ -127,7 +139,8 @@
     "Magician":255,
     "Cracksman":255,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":5
   },
   "Gate":{
     "Infantry":1,
@@ -137,7 +150,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Village":{
     "Infantry":1,
@@ -147,7 +161,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Fort":{
     "Infantry":1,
@@ -157,7 +172,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Throne":{
     "Infantry":1,
@@ -167,7 +183,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Floor":{
     "Infantry":1,
@@ -177,7 +194,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Treasury":{
     "Infantry":1,
@@ -187,7 +205,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Empty Treasury":{
     "Infantry":1,
@@ -197,7 +216,8 @@
     "Magician":1,
     "Cracksman":1,
     "Hoplite":1,
-    "Armor":1
+    "Armor":1,
+    "Mountainer":1
   },
   "Door":{
     "Infantry":255,
@@ -207,7 +227,8 @@
     "Magician":255,
     "Cracksman":255,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":255
   },
   "Closed":{
     "Infantry":255,
@@ -217,7 +238,8 @@
     "Magician":255,
     "Cracksman":255,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":255
   },
   "Fence":{
     "Infantry":255,
@@ -227,6 +249,7 @@
     "Magician":255,
     "Cracksman":5,
     "Hoplite":255,
-    "Armor":255
+    "Armor":255,
+    "Mountainer":255
   }
 }

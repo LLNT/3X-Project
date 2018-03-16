@@ -1,6 +1,6 @@
 {
   "Lord":"Infantry",
-  "Swordman":"Infantry",
+  "Swordsman":"Infantry",
   "Lancer":"Hoplite",
   "Fighter":"Hoplite",
   "Armorknight":"Armor",
@@ -9,6 +9,8 @@
   "Mercenary":"Infantry",
   "Cleric":"Magician",
   "Sniper":"Bower",
+  "Ranger":"Knight",
+  "Brigand":"Mountainer",
   "Cavalier":"Knight",
   "Paladin":"Knight",
   "Mage Knight":"Knight",
@@ -19,5 +21,8 @@
   "Summoner":"Infantry",
   "Rhymist":"Infantry",
   "Monk":"Infantry" ,
-  "Civilian":"Infantry"
+  "Civilian":"Infantry",
+  "Swordsmaster":"Infantry",
+  "Priest Knight":"Knight",
+  "Hero":"Infantry"
 }

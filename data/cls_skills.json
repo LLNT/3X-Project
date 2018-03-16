@@ -4,7 +4,7 @@
   "Archer":[],
   "Pegasus Knight":[],
   "Cleric":[],
-  "Sniper":["Continue"],
+  "Sniper":["Ambush"],
   "Paladin":["Charge"],
   "Mercenary":[],
   "Thief":[],
@@ -12,5 +12,12 @@
   "Fighter":[],
   "Armorknight":[],
   "Civilian":[],
-  "Mage Knight":["Prayer"]
+  "Mage Knight":["Prayer"],
+  "Ranger":["Continue"],
+  "Brigand":[],
+  "Swordsman":[],
+  "Swordsmaster":[],
+  "Nomad":[],
+  "Priest Knight":[],
+  "Hero":[]
 }
