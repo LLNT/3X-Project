@@ -159,6 +159,21 @@
       "HP":80,
       "CRY":20
   },
+  "Great Knight":{
+      "LV":20,
+      "MHP":60,
+      "STR":27,
+      "MGC":20,
+      "SPD":24,
+      "SKL":25,
+      "DEF":29,
+      "RES":26,
+      "LUK":30,
+      "BLD":20,
+      "MOV":20,
+      "HP":80,
+      "CRY":20
+  },
   "Swordsman":
     {"LV":20,
       "MHP":60,

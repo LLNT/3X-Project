@@ -249,5 +249,18 @@
       "Light":0,
       "Dark":0,
       "Wand":0
+  },
+  "Great Knight":
+  {
+    "Sword":1,
+      "Lance":1,
+      "Axe":1,
+      "Bow":1,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0
   }
 }

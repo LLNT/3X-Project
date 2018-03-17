@@ -4,7 +4,8 @@
     {
       "Name": "Kruberian 2ND Legion",
       "Member": [{"Id":"1","X":12,"Y":15,"PRI":0,"AI":"No-AI-Base"},{"Id":"2","X":12,"Y":14,"PRI":0,"AI":"No-AI-Base"},{"Id":"4","X":12,"Y":22,"PRI":0,"AI":"No-AI-Base"}
-      ,{"Id":"1010001","X":7,"Y":20,"PRI":0,"AI":"No-AI-Base"},{"Id":"1010002","X":16,"Y":20,"PRI":0,"AI":"No-AI-Base"}],
+      ,{"Id":"1010001","X":7,"Y":20,"PRI":0,"AI":"No-AI-Base"},{"Id":"1010002","X":16,"Y":20,"PRI":0,"AI":"No-AI-Base"},{"Id":"1010003","X":15,"Y":14,"PRI":0,"AI":"No-AI-Base"}
+      ,{"Id":"1010004","X":8,"Y":14,"PRI":0,"AI":"No-AI-Base"},{"Id":"1010005","X":15,"Y":9,"PRI":0,"AI":"No-AI-Base"}],
       "Controller": 0
     },
     {

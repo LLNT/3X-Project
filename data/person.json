@@ -2538,5 +2538,210 @@
       },
       "Base":""
     }
+  },
+   "1010003":
+  {
+    "Id": 1010003,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Ranger",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":27,
+      "STR":12,
+      "MGC":0,
+      "SPD":18,
+      "SKL":16,
+      "DEF":8,
+      "RES":1,
+      "LUK":4,
+      "BLD":10,
+      "MOV":8,
+      "HP":27,
+      "CRY":15,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":30,
+      "Lance":0,
+      "Axe":0,
+      "Bow":30,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[51,52,53],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Ranger":{
+        "Sword":"",
+        "Bow":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1010004":
+  {
+    "Id": 1010004,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Great Knight",
+    "Ability":
+    {
+      "LV":3,
+      "MHP":33,
+      "STR":15,
+      "MGC":0,
+      "SPD":13,
+      "SKL":12,
+      "DEF":18,
+      "RES":6,
+      "LUK":1,
+      "BLD":15,
+      "MOV":7,
+      "HP":33,
+      "CRY":10,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":30,
+      "Axe":30,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[54,55],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Great Knight":{
+        "Sword":"",
+        "Bow":"",
+        "Axe":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1010005":
+  {
+    "Id": 1010005,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Great Knight",
+    "Ability":
+    {
+      "LV":4,
+      "MHP":36,
+      "STR":14,
+      "MGC":0,
+      "SPD":13,
+      "SKL":15,
+      "DEF":20,
+      "RES":0,
+      "LUK":3,
+      "BLD":16,
+      "MOV":7,
+      "HP":36,
+      "CRY":9,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":30,
+      "Lance":30,
+      "Axe":0,
+      "Bow":30,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[56,57,58],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Great Knight":{
+        "Sword":"",
+        "Bow":"",
+        "Axe":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
   }
 }

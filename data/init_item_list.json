@@ -248,5 +248,45 @@
     "Id":50,
     "Itemtype":"Wind Edge",
     "Use":20
+  },
+  {
+    "Id":51,
+    "Itemtype":"Killer Bow",
+    "Use":20
+  },
+  {
+    "Id":52,
+    "Itemtype":"Long Bow",
+    "Use":25
+  },
+  {
+    "Id":53,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":54,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":55,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":56,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":57,
+    "Itemtype":"Iron Blade",
+    "Use":35
+  },
+  {
+    "Id":58,
+    "Itemtype":"Steel Bow",
+    "Use":30
   }
 ]

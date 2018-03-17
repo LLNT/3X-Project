@@ -24,5 +24,6 @@
   "Civilian":"Infantry",
   "Swordsmaster":"Infantry",
   "Priest Knight":"Knight",
-  "Hero":"Infantry"
+  "Hero":"Infantry",
+  "Great Knight":"Armor"
 }
