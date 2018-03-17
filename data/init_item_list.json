@@ -288,5 +288,40 @@
     "Id":58,
     "Itemtype":"Steel Bow",
     "Use":30
+  },
+  {
+    "Id":59,
+    "Itemtype":"Short Bow",
+    "Use":22
+  },
+  {
+    "Id":60,
+    "Itemtype":"Steel Bow",
+    "Use":30
+  },
+  {
+    "Id":61,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":62,
+    "Itemtype":"Short Spear",
+    "Use":18
+  },
+  {
+    "Id":63,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":64,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":65,
+    "Itemtype":"Sleep",
+    "Use":5
   }
 ]

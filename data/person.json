@@ -258,7 +258,7 @@
       "Charge",
       "Shield"
     ],
-    "Init_item":[44,45,46],
+    "Init_item":[44,45,46,65],
     "Support":{
 
     },
@@ -2551,7 +2551,7 @@
       "STR":12,
       "MGC":0,
       "SPD":18,
-      "SKL":16,
+      "SKL":17,
       "DEF":8,
       "RES":1,
       "LUK":4,
@@ -2738,6 +2738,272 @@
         "Sword":"",
         "Bow":"",
         "Axe":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+   "1010006":
+  {
+    "Id": 1010006,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Nomad",
+    "Ability":
+    {
+      "LV":16,
+      "MHP":26,
+      "STR":9,
+      "MGC":0,
+      "SPD":15,
+      "SKL":16,
+      "DEF":8,
+      "RES":2,
+      "LUK":6,
+      "BLD":8,
+      "MOV":7,
+      "HP":26,
+      "CRY":12,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":30,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[59],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Nomad":{
+        "Bow":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1010007":
+  {
+    "Id": 1010007,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Nomad",
+    "Ability":
+    {
+      "LV":18,
+      "MHP":31,
+      "STR":13,
+      "MGC":0,
+      "SPD":13,
+      "SKL":14,
+      "DEF":10,
+      "RES":4,
+      "LUK":4,
+      "BLD":12,
+      "MOV":7,
+      "HP":31,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":0,
+      "Bow":30,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[60],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Nomad":{
+        "Bow":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1010008":
+  {
+    "Id": 1010008,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":17,
+      "MHP":30,
+      "STR":14,
+      "MGC":0,
+      "SPD":8,
+      "SKL":11,
+      "DEF":13,
+      "RES":6,
+      "LUK":3,
+      "BLD":13,
+      "MOV":7,
+      "HP":30,
+      "CRY":7,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":30,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[61,62],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1010009":
+  {
+    "Id": 1010009,
+    "Name": "Kruberian Cavalry",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":17,
+      "MHP":33,
+      "STR":12,
+      "MGC":0,
+      "SPD":10,
+      "SKL":10,
+      "DEF":12,
+      "RES":4,
+      "LUK":1,
+      "BLD":10,
+      "MOV":7,
+      "HP":33,
+      "CRY":10,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":30,
+      "Lance":0,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[63,64],
+    "Support":{
+
+    },
+    "Color":"Green",
+    "Attribute":"Wind",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
         "Lance":"",
         "Base":""
       },
