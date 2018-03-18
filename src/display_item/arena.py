@@ -79,7 +79,7 @@ class Arena(Layer):
         self.menulayer = menulayer
         self.infolayer = infolayer
 
-        self.board = Board(self.windowsize[0], self.windowsize[1],25,-5)
+        self.board = Board(self.windowsize[0], self.windowsize[1],25,-10)
         self._update = (0, 0)
         self.schedule(self.update)
 
@@ -115,6 +115,7 @@ class Arena(Layer):
     def _clear_map(self):
         # should be executed after movement and before battle display
         self.state = 'default' #type:
+        self.allow_move = True
         self.selected = None
         self.target = None
         self.mouse_pos = None
@@ -708,8 +709,11 @@ class Arena(Layer):
                 hitr = Type1(user, wand, target, self.map, self.target).simulate()
                 self.hitrate = Info()
                 self.add(self.hitrate)
+                x, y = self.position
+                self.hitrate.position = -x, -y
                 self.hitrate.display([str(hitr)])
                 self.state = 'wand_type1_confirm'
+                self.allow_move = False
             else:
                 self._reset()
             pass
@@ -1062,6 +1066,7 @@ class Arena(Layer):
 
 
     def _battle(self, layer, **kwargs):
+        director.window.remove_handlers(self)
         pid = self.selected
         dst = self._mapstate[0][self.selected][self.target][1]
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) +\
@@ -1561,21 +1566,22 @@ class Arena(Layer):
         return i, j
 
     def update(self, dt):
-        x1, y1 = self._update
-        x0, y0 = self.position
-        if x0 > 5 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) - 5 and x1 < 0:
-            x1 = 0
-        if y0 > 5 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) - 5 and y1 < 0:
-            y1 = 0
-        self.position = self.position[0] + x1, \
-                        self.position[1] + y1
+        if self.allow_move:
+            x1, y1 = self._update
+            x0, y0 = self.position
+            if x0 > 5 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) - 5 and x1 < 0:
+                x1 = 0
+            if y0 > 5 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) - 5 and y1 < 0:
+                y1 = 0
+            self.position = self.position[0] + x1, \
+                            self.position[1] + y1
 
     def _coordinate(self,x, y):
         return ((x - self.anchor_x - self.position[0]) // self.scale + self.anchor_x) ,\
               ((y - self.anchor_y - self.position[1]) // self.scale + self.anchor_y)
 
 class Board():
-    def __init__(self, w=800, h=600, margin=20, step=-2):
+    def __init__(self, w=800, h=600, margin=20, step=-5):
         self.w = w
         self.h = h
         self.margin = margin
@@ -1593,9 +1599,9 @@ class Board():
                 return (-self.step, 0)
         elif x > self.right:
             if y > self.up:
-                return (self.step, -self.step)
+                return (self.step,  self.step)
             elif y < self.margin:
-                return (self.step, self.step)
+                return (self.step, -self.step)
             else:
                 return (self.step, 0)
         else:
