@@ -348,5 +348,95 @@
     "Id":70,
     "Itemtype":"Heal",
     "Use":40
+  },
+  {
+    "Id":71,
+    "Itemtype":"Short Spear",
+    "Use":18
+  },
+  {
+    "Id":72,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":73,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":74,
+    "Itemtype":"Slim Sword",
+    "Use":30
+  },
+  {
+    "Id": 75,
+    "Itemtype": "Short Bow",
+    "Use": 22
+  },
+  {
+    "Id":76,
+    "Itemtype":"Long Bow",
+    "Use":25
+  },
+  {
+    "Id":77,
+    "Itemtype":"Horse Slayer",
+    "Use":20
+  },
+  {
+    "Id":78,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":79,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":80,
+    "Itemtype":"Mend",
+    "Use":30
+  },
+  {
+    "Id":81,
+    "Itemtype":"Killer Bow",
+    "Use":20
+  },
+  {
+    "Id":82,
+    "Itemtype":"Killer Lance",
+    "Use":20
+  },
+  {
+    "Id":83,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":84,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":85,
+    "Itemtype":"Steel Blade",
+    "Use":25
+  },
+  {
+    "Id":86,
+    "Itemtype":"Killer Axe",
+    "Use":20
+  },
+  {
+    "Id":87,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":88,
+    "Itemtype":"Knight Killer",
+    "Use":20
   }
 ]
