@@ -1408,6 +1408,7 @@ class Arena(Layer):
                               w=self.windowsize[0],
                               h=self.windowsize[1],
                               callback=self._clear)
+        self.add(_event)
         obj.do(action + CallFunc(_event.display))
 
     def treasury(self, event, item):
