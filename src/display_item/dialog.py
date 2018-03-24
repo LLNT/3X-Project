@@ -48,6 +48,7 @@ class BaseDialog(Layer):
                     break
                 self.i += 1
             if not self.i < self.length:
+                director.window.remove_handlers(self)
                 self.exit()
 
 
@@ -61,6 +62,7 @@ class BaseDialog(Layer):
             self.exit()
         else:
             director.window.push_handlers(self)
+            self.excute()
 
 class Dialogscene(BaseDialog):
 
@@ -172,7 +174,7 @@ class Dialogscene(BaseDialog):
         self.add(self.right)
 
     def exit(self):
-        self.kill()
+        director.pop()
         if self.callback:
             self.callback.__call__(**self.kwargs)
 
@@ -360,3 +362,7 @@ class Afterdialog(Dialogscene):
         super().changeright(source)
         self.right_text = source
     '''
+    def exit(self):
+        self.kill()
+        if self.callback:
+            self.callback.__call__(**self.kwargs)

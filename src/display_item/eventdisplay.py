@@ -50,7 +50,6 @@ class Eventdisplay(Layer):
     def get_finish(self):
         self.finish = self.event['Finish']
         self.execute_finish = self.finish[-1]
-        print(self.finish)
         self.execute_event = self.finish[-1]['Execute']
         for item in self.finish:
             cd = item['Condition']
@@ -78,7 +77,8 @@ class Eventdisplay(Layer):
                 item = self.map.global_vars.itemBank[int(_itemid)]
                 person = self.map.global_vars.personBank[_pid]
                 flag = self.map.global_vars.flags['Have Transporter']
-                self.add(Getitem(person, item, flag, self.map, callback=self.execute, i=i+1))
+                git = Getitem(person, item, flag, self.map, callback=self.execute, i=i+1)
+                self.add(git)
             elif _type == 'SF':
                 flag = _event[1]
                 self.map.global_vars.flags[flag] = True
