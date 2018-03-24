@@ -816,6 +816,7 @@ class Main:
         return log
 
     def reinforce_person(self,pid,controller,pos,army,pri,strategy):
+        print("REINFORCEMENT No.%s"%(pid))
         person=self.global_vars.personBank[pid]
         self.person_container.people.append(person)
         pos_real=self.find_nearest_empty_block(pos)

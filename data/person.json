@@ -3677,5 +3677,71 @@
       },
       "Base":""
     }
+  },
+  "1010020":
+  {
+    "Id": 1010020,
+    "Name": "Lilse Bandit",
+    "Cls":"Brigand",
+    "Ability":
+    {
+      "LV":12,
+      "MHP":36,
+      "STR":12,
+      "MGC":0,
+      "SPD":9,
+      "SKL":5,
+      "DEF":7,
+      "RES":0,
+      "LUK":5,
+      "BLD":15,
+      "MOV":5,
+      "HP":36,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":0,
+      "Lance":0,
+      "Axe":30,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[89],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Brigand":{
+        "Axe":"",
+        "Base":""
+      },
+      "Base":""
+    }
   }
 }
