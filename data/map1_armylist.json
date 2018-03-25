@@ -17,6 +17,11 @@
       "Name": "Lilse Army",
       "Member":[{"Id":"202","X":11,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"}],
       "Controller":1
+    },
+    {
+      "Name":"Lilse Bandits",
+      "Member":[],
+      "Controller":2
     }
   ]
 }

@@ -438,5 +438,10 @@
     "Id":88,
     "Itemtype":"Knight Killer",
     "Use":20
+  },
+  {
+    "Id":89,
+    "Itemtype":"Steel Axe",
+    "Use":30
   }
 ]

@@ -1,6 +1,23 @@
 {
   "General":[],
-  "Turns":[],
+  "Turns":[{
+        "Event":"U01001",
+        "Side":0,
+        "Turn":2,
+        "Condition":[
+            [[],["U01001"]]
+        ],
+        "Text_type":"S",
+        "Text":[ "PT010-21"],
+        "Reconstruct":null,
+        "Finish":[
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010020/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally"],
+            "Jump":"F"
+        }
+        ]
+    }],
   "Dialogs":[],
   "Treasures":{},
   "Seize":{},
