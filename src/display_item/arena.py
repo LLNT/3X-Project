@@ -232,7 +232,9 @@ class Arena(Layer):
             p = self.person_list[i]
             p.state = 'unmoved'
             p.moved = False
-            log = self.map.refresh_person(p.pid)
+            if p.pid in self.map.person_container.controller:
+                if self.map.person_container.controller[p.pid]==self.map.controller:
+                    log = self.map.refresh_person(p.pid)
             prop = p.update_hp(False)
             obj, action = p.set_angle_action(prop, min_duration=0, max_duration=2)
             obj.do(CallFunc(self.focus, p.pid) + action + CallFunc(self.update_person, i+1))
@@ -247,6 +249,7 @@ class Arena(Layer):
         # before executed, handlers should be removed
 
     def ai_turn(self, **kwargs):
+        self.update_person()
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
             events = kwargs['Reinforce']
             self._reinforce(events, callback=self.map.ai_turn2, arena=self)
