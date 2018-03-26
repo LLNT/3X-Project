@@ -762,7 +762,7 @@
       "MGC":0,
       "SPD":0,
       "SKL":5,
-      "DEF":7,
+      "DEF":5,
       "RES":4,
       "LUK":0,
       "BLD":17,
@@ -1021,12 +1021,12 @@
     "Ability":
     {
       "LV":2,
-      "MHP":33,
+      "MHP":29,
       "STR":5,
       "MGC":0,
       "SPD":4,
       "SKL":5,
-      "DEF":4,
+      "DEF":3,
       "RES":0,
       "LUK":0,
       "BLD":10,
@@ -1218,7 +1218,7 @@
     "Ability":
     {
       "LV":1,
-      "MHP":32,
+      "MHP":27,
       "STR":6,
       "MGC":0,
       "SPD":0,
@@ -1283,7 +1283,7 @@
     "Ability":
     {
       "LV":1,
-      "MHP":8,
+      "MHP":13,
       "STR":0,
       "MGC":0,
       "SPD":12,
