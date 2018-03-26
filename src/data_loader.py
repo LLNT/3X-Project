@@ -6,7 +6,10 @@ class Main:
     def __init__(self):
         ostype=platform.platform()
         path=os.getcwd()
-        path=path[:-3]
+        if path[-3:]=="src":
+            path=path[:-3]
+        else:
+            path=path+"\\"
         if ostype[:7]=="Windows":
             path=path+"data\\"
         else:
@@ -43,7 +46,10 @@ class Main:
     def get_obj(self,fname):
         ostype = platform.platform()
         path = os.getcwd()
-        path = path[:-3]
+        if path[-3:]=="src":
+            path=path[:-3]
+        else:
+            path=path+"\\"
         if ostype[:7] == "Windows":
             path = path + "data\\"
         else:
@@ -53,7 +59,10 @@ class Main:
     def get_root(self,directory):
         ostype = platform.platform()
         path = os.getcwd()
-        path = path[:-3]
+        if path[-3:]=="src":
+            path=path[:-3]
+        else:
+            path=path+"\\"
         if ostype[:7] == "Windows":
             path = path + directory+"\\"
         else:
