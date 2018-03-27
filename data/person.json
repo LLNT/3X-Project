@@ -757,12 +757,12 @@
     "Ability":
     {
       "LV":3,
-      "MHP":28,
+      "MHP":24,
       "STR":5,
       "MGC":0,
       "SPD":0,
       "SKL":5,
-      "DEF":5,
+      "DEF":4,
       "RES":4,
       "LUK":0,
       "BLD":17,
