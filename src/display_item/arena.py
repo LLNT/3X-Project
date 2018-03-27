@@ -1475,7 +1475,7 @@ class Arena(Layer):
             if ty is 'default':
                 self.map.reconstruct_log.append(rec)
             if type(rec) is str:
-                path = os.getcwd()[:-3] + "data\\"
+                path = self.map.global_vars.data.get_root("data")
                 _rec = json.load(open(path + rec, "r"))
             else:
                 _rec = rec
