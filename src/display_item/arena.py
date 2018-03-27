@@ -110,6 +110,7 @@ class Arena(Layer):
 
     def _clear(self, **kwargs):
         # handle the default execute after battle or a movement
+
         self.get_next_to_delete()
 
     def _clear_map(self):
@@ -254,10 +255,17 @@ class Arena(Layer):
             self.map.ai_turn2(self)
 
     def player_phase(self, **kwargs):
+        if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
+            events = kwargs['Reinforce']
+            self._reinforce(events, callback=self._callback, arena=self)
+        else:
+            self._callback()
+        pass
+
+    def _callback(self):
         self.person_list = list(self.people.values())
         self.person_num = len(self.person_list)
         self.update_person()
-        pass
 
     def ai_phase(self):
         self.execute_turn_event(callback_func=self.ai_turn)
@@ -272,6 +280,7 @@ class Arena(Layer):
                     and check_condition(event['Condition'], self.map):
                     if 'Reconstruct' in event.keys():
                         self.reconstruct(event['Reconstruct'])
+                    print(event)
                     self.eventdisplay(
                         event=event, map=self.map,
                         dialog_type=event['Text_type'], dialog_info=self.dialog_info,
@@ -282,6 +291,7 @@ class Arena(Layer):
             else:
                 self.execute_turn_event(i + 1, callback_func, **kwargs)
         else:
+            print(callback_func, kwargs)
             callback_func.__call__(**kwargs)
 
     def _sequential_move(self, dst):

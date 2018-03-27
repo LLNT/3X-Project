@@ -252,12 +252,14 @@ class Experience(Info):
         self.bar.do(Scale_to(scale_x=scale, scale_y=1, duration=d) + CallFunc(self.level_up))
 
     def level_up(self):
+        print(self.i, self.level)
         if self.i == self.level:
             if self.flag:
+                print('end')
                 director.window.push_handlers(self.parent)
                 self.flag = False
                 del self
-            return
+                return
         self.info_clear(1)
         self.info_clear(2)
         self.info_clear(3)
@@ -279,7 +281,6 @@ class Experience(Info):
             content_new.append(str(self.origin[ability]))
         self.display(content_new, font_size=20, contentid=3,
                      pos_range=((self.width *7//9, 0), (self.width, self.height)))
-
 
         self.do(Delay(0.5) + CallFunc(self.bar_raise))
         self.i += 1

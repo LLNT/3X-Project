@@ -72,6 +72,7 @@ class Animation(Layer):
                     break
             # _event = battlebefore[-1]
             # should be replaced by condition
+            print(_event)
             display = Eventdisplay(
                 event=_event, map=self.map, dialog_type='B', dialog_info=self.dialog_info,
                 w=self.width, h=self.height, callback=self.get_next_action
@@ -186,6 +187,7 @@ class Animation(Layer):
             self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin)
             self.add(self.exp)
         else:
+            print('no exp')
             director.window.push_handlers(self)
 
 class Battlescene(Animation):
@@ -227,6 +229,7 @@ class Battlescene(Animation):
     def on_mouse_press(self, x, y, buttons, modifiers):
         director.window.remove_handlers(self)
         director.pop()
+        print(self.callback, self.kwargs)
         self.callback.__call__(**self.kwargs)
 
     def exit(self):
@@ -297,7 +300,6 @@ class Wandtype0(Wandscene):
             return
         self.i += 1
         if self.i >= len(self.events):
-            print(self.i)
             self.exit()
             return
         event = self.events[self.i]
