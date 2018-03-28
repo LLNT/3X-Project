@@ -1,5 +1,5 @@
 from pyglet.gl import *
-
+'''
 # Direct OpenGL commands to this window.
 window = pyglet.window.Window()
 joysticks = pyglet.input.get_joysticks()
@@ -23,3 +23,4 @@ def on_joybutton_press(joystick, button):
 
 
 pyglet.app.run()
+'''
