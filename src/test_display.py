@@ -1,4 +1,10 @@
 from pyglet.gl import *
+
+def exec():
+    return 0
+
+def test_a():
+    assert exec()==0
 '''
 # Direct OpenGL commands to this window.
 window = pyglet.window.Window()
