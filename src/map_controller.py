@@ -721,8 +721,10 @@ class Main:
         return objs
 
     def refresh_person(self,pid):
+        print(pid)
         pos=self.person_container.position[pid]
         person=self.global_vars.personBank[pid]
+        print(person.status)
         hp_recov=0
         sta_clear=[]
         log=[]
@@ -813,6 +815,9 @@ class Main:
                         if (person.suprank[obj]==0)and(person.supdata[obj][0]<50):
                             person.supdata[obj][0]+=person.supdata[obj][1]
                             continue
+        if 'Sleep' in person.status:
+            self.person_container.movable[pid]=False
+        print(log)
         return log
 
     def reinforce_person(self,pid,controller,pos,army,pri,strategy):

@@ -143,7 +143,7 @@
       "Finish":[{
         "Condition":[[[],[]]],
         "Execute":[],
-        "Jump":"F"
+        "Jump":"G000010"
       }
       ]
     },
@@ -164,7 +164,7 @@
       "Finish":[{
         "Condition":[[[],[]]],
         "Execute":[],
-        "Jump":"F"
+        "Jump":"G000010"
       }
       ]
     },
@@ -239,6 +239,46 @@
         "Condition":[[[],[]]],
         "Execute":["SF/GAOV_FLAG00002"],
         "Jump":"L"
+      }]},
+        {
+      "Event":"G000010",
+      "Condition":[
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_0_door4",
+          "M":1,
+          "N":1,
+          "Anchor_X":9,
+          "Anchor_Y":13,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"G000011"
+      }
+      ]
+    },
+         {
+      "Event":"G000011",
+      "Condition":[
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_0_door5",
+          "M":1,
+          "N":1,
+          "Anchor_X":9,
+          "Anchor_Y":3,
+          "Map":[["Floor"]],
+          "Pic":"map_cell.png"},
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":[],
+        "Jump":"F"
       }
       ]
     }

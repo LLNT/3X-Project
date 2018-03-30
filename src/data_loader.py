@@ -4,13 +4,7 @@ import json
 import codecs
 class Main:
     def __init__(self):
-        ostype=platform.platform()
-        path=os.getcwd()
-        path=path[:-3]
-        if ostype[:7]=="Windows":
-            path=path+"data\\"
-        else:
-            path=path+"data/"
+        path=self.get_root("data")
         #print(path)
         self.terrain_typenames=json.load(open(path+"terrain_typenames.json","r"))
         self.cls_group_typenames=json.load(open(path+"cls_group_typenames.json","r"))
@@ -41,19 +35,18 @@ class Main:
         self.ai_configs=json.load(open(path+"ai_configs.json","r"))
         self.startmeta=json.load(open(path+"map0_meta.json","r"))
     def get_obj(self,fname):
-        ostype = platform.platform()
-        path = os.getcwd()
-        path = path[:-3]
-        if ostype[:7] == "Windows":
-            path = path + "data\\"
-        else:
-            path = path + "data/"
+        path=self.get_root("data")
         return json.load(open(path+fname,"r"))
-
     def get_root(self,directory):
         ostype = platform.platform()
         path = os.getcwd()
-        path = path[:-3]
+        if path[-3:]=="src":
+            path=path[:-3]
+        else:
+            if ostype[:7]=="Windows":
+                path=path+"\\"
+            else:
+                path=path+"/"
         if ostype[:7] == "Windows":
             path = path + directory+"\\"
         else:

@@ -1,0 +1,13 @@
+Class,Name,Group,Promotion,Weapon,Skills,Lv,Mhp,Str,Mgc,Spd,Skl,Def,Res,Luk,Bld,Mov,Hp,Cry
+Lord,领主,Infantry,/,Sword-1,/,20,60,20,10,20,20,20,20,30,20,20,80,20
+Thief,盗贼,Cracksman,/,Sword-1,/,20,60,20,10,20,20,20,20,30,20,20,80,20
+Mercenary,佣兵,Infantry,Hero,Sword-1,/,20,60,20,10,20,20,20,20,30,20,20,80,20
+Cleric,修女,Magician,/,Wand-1,/,20,60,10,20,20,20,20,20,30,20,20,80,20
+Sniper,狙击手,Bower,+,Bow-60,Ambush,20,60,25,22,29,30,24,24,30,20,20,80,20
+Paladin,圣骑士,Knight,+,Sword-60;Lance-60,Charge,20,60,24,21,25,26,25,25,30,20,20,80,20
+Mage Knight,魔法骑士,Knight,+,Sword-1;Fire-1;Thunder-1;Wind-1;Wand-1,Prayer,20,60,23,27,25,25,25,29,30,20,20,80,20
+Ranger,游牧骑士,Knight,+,Sword-1;Bow-50,Continue,20,60,24,21,30,29,22,23,30,20,20,80,20
+Swordsmaster,剑圣,Infantry,+,Sword-70,/,20,60,23,22,30,29,23,22,30,20,20,80,20
+Hero,勇者,Infantry,+,Sword-30;Axe-30,/,20,60,26,23,26,30,26,25,30,20,20,80,20
+Great Knight,大骑士,Armor,+,Sword-1;Lance-1;Axe-1;Bow-1,/,20,60,27,20,24,25,29,26,30,20,20,80,20
+Swordsman,剑士,Infantry,/,Sword-1,/,20,60,20,10,20,20,20,20,20,20,20,80,20
