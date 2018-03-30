@@ -1056,7 +1056,7 @@ class Arena(Layer):
             self.get_next_to_delete()
         pass
 
-    def get_next_event(self, i=0, **kwargs):
+    def excute_event(self, i):
         if i < self.general_length:
             event = self.general[i]
             if check_condition(event['Condition'], self.map):
@@ -1073,6 +1073,13 @@ class Arena(Layer):
         else:
             self.map.take_turn(self)
             pass
+
+    def get_next_event(self, i=0, **kwargs):
+        if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
+            events = kwargs['Reinforce']
+            self._reinforce(events, callback=self.excute_event, i=i)
+        else:
+            self.excute_event(i)
 
 
     def _battle(self, layer, **kwargs):

@@ -256,8 +256,8 @@ class Experience(Info):
         if self.i == self.level:
             if self.flag:
                 print('end')
-                director.window.push_handlers(self.parent)
                 self.flag = False
+                director.window.push_handlers(self.parent)
                 del self
                 return
         self.info_clear(1)
