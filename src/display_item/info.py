@@ -258,7 +258,6 @@ class Experience(Info):
                 print('end')
                 self.flag = False
                 director.window.push_handlers(self.parent)
-                del self
                 return
         self.info_clear(1)
         self.info_clear(2)

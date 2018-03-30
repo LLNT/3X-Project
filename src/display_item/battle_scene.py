@@ -227,10 +227,8 @@ class Battlescene(Animation):
         self.excute(event=event)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
-        director.window.remove_handlers(self)
         director.pop()
-        print(self.callback, self.kwargs)
-        self.callback.__call__(**self.kwargs)
+        self.callback(**self.kwargs)
 
     def exit(self):
         if not self.flag:
@@ -290,7 +288,7 @@ class Wandtype0(Wandscene):
     def __init__(self, arena, w=640, h=480, maxsize=2, callback=None,**kwargs):
         self.at, wand, self.df, self.map = arena.wandlist_type0
         self.battle = Type0(self.at, wand, self.df, self.map)
-        self.wandinit(wand, w, h, arena, maxsize)
+        self.wandinit(wand, w, h, arena, maxsize, callback=callback,**kwargs)
         event = self.battle.execute()
         del self.battle
         self.excute(event=event)

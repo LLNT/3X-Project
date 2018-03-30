@@ -110,8 +110,7 @@ class Arena(Layer):
 
     def _clear(self, **kwargs):
         # handle the default execute after battle or a movement
-
-        self.get_next_to_delete()
+        self.do(Delay(0.5) + CallFunc(self.get_next_to_delete))
 
     def _clear_map(self):
         # should be executed after movement and before battle display
@@ -142,6 +141,7 @@ class Arena(Layer):
         for cell in self.cells.values():
             cell.state = 'default'
         for person in self.people.values(): #type:PerSpr
+            print(person.pid, person.moved)
             if not person.moved:
                 person.state = 'unmoved'
             else:
@@ -259,7 +259,9 @@ class Arena(Layer):
             events = kwargs['Reinforce']
             self._reinforce(events, callback=self._callback, arena=self)
         else:
-            self._callback()
+            self.person_list = list(self.people.values())
+            self.person_num = len(self.person_list)
+            self.update_person()
         pass
 
     def _callback(self):
