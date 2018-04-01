@@ -187,7 +187,7 @@ class Animation(Layer):
             self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin,callback=self.callback,**self.kwargs)
             self.add(self.exp)
             self.exp.bar_raise()
-            print("BAR_RAISEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+            #print("BAR_RAISEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
         else:
             director.pop()
             self.do(Delay(0.5) + CallFunc(self.callback, **self.kwargs))

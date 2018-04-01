@@ -956,7 +956,7 @@
     "Type":"S",
     "Tag":"女人",
     "Text":"你说，为什么克鲁贝尔要进攻我们呢？",
-    "Left":"v",
+    "Left":"V",
     "Right":"village_man_map0.jpg",
     "Direction":1,
     "Scene":"background_test.jpg"
@@ -1081,7 +1081,7 @@
   "VT010-515":{
     "Type":"S",
     "Tag":"V",
-    "Text":"那大嫂你为什么要到这么危险的地方来呢？",
+    "Text":"那夫人你为什么要到这么危险的地方来呢？",
     "Left":null,
     "Right":null,
     "Direction":0,

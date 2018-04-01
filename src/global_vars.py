@@ -24,6 +24,7 @@ class Main:
         self.transporter={}                 #type:Dict[str,List[item.Item]]
         self.maps=[]
         self.data=None                     #type:data_loader.Main
+        self.gold=0
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -38,6 +39,7 @@ class Main:
         for _type in data.itemtype_typenames:
             self.transporter[_type]=[]
         self.maps=[]
+        self.gold=0
 
     def new_game(self):
         terrain0=terrain_container.Main(self.data.get_obj(self.data.startmeta["Terrain_map"]), self.terrainBank)

@@ -443,5 +443,10 @@
     "Id":89,
     "Itemtype":"Steel Axe",
     "Use":30
+  },
+  {
+    "Id":90,
+    "Itemtype":"Angel's Clothes",
+    "Use":1
   }
 ]

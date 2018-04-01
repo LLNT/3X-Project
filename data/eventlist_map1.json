@@ -8,7 +8,7 @@
             [[],["U01001"]]
         ],
         "Text_type":"S",
-        "Text":[ "PT010-21"],
+        "Text":[],
         "Reconstruct":null,
         "Finish":[
         {
@@ -22,7 +22,45 @@
   "Treasures":{},
   "Seize":{},
   "Doors":{},
-  "Villages":{},
+  "Villages":{
+    "4,38":[
+      {
+        "Event":"V010030",
+        "Character":null,
+        "Condition": [[[],["V000030"]]],
+        "Text":["VT010-51","VT010-52","VT010-53","VT010-54","VT010-55","VT010-56","VT010-57","VT010-58","VT010-59","VT010-510",
+          "VT010-511","VT010-512","VT010-513","VT010-514","VT010-515","VT010-516","VT010-517","VT010-518","VT010-519","VT010-520",
+          "VT010-521","VT010-522","VT010-523","VT010-524","VT010-525","VT010-526","VT010-527","VT010-528","VT010-529","VT010-530"
+        ],
+        "Finish":[
+        {
+          "Condition":[[[],[]]],
+          "Execute":["CLV/4,38","I/90/V"],
+          "Jump":"F"
+        }]
+      }
+    ]
+  },
   "Battle":[],
-  "Defeated":[]
+  "Defeated":[{
+      "Event": "D01030",
+      "Person": "202",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01030"
+          ]
+        ]
+      ],
+      "Text": ["DT010-31","DT010-32"],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":[],
+          "Jump": "F"
+        }
+      ]
+    }]
 }
