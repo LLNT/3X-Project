@@ -794,6 +794,8 @@ class Main:
                 log.append(('Poison',hp_poi))
         for sta in list(person.status.keys()).copy():
             person.status[sta]-=1
+            if sta=="Barrier":
+                person.ability["RES"]-=1
             if person.status[sta]<1:
                 person.status.pop(sta)
                 sta_clear.append(sta)

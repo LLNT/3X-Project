@@ -35,6 +35,10 @@ class Item:
             if use_eff[t]=="PROMOTE":
                 t+=1
                 continue
+            if use_eff[t]=="BARRIER":
+                t+=1
+                p.ability["RES"] += 7
+                p.add_status("Barrier", 7)
         return use_eff
 
 class ItemBank:

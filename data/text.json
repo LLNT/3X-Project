@@ -5075,7 +5075,7 @@
     "Type":"S",
     "Tag":"男人",
     "Text":"你好，请问这里是克鲁贝尔王国境内吗？",
-    "Left":"v",
+    "Left":"V",
     "Right":"village_man_map0.jpg",
     "Direction":1,
     "Scene":"background_test.jpg"
@@ -5219,10 +5219,10 @@
     "Type":"S",
     "Tag":"米沙",
     "Text":"这是！",
-    "Left":"reinhard.jpg",
-    "Right":"village_man_map0.jpg",
+    "Left":null,
+    "Right":null,
     "Direction":0,
-    "Scene":"background_test.jpg"
+    "Scene":null
   },
   "VT010-42":{
     "Type":"S",

@@ -448,5 +448,15 @@
     "Id":90,
     "Itemtype":"Angel's Clothes",
     "Use":1
+  },
+  {
+    "Id":91,
+    "Itemtype":"Pure Water",
+    "Use":3
+  },
+  {
+    "Id":92,
+    "Itemtype":"Thunder",
+    "Use":40
   }
 ]
