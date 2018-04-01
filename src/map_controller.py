@@ -721,10 +721,10 @@ class Main:
         return objs
 
     def refresh_person(self,pid):
-        print(pid)
+        #print(pid)
         pos=self.person_container.position[pid]
         person=self.global_vars.personBank[pid]
-        print(person.status)
+        #print(person.status)
         hp_recov=0
         sta_clear=[]
         log=[]
@@ -817,11 +817,11 @@ class Main:
                             continue
         if 'Sleep' in person.status:
             self.person_container.movable[pid]=False
-        print(log)
+        #print(log)
         return log
 
     def reinforce_person(self,pid,controller,pos,army,pri,strategy):
-        print("REINFORCEMENT No.%s"%(pid))
+        #print("REINFORCEMENT No.%s"%(pid))
         person=self.global_vars.personBank[pid]
         self.person_container.people.append(person)
         pos_real=self.find_nearest_empty_block(pos)

@@ -240,7 +240,7 @@ class Arena(Layer):
             obj, action = p.set_angle_action(prop, min_duration=0, max_duration=2)
             obj.do(CallFunc(self.focus, p.pid) + action + CallFunc(self.update_person, i+1))
         else:
-            self.player_turn()
+            self.get_next_event()
 
     def player_turn(self, **kwargs):
 
@@ -251,14 +251,16 @@ class Arena(Layer):
         # before executed, handlers should be removed
 
     def ai_turn(self, **kwargs):
+        if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
+            events = kwargs['Reinforce']
+            self._reinforce(events, callback=self.ai_turn2)
+        else:
+            self.ai_turn2()
+
+    def ai_turn2(self):
         self.person_list = list(self.people.values())
         self.person_num = len(self.person_list)
         self.update_person()
-        if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
-            events = kwargs['Reinforce']
-            self._reinforce(events, callback=self.map.ai_turn2, arena=self)
-        else:
-            self.map.ai_turn2(self)
 
     def player_phase(self, **kwargs):
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
@@ -1246,7 +1248,7 @@ class Arena(Layer):
             rng = kwargs['rng']
             self._set_areastate(rng, 'in_enemy_moverange')
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
-                 CallFunc(self._clear_map) + CallFunc(self._clear)
+                 CallFunc(self._clear_map) + Delay(0.5) + CallFunc(self.get_next_to_delete)
         obj = self.people[pid]
         obj.do(action)
         pass

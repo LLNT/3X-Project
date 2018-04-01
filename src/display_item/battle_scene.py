@@ -189,8 +189,11 @@ class Animation(Layer):
             self.exp.bar_raise()
             #print("BAR_RAISEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
         else:
-            director.pop()
-            self.do(Delay(0.5) + CallFunc(self.callback, **self.kwargs))
+            self.do(Delay(0.5) + CallFunc(self._callback))
+
+    def _callback(self):
+        director.pop()
+        self.callback.__call__(**self.kwargs)
 
 class Battlescene(Animation):
     is_event_handler = False
