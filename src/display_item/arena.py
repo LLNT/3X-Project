@@ -245,11 +245,14 @@ class Arena(Layer):
     def player_turn(self, **kwargs):
 
         self._clear_map()
+        director.window.remove_handlers(self)
         director.window.push_handlers(self)
         print('player_turn push_handlers')
         # before executed, handlers should be removed
 
     def ai_turn(self, **kwargs):
+        self.person_list = list(self.people.values())
+        self.person_num = len(self.person_list)
         self.update_person()
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
             events = kwargs['Reinforce']
@@ -516,6 +519,7 @@ class Arena(Layer):
         }
 
     def _callback(self, **kwargs):
+        director.window.remove_handlers(self)
         director.window.push_handlers(self)
         print('callback push_handlers')
         self.state = 'default'

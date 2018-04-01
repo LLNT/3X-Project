@@ -215,11 +215,13 @@ class Experience(Info):
 
         super().__init__(size=(width, height), center=True, alpha=255)
         print(kwargs)
-        self.growthlist = kwargs['growthlist']
-        self.origin = kwargs['origin']
-        self.level = kwargs['level']
-        self.person = kwargs['person']
-        self.leftexp = kwargs['exp']
+        self.growthlist = kwargs.pop('growthlist')
+        self.origin = kwargs.pop('origin')
+        self.level = kwargs.pop('level')
+        self.person = kwargs.pop('person')
+        self.leftexp = kwargs.pop('exp')
+        self.callback = kwargs.pop('callback')
+        self.kwargs = kwargs
         oriexp = self.origin['EXP']
 
         self.abilities = ["MHP","STR","MGC","SPD","SKL","DEF","RES","LUK"]
@@ -235,10 +237,6 @@ class Experience(Info):
         self.add(self.bar)
         self.i = 0
         self.flag = True
-        
-    def on_enter(self):
-        super().on_enter()
-        self.bar_raise()
 
     def bar_raise(self, duration=3):
         if self.bar.scale_x == 1:
@@ -251,13 +249,17 @@ class Experience(Info):
             d = duration * (scale - self.bar.scale_x)
         self.bar.do(Scale_to(scale_x=scale, scale_y=1, duration=d) + CallFunc(self.level_up))
 
+    def _callback(self):
+        director.pop()
+        self.callback.__call__(**self.kwargs)
+
     def level_up(self):
         print(self.i, self.level)
-        if self.i == self.level:
+        if self.i >= self.level:
             if self.flag:
                 print('end')
                 self.flag = False
-                director.window.push_handlers(self.parent)
+                self.do(Delay(0.5) + CallFunc(self._callback))
                 return
         self.info_clear(1)
         self.info_clear(2)

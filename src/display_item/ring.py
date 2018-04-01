@@ -140,6 +140,9 @@ class PerSpr(Ring):
         self.inner = Sprite(image='ring.png', scale=scl*0.9)
         self.add(self.inner)
         self._opacity = 255
+        self.icon = Sprite(image=person.icon, position=(size//2-14, -size//2+14))
+        self.icon.scale_x, self.icon.scale_y = 28 / self.icon.width , 28 / self.icon.height
+        self.add(self.icon)
 
     def _set_opacity(self, opacity):
         self.inner.opacity = opacity

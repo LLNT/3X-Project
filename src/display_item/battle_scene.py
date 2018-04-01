@@ -184,11 +184,13 @@ class Animation(Layer):
         growthlist = self.content[3]
         origin = self.content[4]
         if len(origin) > 0:
-            self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin)
+            self.exp = Experience(person=person, level=level, exp=exp, growthlist=growthlist, origin=origin,callback=self.callback,**self.kwargs)
             self.add(self.exp)
+            self.exp.bar_raise()
+            print("BAR_RAISEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
         else:
-            print('no exp')
-            director.window.push_handlers(self)
+            director.pop()
+            self.do(Delay(0.5) + CallFunc(self.callback, **self.kwargs))
 
 class Battlescene(Animation):
     is_event_handler = False
@@ -227,6 +229,7 @@ class Battlescene(Animation):
         self.excute(event=event)
 
     def on_mouse_press(self, x, y, buttons, modifiers):
+        director.window.remove_handlers(self)
         director.pop()
         self.callback(**self.kwargs)
 
