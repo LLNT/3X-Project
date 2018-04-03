@@ -690,7 +690,7 @@ class Main:
                         if check_condition(event["Condition"],self):
                             doors[(x,y-1)]=event
                             break
-        if x+1<self.terrain_container.N:
+        if y+1<self.terrain_container.N:
             if self.terrain_container.map[x][y+1].typename=="Door":
                 if ("%d,%d"%(x,y+1) in self.eventlist["Doors"]):
                     for event in self.eventlist["Doors"]["%d,%d"%(x,y+1)]:
