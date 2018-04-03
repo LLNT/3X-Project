@@ -49,7 +49,7 @@
     [
 
     ],
-    "Init_item":[1],
+    "Init_item":[1,93],
     "Support":{
       "3":{
         "Base":0,
@@ -118,7 +118,7 @@
     [
       "Awareness"
     ],
-    "Init_item":[2,3],
+    "Init_item":[2,3,94],
     "Support":{
 
     },
@@ -186,7 +186,7 @@
       "Ambush",
       "Promised"
     ],
-    "Init_item":[4,6],
+    "Init_item":[4,6,95],
     "Support":{
       "1":{
         "Base":0,

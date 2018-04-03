@@ -458,5 +458,20 @@
     "Id":92,
     "Itemtype":"Thunder",
     "Use":40
+  },
+  {
+    "Id":93,
+    "Itemtype":"Vulnerary",
+    "Use":6
+  },
+  {
+    "Id":94,
+    "Itemtype":"Vulnerary",
+    "Use":6
+  },
+  {
+    "Id":95,
+    "Itemtype":"Elixir",
+    "Use":3
   }
 ]
