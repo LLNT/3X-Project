@@ -191,12 +191,12 @@ class Afterevent(Eventdisplay):
             event = self.event[self.i]
             text_list = event['Text']
             text_source = self.map.global_vars.data.text
-            print(event)
             if len(text_list) > 0:
                 if self.event[self.i-1]['Keep'] is 1:
                     scene = self.keep #type: Afterdialog
                     scene.textlist = text_list
                     scene.textsource = text_source
+                    scene.length = len(text_list)
                     scene.i = 0
                     print('Keep')
                 else:

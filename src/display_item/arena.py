@@ -141,7 +141,6 @@ class Arena(Layer):
         for cell in self.cells.values():
             cell.state = 'default'
         for person in self.people.values(): #type:PerSpr
-            print(person.pid, person.moved)
             if not person.moved:
                 person.state = 'unmoved'
             else:
@@ -1538,6 +1537,7 @@ class Arena(Layer):
 
     def win(self):
         event = self.map.after
+        print(event)
         after = Afterevent(event=event, map=self.map,
                     dialog_type='S', dialog_info=self.dialog_info,
                     w=self.windowsize[0], h=self.windowsize[1],
