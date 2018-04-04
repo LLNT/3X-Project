@@ -43,8 +43,8 @@ class BaseDialog(Layer):
             while self.i < self.length:
                 item = self.textsource[self.textlist[self.i]]
                 if 'Branch' in item.keys():
-                    self.add(Branch(self.map, item['Branch'], self._callback))
-                    director.window.remove_handlers(self)
+                    self.i -= 1
+                    self.excute()
                     break
                 self.i += 1
             if not self.i < self.length:
@@ -80,9 +80,9 @@ class Dialogscene(BaseDialog):
         # add background
 
         self.background = Sprite(map.scene, position=(w // 2, h // 2))
-        text_background = ColorLayer(0,0,200,255,w,h//3)
+        self.text_back = ColorLayer(0,0,200,255,w,h//3)
         self.add(self.background)
-        self.add(text_background)
+        self.add(self.text_back)
 
         # add img
         self.left = Sprite('ring.png', position=(w // 6, h // 2), opacity=0)
@@ -96,7 +96,7 @@ class Dialogscene(BaseDialog):
 
         # add text
         self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
-        self.add(self.text)
+        self.text_back.add(self.text)
 
     def excute(self):
         item = self.textsource[self.textlist[self.i]]
@@ -105,6 +105,7 @@ class Dialogscene(BaseDialog):
             self.add(Branch(self.map, item['Branch'], self.callback))
             director.window.remove_handlers(self)
         else:
+            self.remove_layer()
             if item['Type'] is 'S':
                 if item['Text'] is not None:
                     self.text.element.text = item['Text']
@@ -140,6 +141,13 @@ class Dialogscene(BaseDialog):
                     self.changeright(item['Right'])
             else:
                 self.source_error(item['Type'])
+            self.return_layer()
+
+    def remove_layer(self):
+        self.remove(self.text_back)
+
+    def return_layer(self):
+        self.add(self.text_back)
 
     def changeleft(self, source):
         self.left.kill()
