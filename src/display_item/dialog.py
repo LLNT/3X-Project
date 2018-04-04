@@ -309,6 +309,7 @@ class Mapdialog(BaseDialog):
         self.callback.__call__(**self.kwargs)
 
 class Afterdialog(Dialogscene):
+
     '''
     def __init__(self, text_list, text_source, map, w, h, info, tag, size=200,
                  left=None, right=None, callback=None, **kwargs):

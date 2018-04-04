@@ -129,16 +129,22 @@ class Afterevent(Eventdisplay):
 
     def display(self):
         self.i = 0
-        text_list = self.event[self.i]['Text']
-        text_source = self.map.global_vars.data.text
-        tag = self.event[self.i]['Tag']
-        self.event_length = len(self.event)
-        self.keep = Afterdialog(text_list, text_source, self.map, self.w, self.h, tag=tag,
-                                        callback=self._callback, info=self.dialog_info)
-        self.scene = Layer()
-        director.push(Scene(self.scene))
-        self.scene.add(self.keep)
-        self.keep.excute()
+        while not check_condition(self.event[self.i]['Condition'], self.map):
+            self.i += 1
+        if self.i < len(self.event):
+            text_list = self.event[self.i]['Text']
+            text_source = self.map.global_vars.data.text
+            tag = self.event[self.i]['Tag']
+            self.event_length = len(self.event)
+            self.keep = Afterdialog(text_list, text_source, self.map, self.w, self.h, tag=tag,
+                                            callback=self._callback, info=self.dialog_info)
+            self.scene = Layer()
+            director.push(Scene(self.scene))
+            self.scene.add(self.keep)
+            self.keep.excute()
+        else:
+            self.kill()
+            self.callback.__call__(**self.kwargs)
 
     def _callback(self, **kwargs):
         self.length = len(self.event[self.i]['Execute'])
@@ -187,6 +193,8 @@ class Afterevent(Eventdisplay):
 
     def get_next_event(self):
         self.i += 1
+        while self.i < self.event_length and not check_condition(self.event[self.i]['Condition'], self.map):
+            self.i += 1
         if self.i < self.event_length:
             event = self.event[self.i]
             text_list = event['Text']

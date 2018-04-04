@@ -1552,11 +1552,14 @@ class Arena(Layer):
         before = Afterevent(event=event, map=self.map,
                     dialog_type='S', dialog_info=self.dialog_info,
                     w=self.windowsize[0], h=self.windowsize[1],
-                    callback=self.next_round)
+                    callback=self._before_callback)
         self.add(before)
         x, y = self.position
         before.position = -x, -y
         self.do(Delay(0.5) + CallFunc(before.display))
+
+    def _before_callback(self):
+        self.next_round()
 
     def jump(self):
         self.menulayer.disapper()
