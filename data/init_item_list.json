@@ -473,5 +473,10 @@
     "Id":95,
     "Itemtype":"Elixir",
     "Use":3
+  },
+  {
+    "Id":96,
+    "Itemtype":"Brave Sword",
+    "Use":30
   }
 ]

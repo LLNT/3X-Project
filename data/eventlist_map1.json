@@ -24,7 +24,31 @@
         "Jump":"L"
       }
       ]
-    }],
+    },
+  {
+      "Event":"G010003",
+      "Condition":[[["CHPOS-1010020-4,38-4,38"],["V010030","G010003"]]],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_1_village3",
+          "M":1,
+          "N":1,
+          "Anchor_X":4,
+          "Anchor_Y":38,
+          "Map":[["Plain"]],
+          "Pic":"plain_cell.png"},
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":["CLV/4,38"],
+        "Jump":"F"
+      }
+      ]
+    }
+
+
+
+  ],
   "Turns":[{
         "Event":"U01001",
         "Side":0,
@@ -314,5 +338,405 @@
           "Jump": "F"
         }
       ]
-    }]
+    },
+  {
+      "Event": "D01051",
+      "Person": "1010001",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01051"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01052",
+      "Person": "1010002",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01052"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01053",
+      "Person": "1010003",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01053"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01054",
+      "Person": "1010004",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01054"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01055",
+      "Person": "1010005",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01055"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01056",
+      "Person": "1010006",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01056"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01057",
+      "Person": "1010007",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01057"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01058",
+      "Person": "1010008",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01058"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D01059",
+      "Person": "1010009",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D01059"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010510",
+      "Person": "1010010",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010510"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010511",
+      "Person": "1010011",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010511"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010512",
+      "Person": "1010012",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010512"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010513",
+      "Person": "1010013",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010513"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010514",
+      "Person": "1010014",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010514"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010515",
+      "Person": "1010015",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010515"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010516",
+      "Person": "1010016",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010516"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010517",
+      "Person": "1010017",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010517"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010518",
+      "Person": "1010018",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010518"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    },
+    {
+      "Event": "D010519",
+      "Person": "1010019",
+      "Enemy": null,
+      "Condition": [
+        [
+          [],
+          [
+            "D010519"
+          ]
+        ]
+      ],
+      "Text": [],
+      "Finish": [
+        {
+          "Condition": [[[],[]]],
+          "Execute":["SF/ARMY2FALL_FLAG010"],
+          "Jump": "F"
+        }
+      ]
+    }
+  ]
 }

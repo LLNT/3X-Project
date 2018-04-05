@@ -8,6 +8,27 @@ def coordinate_t(x, y, size):
     j = y // size
     return i, j
 
+def check_chpos(s,map):
+    print(s)
+    #CHPOS-5-4,38-5,40
+    tp=s.split("-")
+    pid=tp[1]
+    pos1=(int(tp[2].split(",")[0]),int(tp[2].split(",")[1]))
+    pos2=(int(tp[3].split(",")[0]),int(tp[3].split(",")[1]))
+    if not pid in map.person_container.position:
+        return False
+    pos=map.person_container.position[pid]
+    if pos[0]<pos1[0]:
+        return False
+    if pos[1]<pos1[1]:
+        return False
+    if pos[0]>pos2[0]:
+        return False
+    if pos[1]>pos2[1]:
+        return False
+    print("TRUE")
+    return True
+
 def check_condition(cd,map=None):
     condition_satisfied = 0
     for conj_item in cd:
@@ -15,6 +36,12 @@ def check_condition(cd,map=None):
         tr_items = conj_item[0]
         fl_items = conj_item[1]
         for tag in tr_items:
+            if tag[0:5]=="CHPOS":
+                if not check_chpos(tag,map):
+                    item_satisfied=0
+                    break
+                else:
+                    continue
             if not (tag in map.global_vars.flags):
                 item_satisfied = 0
                 break
@@ -24,6 +51,12 @@ def check_condition(cd,map=None):
         if item_satisfied == 0:
             continue
         for tag in fl_items:
+            if tag[0:5]=="CHPOS":
+                if check_chpos(tag,map):
+                    item_satisfied=0
+                    break
+                else:
+                    continue
             if not (tag in map.global_vars.flags):
                 pass
             elif map.global_vars.flags[tag] == True:
