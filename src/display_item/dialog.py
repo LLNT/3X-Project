@@ -92,7 +92,7 @@ class Dialogscene(BaseDialog):
 
         # add label
         self.label = Text(text=' ', position=(w // 6, h // 3), font_size=24)
-        self.add(self.label)
+        self.text_back.add(self.label)
 
         # add text
         self.text = Text(text=' ', position=(w // 2, h // 6), font_size=30)
