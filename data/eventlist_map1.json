@@ -27,7 +27,15 @@
     },
   {
       "Event":"G010003",
-      "Condition":[[["CHPOS-1010020-4,38-4,38"],["V010030","G010003"]]],
+      "Condition":[[["CHPOS-1010020-4,38-4,38"],["V010030","G010003"]],
+      [["CHPOS-1010021-4,38-4,38"],["V010030","G010003"]],
+        [["CHPOS-1010022-4,38-4,38"],["V010030","G010003"]],
+        [["CHPOS-1010023-4,38-4,38"],["V010030","G010003"]],
+        [["CHPOS-1010024-4,38-4,38"],["V010030","G010003"]],
+        [["CHPOS-1010025-4,38-4,38"],["V010030","G010003"]],
+        [["CHPOS-1010026-4,38-4,38"],["V010030","G010003"]],
+        [["CHPOS-1010027-4,38-4,38"],["V010030","G010003"]]
+      ],
       "Text_type":"S",
       "Text":[],
       "Reconstruct":{
@@ -62,17 +70,55 @@
         "Finish":[
         {
             "Condition":[[[],[]]],
-            "Execute":["R/1010020/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally"],
+            "Execute":["R/1010020/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally","R/1010021/2/0,37/Lilse Bandits/0/AI010-Pursue-Ally",
+            "R/1010022/2/0,33/Lilse Bandits/0/AI010-Pursue-Ally"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01002",
+        "Side":0,
+        "Turn":3,
+        "Condition":[
+            [[],["U01002"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010023/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally","R/1010024/2/0,34/Lilse Bandits/0/AI010-Pursue-Ally",
+            "R/1010025/2/0,33/Lilse Bandits/0/AI010-Pursue-Ally"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01003",
+        "Side":0,
+        "Turn":4,
+        "Condition":[
+            [[],["U01003"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010026/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally","R/1010027/2/0,33/Lilse Bandits/0/AI010-Pursue-Ally"],
             "Jump":"F"
         }
         ]
     },
   {
-        "Event":"U01002",
+        "Event":"U01004",
         "Side":1,
         "Turn":1,
         "Condition":[
-            [[],["U01002"]]
+            [[],["U01004"]]
         ],
         "Text_type":"S",
         "Text":["GT010-11","GT010-12","GT010-13","GT010-14","GT010-15","GT010-16","GT010-17","GT010-18","GT010-19","GT010-110",
@@ -88,11 +134,11 @@
         ]
     },
   {
-        "Event":"U01003",
+        "Event":"U01005",
         "Side":0,
         "Turn":16,
         "Condition":[
-            [[],["U01003"]]
+            [[],["U01005"]]
         ],
         "Text_type":"S",
         "Text":[],

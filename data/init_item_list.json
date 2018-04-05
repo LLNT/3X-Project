@@ -478,5 +478,60 @@
     "Id":96,
     "Itemtype":"Brave Sword",
     "Use":30
+  },
+  {
+    "Id":97,
+    "Itemtype":"Steel Axe",
+    "Use":30
+  },
+  {
+    "Id":98,
+    "Itemtype":"Iron Axe",
+    "Use":45
+  },
+  {
+    "Id":99,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":100,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":101,
+    "Itemtype":"Poison Axe",
+    "Use":40
+  },
+  {
+    "Id":102,
+    "Itemtype":"Steel Axe",
+    "Use":30
+  },
+  {
+    "Id":103,
+    "Itemtype":"Steel Axe",
+    "Use":30
+  },
+  {
+    "Id":104,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":105,
+    "Itemtype":"Iron Axe",
+    "Use":45
+  },
+  {
+    "Id":106,
+    "Itemtype":"Halberd",
+    "Use":20
+  },
+  {
+    "Id":107,
+    "Itemtype":"Hand Axe",
+    "Use":20
   }
 ]
