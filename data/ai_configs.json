@@ -61,5 +61,12 @@
   "Attack_Obj":[],
   "Not_Attack":[],
   "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+},
+  "AI010-Pursue-Ally2":{
+  "Strategy":"PURSUE",
+  "Push":["4,21"],
+  "Attack_Obj":[],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
 }
 }
