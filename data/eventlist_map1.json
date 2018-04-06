@@ -48,9 +48,15 @@
           "Pic":"plain_cell.png"},
       "Finish":[{
         "Condition":[[[],[]]],
-        "Execute":["CLV/4,38","AIC/1010020/AI010-Pursue-Ally2","AIC/1010021/AI010-Pursue-Ally2","AIC/1010022/AI010-Pursue-Ally2",
-        "AIC/1010023/AI010-Pursue-Ally2","AIC/1010024/AI010-Pursue-Ally2","AIC/1010025/AI010-Pursue-Ally2",
-        "AIC/1010026/AI010-Pursue-Ally2","AIC/1010027/AI010-Pursue-Ally2"],
+        "Execute":["CLV/4,38",
+          "AIC/1010020/0/AI010-Pursue-Ally2",
+          "AIC/1010021/0/AI010-Pursue-Ally2",
+          "AIC/1010022/0/AI010-Pursue-Ally2",
+        "AIC/1010023/0/AI010-Pursue-Ally2",
+          "AIC/1010024/0/AI010-Pursue-Ally2",
+          "AIC/1010025/0/AI010-Pursue-Ally2",
+        "AIC/1010026/0/AI010-Pursue-Ally2",
+          "AIC/1010027/0/AI010-Pursue-Ally2"],
         "Jump":"F"
       }
       ]

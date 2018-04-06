@@ -88,6 +88,12 @@ class Eventdisplay(Layer):
                     self.kwargs['Reinforce'] = []
                 self.kwargs['Reinforce'].append(_event)
                 self.execute(i+1)
+            elif _type == 'AIC':
+                _, pid, pri, strategy = _event
+                if pid in self.parent.people.keys():
+                    self.map.person_container.AItype[pid] = \
+                        int(pri), self.map.global_vars.data.ai_configs[strategy]
+                self.execute(i+1)
             else:
                 print('Unknown event %s' % _event)
                 self.execute(i + 1)

@@ -566,6 +566,7 @@ class Arena(Layer):
                 self.info = Personinfo(select, callback=self._callback, map=self.map)
                 self.infolayer.add(self.info)
                 self.state = 'person_info'
+                print(self.map.person_container.AItype[pid])
             else:
                 self.end = Endturn(self)
                 self.add_menu(self.end)
@@ -1585,6 +1586,7 @@ class Arena(Layer):
 
         director.pop()
         director.run(Transition(Scene(arena, menulayer, infolayer)))
+        self.kill()
 
     def remove(self, obj):
         super().remove(obj)
@@ -1680,7 +1682,7 @@ def new_game(map, size=80):
             before.display()
 
 
-    scene = Transition(Scene(arena, menulayer, infolayer), duration=1.5)
+    scene = Transition(Scene(layer), duration=1.5)
     director.push(scene)
 
 def load_game(map, size=80):
