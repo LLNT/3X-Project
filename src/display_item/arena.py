@@ -1559,6 +1559,7 @@ class Arena(Layer):
         self.do(Delay(0.5) + CallFunc(before.display))
 
     def _before_callback(self):
+        director.push(Scene(self, self.menulayer, self.infolayer))
         self.next_round()
 
     def jump(self):
@@ -1664,12 +1665,23 @@ def new_game(map, size=80):
     infolayer = Layer()
     arena = Arena(map, menulayer, infolayer, size)
 
+    layer = Layer()
+    event = map.pre
+    before = Afterevent(event=event, map=arena.map,
+                        dialog_type='S', dialog_info=arena.dialog_info,
+                        w=arena.windowsize[0], h=arena.windowsize[1],
+                        callback=arena._before_callback)
+
+    layer.add(before)
+
     class Transition(FadeTransition):
         def finish(self):
             super().finish()
-            arena.before()
+            before.display()
 
-    director.push(Transition(Scene(arena, menulayer, infolayer), duration=1.5))
+
+    scene = Transition(Scene(arena, menulayer, infolayer), duration=1.5)
+    director.push(scene)
 
 def load_game(map, size=80):
     menulayer = Menulayer()
@@ -1687,8 +1699,14 @@ def load_game(map, size=80):
 
 
 if __name__ == '__main__':
-    pass
-
+    pyglet.resource.path = ['../img']
+    pyglet.resource.reindex()
+    director.init(caption='3X-Project', width=1280, height=720)
+    menulayer = Menulayer()
+    infolayer = Layer()
+    arena = Arena(map_init(), menulayer, infolayer, size=80)
+    director.run(Scene(arena, menulayer, infolayer))
+    arena.next_round()
 
 
 
