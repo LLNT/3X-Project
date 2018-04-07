@@ -34,6 +34,13 @@
   "Not_Attack":[],
   "Attack_Selection":["Fatal","Object","Uncountered","Any"]
   },
+  "AI000-Active-Variation":{
+    "Strategy":"ACTIVE",
+  "Push":["13,11"],
+  "Attack_Obj":["1000012","1000013","1000014","1000015","1"],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+  },
   "AI010-Passive-Base":{
   "Strategy":"PASSIVE",
   "Push":[],
@@ -65,6 +72,13 @@
   "AI010-Pursue-Ally2":{
   "Strategy":"PURSUE",
   "Push":["4,21"],
+  "Attack_Obj":[],
+  "Not_Attack":[],
+  "Attack_Selection":["Fatal","Object","Uncountered","Any"]
+},
+  "AI010-Active-Ally":{
+  "Strategy":"ACTIVE",
+  "Push":["202","18,8"],
   "Attack_Obj":[],
   "Not_Attack":[],
   "Attack_Selection":["Fatal","Object","Uncountered","Any"]

@@ -9,7 +9,6 @@ def coordinate_t(x, y, size):
     return i, j
 
 def check_chpos(s,map):
-    print(s)
     #CHPOS-5-4,38-5,40
     tp=s.split("-")
     pid=tp[1]

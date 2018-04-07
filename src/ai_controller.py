@@ -279,7 +279,7 @@ class AI_Controller:
                     break
         return (dst,track,rem_mov,moveto,occupied)
 
-    def find_push_action(self,p,_map,tar):
+    def find_push_action(self,p,_map,tar,valid):
         tarpos=_map.person_container.position[tar]
         dst,track,rem_mov,moveto,occupied=self.find_geographical_shortest(p,_map,tarpos)
         if rem_mov<-100:
@@ -294,6 +294,8 @@ class AI_Controller:
                     if _map.person_container.position[_p] == moveto:
                         occupied = 1
                         break
+            if not moveto in valid[p.pid]:
+                occupied=1
         return moveto,track
 
     def individual_movement(self,_valid,_invalid,_ally,_enemy,_map,_person_to_move):
@@ -307,7 +309,7 @@ class AI_Controller:
                 if len(tartp) == 1:
                     push_pid = tartp[0]
                     if push_pid in _map.person_container.position:
-                        (move_to, track) = self.find_push_action(person, _map, push_pid)
+                        (move_to, track) = self.find_push_action(person, _map, push_pid,_valid)
                         if not move_to == None:
                             attack_candidate = []
                             if len(person.item) > 0:
@@ -379,6 +381,7 @@ class AI_Controller:
                                 direction = 1
                                 step -= 1
                                 continue
+                            occ=0
                             for _p in _map.person_container.position:
                                 if not (_p == person.pid):
                                     if _map.person_container.position[_p] == moveto_g:
@@ -388,6 +391,7 @@ class AI_Controller:
                                                 step += 1
                                             else:
                                                 step -= 1
+                                            occ=1
                                             break
                                         else:
                                             movement_candidate = []
@@ -453,6 +457,8 @@ class AI_Controller:
                                                             attack_object[2]]
                                             return ["M", person, moveto_r, track_r]
                                             # push the enemy
+                            if occ>0:
+                                continue
                             if step == len(track_g) - 1:
                                 return ["M", person, moveto_g, dst_g[moveto_g][1]]
                             if direction == 1:
@@ -488,7 +494,7 @@ class AI_Controller:
                 if len(tartp)==1:
                     push_pid=tartp[0]
                     if push_pid in _map.person_container.position:
-                        (move_to,track)=self.find_push_action(person,_map,push_pid)
+                        (move_to,track)=self.find_push_action(person,_map,push_pid,_valid)
                         if not move_to==None:
                             return ["M",person,move_to,track]
                 else:
@@ -519,14 +525,17 @@ class AI_Controller:
                                 direction=1
                                 step-=1
                                 continue
+                            occ=0
                             for _p in _map.person_container.position:
                                 if not (_p == person.pid):
                                     if _map.person_container.position[_p] == moveto_g:
                                         if _map.person_container.controller[_p] %2 == _map.person_container.controller[person.pid]%2:
                                             if direction==0:
                                                 step+=1
+                                                occ=1
                                             else:
                                                 step-=1
+                                                occ=1
                                             break
                                         else:
                                             movement_candidate = []
@@ -592,6 +601,8 @@ class AI_Controller:
                                                             attack_object[2]]
                                             return ["M", person, moveto_r, track_r]
                                             #push the enemy
+                            if occ>0:
+                                continue
                             if step==len(track_g)-1:
                                 return ["M",person,moveto_g,dst_g[moveto_g][1]]
                             if direction==1:

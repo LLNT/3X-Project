@@ -46,7 +46,23 @@
           "Anchor_Y":38,
           "Map":[["Plain"]],
           "Pic":"plain_cell.png"},
-      "Finish":[{
+      "Finish":[
+        {
+        "Condition":[[["V010010"],[]],
+          [["V010011"],[]]
+        ],
+        "Execute":["CLV/4,38",
+          "AIC/1010020/0/AI010-Active-Ally",
+          "AIC/1010021/0/AI010-Active-Ally",
+          "AIC/1010022/0/AI010-Active-Ally",
+        "AIC/1010023/0/AI010-Active-Ally",
+          "AIC/1010024/0/AI010-Active-Ally",
+          "AIC/1010025/0/AI010-Active-Ally",
+        "AIC/1010026/0/AI010-Active-Ally",
+          "AIC/1010027/0/AI010-Active-Ally"],
+        "Jump":"F"
+      },
+        {
         "Condition":[[[],[]]],
         "Execute":["CLV/4,38",
           "AIC/1010020/0/AI010-Pursue-Ally2",
@@ -57,6 +73,72 @@
           "AIC/1010025/0/AI010-Pursue-Ally2",
         "AIC/1010026/0/AI010-Pursue-Ally2",
           "AIC/1010027/0/AI010-Pursue-Ally2"],
+        "Jump":"F"
+      }
+      ]
+    },
+    {
+      "Event":"G010004",
+      "Condition":[[["CHPOS-1010020-4,21-4,21"],["V010010","V010011","G010004"]],
+      [["CHPOS-1010021-4,21-4,21"],["V010010","V010011","G010004"]],
+        [["CHPOS-1010022-4,21-4,21"],["V010010","V010011","G010004"]],
+        [["CHPOS-1010023-4,21-4,21"],["V010010","V010011","G010004"]],
+        [["CHPOS-1010024-4,21-4,21"],["V010010","V010011","G010004"]],
+        [["CHPOS-1010025-4,21-4,21"],["V010010","V010011","G010004"]],
+        [["CHPOS-1010026-4,21-4,21"],["V010010","V010011","G010004"]],
+        [["CHPOS-1010027-4,21-4,21"],["V010010","V010011","G010004"]]
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_1_village1",
+          "M":1,
+          "N":1,
+          "Anchor_X":4,
+          "Anchor_Y":21,
+          "Map":[["Plain"]],
+          "Pic":"plain_cell.png"},
+      "Finish":[
+
+        {
+        "Condition":[[[],[]]],
+        "Execute":["CLV/4,21",
+          "AIC/1010020/0/AI010-Active-Ally",
+          "AIC/1010021/0/AI010-Active-Ally",
+          "AIC/1010022/0/AI010-Active-Ally",
+        "AIC/1010023/0/AI010-Active-Ally",
+          "AIC/1010024/0/AI010-Active-Ally",
+          "AIC/1010025/0/AI010-Active-Ally",
+        "AIC/1010026/0/AI010-Active-Ally",
+          "AIC/1010027/0/AI010-Active-Ally"],
+        "Jump":"F"
+      }
+      ]
+    },
+    {
+      "Event":"G010005",
+      "Condition":[[["CHPOS-1010020-18,8-18,8"],["V010020","V010021","G010005"]],
+      [["CHPOS-1010021-18,8-18,8"],["V010020","V010021","G010005"]],
+        [["CHPOS-1010022-18,8-18,8"],["V010020","V010021","G010005"]],
+        [["CHPOS-1010023-18,8-18,8"],["V010020","V010021","G010005"]],
+        [["CHPOS-1010024-18,8-18,8"],["V010020","V010021","G010005"]],
+        [["CHPOS-1010025-18,8-18,8"],["V010020","V010021","G010005"]],
+        [["CHPOS-1010026-18,8-18,8"],["V010020","V010021","G010005"]],
+        [["CHPOS-1010027-18,8-18,8"],["V010020","V010021","G010005"]]
+      ],
+      "Text_type":"S",
+      "Text":[],
+      "Reconstruct":{
+          "Name":"map_1_village2",
+          "M":1,
+          "N":1,
+          "Anchor_X":18,
+          "Anchor_Y":8,
+          "Map":[["Plain"]],
+          "Pic":"plain_cell.png"},
+      "Finish":[{
+        "Condition":[[[],[]]],
+        "Execute":["CLV/18,8"],
         "Jump":"F"
       }
       ]
@@ -76,6 +158,20 @@
         "Text":[],
         "Reconstruct":null,
         "Finish":[
+          {
+            "Condition":[[["V010030","V010010"],[]],
+              [["V010030","V010011"],[]]
+            ],
+            "Execute":["R/1010020/2/0,38/Lilse Bandits/0/AI010-Active-Ally","R/1010021/2/0,37/Lilse Bandits/0/AI010-Active-Ally",
+            "R/1010022/2/0,33/Lilse Bandits/0/AI010-Active-Ally"],
+            "Jump":"F"
+        },
+          {
+            "Condition":[[["V010030"],[]]],
+            "Execute":["R/1010020/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally2","R/1010021/2/0,37/Lilse Bandits/0/AI010-Pursue-Ally2",
+            "R/1010022/2/0,33/Lilse Bandits/0/AI010-Pursue-Ally2"],
+            "Jump":"F"
+        },
         {
             "Condition":[[[],[]]],
             "Execute":["R/1010020/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally","R/1010021/2/0,37/Lilse Bandits/0/AI010-Pursue-Ally",
@@ -95,6 +191,20 @@
         "Text":[],
         "Reconstruct":null,
         "Finish":[
+          {
+            "Condition":[[["V010030","V010010"],[]],
+              [["V010030","V010011"],[]]
+            ],
+            "Execute":["R/1010023/2/0,38/Lilse Bandits/0/AI010-Active-Ally","R/1010024/2/0,34/Lilse Bandits/0/AI010-Active-Ally",
+            "R/1010025/2/0,33/Lilse Bandits/0/AI010-Active-Ally"],
+            "Jump":"F"
+        },
+          {
+            "Condition":[[["V010030"],[]]],
+            "Execute":["R/1010023/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally2","R/1010024/2/0,34/Lilse Bandits/0/AI010-Pursue-Ally2",
+            "R/1010025/2/0,33/Lilse Bandits/0/AI010-Pursue-Ally2"],
+            "Jump":"F"
+        },
         {
             "Condition":[[[],[]]],
             "Execute":["R/1010023/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally","R/1010024/2/0,34/Lilse Bandits/0/AI010-Pursue-Ally",
@@ -114,6 +224,18 @@
         "Text":[],
         "Reconstruct":null,
         "Finish":[
+          {
+            "Condition":[[["V010030","V010010"],[]],
+              [["V010030","V010011"],[]]
+            ],
+            "Execute":["R/1010026/2/0,38/Lilse Bandits/0/AI010-Active-Ally","R/1010027/2/0,33/Lilse Bandits/0/AI010-Active-Ally"],
+            "Jump":"F"
+        },
+          {
+            "Condition":[[["V010030"],[]]],
+            "Execute":["R/1010026/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally2","R/1010027/2/0,33/Lilse Bandits/0/AI010-Pursue-Ally2"],
+            "Jump":"F"
+        },
         {
             "Condition":[[[],[]]],
             "Execute":["R/1010026/2/0,38/Lilse Bandits/0/AI010-Pursue-Ally","R/1010027/2/0,33/Lilse Bandits/0/AI010-Pursue-Ally"],
