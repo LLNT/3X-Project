@@ -34,6 +34,7 @@ class Main:
         self.eventlist=json.load(open(path+"eventlist_map0.json","r"))
         self.ai_configs=json.load(open(path+"ai_configs.json","r"))
         self.startmeta=json.load(open(path+"map0_meta.json","r"))
+        self.settings=json.load(open(path+"settings.json","r"))
     def get_obj(self,fname):
         path=self.get_root("data")
         return json.load(open(path+fname,"r"))

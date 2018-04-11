@@ -9,6 +9,7 @@ from cocos.director import director
 from cocos.layer import ColorLayer, Layer
 from cocos.actions import Delay, CallFunc
 import map_controller
+from cocos.layer import PythonInterpreterLayer
 
 class Menulayer(Layer):
     def __init__(self):
@@ -321,9 +322,13 @@ class Weaponmenu(Menu):
 
 class Exchangeitem(MenuItem):
 
+
     def on_activated(self):
         for obj in self.parent.get_children():
-            obj.inactivate()
+            try:
+                obj.inactivate()
+            except:
+                pass
         self.item.color = (50, 250, 50, 200)
 
     def inactivate(self):
@@ -393,6 +398,84 @@ class Weaponexchange(Menu):
             obj.inactivate()
         self.selected = None
 
+class Setting(Menu):
+    is_event_handler = True
+    def __init__(self, arena):
+        super().__init__(title='Settings')
+        l = []
+        l.append(MenuItem('Rolling', self.rolling))
+        l.append(MenuItem('Moving', self.moving))
+        l.append(MenuItem('Simplified', self.simple))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.arena = arena
+
+        self.create_menu(l, zoom_in(), zoom_out())
+
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
+
+    def rolling(self):
+        self.parent.remove(self)
+        self.parent.add(Fivelevelspeed(klass='rolling', arena=self.arena))
+
+    def moving(self):
+        self.parent.remove(self)
+        self.parent.add(Fivelevelspeed(klass='moving', arena=self.arena))
+        pass
+
+    def simple(self):
+        pass
+
+    def cancel(self):
+        self.parent.remove(self)
+        self.parent.add(Endturn(self.arena))
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
+class Fivelevelspeed(Menu):
+    is_event_handler = True
+    def __init__(self, klass, arena):
+        super().__init__(title=klass)
+        l = []
+        l.append(Exchangeitem('Very slow', self.adjust, 0))
+        l.append(Exchangeitem('Slow', self.adjust, 1))
+        l.append(Exchangeitem('Medium', self.adjust, 2))
+        l.append(Exchangeitem('Fast', self.adjust, 3))
+        l.append(Exchangeitem('Very fast', self.adjust, 4))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.arena = arena
+        self.klass = klass
+        self.create_menu(l, None, None)
+        l[arena.settings[klass]].item.color = (50, 250, 50, 200)
+        pass
+
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
+
+    def adjust(self, level=0):
+        dic = self.arena.settings
+        dic[self.klass] = level
+        self.arena.settings = dic
+        self.parent.remove(self)
+        self.parent.add(Setting(self.arena))
+
+    def cancel(self):
+        self.parent.remove(self)
+        self.parent.add(Setting(self.arena))
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
+
+
 class Endturn(Menu):
     is_event_handler = True
     def __init__(self, arena):
@@ -405,6 +488,7 @@ class Endturn(Menu):
         l.append(MenuItem('Cancel', self.cancel))
         l.append(MenuItem('Quit', self.quit))
         l.append(MenuItem('Jump', self.jump))
+        l.append(MenuItem('Settings', self.setting))
         self.create_menu(l, zoom_in(), zoom_out())
         self.arena = arena
 
@@ -442,6 +526,10 @@ class Endturn(Menu):
     def quit(self):
         self.parent.remove(self)
         director.pop()
+
+    def setting(self):
+        self.parent.remove(self)
+        self.parent.add(Setting(self.arena))
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:

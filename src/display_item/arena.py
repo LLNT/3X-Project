@@ -21,7 +21,7 @@ from display_item.getitem import Getitem
 from display_item.action_control import Sequencial, Graphic
 from display_item.dialog import Dialogscene
 from display_item.eventdisplay import *
-import os
+import pathlib
 import map_controller
 from global_vars import Main as Global
 from data_loader import Main as Data
@@ -67,19 +67,21 @@ class Arena(Layer):
         people = map.person_container.people
         position = map.person_container.position
         controller = map.person_container.controller
+
         for person in people:
             pid = person.pid
             self.people[pid] = PerSpr(person, scale=1, size=size, pos=position[pid],
                                       controller=controller[pid], bk_color=(220,220,220))
             self.people[pid].moved = not map.person_container.movable[pid]
-
             self.person_layer.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
 
         self.menulayer = menulayer
         self.infolayer = infolayer
 
-        self.board = Board(self.windowsize[0], self.windowsize[1],25,-10)
+        self.board = Board(self.windowsize[0], self.windowsize[1],
+                           25,-5)
+        self.settings = self.map.global_vars.settings
         self._update = (0, 0)
         self.schedule(self.update)
 
@@ -89,6 +91,16 @@ class Arena(Layer):
         print('loaded map reconstruct ', self.map.reconstruct_log)
         print('map size %d, %d'% (self.width, self.height))
 
+    def get_settings(self):
+        return self._settings
+
+    def set_settings(self, value):
+        self._settings = value
+        self.board.step = rolling[self._settings['rolling']]
+        path = self.map.global_vars.data.get_root('data')
+        json.dump(self._settings, open(path+'settings.json', 'w'))
+
+    settings = property(get_settings, set_settings)
 
     # callback functions
     def _getitem(self, **kwargs):
@@ -246,6 +258,7 @@ class Arena(Layer):
         self._clear_map()
         director.window.remove_handlers(self)
         director.window.push_handlers(self)
+        self.focus('1')
         print('player_turn push_handlers')
         # before executed, handlers should be removed
 
@@ -308,7 +321,8 @@ class Arena(Layer):
         # at start of this period, remove handlers to avoid events
         action = CallFunc(self.menulayer.disapper)
         for x,y in dst:
-            action = action + MoveTo(coordinate(x, y, self.size), 0.5)
+            action = action + MoveTo(coordinate(x, y, self.size),
+                                     moving[self.settings['moving']])
         return action
 
     def _set_moved(self, pid, dst):
@@ -1567,6 +1581,12 @@ class Arena(Layer):
         self.menulayer.disapper()
         director.window.push_handlers(self)
         self.map.global_vars.flags['VIC_FLAG00001'] = True
+        self.state = 'default'
+
+    def setting(self):
+        self.menulayer.disapper()
+        director.window.push_handlers(self)
+        print(self.settings)
         self.state = 'default'
 
     def _next(self, **kwargs):

@@ -9,6 +9,8 @@ from cocos.sprite import Sprite
 from display_item.text import Text
 from utility import *
 from cocos.director import director
+import pyglet
+
 class Ring(CocosNode):
 
     def __init__(self, position, scale, start_color=GREEN, end_color=RED,
@@ -137,7 +139,14 @@ class PerSpr(Ring):
         self.moved = False
         self.pid = person.pid
         self.pos = pos
-        self.inner = Sprite(image='ring.png', scale=scl*0.9)
+
+        name = 'cls/' + person.cls + '_' + str(controller) + '.png'
+        try:
+            self.inner = Sprite(image=name)
+            self.inner.scale_x, self.inner.scale_y = \
+                size/self.inner.width*0.8, size/self.inner.height*0.8
+        except:
+            self.inner = Sprite(image='ring.png', scale=scl*0.9)
         self.add(self.inner)
         self._opacity = 255
         self.icon = Sprite(image=person.icon, position=(size//2-14, -size//2+14))

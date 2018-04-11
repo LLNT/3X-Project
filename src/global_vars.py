@@ -25,6 +25,7 @@ class Main:
         self.maps=[]
         self.data=None                     #type:data_loader.Main
         self.gold=0
+        self.settings = {}
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -36,6 +37,7 @@ class Main:
         self.flags=data.flags
         self.transporter={}
         self.data=data                     #type:data_loader.Main
+        self.settings = data.settings
         for _type in data.itemtype_typenames:
             self.transporter[_type]=[]
         self.maps=[]
