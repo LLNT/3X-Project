@@ -15,7 +15,20 @@
     },
     {
       "Name": "Lilse Army",
-      "Member":[{"Id":"202","X":11,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"}],
+      "Member":[{"Id":"202","X":11,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010028","X":6,"Y":10,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010029","X":7,"Y":10,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010030","X":5,"Y":10,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010031","X":6,"Y":11,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010032","X":7,"Y":11,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010033","X":5,"Y":11,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010034","X":7,"Y":7,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010035","X":7,"Y":6,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010036","X":8,"Y":7,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010037","X":6,"Y":7,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010038","X":4,"Y":6,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010039","X":4,"Y":5,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010040","X":3,"Y":6,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010041","X":5,"Y":6,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010042","X":10,"Y":6,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010043","X":10,"Y":5,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010044","X":10,"Y":7,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010045","X":11,"Y":6,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010046","X":11,"Y":7,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010047","X":11,"Y":5,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010048","X":12,"Y":3,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010049","X":12,"Y":2,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010050","X":11,"Y":3,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010051","X":13,"Y":3,"PRI":0,"AI":"AI010-Pursue-Base"}
+      ],
       "Controller":1
     },
     {
