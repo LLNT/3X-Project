@@ -19,7 +19,7 @@ from display_item.battle_scene import *
 from display_item.ring import PerSpr
 from display_item.getitem import Getitem
 from display_item.action_control import Sequencial, Graphic
-from display_item.dialog import Dialogscene
+from display_item.saveload import Main as Saveload
 from display_item.eventdisplay import *
 import pathlib
 import map_controller
@@ -1283,26 +1283,20 @@ class Arena(Layer):
         self.target = None
 
     def save(self):
-        director.window.push_handlers(self)
+        # director.window.push_handlers(self)
         self.menulayer.disapper()
         self.state = 'default'
-        self.map.map_save()
+        # self.map.map_save()
+        sl = Saveload(self.windowsize[0], self.windowsize[1], self)
+        self.add(sl)
+        sl.position = -self.position[0], -self.position[1]
 
     def load(self):
-        map = self.map.map_load()[0] #type:map_controller.Main
-        menulayer = Menulayer()
-        infolayer = Layer()
-        arena = Arena(map, menulayer, infolayer, self.size)
-        class Transition(FadeTransition):
-            def finish(self):
-                super().finish()
-                for rec in map.reconstruct_log:
-                    arena.reconstruct(rec, ty='load')
-                arena.map.take_turn(arena)
-
-        director.replace(Transition(Scene(arena, menulayer, infolayer), duration=1))
-        self.kill()
-        del self
+        self.menulayer.disapper()
+        self.state = 'default'
+        sl = Saveload(self.windowsize[0], self.windowsize[1], self, 'load')
+        self.add(sl)
+        sl.position = -self.position[0], -self.position[1]
 
     def cancel_select(self):
         self.state = 'valid_dst'
@@ -1604,9 +1598,8 @@ class Arena(Layer):
                 super().finish()
                 arena.before()
 
-        director.pop()
-        director.run(Transition(Scene(arena, menulayer, infolayer)))
         self.kill()
+        director.run(Transition(Scene(arena, menulayer, infolayer)))
 
     def remove(self, obj):
         super().remove(obj)
