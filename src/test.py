@@ -15,6 +15,8 @@ if __name__ == '__main__':
     print(mrp.calc_move(unstable,uncross,mov_map,pos,mov))
     data=Data()
     global_vars=Global(data)
+    global_vars.saved_data_preload()
+    print("AAAAAAAAAAAAAAAAAAAA")
     print(global_vars.terrainBank["Forest"].enhance)
     print(global_vars.clsBank["Lord"].weapon_rank)
     print(global_vars.personBank["1"].ability)

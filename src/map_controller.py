@@ -835,7 +835,7 @@ class Main:
         return
 
     def map_save(self):
-        return self.global_vars.map_save("map_save.sav")
+        return self.global_vars.map_save("game_0.sav",0)
 
     def map_load(self):
         return self.global_vars.map_load("map_save.sav")

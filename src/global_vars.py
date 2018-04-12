@@ -1,4 +1,5 @@
 from typing import Dict, List
+import time
 import terrain
 import cls
 import person
@@ -26,6 +27,8 @@ class Main:
         self.data=None                     #type:data_loader.Main
         self.gold=0
         self.settings = {}
+        self.saved_time="19960229065033" #type:str
+        self.saved_type=0   #type:int
     def __init__(self,data):
         self.terrainBank=terrain.Main(data).terrain_bank
         self.clsBank=cls.Main(data).cls_bank
@@ -42,6 +45,8 @@ class Main:
             self.transporter[_type]=[]
         self.maps=[]
         self.gold=0
+        self.saved_time=time.strftime("%Y%m%d%H%M%S",time.localtime())
+        self.saved_type=0 #0 free save 1 after 2 preparation 3 prebattle
 
     def new_game(self):
         terrain0=terrain_container.Main(self.data.get_obj(self.data.startmeta["Terrain_map"]), self.terrainBank)
@@ -56,7 +61,21 @@ class Main:
         self.transporter={}
         return map0
 
-    def map_save(self,fname):
+    def saved_data_preload(self,n=4):
+        loaded_maps=[]
+        for i in range(n):
+            fname="game_%d.sav"%(i)
+            try:
+                premap=self.map_load(fname)
+            except FileNotFoundError:
+                loaded_maps.append(None)
+            else:
+                loaded_maps.append(premap)
+        return loaded_maps
+
+    def map_save(self,fname,t=0):
+        self.saved_time = time.strftime("%Y%m%d%H%M%S", time.localtime())
+        self.saved_type=t
         path=self.data.get_root("save")
         obj=pickle.dump(self,open(path+fname,"wb"))
         return obj
