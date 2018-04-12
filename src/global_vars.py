@@ -61,12 +61,13 @@ class Main:
         self.transporter={}
         return map0
 
-    def saved_data_preload(self,n=4):
+    @classmethod
+    def saved_data_preload(cls,n=4):
         loaded_maps=[]
         for i in range(n):
             fname="game_%d.sav"%(i)
             try:
-                premap=self.map_load(fname)
+                premap=cls.map_load(fname)
             except FileNotFoundError:
                 loaded_maps.append(None)
             else:
@@ -80,8 +81,9 @@ class Main:
         obj=pickle.dump(self,open(path+fname,"wb"))
         return obj
 
-    def map_load(self,fname):
-        path=self.data.get_root("save")
+    @classmethod
+    def map_load(cls,fname):
+        path=data_loader.Main.get_root("save")
         obj=pickle.load(open(path+fname,"rb"))
         map_active=obj.maps[-1]
         return map_active

@@ -38,7 +38,9 @@ class Main:
     def get_obj(self,fname):
         path=self.get_root("data")
         return json.load(open(path+fname,"r"))
-    def get_root(self,directory):
+
+    @classmethod
+    def get_root(cls,directory):
         ostype = platform.platform()
         path = os.getcwd()
         if path[-3:]=="src":
