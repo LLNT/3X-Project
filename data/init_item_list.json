@@ -688,5 +688,56 @@
     "Id":138,
     "Itemtype":"Hand Axe",
     "Use":20
+  },
+  {
+    "Id":139,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":140,
+    "Itemtype":"Slim Sword",
+    "Use":30
+  },
+  {
+    "Id":141,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":142,
+    "Itemtype":"Iron Blade",
+    "Use":35
+  },
+  {
+    "Id":143,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":144,
+    "Itemtype":"Silver Sword",
+    "Use":20
+  },
+  {
+    "Id":145,
+    "Itemtype":"Steel Blade",
+    "Use":25
+  },
+  {
+    "Id":146,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":147,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":148,
+    "Itemtype":"Iron Sword",
+    "Use":46
   }
+
 ]
