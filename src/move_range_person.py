@@ -1,4 +1,3 @@
-import numpy
 def calc_move(unstable,uncross,mov_map,pos,mov):
     #####################################################
     # To calculate the moving range of one character:   #
