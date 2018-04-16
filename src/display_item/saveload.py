@@ -11,6 +11,7 @@ from global_vars import Main as Global
 from display_item.menu import Menulayer
 from display_item import arena
 from person import Person
+from display_item.text import layout_multiply, layout
 
 class Main(ColorLayer):
 
@@ -44,13 +45,19 @@ class Save(ColorLayer):
         if map is not None:
             hero = map[0].global_vars.personBank["1"] #type:Person
             self.displayitem=[
-                hero.ability['LV'],
-                hero.cls,
+                str(hero.ability['LV']),
+                str(hero.cls),
                 map[0].title,
-                map[0].global_vars.saved_time,
-                map[0].global_vars.saved_type
+                str(map[0].global_vars.saved_time),
             ]
-            self.map = map[0] 
+            content_map = layout_multiply(self.displayitem, row=2, column=2, color=(0, 0, 0, 200),
+                                          pos_range=((50, 0), (self.width, self.height)))
+            for column in content_map:
+                for item in column:
+                    self.add(item)
+            save_type = layout([str(map[0].global_vars.saved_type)], color=(0, 0, 0, 200), pos_range=((0, 0), (50, self.height)))
+            self.add(save_type[0])
+            self.map = map[0]
         else:
             self.displayitem = 'Empty Save'
 
