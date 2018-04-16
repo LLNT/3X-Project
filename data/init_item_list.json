@@ -533,5 +533,211 @@
     "Id":107,
     "Itemtype":"Hand Axe",
     "Use":20
+  },
+  {
+    "Id":108,
+    "Itemtype":"Silver Bow",
+    "Use":20
+  },
+  {
+    "Id":109,
+    "Itemtype":"Killer Bow",
+    "Use":20
+  },
+  {
+    "Id":110,
+    "Itemtype":"Killer Bow",
+    "Use":20
+  },
+  {
+    "Id":111,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":112,
+    "Itemtype":"Silver Sword",
+    "Use":20
+  },
+  {
+    "Id":113,
+    "Itemtype":"Steel Axe",
+    "Use":30
+  },
+  {
+    "Id": 114,
+    "Itemtype": "Killer Axe",
+    "Use": 20
+  },
+  {
+    "Id":115,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":116,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":117,
+    "Itemtype":"Long Bow",
+    "Use":25
+  },
+  {
+    "Id":118,
+    "Itemtype":"Steel Bow",
+    "Use":30
+  },
+  {
+    "Id":119,
+    "Itemtype":"Iron Blade",
+    "Use":35
+  },
+  {
+    "Id":120,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+   {
+    "Id":121,
+    "Itemtype":"Steel Blade",
+    "Use":25
+  },
+  {
+    "Id":122,
+    "Itemtype":"Killer Axe",
+    "Use":20
+  },
+  {
+    "Id":123,
+    "Itemtype":"Short Bow",
+    "Use":22
+  },
+  {
+    "Id":124,
+    "Itemtype":"Short Spear",
+    "Use":18
+  },
+  {
+    "Id":125,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":126,
+    "Itemtype":"Steel Bow",
+    "Use":30
+  },
+  {
+    "Id":127,
+    "Itemtype":"Long Bow",
+    "Use":25
+  },
+  {
+    "Id":128,
+    "Itemtype":"Steel Bow",
+    "Use":30
+  },
+  {
+    "Id":129,
+    "Itemtype":"Killer Bow",
+    "Use":20
+  },
+  {
+    "Id":130,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":131,
+    "Itemtype":"Steel Blade",
+    "Use":25
+  },
+  {
+    "Id":132,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":133,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":134,
+    "Itemtype":"Tomahawk",
+    "Use":20
+  },
+  {
+    "Id":135,
+    "Itemtype":"Silver Axe",
+    "Use":20
+  },
+  {
+    "Id":136,
+    "Itemtype":"Killer Bow",
+    "Use":20
+  },
+  {
+    "Id":137,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":138,
+    "Itemtype":"Hand Axe",
+    "Use":20
+  },
+  {
+    "Id":139,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":140,
+    "Itemtype":"Slim Sword",
+    "Use":30
+  },
+  {
+    "Id":141,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":142,
+    "Itemtype":"Iron Blade",
+    "Use":35
+  },
+  {
+    "Id":143,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":144,
+    "Itemtype":"Silver Sword",
+    "Use":20
+  },
+  {
+    "Id":145,
+    "Itemtype":"Steel Blade",
+    "Use":25
+  },
+  {
+    "Id":146,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":147,
+    "Itemtype":"Killer Sword",
+    "Use":20
+  },
+  {
+    "Id":148,
+    "Itemtype":"Iron Sword",
+    "Use":46
   }
+
 ]

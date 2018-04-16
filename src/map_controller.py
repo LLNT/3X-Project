@@ -496,8 +496,41 @@ class Main:
                 continue
             d=calc_dist(self.person_container.position[p],pos)
             if (d>=minr)and(d<=maxr):
-                enemy_list.append(d)
+                enemy_list.append(p)
         return enemy_list
+
+    def get_attack_range(self,pid,valid):
+        available_blocks=set()
+        differential_blocks=set()
+        person = self.global_vars.personBank[pid]
+        minr = 255
+        maxr = -255
+        for i in person.item:
+            if self.can_equip(pid,i):
+                if minr>i.itemtype.min_range:
+                    minr=i.itemtype.min_range
+                if maxr<i.itemtype.max_range:
+                    maxr=i.itemtype.max_range
+        for i in range(self.terrain_container.M):
+            for j in range(self.terrain_container.N):
+                for ppos in valid[pid]:
+                    d=calc_dist((i,j),ppos)
+                    if (d>=minr)and(d<=maxr):
+                        available_blocks.add((i,j))
+                        if not (i,j) in valid[pid]:
+                            differential_blocks.add((i,j))
+        return available_blocks,differential_blocks
+
+    def get_attack_target(self,pid,valid):
+        targets={}
+        for ppos in valid[pid]:
+            enemies=self.find_attackable(pid,ppos)
+            for enemy in enemies:
+                if enemy in targets:
+                    targets[enemy].append(ppos)
+                else:
+                    targets[enemy]=[ppos]
+        return targets
 
     def available_wand(self,pid):
         wands=[]
