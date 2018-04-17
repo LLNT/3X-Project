@@ -2,7 +2,7 @@ from typing import List,Tuple
 import random
 import map_controller
 from utility import *
-from battle import Battle
+import battle
 class AI_Controller:
     def __init__(self):
         pass
@@ -267,7 +267,7 @@ class AI_Controller:
                                             if (calc_dist(pose, move_to) >= minrange) and (
                                                 calc_dist(pose, move_to) <= maxrange):
                                                 enemy_person = _map.global_vars.personBank[enm]
-                                                bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
+                                                bat = battle.Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
                                                              move_to)
                                                 sim = bat.simulate()
                                                 del (bat)
@@ -300,7 +300,7 @@ class AI_Controller:
                                         if (calc_dist(pose, moveto_r) >= minrange) and (
                                                     calc_dist(pose, moveto_r) <= maxrange):
                                             enemy_person = _map.global_vars.personBank[enm]
-                                            bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
+                                            bat = battle.Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
                                                          moveto_r)
                                             sim = bat.simulate()
                                             del (bat)
@@ -337,7 +337,7 @@ class AI_Controller:
                                                 pose = _map.person_container.position[enm]
                                                 if (calc_dist(pose, moveto_g) >= minrange) and (calc_dist(pose, moveto_g) <= maxrange):
                                                         enemy_person = _map.global_vars.personBank[enm]
-                                                        bat = Battle(person, enemy_person, weap,
+                                                        bat = battle.Battle(person, enemy_person, weap,
                                                                      enemy_person.get_equip(), _map, moveto_g)
                                                         sim = bat.simulate()
                                                         del (bat)
@@ -360,7 +360,7 @@ class AI_Controller:
                                         if (calc_dist(pose, moveto_g) >= minrange) and (
                                                     calc_dist(pose, moveto_g) <= maxrange):
                                             enemy_person = _map.global_vars.personBank[enm]
-                                            bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
+                                            bat = battle.Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
                                                          moveto_g)
                                             sim = bat.simulate()
                                             del (bat)
@@ -384,7 +384,7 @@ class AI_Controller:
                                 pose = _map.person_container.position[enm]
                                 if (calc_dist(pose, dst) >= minrange) and (calc_dist(pose, dst) <= maxrange):
                                     enemy_person = _map.global_vars.personBank[enm]
-                                    bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map, dst)
+                                    bat = battle.Battle(person, enemy_person, weap, enemy_person.get_equip(), _map, dst)
                                     sim = bat.simulate()
                                     del (bat)
                                     movement_candidate.append((dst, enemy_person, weap, sim))
@@ -425,7 +425,7 @@ class AI_Controller:
                                         if (calc_dist(pose, moveto_r) >= minrange) and (
                                                     calc_dist(pose, moveto_r) <= maxrange):
                                             enemy_person = _map.global_vars.personBank[enm]
-                                            bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
+                                            bat = battle.Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
                                                          moveto_r)
                                             sim = bat.simulate()
                                             del (bat)
@@ -463,7 +463,7 @@ class AI_Controller:
                                                 if (calc_dist(pose, moveto_g) >= minrange) and (
                                                     calc_dist(pose, moveto_g) <= maxrange):
                                                     enemy_person = _map.global_vars.personBank[enm]
-                                                    bat = Battle(person, enemy_person, weap,
+                                                    bat = battle.Battle(person, enemy_person, weap,
                                                                  enemy_person.get_equip(), _map, moveto_g)
                                                     sim = bat.simulate()
                                                     del (bat)
@@ -486,7 +486,7 @@ class AI_Controller:
                                         if (calc_dist(pose, moveto_g) >= minrange) and (
                                                     calc_dist(pose, moveto_g) <= maxrange):
                                             enemy_person = _map.global_vars.personBank[enm]
-                                            bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
+                                            bat = battle.Battle(person, enemy_person, weap, enemy_person.get_equip(), _map,
                                                          moveto_g)
                                             sim = bat.simulate()
                                             del (bat)
@@ -510,7 +510,7 @@ class AI_Controller:
                             pose=_map.person_container.position[enm]
                             if (calc_dist(pose,pos)>=minrange)and(calc_dist(pose,pos)<=maxrange):
                                 enemy_person=_map.global_vars.personBank[enm]
-                                bat=Battle(person,enemy_person,weap,enemy_person.get_equip(),_map,pos)
+                                bat=battle.Battle(person,enemy_person,weap,enemy_person.get_equip(),_map,pos)
                                 sim=bat.simulate()
                                 del(bat)
                                 attack_candidate.append((pos,enemy_person,weap,sim))
@@ -535,7 +535,7 @@ class AI_Controller:
                                 pose = _map.person_container.position[enm]
                                 if (calc_dist(pose, dst) >= minrange) and (calc_dist(pose, dst) <= maxrange):
                                     enemy_person = _map.global_vars.personBank[enm]
-                                    bat = Battle(person, enemy_person, weap, enemy_person.get_equip(), _map, dst)
+                                    bat = battle.Battle(person, enemy_person, weap, enemy_person.get_equip(), _map, dst)
                                     sim = bat.simulate()
                                     del(bat)
                                     movement_candidate.append((dst,enemy_person, weap, sim))

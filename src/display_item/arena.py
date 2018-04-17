@@ -1356,6 +1356,7 @@ class Arena(Layer):
 
     def set_turn(self, turn):
         # change the turn over the arena
+
         pass
 
     def can_exchange(self, pos):
