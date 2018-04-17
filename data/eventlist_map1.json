@@ -155,7 +155,7 @@
             [[],["U01001"]]
         ],
         "Text_type":"S",
-        "Text":[],
+        "Text":["UT010-011","UT010-012","UT010-013","UT010-014","UT010-015","UT010-016","UT010-017","UT010-018"],
         "Reconstruct":null,
         "Finish":[
           {
@@ -342,7 +342,7 @@
         "Finish":[
         {
           "Condition":[[[],[]]],
-          "Execute":["CLV/18,8","I/90/V"],
+          "Execute":["CLV/18,8","I/92/V"],
           "Jump":"F"
         }]
       },
@@ -356,7 +356,7 @@
         "Finish":[
         {
           "Condition":[[[],[]]],
-          "Execute":["CLV/18,8","I/90/V"],
+          "Execute":["CLV/18,8","I/92/V"],
           "Jump":"F"
         }]
       }

@@ -9,5 +9,6 @@
   "Prelude":"map0_pre.json",
   "Preparation":null,
   "Afterscene":"map0_after.json",
-  "Basement":null
+  "Basement":null,
+  "Leader":"1"
 }

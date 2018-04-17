@@ -54,7 +54,7 @@ class Main:
         map0 = map_controller.Main(terrain0, person0, self,[],self.data.get_obj(self.data.startmeta["Eventlist"]),
                                    self.data.get_obj(self.data.startmeta["Prelude"]),self.data.get_obj(self.data.startmeta["Afterscene"]),
                                    self.data.startmeta["Map_pic"],self.data.startmeta["Background_Scene"],
-                                   self.data.startmeta["Title"])
+                                   self.data.startmeta["Title"],self.data.startmeta["Leader"])
         self.maps.append((map0,self.data.startmeta))
         self.flags=self.data.flags
         self.player_character_status=self.data.player_character_init
@@ -94,7 +94,7 @@ class Main:
         _person = person_container.Main(self.data.get_obj(meta["Armylist"]), self.personBank,self.data.ai_configs)
         _map = map_controller.Main(_terrain, _person, self, [], self.data.get_obj(meta["Eventlist"]),
                                    self.data.get_obj(meta["Prelude"]),self.data.get_obj(meta["Afterscene"]),meta["Map_pic"],
-                                   meta["Background_Scene"],meta["Title"])
+                                   meta["Background_Scene"],meta["Title"],meta["Leader"])
         self.maps.append((_map, meta))
         return self.maps[-1]
 

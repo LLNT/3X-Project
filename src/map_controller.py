@@ -29,7 +29,8 @@ class Main:
         self.scene=""
         self.title=""
         self.reconstruct_log=[]
-    def __init__(self,terrain_map,person_container,glb,reconstruct_log,eventlist={},pre=[],after=[],pic="",scene="",title=""):
+        self.leader="1"
+    def __init__(self,terrain_map,person_container,glb,reconstruct_log,eventlist={},pre=[],after=[],pic="",scene="",title="",leader="1"):
         self.terrain_container=terrain_map
         self.person_container=person_container
         self.turn=0
@@ -42,6 +43,7 @@ class Main:
         self.global_vars=glb
         self.eventlist=eventlist
         self.reconstruct_log = reconstruct_log
+        self.leader=leader
         for p in self.person_container.people:
             p.status.clear()
             p.ability["HP"]=p.ability["MHP"]
