@@ -1,4 +1,4 @@
-def calc_move(unstable,uncross,mov_map,pos,mov):
+def calc_move(unstable,uncross,mov_map,pos,mov,M,N):
     #####################################################
     # To calculate the moving range of one character:   #
     # unstable=cannot stay at the grid after moving     #
@@ -13,7 +13,6 @@ def calc_move(unstable,uncross,mov_map,pos,mov):
     #uncross=set([(4,5),(2,2)])
     wait={}
     dst={}
-    (M,N)=mov_map.shape
     wait[pos]=(mov,[pos,])
     for item in uncross:
         mov_map[item]=255
