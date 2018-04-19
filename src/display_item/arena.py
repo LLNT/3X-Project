@@ -20,6 +20,7 @@ from display_item.ring import PerSpr
 from display_item.getitem import Getitem
 from display_item.action_control import Sequencial, Graphic
 from display_item.saveload import Main as Saveload
+from display_item.saveload import Confirm
 from display_item.eventdisplay import *
 import pathlib
 import map_controller
@@ -257,10 +258,24 @@ class Arena(Layer):
 
         self._clear_map()
         director.window.remove_handlers(self)
-        director.window.push_handlers(self)
-        self.focus('1')
-        print('player_turn push_handlers')
-        # before executed, handlers should be removed
+        flag = False
+        for p in self.people.values():
+            if p.state is 'unmoved' and p.controller is 0:
+                flag = True
+                break
+
+        def player_turn():
+            director.window.push_handlers(self)
+            print('player_turn push_handlers')
+            # before executed, handlers should be removed
+
+        if not flag:
+            print('all members are moved')
+
+            self.add(Confirm(confirm=self.end_turn, cancel=player_turn,
+                             title='End turn'))
+        else:
+            player_turn()
 
     def ai_turn(self, **kwargs):
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
@@ -1096,6 +1111,7 @@ class Arena(Layer):
             else:
                 self.get_next_event(i+1)
         else:
+            self.focus('1')
             self.map.take_turn(self)
             pass
 

@@ -12,6 +12,8 @@ from display_item.menu import Menulayer
 from display_item import arena
 from person import Person
 from display_item.text import layout_multiply, layout
+from cocos.menu import Menu, MenuItem
+
 
 class Main(ColorLayer):
 
@@ -32,6 +34,15 @@ class Main(ColorLayer):
             save.position = (0, height - h*(i+1)+margin)
             saves.append(save)
 
+    def set_handler(self, bool):
+        if bool:
+            for z, child in self.children:
+                director.window.push_handlers(child)
+        else:
+            for z, child in self.children:
+                director.window.remove_handlers(child)
+
+
         pass
 
 class Save(ColorLayer):
@@ -41,23 +52,30 @@ class Save(ColorLayer):
         self.i = i
         self.arena = arena
         self.operation = operation
-        self.map = None
         if map is not None:
-            hero = map[0].global_vars.personBank["1"] #type:Person
+            self.map = map[0]
+        else:
+            self.map = None
+        self.display()
+
+    def display(self):
+        for item in self.children:
+            self.remove(item[1])
+        if self.map is not None:
+            hero = self.map.global_vars.personBank["1"] #type:Person
             self.displayitem=[
                 str(hero.ability['LV']),
                 str(hero.cls),
-                map[0].title,
-                str(map[0].global_vars.saved_time),
+                self.map.title,
+                str(self.map.global_vars.saved_time),
             ]
             content_map = layout_multiply(self.displayitem, row=2, column=2, color=(0, 0, 0, 200),
                                           pos_range=((50, 0), (self.width, self.height)))
             for column in content_map:
                 for item in column:
                     self.add(item)
-            save_type = layout([str(map[0].global_vars.saved_type)], color=(0, 0, 0, 200), pos_range=((0, 0), (50, self.height)))
+            save_type = layout([str(self.map.global_vars.saved_type)], color=(0, 0, 0, 200), pos_range=((0, 0), (50, self.height)))
             self.add(save_type[0])
-            self.map = map[0]
         else:
             self.displayitem = 'Empty Save'
 
@@ -68,18 +86,13 @@ class Save(ColorLayer):
         if buttons is 1:
             if y in range(self.position[1], self.position[1]+self.height):
                 print(self.i, self.displayitem)
-                if self.operation is 'save' and self.map is None:
-                    print('saved')
-                    self.map = self.arena.map
-                    self.map.global_vars.map_save(fname='game_%d.sav'%self.i)
-                    hero = self.map.global_vars.personBank["1"]  # type:Person
-                    self.displayitem = [
-                        hero.ability['LV'],
-                        hero.cls,
-                        self.map.title,
-                        self.map.global_vars.saved_time,
-                        self.map.global_vars.saved_type
-                    ]
+                if self.operation is 'save':
+                    self.parent.set_handler(False)
+                    if self.map is None:
+                        print('saved')
+                        self.save()
+                    else:
+                        self.parent.add(Confirm(confirm=self.save, cancel=self.cancel))
                 elif self.operation is 'load' and self.map is not None:
                     map = self.map
                     menulayer = Menulayer()
@@ -108,6 +121,42 @@ class Save(ColorLayer):
                 layer = Layer()
                 director.replace(Scene(layer, Main(map_init(), layer)))
             pass
+
+    def save(self):
+        self.parent.set_handler(True)
+        self.map = self.arena.map
+        self.map.global_vars.map_save(fname='game_%d.sav' % self.i)
+        hero = self.map.global_vars.personBank["1"]  # type:Person
+        self.displayitem = [
+            hero.ability['LV'],
+            hero.cls,
+            self.map.title,
+            self.map.global_vars.saved_time,
+            self.map.global_vars.saved_type
+        ]
+        self.display()
+
+    def cancel(self):
+        self.parent.set_handler(True)
+
+class Confirm(Menu):
+
+    def __init__(self, confirm, cancel, title='Confirm'):
+        super().__init__(title=title)
+        self._confirm = confirm
+        self._cancel = cancel
+        l = []
+        l.append(MenuItem('Confirm', self.confirm))
+        l.append(MenuItem('Cancel', self.cancel))
+        self.create_menu(l, None, None)
+
+    def confirm(self):
+        self.kill()
+        self._confirm.__call__()
+
+    def cancel(self):
+        self.kill()
+        self._cancel.__call__()
 
 if __name__ == '__main__':
     pass
