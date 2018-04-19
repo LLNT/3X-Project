@@ -79,6 +79,7 @@ class Eventdisplay(Layer):
                 flag = self.map.global_vars.flags['Have Transporter']
                 git = Getitem(person, item, flag, self.map, callback=self.execute, i=i+1)
                 self.add(git)
+                git.position = -self.parent.position[0], -self.parent.position[1]
             elif _type == 'SF':
                 flag = _event[1]
                 self.map.global_vars.flags[flag] = True
@@ -176,6 +177,7 @@ class Afterevent(Eventdisplay):
                 getitem = Getitem(person, item, flag, self.map,
                                  callback=self.execute, i=i+1)
                 self.scene.add(getitem)
+                getitem.position = -self.parent.position[0], -self.parent.position[1]
                 director.window.remove_handlers(self)
             elif _type == 'SF':
                 flag = _event[1]

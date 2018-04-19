@@ -107,8 +107,10 @@ class Arena(Layer):
     def _getitem(self, **kwargs):
         person = kwargs['defeat']
         item = kwargs['item']
-        self.add(Getitem(person, item, self.map.global_vars.flags['Have Transporter'],
-                         self.map, callback=self._clear))
+        gititem = Getitem(person, item, self.map.global_vars.flags['Have Transporter'],
+                         self.map, callback=self._clear)
+        self.add(gititem)
+        gititem.position = -self.position[0], -self.position[1]
 
     def _trans(self, **kwargs):
         pid, pos = kwargs['transtuple']
@@ -166,6 +168,7 @@ class Arena(Layer):
         if getitem is not None:
             self.add(Getitem(person,getitem,self.map.global_vars.flags['Have Transporter'],
                              self.map, callback=self.end_getitem))
+
         else:
             if transtuple is not None:
                 self.transtuple = transtuple
@@ -186,9 +189,12 @@ class Arena(Layer):
                     if _pid is 'E':
                         _pid = defeat
                     if _type is 'I':
-                        self.add(Getitem(self.people[_pid].person, self.map.global_vars.itemBank[int(_id)],
-                                         self.map.global_vars.flags['Have Transporter'], self.map, callback=self.end_getitem))
-                        
+                        gititem = Getitem(self.people[_pid].person,
+                                          self.map.global_vars.itemBank[int(_id)],
+                                         self.map.global_vars.flags['Have Transporter'],
+                                          self.map, callback=self.end_getitem)
+                        self.add(gititem)
+                        gititem.position = -self.position[0], -self.position[1]
                     pass
                 else:
                     self.clear()
