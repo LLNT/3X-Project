@@ -233,6 +233,7 @@ class Arena(Layer):
         if set:
             self.position = _position
         else:
+
             return _position
 
     def next_round(self):
@@ -279,6 +280,8 @@ class Arena(Layer):
             print('all members are moved')
             if self.settings['endturn_automatically']:
                 self.end_turn()
+            else:
+                player_turn()
         else:
             player_turn()
 
