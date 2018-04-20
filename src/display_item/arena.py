@@ -277,9 +277,11 @@ class Arena(Layer):
 
         if not flag:
             print('all members are moved')
-
-            self.add(Confirm(confirm=self.end_turn, cancel=player_turn,
-                             title='End turn'))
+            if self.settings['endturn_automatically']:
+                self.end_turn()
+            else:
+                self.add(Confirm(confirm=self.end_turn, cancel=player_turn,
+                                 title='End turn'))
         else:
             player_turn()
 
