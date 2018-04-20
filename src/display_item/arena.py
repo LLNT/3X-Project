@@ -1633,13 +1633,13 @@ class Arena(Layer):
         j = int(pos[1] // self.size)
         return i, j
 
-    def update(self, dt):
+    def update(self, dt,d=0):
         if self.allow_move:
             x1, y1 = self._update
             x0, y0 = self.position
-            if x0 > 5 and x1 > 0 or x0 < -(self.width - self.windowsize[0]) - 5 and x1 < 0:
+            if x0 > d and x1 > 0 or x0 < -(self.width - self.windowsize[0]) - d and x1 < 0:
                 x1 = 0
-            if y0 > 5 and y1 > 0 or y0 < -(self.height - self.windowsize[1]) - 5 and y1 < 0:
+            if y0 > d and y1 > 0 or y0 < -(self.height - self.windowsize[1]) - d and y1 < 0:
                 y1 = 0
             self.position = self.position[0] + x1, \
                             self.position[1] + y1
