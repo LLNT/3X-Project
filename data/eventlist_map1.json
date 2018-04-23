@@ -280,7 +280,210 @@
             "Jump":"F"
         }
         ]
-    }],
+    },
+  {
+        "Event":"U01006",
+        "Side":1,
+        "Turn":3,
+        "Condition":[
+            [[],["U01006"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010062/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010063/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010064/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010065/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+  {
+        "Event":"U01007",
+        "Side":1,
+        "Turn":4,
+        "Condition":[
+            [[],["U01007"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010066/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010067/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010068/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010069/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01008",
+        "Side":1,
+        "Turn":5,
+        "Condition":[
+            [[],["U01008"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010070/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010071/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010072/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010073/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01009",
+        "Side":1,
+        "Turn":6,
+        "Condition":[
+            [[],["U01009"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010074/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010075/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010076/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010077/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+  {
+        "Event":"U01010",
+        "Side":1,
+        "Turn":7,
+        "Condition":[
+            [[],["U01010"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010078/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010079/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010080/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010081/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+  {
+        "Event":"U01011",
+        "Side":1,
+        "Turn":8,
+        "Condition":[
+            [[],["U01011"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010082/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010083/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010084/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010085/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01012",
+        "Side":1,
+        "Turn":9,
+        "Condition":[
+            [[],["U01012"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010086/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010087/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010088/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010089/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01013",
+        "Side":1,
+        "Turn":10,
+        "Condition":[
+            [[],["U01013"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010090/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010091/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010092/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010093/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01014",
+        "Side":1,
+        "Turn":11,
+        "Condition":[
+            [[],["U01014"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010094/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010095/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010096/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010097/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    },
+    {
+        "Event":"U01015",
+        "Side":1,
+        "Turn":12,
+        "Condition":[
+            [[],["U01015"]]
+        ],
+        "Text_type":"S",
+        "Text":[],
+        "Reconstruct":null,
+        "Finish":[
+
+        {
+            "Condition":[[[],[]]],
+            "Execute":["R/1010098/1/8,39/Lilse Army/0/AI010-Pursue-Base","R/1010099/1/9,39/Lilse Army/0/AI010-Pursue-Base",
+            "R/1010100/1/20,39/Lilse Army/0/AI010-Pursue-Base","R/1010101/1/21,39/Lilse Army/0/AI010-Pursue-Base"],
+            "Jump":"F"
+        }
+        ]
+    }
+
+
+  ],
   "Dialogs":[],
   "Treasures":{},
   "Seize":{},
