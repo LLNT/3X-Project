@@ -126,7 +126,7 @@ class Scoreboard(Ring):
 
 class PerSpr(Ring):
     def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved',
-                 st_color=GREEN, ed_color=RED, bk_color=WHITE):
+                 st_color=(127,159,63), ed_color=(216,23,40), bk_color=WHITE):
 
         position = coordinate(pos[0], pos[1], size)
         scl = scale * size / 400

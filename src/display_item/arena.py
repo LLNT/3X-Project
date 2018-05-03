@@ -250,14 +250,14 @@ class Arena(Layer):
 
     def _residual(self, obj):
         self.infolayer.remove(obj)
-        self.execute_turn_event(callback_func=self.player_phase)
+        self.execute_turn_event(callback_func=self.player_phase, reset=True)
 
     def show_chapter(self):
         obj = Chapter(self.map.title, self.map.turn, self.windowsize[0], self.windowsize[1])
         self.infolayer.add(obj)
         obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj))
 
-    def update_person(self, i=0):
+    def update_person(self, i=0, **kwargs):
         if i < self.person_num:
             p = self.person_list[i]
             p.state = 'unmoved'
@@ -267,9 +267,9 @@ class Arena(Layer):
                     log = self.map.refresh_person(p.pid)
             prop = p.update_hp(False)
             obj, action = p.set_angle_action(prop, min_duration=0, max_duration=2)
-            obj.do(CallFunc(self.focus, p.pid) + action + CallFunc(self.update_person, i+1))
+            obj.do(CallFunc(self.focus, p.pid) + action + CallFunc(self.update_person, i+1, **kwargs))
         else:
-            self.get_next_event()
+            self.get_next_event(**kwargs)
 
     def player_turn(self, **kwargs):
 
@@ -314,7 +314,7 @@ class Arena(Layer):
         else:
             self.person_list = list(self.people.values())
             self.person_num = len(self.person_list)
-            self.update_person()
+            self.update_person(**kwargs)
         pass
 
     def _callback(self):
@@ -1105,7 +1105,7 @@ class Arena(Layer):
         try:
             pid = next(self.iter)
         except:
-            self.get_next_event()
+            self.get_next_event(reset=False)
             return
         person = self.people[pid].person
         if person.ability['HP'] <= 0:
@@ -1114,7 +1114,7 @@ class Arena(Layer):
             self.get_next_to_delete()
         pass
 
-    def excute_event(self, i):
+    def excute_event(self, i, reset=False):
         if i < self.general_length:
             event = self.general[i]
             if check_condition(event['Condition'], self.map):
@@ -1124,21 +1124,22 @@ class Arena(Layer):
                     event=event, map=self.map,
                     dialog_type=event['Text_type'], dialog_info=self.dialog_info,
                     w=self.windowsize[0], h=self.windowsize[1],
-                    callback=self.get_next_event, i=i+1
+                    callback=self.get_next_event, i=i+1, reset=reset
                 )
             else:
-                self.get_next_event(i+1)
+                self.get_next_event(i+1, reset=reset)
         else:
-            self.focus('1')
+            if reset is True:
+                self.focus('1')
             self.map.take_turn(self)
             pass
 
     def get_next_event(self, i=0, **kwargs):
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
             events = kwargs['Reinforce']
-            self._reinforce(events, callback=self.excute_event, i=i)
+            self._reinforce(events, callback=self.excute_event, i=i, **kwargs)
         else:
-            self.excute_event(i)
+            self.excute_event(i, **kwargs)
 
 
     def _battle(self, layer, **kwargs):
