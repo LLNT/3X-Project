@@ -17,7 +17,7 @@ from display_item.menu import *
 from display_item.background import Background
 from display_item.battle_scene import *
 from display_item.ring import PerSpr
-from display_item.getitem import Getitem
+from display_item.animation import Chapter
 from display_item.action_control import Sequencial, Graphic
 from display_item.saveload import Main as Saveload
 from display_item.saveload import Confirm
@@ -245,7 +245,17 @@ class Arena(Layer):
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
+        self.show_chapter()
+
+
+    def _residual(self, obj):
+        self.infolayer.remove(obj)
         self.execute_turn_event(callback_func=self.player_phase)
+
+    def show_chapter(self):
+        obj = Chapter(self.map.title, self.map.turn, self.windowsize[0], self.windowsize[1])
+        self.infolayer.add(obj)
+        obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj))
 
     def update_person(self, i=0):
         if i < self.person_num:
