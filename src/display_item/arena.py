@@ -17,7 +17,7 @@ from display_item.menu import *
 from display_item.background import Background
 from display_item.battle_scene import *
 from display_item.ring import PerSpr
-from display_item.animation import Chapter
+from display_item.animation import Turn, Chapter
 from display_item.action_control import Sequencial, Graphic
 from display_item.saveload import Main as Saveload
 from display_item.saveload import Confirm
@@ -149,6 +149,7 @@ class Arena(Layer):
         self.allow_cancel = True
         self.transtuple = None
         self.dialog_info = {}
+        self.visible = True
         try:
             self.infolayer.remove(self.info)
             self.remove(self.wpinfo)
@@ -249,17 +250,18 @@ class Arena(Layer):
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
-        self.show_chapter()
+        self.show_infos(turn=self.map.turn, phase='Player Turn', callback=self.player_phase, reset=True)
 
 
-    def _residual(self, obj):
+    def _residual(self, obj, callback, **kwargs):
         self.infolayer.remove(obj)
-        self.execute_turn_event(callback_func=self.player_phase, reset=True)
+        self.execute_turn_event(callback_func=callback, **kwargs)
 
-    def show_chapter(self):
-        obj = Chapter(self.map.title, self.map.turn, self.windowsize[0], self.windowsize[1])
+    def show_infos(self, turn=0, phase='Player Turn', callback=None, **kwargs):
+        obj = Turn(phase, turn, self.windowsize[0], self.windowsize[1])
         self.infolayer.add(obj)
-        obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj))
+        obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,
+                callback=callback, **kwargs))
 
     def update_person(self, i=0, **kwargs):
         if i < self.person_num:
@@ -327,7 +329,10 @@ class Arena(Layer):
         pass
 
     def ai_phase(self):
-        self.execute_turn_event(callback_func=self.ai_turn)
+        obj = Turn('Ally Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
+        self.infolayer.add(obj)
+        obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,
+                                                                callback=self.ai_turn))
         pass
 
     def execute_turn_event(self, i=0, callback_func=None, **kwargs):
@@ -1281,7 +1286,10 @@ class Arena(Layer):
         self.map.controller = 1
         self.map.reset_state(0)
         director.window.remove_handlers(self)
-        self.execute_turn_event(callback_func=self.ai_turn)
+        obj = Turn('Enemy Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
+        self.infolayer.add(obj)
+        obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,
+                                                                callback=self.ai_turn))
 
     def flag(self):
         self.menulayer.disapper()
@@ -1625,21 +1633,27 @@ class Arena(Layer):
         self.state = 'default'
 
     def _next(self, **kwargs):
-
         map, metadata = self.map.global_vars.new_map(kwargs['Map']) #type: map_controller.Main, dict
-        print(map.pic, map.pre, map.after, map.title)
+        title = map.title
+        obj = Chapter(title, w=self.windowsize[0], h=self.windowsize[1])
+        print(self.windowsize)
+        self.infolayer.add(obj)
+        obj.do(FadeIn(0.5) + Delay(1) + CallFunc(self._residual2, map, metadata))
+
+    def _residual2(self, map, metadata):
+
         if 'Preparation' in metadata.keys():
             print(metadata['Preparation'])
         menulayer = Menulayer()
         infolayer = Layer()
         arena = Arena(map, menulayer, infolayer, self.size)
+        arena.visible = False
 
         class Transition(FadeTransition):
             def finish(self):
                 super().finish()
                 arena.before()
 
-        self.kill()
         director.run(Transition(Scene(arena, menulayer, infolayer)))
 
     def remove(self, obj):

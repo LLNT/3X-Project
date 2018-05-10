@@ -104,6 +104,7 @@ class Save(ColorLayer):
                             super().finish()
                             for rec in map.reconstruct_log:
                                 arena2.reconstruct(rec, ty='load')
+                            arena2.focus('1')
                             arena2.map.take_turn(arena2)
 
                     self.kill()

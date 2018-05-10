@@ -177,7 +177,7 @@ class Afterevent(Eventdisplay):
                 getitem = Getitem(person, item, flag, self.map,
                                  callback=self.execute, i=i+1)
                 self.scene.add(getitem)
-                getitem.position = -self.parent.position[0], -self.parent.position[1]
+                # getitem.position = -self.parent.position[0], -self.parent.position[1]
                 director.window.remove_handlers(self)
             elif _type == 'SF':
                 flag = _event[1]

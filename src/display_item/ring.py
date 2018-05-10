@@ -50,7 +50,7 @@ class Ring(CocosNode):
         self.right_ring.busy = False
 
     def set_angle_action(self, proportion, max_duration=4, min_duration=2):
-        angle = 360 - proportion * 360
+        angle = 361 - proportion * 360
         delta = abs(self.angles - angle)
         if delta <= 10:
             return self.right_ring, Delay(min_duration)
