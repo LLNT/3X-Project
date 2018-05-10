@@ -32,7 +32,10 @@ from wand import Type1, Type3, Type5
 from typing import Dict
 
 class Arena(Layer):
-    # the holder of map and roles
+    """
+    the holder of map and items
+    """
+
     is_event_handler = False
 
     def __init__(self, map, menulayer,infolayer,size=80):
@@ -214,6 +217,7 @@ class Arena(Layer):
     target = property(get_target, set_target)
 
     def focus(self, pid, set=True):
+        print('%s focus'%pid)
         if not pid in self.people:
             i=0
             j=0
@@ -307,20 +311,20 @@ class Arena(Layer):
         self.person_num = len(self.person_list)
         self.update_person()
 
+    def _callbk(self, **kwargs):
+        self.person_list = list(self.people.values())
+        self.person_num = len(self.person_list)
+        self.update_person(**kwargs)
+
     def player_phase(self, **kwargs):
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
-            events = kwargs['Reinforce']
-            self._reinforce(events, callback=self._callback, arena=self)
+            events = kwargs.pop('Reinforce')
+            self._reinforce(events, callback=self._callbk, **kwargs)
         else:
             self.person_list = list(self.people.values())
             self.person_num = len(self.person_list)
             self.update_person(**kwargs)
         pass
-
-    def _callback(self):
-        self.person_list = list(self.people.values())
-        self.person_num = len(self.person_list)
-        self.update_person()
 
     def ai_phase(self):
         self.execute_turn_event(callback_func=self.ai_turn)
@@ -393,6 +397,7 @@ class Arena(Layer):
             self.cells[position[pid]].person_on = pid
             actionlist.append((self.people[pid], CallFunc(self.focus, pid) + FadeIn(1.5)))
         self._repaint()
+        print(callback, kwargs)
         actionlist.append((self, CallFunc(callback.__call__, **kwargs)))
         Sequencial(actionlist).excute()
 

@@ -406,6 +406,7 @@ class Setting(Menu):
         l.append(MenuItem('Rolling', self.rolling))
         l.append(MenuItem('Moving', self.moving))
         l.append(MenuItem('Simplified', self.simple))
+        l.append(MenuItem('Autoend', self.auto_end))
         l.append(MenuItem('Cancel', self.cancel))
         self.arena = arena
 
@@ -432,6 +433,10 @@ class Setting(Menu):
     def cancel(self):
         self.parent.remove(self)
         self.parent.add(Endturn(self.arena))
+
+    def auto_end(self):
+        self.parent.remove(self)
+        self.parent.add(Onoff(klass='endturn_automatically', arena=self.arena))
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         if buttons == 4:
@@ -475,6 +480,36 @@ class Fivelevelspeed(Menu):
         if buttons == 4:
             self.cancel()
 
+class Onoff(Menu):
+    def __init__(self, klass, arena):
+        super().__init__(title=klass)
+        l = []
+        l.append(Exchangeitem('On', self.adjust, True))
+        l.append(Exchangeitem('Off', self.adjust, False))
+        self.arena = arena
+        self.klass = klass
+        self.create_menu(l, None, None)
+        l[arena.settings[klass]].item.color = (50, 250, 50, 200)
+
+    def on_enter(self):
+        super().on_enter()
+        x = self.parent.menu_back.position[0]
+        self.position = x - director.get_window_size()[0] * 3 // 8, 0
+
+    def adjust(self, level=0):
+        dic = self.arena.settings
+        dic[self.klass] = level
+        self.arena.settings = dic
+        self.parent.remove(self)
+        self.parent.add(Setting(self.arena))
+
+    def cancel(self):
+        self.parent.remove(self)
+        self.parent.add(Setting(self.arena))
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        if buttons == 4:
+            self.cancel()
 
 class Endturn(Menu):
     is_event_handler = True
