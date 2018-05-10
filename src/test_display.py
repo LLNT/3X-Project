@@ -1,17 +1,19 @@
 from pyglet.gl import *
+from cocos.director import director
 
 def exec():
     return 0
 
 def test_a():
     assert exec()==0
-'''
+
 # Direct OpenGL commands to this window.
-window = pyglet.window.Window()
+director.init()
+window = director.window
 joysticks = pyglet.input.get_joysticks()
 if joysticks:
     joystick = joysticks[0]
-joystick.open()
+
 print(joystick)
 @window.event
 def on_draw():
@@ -28,5 +30,6 @@ def on_joybutton_press(joystick, button):
     print(joystick, button)
 
 
-pyglet.app.run()
-'''
+
+director.run()
+

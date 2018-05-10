@@ -10,6 +10,7 @@ from cocos.director import director
 from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay, FadeTo, FadeIn, FadeOut, Place
 from cocos.scenes import FadeTransition
+from cocos.batch import BatchNode
 from display_item.sprite import Charactor, Cell
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo, Experience2
@@ -20,9 +21,7 @@ from display_item.ring import PerSpr
 from display_item.animation import Turn, Chapter
 from display_item.action_control import Sequencial, Graphic
 from display_item.saveload import Main as Saveload
-from display_item.saveload import Confirm
 from display_item.eventdisplay import *
-import pathlib
 import map_controller
 from global_vars import Main as Global
 from data_loader import Main as Data
@@ -49,6 +48,7 @@ class Arena(Layer):
         self.windowsize = director.get_window_size()
         # self.anchor = self.width // 2, self.height // 2
 
+
         self.add(Background(self.windowsize, self.map.pic))
 
         # initialize arena attributes
@@ -61,12 +61,14 @@ class Arena(Layer):
         # add map elements
         self.cells = {}  #type:Dict[tuple,Cell]
         self.people = {} #type:Dict[str,PerSpr]
-        self.person_layer = Layer()
-        self.add(self.person_layer)
+        self.person_layer = BatchNode()
+        self.cell_layer = BatchNode()
+        self.add(self.cell_layer)
+
         for i in range(self.w):
             for j in range(self.h):
                 self.cells[(i, j)] = Cell(size, (i, j))
-                self.person_layer.add(self.cells[(i, j)])
+                self.cell_layer.add(self.cells[(i, j)])
 
         people = map.person_container.people
         position = map.person_container.position
@@ -80,6 +82,7 @@ class Arena(Layer):
             self.person_layer.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
 
+        self.add(self.person_layer)
         self.menulayer = menulayer
         self.infolayer = infolayer
 
@@ -95,6 +98,8 @@ class Arena(Layer):
         print('loaded map reconstruct ', self.map.reconstruct_log)
         print('map size %d, %d'% (self.width, self.height))
 
+
+
     def get_settings(self):
         return self._settings
 
@@ -105,6 +110,7 @@ class Arena(Layer):
         json.dump(self._settings, open(path+'settings.json', 'w'))
 
     settings = property(get_settings, set_settings)
+
 
     # callback functions
     def _getitem(self, **kwargs):
@@ -411,7 +417,7 @@ class Arena(Layer):
             cell.color = mapstate2color[cell.state]
             cell.opacity = opacity[cell.state]
         for person in self.people.values(): #type:Charactor
-            person.inner.color = per_state2color(person.state, person.controller)
+            person.color = per_state2color(person.state, person.controller)
 
         # according to the state of every sprite within, repaint them in the correct color
         pass
@@ -1282,6 +1288,9 @@ class Arena(Layer):
         pass
 
     def end_turn(self):
+        """
+
+        """
         self._clear_map()
         self.map.controller = 1
         self.map.reset_state(0)

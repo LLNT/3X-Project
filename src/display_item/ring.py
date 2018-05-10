@@ -3,7 +3,7 @@
 @author: Antastsy
 @time: 2018/2/9 12:03
 '''
-from cocos.cocosnode import CocosNode
+from cocos.batch import BatchableNode
 from cocos.actions import RotateTo, RotateBy, Delay, CallFunc
 from cocos.sprite import Sprite
 from display_item.text import Text
@@ -11,7 +11,7 @@ from utility import *
 from cocos.director import director
 import pyglet
 
-class Ring(CocosNode):
+class Ring(BatchableNode):
 
     def __init__(self, position, scale, start_color=GREEN, end_color=RED,
                  prop=1, back_color = BLACK):
@@ -124,15 +124,24 @@ class Scoreboard(Ring):
         self.hp.element.text = str(self.mhp - int(self.r * self.mhp))
         # self.hp.element.color = color[0], color[1], color[2], 255
 
-class PerSpr(Ring):
+
+
+class PerSpr(Sprite):
     def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved',
                  st_color=(127,159,63), ed_color=(216,23,40), bk_color=WHITE):
-
         position = coordinate(pos[0], pos[1], size)
         scl = scale * size / 400
-        self.person = person
-        super().__init__(position=position, scale=scl, start_color=st_color,
+        name = 'cls/' + person.cls + '_' + str(controller) + '.png'
+        self.ring = Ring(position=position, scale=scl, start_color=st_color,
                          end_color=ed_color, back_color=bk_color)
+        try:
+            super().__init__(image=name)
+            self.scale_x, self.scale_y = \
+            size / self.width * 0.8, size / self.height * 0.8
+        except:
+            super().__init__(image='ring.png', scale=scl*0.9)
+        self.position = position
+        self.person = person
         self.update_hp()
         self.controller = controller
         self.state = state
@@ -140,25 +149,17 @@ class PerSpr(Ring):
         self.pid = person.pid
         self.pos = pos
 
-        name = 'cls/' + person.cls + '_' + str(controller) + '.png'
-        try:
-            self.inner = Sprite(image=name)
-            self.inner.scale_x, self.inner.scale_y = \
-                size/self.inner.width*0.8, size/self.inner.height*0.8
-        except:
-            self.inner = Sprite(image='ring.png', scale=scl*0.9)
-        self.add(self.inner)
         self._opacity = 255
         self.icon = Sprite(image=person.icon, position=(size//2-14, -size//2+14))
         self.icon.scale_x, self.icon.scale_y = 28 / self.icon.width , 28 / self.icon.height
         self.add(self.icon)
 
     def _set_opacity(self, opacity):
-        self.inner.opacity = opacity
-        self.left_ring.opacity = opacity
-        self.right_ring.opacity = opacity
-        self.mask_ring.opacity = opacity
-        self.backend.opacity = opacity
+        self.ring.opacity = opacity
+        self.ring.left_ring.opacity = opacity
+        self.ring.right_ring.opacity = opacity
+        self.ring.mask_ring.opacity = opacity
+        self.ring.backend.opacity = opacity
         self._opacity = opacity
 
     def _get_opacity(self):
@@ -173,6 +174,6 @@ class PerSpr(Ring):
         self.mhp = self.person.ability['MHP']
         prop = self.hp/self.mhp
         if set:
-            self.set_prop(prop)
+            self.ring.set_prop(prop)
         else:
             return prop
