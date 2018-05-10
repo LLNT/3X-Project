@@ -581,8 +581,8 @@
   },
   {
     "Id":117,
-    "Itemtype":"Long Bow",
-    "Use":25
+    "Itemtype":"Short Bow",
+    "Use":22
   },
   {
     "Id":118,
@@ -631,8 +631,8 @@
   },
   {
     "Id":127,
-    "Itemtype":"Long Bow",
-    "Use":25
+    "Itemtype":"Short Bow",
+    "Use":22
   },
   {
     "Id":128,
@@ -1393,6 +1393,21 @@
     "Id":279,
     "Itemtype":"Iron Sword",
     "Use":46
+  },
+  {
+    "Id":280,
+    "Itemtype":"Long Bow",
+    "Use":25
+  },
+  {
+    "Id":281,
+    "Itemtype":"Long Bow",
+    "Use":25
+  },
+  {
+    "Id":282,
+    "Itemtype":"Long Bow",
+    "Use":25
   }
 
 ]

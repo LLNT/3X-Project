@@ -46,7 +46,9 @@
       {"Id":"1010120","X":16,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010121","X":18,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},
       {"Id":"1010122","X":11,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010123","X":10,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
       {"Id":"1010124","X":10,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010125","X":12,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
-      {"Id":"1010126","X":12,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"}
+      {"Id":"1010126","X":12,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010127","X":3,"Y":27,"PRI":0,"AI":"AI010-Defensive-Base"},{"Id":"1010128","X":3,"Y":28,"PRI":0,"AI":"AI010-Defensive-Base"},
+      {"Id":"1010129","X":3,"Y":29,"PRI":0,"AI":"AI010-Defensive-Base"}
       ],
       "Controller":1
     },
