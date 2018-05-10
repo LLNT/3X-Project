@@ -33,7 +33,20 @@
       {"Id":"1010056","X":21,"Y":5,"PRI":11,"AI":"AI010-Pursue-Base"},
       {"Id":"1010057","X":20,"Y":9,"PRI":14,"AI":"AI010-Pursue-Base"},{"Id":"1010058","X":19,"Y":8,"PRI":13,"AI":"AI010-Pursue-Base"},
       {"Id":"1010059","X":19,"Y":10,"PRI":13,"AI":"AI010-Pursue-Base"},{"Id":"1010060","X":21,"Y":8,"PRI":13,"AI":"AI010-Pursue-Base"},
-      {"Id":"1010061","X":21,"Y":10,"PRI":13,"AI":"AI010-Pursue-Base"}
+      {"Id":"1010061","X":21,"Y":10,"PRI":13,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010102","X":7,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010103","X":7,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010104","X":6,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010105","X":8,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010106","X":17,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010107","X":17,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010108","X":16,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010109","X":18,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010110","X":9,"Y":30,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010112","X":9,"Y":31,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010111","X":10,"Y":31,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010113","X":8,"Y":31,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010114","X":6,"Y":32,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010115","X":6,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010116","X":5,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010117","X":7,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010118","X":17,"Y":32,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010119","X":17,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010120","X":16,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010121","X":18,"Y":33,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010122","X":11,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010123","X":10,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010124","X":10,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010125","X":12,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010126","X":12,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"}
       ],
       "Controller":1
     },

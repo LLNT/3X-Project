@@ -238,7 +238,7 @@
       "Finish":[{
         "Condition":[[[],[]]],
         "Execute":["SF/GAOV_FLAG00002"],
-        "Jump":"L"
+        "Jump":"F"
       }]},
         {
       "Event":"G000010",

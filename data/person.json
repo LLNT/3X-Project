@@ -9001,9 +9001,9 @@
       "Base":""
     }
   },
-"10100100":
+"1010100":
   {
-    "Id": 10100100,
+    "Id": 1010100,
     "Name": "Lilse Knight",
     "Cls":"Cavalier",
     "Ability":
@@ -9068,9 +9068,9 @@
       "Base":""
     }
   },
-"10100101":
+"1010101":
   {
-    "Id": 10100101,
+    "Id": 1010101,
     "Name": "Lilse Knight",
     "Cls":"Cavalier",
     "Ability":
@@ -9128,6 +9128,1681 @@
     "Bonus":0,
     "Battlecard":{
       "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+  "1010102":
+  {
+    "Id": 1010102,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":4,
+      "MHP":32,
+      "STR":10,
+      "MGC":0,
+      "SPD":12,
+      "SKL":11,
+      "DEF":6,
+      "RES":2,
+      "LUK":5,
+      "BLD":11,
+      "MOV":8,
+      "HP":32,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[230,231],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010103":
+  {
+    "Id": 10100103,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":12,
+      "MHP":29,
+      "STR":8,
+      "MGC":0,
+      "SPD":9,
+      "SKL":7,
+      "DEF":5,
+      "RES":0,
+      "LUK":1,
+      "BLD":12,
+      "MOV":7,
+      "HP":29,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[232,233],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010104":
+  {
+    "Id": 1010104,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":11,
+      "MHP":27,
+      "STR":9,
+      "MGC":0,
+      "SPD":8,
+      "SKL":7,
+      "DEF":5,
+      "RES":1,
+      "LUK":4,
+      "BLD":11,
+      "MOV":7,
+      "HP":27,
+      "CRY":9,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[234,235],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010105":
+  {
+    "Id": 1010105,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":13,
+      "MHP":29,
+      "STR":9,
+      "MGC":0,
+      "SPD":12,
+      "SKL":8,
+      "DEF":5,
+      "RES":0,
+      "LUK":3,
+      "BLD":13,
+      "MOV":7,
+      "HP":29,
+      "CRY":7,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[236,237],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010106":
+  {
+    "Id": 1010106,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":2,
+      "MHP":29,
+      "STR":9,
+      "MGC":0,
+      "SPD":9,
+      "SKL":9,
+      "DEF":7,
+      "RES":2,
+      "LUK":4,
+      "BLD":11,
+      "MOV":8,
+      "HP":29,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[238,239],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010107":
+  {
+    "Id": 1010107,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":13,
+      "MHP":30,
+      "STR":8,
+      "MGC":0,
+      "SPD":9,
+      "SKL":8,
+      "DEF":4,
+      "RES":0,
+      "LUK":2,
+      "BLD":12,
+      "MOV":7,
+      "HP":30,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[240,241],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010108":
+  {
+    "Id": 1010108,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":12,
+      "MHP":28,
+      "STR":10,
+      "MGC":0,
+      "SPD":9,
+      "SKL":8,
+      "DEF":5,
+      "RES":1,
+      "LUK":3,
+      "BLD":12,
+      "MOV":7,
+      "HP":28,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[242,243],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010109":
+  {
+    "Id": 1010109,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":11,
+      "MHP":27,
+      "STR":7,
+      "MGC":0,
+      "SPD":7,
+      "SKL":7,
+      "DEF":4,
+      "RES":0,
+      "LUK":0,
+      "BLD":11,
+      "MOV":7,
+      "HP":27,
+      "CRY":9,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[244,245],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010110":
+  {
+    "Id": 1010110,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":4,
+      "MHP":32,
+      "STR":10,
+      "MGC":0,
+      "SPD":12,
+      "SKL":10,
+      "DEF":6,
+      "RES":2,
+      "LUK":3,
+      "BLD":11,
+      "MOV":8,
+      "HP":32,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[246,247],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010111":
+  {
+    "Id": 1010111,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":12,
+      "MHP":29,
+      "STR":9,
+      "MGC":0,
+      "SPD":10,
+      "SKL":6,
+      "DEF":4,
+      "RES":1,
+      "LUK":0,
+      "BLD":11,
+      "MOV":7,
+      "HP":29,
+      "CRY":9,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[248,249],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010112":
+  {
+    "Id": 1010112,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":13,
+      "MHP":27,
+      "STR":8,
+      "MGC":0,
+      "SPD":10,
+      "SKL":7,
+      "DEF":4,
+      "RES":0,
+      "LUK":0,
+      "BLD":13,
+      "MOV":7,
+      "HP":27,
+      "CRY":7,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[250,251],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010113":
+  {
+    "Id": 1010113,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":13,
+      "MHP":27,
+      "STR":7,
+      "MGC":0,
+      "SPD":9,
+      "SKL":7,
+      "DEF":3,
+      "RES":0,
+      "LUK":0,
+      "BLD":11,
+      "MOV":7,
+      "HP":27,
+      "CRY":9,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[252,253],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010114":
+  {
+    "Id": 1010114,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":4,
+      "MHP":30,
+      "STR":9,
+      "MGC":0,
+      "SPD":13,
+      "SKL":8,
+      "DEF":5,
+      "RES":1,
+      "LUK":2,
+      "BLD":12,
+      "MOV":8,
+      "HP":30,
+      "CRY":13,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[254,255],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010115":
+  {
+    "Id": 1010115,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":14,
+      "MHP":27,
+      "STR":9,
+      "MGC":0,
+      "SPD":10,
+      "SKL":7,
+      "DEF":4,
+      "RES":0,
+      "LUK":1,
+      "BLD":12,
+      "MOV":7,
+      "HP":27,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[256,257],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010116":
+  {
+    "Id": 1010116,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":13,
+      "MHP":27,
+      "STR":8,
+      "MGC":0,
+      "SPD":9,
+      "SKL":8,
+      "DEF":4,
+      "RES":0,
+      "LUK":3,
+      "BLD":12,
+      "MOV":7,
+      "HP":27,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[258,259],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010117":
+  {
+    "Id": 1010117,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":12,
+      "MHP":27,
+      "STR":9,
+      "MGC":0,
+      "SPD":8,
+      "SKL":8,
+      "DEF":4,
+      "RES":0,
+      "LUK":3,
+      "BLD":13,
+      "MOV":7,
+      "HP":27,
+      "CRY":7,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[260,261],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010118":
+  {
+    "Id": 1010118,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":1,
+      "MHP":30,
+      "STR":9,
+      "MGC":0,
+      "SPD":11,
+      "SKL":10,
+      "DEF":7,
+      "RES":2,
+      "LUK":4,
+      "BLD":11,
+      "MOV":8,
+      "HP":30,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[262,263],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010119":
+  {
+    "Id": 1010119,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":11,
+      "MHP":27,
+      "STR":7,
+      "MGC":0,
+      "SPD":7,
+      "SKL":7,
+      "DEF":4,
+      "RES":0,
+      "LUK":3,
+      "BLD":13,
+      "MOV":7,
+      "HP":27,
+      "CRY":7,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[264,265],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010120":
+  {
+    "Id": 1010120,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":13,
+      "MHP":29,
+      "STR":8,
+      "MGC":0,
+      "SPD":9,
+      "SKL":10,
+      "DEF":4,
+      "RES":0,
+      "LUK":0,
+      "BLD":12,
+      "MOV":7,
+      "HP":29,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[266,267],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010121":
+  {
+    "Id": 1010121,
+    "Name": "Lilse Knight",
+    "Cls":"Cavalier",
+    "Ability":
+    {
+      "LV":13,
+      "MHP":30,
+      "STR":8,
+      "MGC":0,
+      "SPD":7,
+      "SKL":8,
+      "DEF":5,
+      "RES":1,
+      "LUK":3,
+      "BLD":12,
+      "MOV":7,
+      "HP":30,
+      "CRY":8,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[268,269],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Cavalier":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010122":
+  {
+    "Id": 1010122,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":3,
+      "MHP":31,
+      "STR":10,
+      "MGC":0,
+      "SPD":12,
+      "SKL":10,
+      "DEF":6,
+      "RES":2,
+      "LUK":2,
+      "BLD":11,
+      "MOV":8,
+      "HP":31,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[270,271],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010123":
+  {
+    "Id": 1010123,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":3,
+      "MHP":30,
+      "STR":11,
+      "MGC":0,
+      "SPD":12,
+      "SKL":10,
+      "DEF":6,
+      "RES":2,
+      "LUK":2,
+      "BLD":11,
+      "MOV":8,
+      "HP":30,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[272,273],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010124":
+  {
+    "Id": 1010124,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":4,
+      "MHP":32,
+      "STR":11,
+      "MGC":0,
+      "SPD":12,
+      "SKL":12,
+      "DEF":6,
+      "RES":2,
+      "LUK":2,
+      "BLD":12,
+      "MOV":8,
+      "HP":32,
+      "CRY":13,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[274,275],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010125":
+  {
+    "Id": 1010125,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":2,
+      "MHP":28,
+      "STR":11,
+      "MGC":0,
+      "SPD":10,
+      "SKL":10,
+      "DEF":6,
+      "RES":2,
+      "LUK":2,
+      "BLD":11,
+      "MOV":8,
+      "HP":28,
+      "CRY":14,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[276,277],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
+        "Sword":"",
+        "Lance":"",
+        "Base":""
+      },
+      "Base":""
+    }
+  },
+"1010126":
+  {
+    "Id": 1010126,
+    "Name": "Lilse Knight",
+    "Cls":"Paladin",
+    "Ability":
+    {
+      "LV":3,
+      "MHP":33,
+      "STR":10,
+      "MGC":0,
+      "SPD":10,
+      "SKL":10,
+      "DEF":6,
+      "RES":2,
+      "LUK":3,
+      "BLD":12,
+      "MOV":8,
+      "HP":33,
+      "CRY":13,
+      "EXP":0
+    },
+    "Growth":
+    {
+      "MHP":0,
+      "STR":0,
+      "MGC":0,
+      "SPD":0,
+      "SKL":0,
+      "DEF":0,
+      "RES":0,
+      "LUK":0
+    },
+    "Weapon Rank Bonus":
+    {"Sword":90,
+      "Lance":90,
+      "Axe":0,
+      "Bow":0,
+      "Fire":0,
+      "Thunder":0,
+      "Wind":0,
+      "Light":0,
+      "Dark":0,
+      "Wand":0},
+    "Picture":"shiva.jpg",
+    "Icon":"shiva.jpg",
+    "Skills":
+    [
+
+    ],
+    "Init_item":[278,279],
+    "Support":{
+
+    },
+    "Color":"White",
+    "Attribute":"Light",
+    "Coefficient":1.0,
+    "Bonus":0,
+    "Battlecard":{
+      "Paladin":{
         "Sword":"",
         "Lance":"",
         "Base":""

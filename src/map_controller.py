@@ -502,7 +502,7 @@ class Main:
         for p in self.person_container.position:
             if p==pid:
                 continue
-            if (self.person_container.controller[p]%2==self.person_container.controller[pid]):
+            if (self.person_container.controller[p]%2==self.person_container.controller[pid]%2):
                 continue
             d=calc_dist(self.person_container.position[p],pos)
             if (d>=minr)and(d<=maxr):

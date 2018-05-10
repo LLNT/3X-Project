@@ -1143,6 +1143,256 @@
     "Id":229,
     "Itemtype":"Steel Sword",
     "Use":30
+  },
+   {
+    "Id":230,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":231,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":232,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":233,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":234,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":235,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":236,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":237,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":238,
+    "Itemtype":"Short Spear",
+    "Use":18
+  },
+  {
+    "Id":239,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":240,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":241,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":242,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":243,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":244,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":245,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":246,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":247,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":248,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":249,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":250,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":251,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":252,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":253,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":254,
+    "Itemtype":"Short Spear",
+    "Use":18
+  },
+  {
+    "Id":255,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":256,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":257,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":258,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":259,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":260,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":261,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":262,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":263,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":264,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":265,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":266,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":267,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":268,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":269,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":270,
+    "Itemtype":"Iron Lance",
+    "Use":40
+  },
+  {
+    "Id":271,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":272,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":273,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":274,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":275,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":276,
+    "Itemtype":"Steel Lance",
+    "Use":30
+  },
+  {
+    "Id":277,
+    "Itemtype":"Iron Sword",
+    "Use":46
+  },
+  {
+    "Id":278,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":279,
+    "Itemtype":"Iron Sword",
+    "Use":46
   }
 
 ]
