@@ -48,7 +48,13 @@
       {"Id":"1010124","X":10,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},{"Id":"1010125","X":12,"Y":27,"PRI":0,"AI":"AI010-Pursue-Base"},
       {"Id":"1010126","X":12,"Y":26,"PRI":0,"AI":"AI010-Pursue-Base"},
       {"Id":"1010127","X":3,"Y":27,"PRI":0,"AI":"AI010-Defensive-Base"},{"Id":"1010128","X":3,"Y":28,"PRI":0,"AI":"AI010-Defensive-Base"},
-      {"Id":"1010129","X":3,"Y":29,"PRI":0,"AI":"AI010-Defensive-Base"}
+      {"Id":"1010129","X":3,"Y":29,"PRI":0,"AI":"AI010-Defensive-Base"},
+      {"Id":"1010130","X":7,"Y":35,"PRI":16,"AI":"AI010-Passive-Base"},{"Id":"1010131","X":5,"Y":36,"PRI":15,"AI":"AI010-Passive-Base"},
+      {"Id":"1010132","X":6,"Y":36,"PRI":15,"AI":"AI010-Passive-Base"},{"Id":"1010133","X":8,"Y":36,"PRI":15,"AI":"AI010-Passive-Base"},
+      {"Id":"1010134","X":9,"Y":36,"PRI":15,"AI":"AI010-Passive-Base"},
+      {"Id":"1010135","X":21,"Y":13,"PRI":17,"AI":"AI010-Pursue-Base"},{"Id":"1010136","X":22,"Y":14,"PRI":17,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010137","X":21,"Y":14,"PRI":17,"AI":"AI010-Pursue-Base"},{"Id":"1010138","X":21,"Y":12,"PRI":17,"AI":"AI010-Pursue-Base"},
+      {"Id":"1010139","X":22,"Y":13,"PRI":17,"AI":"AI010-Pursue-Base"},{"Id":"1010140","X":22,"Y":15,"PRI":17,"AI":"AI010-Pursue-Base"}
       ],
       "Controller":1
     },
