@@ -877,6 +877,18 @@ class Main:
         self.person_container.AItype[pid]=(pri,self.global_vars.data.ai_configs[strategy])
         return
 
+    def count_ally_population(self):
+        count=[0,0,0,0]
+        armylist=[{},{},{},{}]
+        for pid in self.person_container.controller:
+            c=self.person_container.controller[pid]
+            count[c]+=1
+            if not self.person_container.army[pid] in armylist[c]:
+                armylist[c][self.person_container.army[pid]]=1
+            else:
+                armylist[c][self.person_container.army[pid]]+=1
+        return (count,armylist)
+
     def map_save(self):
         return self.global_vars.map_save("game_0.sav",0)
 
