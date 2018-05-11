@@ -45,4 +45,3 @@ if __name__ == '__main__':
     director.show_FPS = True
     layer = Layer()
     director.run(Scene(layer, Main(map_init(), layer=layer)))
-    print(director.scene_stack)

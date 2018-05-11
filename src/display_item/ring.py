@@ -9,6 +9,7 @@ from cocos.sprite import Sprite
 from display_item.text import Text
 from utility import *
 from cocos.director import director
+from display_item.action_control import Sequencial
 import pyglet
 
 class Ring(BatchableNode):
@@ -108,8 +109,6 @@ class Ring(BatchableNode):
     def change_angle(self, angle):
         self.angles = angle
 
-
-
 class Scoreboard(Ring):
     def __init__(self, position, scale, start_color=GREEN, end_color=RED,
                  prop=1, back_color = BLACK, hp=20, mhp=20):
@@ -126,20 +125,99 @@ class Scoreboard(Ring):
 
 
 
-class PerSpr(Sprite):
-    def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved',
-                 st_color=(127,159,63), ed_color=(216,23,40), bk_color=WHITE):
+class Blood(BatchableNode):
+    def __init__(self, size=80):
+        super().__init__()
+        self.blood_right = Sprite('cls/Blood_r.png', anchor=(0, size/2))
+        self.blood_left = Sprite('cls/Blood_l.png', anchor=(size/2, size/2))
+        self.left = Sprite('cls/Left.png', anchor=(size/2, size/2))
+        self.right = Sprite('cls/Right.png', anchor=(0, size/2))
+
+        self.add(self.blood_right)
+        self.add(self.left)
+        self.add(self.blood_left)
+        self.add(self.right)
+        self.right.visible = False
+
+
+    def set_visible(self, right=True):
+        self.right.visible = right
+
+    def set_prop(self, prop):
+        self.prop = prop
+
+    def set_angle(self, prop):
+        self.prop = prop
+        if self.prop <=0.5:
+            self.set_visible(True)
+            self.right.rotation = (0.5 - self.prop) * 360
+            self.left.rotation = 180
+        else:
+            self.set_visible(False)
+            self.right.rotation = 0
+            self.left.rotation = (1 - self.prop) * 360
+
+    def set_angle_action(self, prop, max_duration=4, min_duration=2):
+        delta = abs(self.prop - prop)
+        angle = delta * 360
+        duration = min(1, delta * 4) * (max_duration - min_duration) + min_duration
+        if prop > self.prop:
+            # a right rotation, blood will be more
+            if self.prop > 0.5:
+                return Sequencial([
+                    (self.left,  reversed(RotateBy(angle, duration)))
+                ])
+            elif prop <= 0.5:
+                return Sequencial([
+                    (self.right, reversed(RotateBy(angle, duration)))
+                ])
+            else:
+                _angle = (0.5 - self.prop)*360
+                _duration = _angle/angle * duration
+                return Sequencial([
+                    (self.right, reversed(RotateBy(_angle, _duration))),
+                    (self.right, CallFunc(self.set_visible, False)),
+                    (self.left, reversed(RotateBy(angle - _angle, duration - _duration)))
+                ])
+        else:
+            if self.prop <= 0.5:
+                return Sequencial([
+                    (self.left,  RotateBy(angle, duration))
+                ])
+            elif prop > 0.5:
+                return Sequencial([
+                    (self.right, RotateBy(angle, duration))
+                ])
+            else:
+                _angle = (self.prop - 0.5)*360
+                _duration = _angle/angle * duration
+                return Sequencial([
+                    (self.left, RotateBy(_angle, _duration)),
+                    (self.right, CallFunc(self.set_visible, True)),
+                    (self.right, RotateBy(angle - _angle, duration - _duration))
+                ])
+            pass
+        pass
+
+
+class PerSpr(BatchableNode):
+    def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved'):
         position = coordinate(pos[0], pos[1], size)
         scl = scale * size / 400
         name = 'cls/' + person.cls + '_' + str(controller) + '.png'
-        self.ring = Ring(position=position, scale=scl, start_color=st_color,
-                         end_color=ed_color, back_color=bk_color)
+        self.blood = Blood()
+        self.size = size
+        self.icon = Sprite(image=person.icon, position=(size//2-14, -size//2+14))
+        super().__init__()
         try:
-            super().__init__(image=name)
-            self.scale_x, self.scale_y = \
-            size / self.width * 0.8, size / self.height * 0.8
+            self.img = Sprite(image=name, scale=0.9)
+
         except:
-            super().__init__(image='ring.png', scale=scl*0.9)
+            self.img = Sprite(image='cls/Blood.png', scale=0.9)
+            pass
+        self.add(self.img, z=0)
+        self.add(self.blood, z=1)
+        self.add(self.icon, z=2)
         self.position = position
         self.person = person
         self.update_hp()
@@ -148,25 +226,18 @@ class PerSpr(Sprite):
         self.moved = False
         self.pid = person.pid
         self.pos = pos
-
-        self._opacity = 255
-        self.icon = Sprite(image=person.icon, position=(size//2-14, -size//2+14))
         self.icon.scale_x, self.icon.scale_y = 28 / self.icon.width , 28 / self.icon.height
-        self.add(self.icon)
 
-    def _set_opacity(self, opacity):
-        self.ring.opacity = opacity
-        self.ring.left_ring.opacity = opacity
-        self.ring.right_ring.opacity = opacity
-        self.ring.mask_ring.opacity = opacity
-        self.ring.backend.opacity = opacity
-        self._opacity = opacity
 
-    def _get_opacity(self):
-        return self._opacity
 
-    opacity = property(_get_opacity, _set_opacity)
-
+    def _set_position(self, pos):
+        super()._set_position(pos)
+        self.blood.blood_right.position = pos
+        self.blood.blood_left.position = pos
+        self.blood.left.position = pos
+        self.blood.right.position = pos
+        self.icon.position = (pos[0] + self.size//2-14, pos[1]-self.size//2+14)
+        self.img.position = pos
 
 
     def update_hp(self, set=True):
@@ -174,6 +245,19 @@ class PerSpr(Sprite):
         self.mhp = self.person.ability['MHP']
         prop = self.hp/self.mhp
         if set:
-            self.ring.set_prop(prop)
+            self.blood.set_angle(prop)
         else:
             return prop
+
+if __name__ == '__main__':
+    pyglet.resource.path = ['../../img']
+    pyglet.resource.reindex()
+    director.init()
+    import cocos
+    layer = cocos.layer.Layer()
+    batch = cocos.batch.BatchNode()
+    blood = Blood(size=80)
+    batch.add(blood)
+    layer.add(batch)
+    batch.position = director.get_window_size()[0]//2,director.get_window_size()[1]//2
+    director.run(cocos.scene.Scene(layer))

@@ -17,7 +17,7 @@ from display_item.info import Personinfo, Battleinfo, Experience2
 from display_item.menu import *
 from display_item.background import Background
 from display_item.battle_scene import *
-from display_item.ring import PerSpr
+from display_item.ring import PerSpr, Blood
 from display_item.animation import Turn, Chapter
 from display_item.action_control import Sequencial, Graphic
 from display_item.saveload import Main as Saveload
@@ -38,6 +38,13 @@ class Arena(Layer):
     is_event_handler = False
 
     def __init__(self, map, menulayer,infolayer,size=80):
+        """
+
+        :param map: the map behind to give instuctions
+        :param menulayer: holder for display menus so that they would on the same place of the screen no matter how the arena moves
+        :param infolayer: holder for display infos like person info
+        :param size: the size of a cell , integer,  size * size
+        """
         super(Arena, self).__init__()
 
         # initialize the holder according to the map
@@ -77,7 +84,7 @@ class Arena(Layer):
         for person in people:
             pid = person.pid
             self.people[pid] = PerSpr(person, scale=1, size=size, pos=position[pid],
-                                      controller=controller[pid], bk_color=(220,220,220))
+                                      controller=controller[pid])
             self.people[pid].moved = not map.person_container.movable[pid]
             self.person_layer.add(self.people[pid])
             self.cells[position[pid]].person_on = pid
@@ -111,33 +118,19 @@ class Arena(Layer):
 
     settings = property(get_settings, set_settings)
 
-
     # callback functions
-    def _getitem(self, **kwargs):
-        person = kwargs['defeat']
-        item = kwargs['item']
-        gititem = Getitem(person, item, self.map.global_vars.flags['Have Transporter'],
-                         self.map, callback=self._clear)
-        self.add(gititem)
-        gititem.position = -self.position[0], -self.position[1]
-
-    def _trans(self, **kwargs):
-        pid, pos = kwargs['transtuple']
-        target = self.people[pid]
-        action = self._transfer(pos, 1)
-        map = self.map
-        self.cells[map.person_container.position[pid]].person_on = None
-        map.person_container.position[pid] = pos
-        self.people[pid].pos = pos
-        self.cells[pos].person_on = pid
-        target.do(action + CallFunc(self._clear))
 
     def _clear(self, **kwargs):
-        # handle the default execute after battle or a movement
+        """
+        handle the default execute after battle or a movement
+        """
         self.do(Delay(0.5) + CallFunc(self.get_next_to_delete))
 
     def _clear_map(self):
-        # should be executed after movement and before battle display
+        """
+        should be executed after movement and before battle display
+        set state into default
+        """
         self.state = 'default' #type:
         self.allow_move = True
         self.selected = None
@@ -155,7 +148,6 @@ class Arena(Layer):
         self.allow_cancel = True
         self.transtuple = None
         self.dialog_info = {}
-        self.visible = True
         try:
             self.infolayer.remove(self.info)
             self.remove(self.wpinfo)
@@ -224,6 +216,12 @@ class Arena(Layer):
     target = property(get_target, set_target)
 
     def focus(self, pid, set=True):
+        """
+        this is for the arena to focus a certain person
+        :param pid: the person pid to focus
+        :param set: if true the arena will focus immediately, else it will return the position for arena to focus
+        :return:
+        """
         print('%s focus'%pid)
         if not pid in self.people:
             i=0
@@ -248,6 +246,11 @@ class Arena(Layer):
             return _position
 
     def next_round(self):
+        """
+        this is the entry of a turn begins
+        first show infos of player phase, then execute player phase
+        :return:
+        """
 
         self.map.turn += 1
         print(self.map.turn)
@@ -256,11 +259,12 @@ class Arena(Layer):
         self.set_turn(self.map.turn)
         self.map.controller = 0
         self._mapstate = self.map.send_mapstate()
-        self.show_infos(turn=self.map.turn, phase='Player Turn', callback=self.player_phase, reset=True)
+        self.show_infos(turn=self.map.turn, phase='Player Phase', callback=self.player_phase, reset=True)
 
 
     def _residual(self, obj, callback, **kwargs):
         self.infolayer.remove(obj)
+        self.visible = True
         self.execute_turn_event(callback_func=callback, **kwargs)
 
     def show_infos(self, turn=0, phase='Player Turn', callback=None, **kwargs):
@@ -270,6 +274,13 @@ class Arena(Layer):
                 callback=callback, **kwargs))
 
     def update_person(self, i=0, **kwargs):
+        """
+        this method will be called recursively until all people in person_list are updated
+        after that, get turn event's to execute
+        :param i: the number of person in person list to update
+        :param kwargs: include reset now
+        :return:
+        """
         if i < self.person_num:
             p = self.person_list[i]
             p.state = 'unmoved'
@@ -278,13 +289,21 @@ class Arena(Layer):
                 if self.map.person_container.controller[p.pid]==self.map.controller:
                     log = self.map.refresh_person(p.pid)
             prop = p.update_hp(False)
-            obj, action = p.set_angle_action(prop, min_duration=0, max_duration=2)
-            obj.do(CallFunc(self.focus, p.pid) + action + CallFunc(self.update_person, i+1, **kwargs))
+            if prop != p.blood.prop:
+                p.do(CallFunc(self.focus, p.pid) + Delay(0.2) + CallFunc(p.blood.set_angle, prop)
+                     + CallFunc(self.update_person, i+1, **kwargs))
+            else:
+                self.update_person(i+1, **kwargs)
         else:
             self.get_next_event(**kwargs)
 
     def player_turn(self, **kwargs):
-
+        """
+        before player could give commands, execute other affairs
+        consider if all members have moved in auto_end mode
+        :param kwargs:
+        :return:
+        """
         self._clear_map()
         director.window.remove_handlers(self)
         flag = False
@@ -325,6 +344,12 @@ class Arena(Layer):
         self.update_person(**kwargs)
 
     def player_phase(self, **kwargs):
+        """
+        at the very beginning of player phase
+        if has reinforce, fisrt execute resinforce, then update all people's info
+        :param kwargs: include reinforce and reset now
+        :return:
+        """
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
             events = kwargs.pop('Reinforce')
             self._reinforce(events, callback=self._callbk, **kwargs)
@@ -548,6 +573,8 @@ class Arena(Layer):
 
     def _get_state_control(self):
         '''
+        this is the most important part in interactions
+        it defines a series of state so that different method will be called according to the state
         :return: dictionary in self._state_control
         :usage: self._state_control[state].__call__()
         '''
@@ -589,10 +616,14 @@ class Arena(Layer):
         self.state = 'default'
 
     def _default(self):
-        # 0   default
-        # not any army is selected.
-        # event handler should be true to wait for commands
-        # consider end_turn only under this state
+        """
+        0   default
+        not any army is selected
+        event handler should be true to wait for commands
+        consider end_turn menu only under this state
+        :return:
+        """
+
         if not self._in_arena(self.mouse_pos[0], self.mouse_pos[1]):
             return
         if self.mouse_btn == 1:
@@ -1151,8 +1182,15 @@ class Arena(Layer):
             pass
 
     def get_next_event(self, i=0, **kwargs):
+        """
+        the two method get_next_event and excute event are combined
+        they are seperated for sake of reinforce
+        :param i:
+        :param kwargs:
+        :return:
+        """
         if 'Reinforce' in kwargs.keys() and len(kwargs['Reinforce']) > 0:
-            events = kwargs['Reinforce']
+            events = kwargs.pop('Reinforce')
             self._reinforce(events, callback=self.excute_event, i=i, **kwargs)
         else:
             self.excute_event(i, **kwargs)
@@ -1627,6 +1665,7 @@ class Arena(Layer):
 
     def _before_callback(self):
         director.push(Scene(self, self.menulayer, self.infolayer))
+
         self.next_round()
 
     def jump(self):
@@ -1761,6 +1800,7 @@ def new_game(map, size=80):
 
     scene = Transition(Scene(layer), duration=1.5)
     director.push(scene)
+    print(director.scene_stack)
 
 def load_game(map, size=80):
     menulayer = Menulayer()
@@ -1786,6 +1826,7 @@ if __name__ == '__main__':
     arena = Arena(map_init(), menulayer, infolayer, size=80)
     director.run(Scene(arena, menulayer, infolayer))
     arena.next_round()
+    pyglet.image._codecs
 
 
 

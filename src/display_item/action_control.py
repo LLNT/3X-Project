@@ -24,7 +24,8 @@ class Sequencial():
                 _target = CocosNode()
             _target.do(_action + CallFunc(self.excute, i+1))
         else:
-            print('excuted')
+            # print('excuted')
+            pass
 
 class Graphic():
     def __init__(self, *args):
