@@ -877,7 +877,7 @@ class Main:
         self.person_container.AItype[pid]=(pri,self.global_vars.data.ai_configs[strategy])
         return
 
-    def count_ally_population(self):
+    def count_army_population(self):
         count=[0,0,0,0]
         armylist=[{},{},{},{}]
         for pid in self.person_container.controller:
