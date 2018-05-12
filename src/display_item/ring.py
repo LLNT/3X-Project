@@ -228,7 +228,14 @@ class PerSpr(BatchableNode):
         self.pos = pos
         self.icon.scale_x, self.icon.scale_y = 28 / self.icon.width , 28 / self.icon.height
 
-
+    def _set_scale(self, s):
+        super()._set_scale(s)
+        self.blood.blood_right.scale = s
+        self.blood.blood_left.scale = s
+        self.blood.left.scale = s
+        self.blood.right.scale = s
+        self.icon.scale = s
+        self.img.scale = s*0.9
 
     def _set_position(self, pos):
         super()._set_position(pos)

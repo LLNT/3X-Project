@@ -427,7 +427,7 @@ class Arena(Layer):
             self.map.reinforce_person(pid, int(clr), pos, army, int(pri), strategy)
             person = people[pid]
             self.people[pid] = PerSpr(person, 1, self.size, position[pid],
-                                      controller[pid], bk_color=(220, 220, 220))
+                                      controller[pid])
             self.person_layer.add(self.people[pid])
             self.focus(pid)
             self.cells[position[pid]].person_on = pid
@@ -442,8 +442,10 @@ class Arena(Layer):
             cell.color = mapstate2color[cell.state]
             cell.opacity = opacity[cell.state]
         for person in self.people.values(): #type:Charactor
-            person.color = per_state2color(person.state, person.controller)
-
+            if person.state is 'selected':
+                person.scale = 1.2
+            else:
+                person.scale = 1
         # according to the state of every sprite within, repaint them in the correct color
         pass
 
