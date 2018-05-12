@@ -7,9 +7,10 @@ from cocos.sprite import Sprite
 from cocos.text import RichLabel
 from utility import coordinate
 from cocos.director import director
+import pyglet
 
 class Cell(Sprite):
-    def __init__(self, size=50,pos=(0, 0),state='default',path='ring.png',color=(255, 255, 255)):
+    def __init__(self, size=50,pos=(0, 0),state='default',path='cls/red.png',color=(255, 255, 255)):
         '''
 
         :param size: fixed size of every cell's length and width
@@ -25,7 +26,12 @@ class Cell(Sprite):
         self.state = state
         self.person_on = None
         self.opacity = 0
+        self.size = size
 
+    def change_source(self, source='blue', opacity=255):
+        img = 'cls/' + source + '.png'
+        self._set_texture(pyglet.resource.image(img).get_texture())
+        self.opacity = opacity
 
 
 class Charactor(Sprite):

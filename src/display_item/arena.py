@@ -439,8 +439,14 @@ class Arena(Layer):
 
     def _repaint(self):
         for cell in self.cells.values():
-            cell.color = mapstate2color[cell.state]
-            cell.opacity = opacity[cell.state]
+            if cell.state is 'default':
+                cell.change_source(opacity=0)
+            elif cell.state in ['in_self_moverange',    'in_enemy_moverange',    'in_ally_moverange', 'uncross_inrange']:
+                cell.change_source('blue')
+            elif cell.state in ['in_self_attackrange', 'target']:
+                cell.change_source('red')
+            else:
+                cell.change_source(opacity=0)
         for person in self.people.values(): #type:Charactor
             if person.state is 'selected':
                 person.scale = 1.2
@@ -461,13 +467,12 @@ class Arena(Layer):
         x1, y1 = self.board.get_dir(x, y)
 
         self._update = x1, y1
-        i, j = self.coordinate_t(x, y)
-        if self._in_arena(i, j):
-            self._repaint()
-            cell = self.cells[(i, j)]
-            cell.color = mapstate2color_motion[cell.state]
-            cell.opacity = opacity[cell.state]
-        pass
+        # i, j = self.coordinate_t(x, y)
+        # if self._in_arena(i, j):
+        #     self._repaint()
+        #     cell = self.cells[(i, j)]
+        #     cell.opacity = opacity[cell.state]
+        # pass
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         # according to the state link to correct function
@@ -562,7 +567,6 @@ class Arena(Layer):
     def _set_areastate(self, area, state):
         for i, j in area:
             self.cells[(i, j)].state = state
-        self._repaint()
 
     def _push_scene(self, layer, callback=None, **kwargs):
         if callback is None:
@@ -636,8 +640,11 @@ class Arena(Layer):
                 self.origin_pos = self.mouse_pos
                 valid, invalid, ally, enemy = self._mapstate
                 if pid in valid.keys():   # a valid person selected
-                    area = valid[pid]
                     self.state = 'valid_select'
+                    area = self.map.get_attack_range(pid, valid)
+                    self._set_areastate(area[1], 'in_self_attackrange')
+                    self._set_areastate(area[2], 'uncross_inrange')
+                    self._set_areastate(valid[pid], 'in_self_moverange')
                 else:
                     self.state = 'invalid_select'
                     if pid in invalid.keys():
@@ -650,7 +657,8 @@ class Arena(Layer):
                     else:
                         area = set()
                         pass
-                self._set_areastate(area, ctrl2map_moverange[self.map.person_container.controller[pid]])
+                    self._set_areastate(area, ctrl2map_moverange[self.map.person_container.controller[pid]])
+                self._repaint()
             else:
                 self._clear_map()
                 pass
@@ -1335,6 +1343,19 @@ class Arena(Layer):
         self.map.controller = 1
         self.map.reset_state(0)
         director.window.remove_handlers(self)
+        count, _ = self.map.count_army_population()
+        if count[1] == 0:
+            self.map.send_mapstate()
+            self.map.controller = 2
+            if count[2] == 0:
+                self.map.send_mapstate()
+                self.next_round()
+            else:
+                self.map.controller = 2
+                obj = Turn('Enemy Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
+                self.infolayer.add(obj)
+                obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,
+                                                                        callback=self.ai_turn))
         obj = Turn('Enemy Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
         self.infolayer.add(obj)
         obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,

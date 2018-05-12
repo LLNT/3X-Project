@@ -51,7 +51,7 @@ class Ring(BatchableNode):
         self.right_ring.busy = False
 
     def set_angle_action(self, proportion, max_duration=4, min_duration=2):
-        angle = 361 - proportion * 360
+        angle = 360 - proportion * 360
         delta = abs(self.angles - angle)
         if delta <= 10:
             return self.right_ring, Delay(min_duration)
@@ -122,8 +122,6 @@ class Scoreboard(Ring):
         super().update(dt)
         self.hp.element.text = str(self.mhp - int(self.r * self.mhp))
         # self.hp.element.color = color[0], color[1], color[2], 255
-
-
 
 class Blood(BatchableNode):
     def __init__(self, size=80):
@@ -245,7 +243,6 @@ class PerSpr(BatchableNode):
         self.blood.right.position = pos
         self.icon.position = (pos[0] + self.size//2-14, pos[1]-self.size//2+14)
         self.img.position = pos
-
 
     def update_hp(self, set=True):
         self.hp = self.person.ability['HP']

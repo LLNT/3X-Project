@@ -1,4 +1,10 @@
 def calc_move(unstable,uncross,mov_map,pos,mov,M,N):
+    return _calc_move(unstable,uncross,mov_map,pos,mov,M,N)[0]
+
+def unstablevalid(unstable,uncross,mov_map,pos,mov,M,N):
+    return _calc_move(unstable,uncross,mov_map,pos,mov,M,N)[1]
+
+def _calc_move(unstable,uncross,mov_map,pos,mov,M,N):
     #####################################################
     # To calculate the moving range of one character:   #
     # unstable=cannot stay at the grid after moving     #
@@ -74,7 +80,9 @@ def calc_move(unstable,uncross,mov_map,pos,mov,M,N):
                             wait[npos]=(tr,newtrack)
                     else:
                         wait[npos]=(tr,newtrack)
+    uncrossvalid=[]
     for item in unstable:
         if item in dst:
             dst.pop(item)
-    return dst
+            uncrossvalid.append(item)
+    return dst,uncrossvalid

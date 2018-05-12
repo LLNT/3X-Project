@@ -55,6 +55,26 @@ class Main:
                     self.person_container.movable.pop(p.pid)
                     self.person_container.army.pop(p.pid)
                     self.person_container.AItype.pop(p.pid)
+    def unstable_valid_grid(self,pid):
+        unstable=[]
+        uncross=[]
+        p=self.global_vars.personBank[pid]
+        pos=self.person_container.position[p.pid]
+        mov=p.ability["MOV"]
+        for other in self.person_container.people:
+            if not p is other:
+                if self.person_container.controller[other.pid]%2 == self.person_container.controller[p.pid]%2:
+                    unstable.append(self.person_container.position[other.pid])
+                else:
+                    uncross.append(self.person_container.position[other.pid])
+        movmap={}
+        for i in range(self.terrain_container.M):
+            for j in range(self.terrain_container.N):
+                movmap[(i, j)] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
+        unstablevalid = move_range_person.unstablevalid(unstable, uncross, movmap, pos, mov, self.terrain_container.M,
+                                              self.terrain_container.N)
+        return unstablevalid
+
     def send_mapstate(self):
         valid={}                       #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
         invalid={}                     #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
@@ -330,12 +350,17 @@ class Main:
         elif command_type == "E":
             self.reset_state(self.controller)
             self.controller += 1
-            if self.controller == 3:
+            if self.controller == 3 :
                 print('player phase')
                 arena.next_round()
             else:
-                print('ally phase')
-                arena.ai_phase()
+                if self.count_army_population()[1][2] == 0:
+                    self.send_mapstate()
+                    print('player phase')
+                    arena.next_round()
+                else:
+                    print('ally phase')
+                    arena.ai_phase()
 
         elif command_type == "A":
             person_to_move = command[1].pid
@@ -515,6 +540,7 @@ class Main:
         person = self.global_vars.personBank[pid]
         minr = 255
         maxr = -255
+        unstablevalid=self.unstable_valid_grid(pid)
         for i in person.item:
             if self.can_equip(pid,i):
                 if minr>i.itemtype.min_range:
@@ -528,8 +554,9 @@ class Main:
                     if (d>=minr)and(d<=maxr):
                         available_blocks.add((i,j))
                         if not (i,j) in valid[pid]:
-                            differential_blocks.add((i,j))
-        return available_blocks,differential_blocks
+                            if not (i,j) in unstablevalid:
+                                differential_blocks.add((i,j))
+        return available_blocks,differential_blocks,unstablevalid
 
     def get_attack_target(self,pid,valid):
         targets={}
