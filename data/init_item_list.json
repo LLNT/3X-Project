@@ -1408,6 +1408,66 @@
     "Id":282,
     "Itemtype":"Long Bow",
     "Use":25
+  },
+  {
+    "Id":283,
+    "Itemtype":"Tomahawk",
+    "Use":15
+  },
+  {
+    "Id":284,
+    "Itemtype":"Silver Sword",
+    "Use":20
+  },
+  {
+    "Id":285,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":286,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":287,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":288,
+    "Itemtype":"Javelin",
+    "Use":20
+  },
+  {
+    "Id":289,
+    "Itemtype":"Steel Sword",
+    "Use":30
+  },
+  {
+    "Id":290,
+    "Itemtype":"Silver Sword",
+    "Use":20
+  },
+  {
+    "Id":291,
+    "Itemtype":"Slim Sword",
+    "Use":30
+  },
+  {
+    "Id":292,
+    "Itemtype":"Slim Sword",
+    "Use":30
+  },
+  {
+    "Id":293,
+    "Itemtype":"Iron Sword",
+    "Use":20
+  },
+  {
+    "Id":294,
+    "Itemtype":"Iron Sword",
+    "Use":20
   }
 
 ]
