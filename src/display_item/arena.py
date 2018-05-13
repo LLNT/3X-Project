@@ -497,7 +497,7 @@ class Arena(Layer):
         elif symbol == key.ENTER:
             self.mouse_btn = mouse.LEFT
             self._state_control[self.state].__call__()
-        elif symbol == key.ESCAPE:
+        elif symbol == key.BACKSPACE:
             self.mouse_btn = mouse.RIGHT
             self._state_control[self.state].__call__()
 
@@ -681,12 +681,19 @@ class Arena(Layer):
                         self.people[pid].state = 'moved'
                     elif pid in ally.keys():
                         area = ally[pid]
+                        _area = self.map.get_attack_range(pid, ally)
+                        self._set_areastate(_area[1], 'in_self_attackrange')
                     elif pid in enemy.keys():
                         area = enemy[pid]
+                        _area = self.map.get_attack_range(pid, enemy)
+                        self._set_areastate(_area[1], 'in_self_attackrange')
                     else:
                         area = set()
                         pass
+
+                    self._set_areastate(_area[2], 'uncross_inrange')
                     self._set_areastate(area, ctrl2map_moverange[self.map.person_container.controller[pid]])
+
                 self._repaint()
             else:
                 self._clear_map()
