@@ -1,4 +1,3 @@
-"""
 from pyglet.gl import *
 from cocos.director import director
 
@@ -34,4 +33,3 @@ def on_joybutton_press(joystick, button):
 
 director.run()
 
-"""
