@@ -56,7 +56,7 @@ class Ordermenu(Menu):
         if len(self.sup_dict) > 0:
             l.append(MenuItem('Support', self.support))
 
-        self.exc = arena.can_exchange(position)
+        self.exc = map.have_exchange_object(pid, position)
         if len(self.exc) > 0:
             l.append(MenuItem('Exchange', self.exchange))
 
