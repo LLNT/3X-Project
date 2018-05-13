@@ -10,7 +10,7 @@ from cocos.director import director
 import pyglet
 
 class Cell(Sprite):
-    def __init__(self, size=50,pos=(0, 0),state='default',path='cls/red.png',color=(255, 255, 255)):
+    def __init__(self, size=50,pos=(0, 0),state='default',path='sprite/red.png',color=(255, 255, 255)):
         '''
 
         :param size: fixed size of every cell's length and width
@@ -29,7 +29,7 @@ class Cell(Sprite):
         self.size = size
 
     def change_source(self, source='blue', opacity=255):
-        img = 'cls/' + source + '.png'
+        img = 'sprite/' + source + '.png'
         self._set_texture(pyglet.resource.image(img).get_texture())
         self.opacity = opacity
 
@@ -129,3 +129,11 @@ class Endturn(Button):
     def on_activated(self):
         if self.parent.state is 'default':
             self.parent.end_turn()
+
+
+class Cursor(Sprite):
+    
+    def __init__(self, size=80):
+        super().__init__('sprite/cursor.png')
+        self.scale_y, self.scale_x = size / self.height, size / self.width
+        self.image_anchor = (0, 0)

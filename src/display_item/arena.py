@@ -11,7 +11,7 @@ from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay, FadeTo, FadeIn, FadeOut, Place
 from cocos.scenes import FadeTransition
 from cocos.batch import BatchNode
-from display_item.sprite import Charactor, Cell
+from display_item.sprite import Charactor, Cell, Cursor
 from display_item.state2color import *
 from display_item.info import Personinfo, Battleinfo, Experience2
 from display_item.menu import *
@@ -29,6 +29,7 @@ from person_container import Main as Person_Container
 from terrain_container import Main as Terrain_Container
 from wand import Type1, Type3, Type5
 from typing import Dict
+from pyglet.window import key, mouse
 
 class Arena(Layer):
     """
@@ -99,6 +100,9 @@ class Arena(Layer):
         self._update = (0, 0)
         self.schedule(self.update)
 
+        self.cursor = Cursor(size)
+        self.add(self.cursor)
+
         self._clear_map()
 
         print('loaded turn %s' % self.map.turn)
@@ -140,6 +144,7 @@ class Arena(Layer):
         self.item = None
         self.sup_dict = None
         self._reset_person = {}
+        self._reset_cell = {}
         self.menulayer.disapper()
         self.iter = iter(self.people)
         self.item_w = None
@@ -445,8 +450,10 @@ class Arena(Layer):
                 cell.change_source('blue')
             elif cell.state in ['in_self_attackrange', 'target']:
                 cell.change_source('red')
+            elif cell.state is 'execute_object':
+                cell.change_source('green')
             else:
-                cell.change_source(opacity=0)
+                pass
         for person in self.people.values(): #type:Charactor
             if person.state is 'selected':
                 person.scale = 1.2
@@ -467,12 +474,33 @@ class Arena(Layer):
         x1, y1 = self.board.get_dir(x, y)
 
         self._update = x1, y1
-        # i, j = self.coordinate_t(x, y)
-        # if self._in_arena(i, j):
+        i, j = self.coordinate_t(x, y)
+        if self._in_arena(i, j):
+            self.cursor.position = i*self.size, j*self.size
         #     self._repaint()
         #     cell = self.cells[(i, j)]
         #     cell.opacity = opacity[cell.state]
         # pass
+
+    def on_key_press(self, symbol, modifiers):
+        x, y = self.cursor.position
+        i, j = x // self.size, y // self.size
+        self.mouse_pos = i, j
+        if symbol == key.UP and self._in_arena(i, j+1):
+            self.cursor.position = i * self.size, (j + 1) * self.size
+        elif symbol == key.DOWN and self._in_arena(i, j - 1):
+            self.cursor.position = i * self.size, (j - 1) * self.size
+        elif symbol == key.LEFT and self._in_arena(i - 1, j):
+            self.cursor.position = (i - 1) * self.size, j * self.size
+        elif symbol == key.RIGHT and self._in_arena(i + 1, j ):
+            self.cursor.position = (i + 1)  * self.size, j * self.size
+        elif symbol == key.ENTER:
+            self.mouse_btn = mouse.LEFT
+            self._state_control[self.state].__call__()
+        elif symbol == key.ESCAPE:
+            self.mouse_btn = mouse.RIGHT
+            self._state_control[self.state].__call__()
+
 
     def on_mouse_press(self, x, y, buttons, modifiers):
         # according to the state link to correct function
@@ -521,6 +549,7 @@ class Arena(Layer):
         elif self.state in['choose_support', 'choose_exchange', 'choose_steal', 'choose_talk']:
             for pid in self._reset_person.keys():
                 self.people[pid].state = self._reset_person[pid]
+                self.cells[self.people[pid].pos].state = self._reset_cell[self.people[pid].pos]
             '''
             elif self.state is 'choose_exchange':
                 for pid in self.exc:
@@ -691,6 +720,7 @@ class Arena(Layer):
                 self.state = 'valid_dst'
                 self.cells[self.target].person_on = self.selected
                 self.cells[self.origin_pos].person_on = None
+                self._repaint()
             else:
                 pass
         elif self.mouse_btn == 4:
@@ -1248,6 +1278,9 @@ class Arena(Layer):
         for pid in sup_dict:
             self._reset_person[pid] = self.people[pid].state
             self.people[pid].state = 'can_support'
+            self._reset_cell[self.people[pid].pos] = self.cells[self.people[pid].pos].state
+            self.cells[self.people[pid].pos].state = 'execute_object'
+
         self.sup_dict = sup_dict
         self._repaint()
 
@@ -1495,6 +1528,9 @@ class Arena(Layer):
         for pid in exc:
             self._reset_person[pid] = self.people[pid].state
             self.people[pid].state = 'can_exchange'
+            self._reset_cell[self.people[pid].pos] = self.cells[self.people[pid].pos].state
+            self.cells[self.people[pid].pos].state = 'execute_object'
+
         self.exc = exc
         self._repaint()
         self.menulayer.disapper()
@@ -1597,6 +1633,9 @@ class Arena(Layer):
         for pid in stl_dict:
             self._reset_person[pid] = self.people[pid].state
             self.people[pid].state = 'can_steal'
+            self._reset_cell[self.people[pid].pos] = self.cells[self.people[pid].pos].state
+            self.cells[self.people[pid].pos].state = 'execute_object'
+
         self.stl_dict = stl_dict
         self._repaint()
         pass
@@ -1614,6 +1653,9 @@ class Arena(Layer):
         for pid in talk_dict:
             self._reset_person[pid] = self.people[pid].state
             self.people[pid].state = 'can_talk'
+            self._reset_cell[self.people[pid].pos] = self.cells[self.people[pid].pos].state
+            self.cells[self.people[pid].pos].state = 'execute_object'
+
         self.talk_dict = talk_dict
         self._repaint()
 

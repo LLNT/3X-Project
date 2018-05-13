@@ -350,17 +350,12 @@ class Main:
         elif command_type == "E":
             self.reset_state(self.controller)
             self.controller += 1
-            if self.controller == 3 :
+            if self.controller == 3:
                 print('player phase')
                 arena.next_round()
             else:
-                if self.count_army_population()[1][2] == 0:
-                    self.send_mapstate()
-                    print('player phase')
-                    arena.next_round()
-                else:
-                    print('ally phase')
-                    arena.ai_phase()
+                print('ally phase')
+                arena.ai_phase()
 
         elif command_type == "A":
             person_to_move = command[1].pid
@@ -655,7 +650,8 @@ class Main:
         for p in self.person_container.position:
             if self.person_container.controller[p]==self.person_container.controller[pid]:
                 if calc_dist(self.person_container.position[p],pos)==1:
-                    exchange_objects.append(p)
+                    if not p==pid:
+                        exchange_objects.append(p)
         return exchange_objects
 
     def have_items(self,pid):

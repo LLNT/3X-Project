@@ -126,10 +126,10 @@ class Scoreboard(Ring):
 class Blood(BatchableNode):
     def __init__(self, size=80):
         super().__init__()
-        self.blood_right = Sprite('cls/Blood_r.png', anchor=(0, size/2))
-        self.blood_left = Sprite('cls/Blood_l.png', anchor=(size/2, size/2))
-        self.left = Sprite('cls/Left.png', anchor=(size/2, size/2))
-        self.right = Sprite('cls/Right.png', anchor=(0, size/2))
+        self.blood_right = Sprite('sprite/Blood_r.png', anchor=(0, size/2))
+        self.blood_left = Sprite('sprite/Blood_l.png', anchor=(size/2, size/2))
+        self.left = Sprite('sprite/Left.png', anchor=(size/2, size/2))
+        self.right = Sprite('sprite/Right.png', anchor=(0, size/2))
 
         self.add(self.blood_right)
         self.add(self.left)
@@ -208,11 +208,12 @@ class PerSpr(BatchableNode):
         self.icon = Sprite(image=person.icon, position=(size//2-14, -size//2+14))
         super().__init__()
         try:
-            self.img = Sprite(image=name, scale=0.9)
+            self.img = Sprite(image=name)
 
         except:
-            self.img = Sprite(image='cls/Blood.png', scale=0.9)
-            pass
+            self.img = Sprite(image='sprite/Blood.png')
+        self.img.scale_y, self.img.scale_x = size / self.img.height, size / self.img.width
+
         self.add(self.img, z=0)
         self.add(self.blood, z=1)
         self.add(self.icon, z=2)
