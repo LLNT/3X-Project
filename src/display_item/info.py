@@ -9,7 +9,7 @@ from battle import Battle
 from utility import get_weapon_rank
 
 class Info(ColorLayer):
-
+    is_event_handler = True
     def __init__(self, size=None, position=None, center=False,
                  color=(200,200,200), alpha=200):
         '''

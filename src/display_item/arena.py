@@ -9,6 +9,7 @@ from cocos.layer import Layer, ColorLayer, ScrollableLayer
 from cocos.director import director
 from cocos.scene import Scene
 from cocos.actions import CallFunc, MoveTo, Delay, FadeTo, FadeIn, FadeOut, Place
+from cocos.cocosnode import CocosNode
 from cocos.scenes import FadeTransition
 from cocos.batch import BatchNode
 from display_item.sprite import Charactor, Cell, Cursor
@@ -153,6 +154,7 @@ class Arena(Layer):
         self.allow_cancel = True
         self.transtuple = None
         self.dialog_info = {}
+        self.wpinfo = CocosNode()
         try:
             self.infolayer.remove(self.info)
             self.remove(self.wpinfo)
@@ -448,9 +450,9 @@ class Arena(Layer):
                 cell.change_source(opacity=0)
             elif cell.state in ['in_self_moverange',    'in_enemy_moverange',    'in_ally_moverange', 'uncross_inrange']:
                 cell.change_source('blue')
-            elif cell.state in ['in_self_attackrange', 'target']:
+            elif cell.state in ['target', 'in_attackrange']:
                 cell.change_source('red')
-            elif cell.state is 'execute_object':
+            elif cell.state in ['in_self_attackrange', 'execute_object', 'door']:
                 cell.change_source('green')
             else:
                 pass
@@ -477,6 +479,12 @@ class Arena(Layer):
         i, j = self.coordinate_t(x, y)
         if self._in_arena(i, j):
             self.cursor.position = i*self.size, j*self.size
+
+        if x >= self.windowsize[0] // 2:
+            self.wpinfo.position = (0, 0)
+        else:
+            self.wpinfo.position = (self.windowsize[0] // 2, 0)
+
         #     self._repaint()
         #     cell = self.cells[(i, j)]
         #     cell.opacity = opacity[cell.state]
@@ -523,33 +531,20 @@ class Arena(Layer):
         if self.state is 'choose_attack':
             self.infolayer.remove(self.wpinfo)
             self.attack()
-            pid = self.selected
-            valid = self._mapstate[0]
-            for (i, j) in self.cells.keys():
-                cell = self.cells[(i, j)]
-                if cell.state is 'in_self_attackrange':
-                    if (i, j) in valid[pid]:
-                        cell.state = 'in_self_moverange'
-                    else:
-                        cell.state = 'default'
-
             self.item = None
-        elif self.state is 'choose_door':
+        elif self.state in ['wand_type0','wand_type1','wand_type2','wand_type3',
+                            'wand_type4', 'wand_type5', 'wand_type6', 'wand_type7_confirm',
+                            'wand_type8', 'wand_type9']:
+            self.wand(self.avl)
+            self.item = None
+        else:
             self.menu = Ordermenu(self)
             self.add_menu(self.menu)
-            for (i, j) in self.cells.keys():
-                cell = self.cells[(i, j)]
-                pid = self.selected
-                valid = self._mapstate[0]
-                if cell.state is 'door':
-                    if (i, j) in valid[pid]:
-                        cell.state = 'in_self_moverange'
-                    else:
-                        cell.state = 'default'
-        elif self.state in['choose_support', 'choose_exchange', 'choose_steal', 'choose_talk']:
-            for pid in self._reset_person.keys():
-                self.people[pid].state = self._reset_person[pid]
-                self.cells[self.people[pid].pos].state = self._reset_cell[self.people[pid].pos]
+        self.state = 'valid_dst'
+        for pid in self._reset_person.keys():
+            self.people[pid].state = self._reset_person[pid]
+        for keys in self._reset_cell.keys():
+            self.cells[keys].state = self._reset_cell[keys]
             '''
             elif self.state is 'choose_exchange':
                 for pid in self.exc:
@@ -561,24 +556,8 @@ class Arena(Layer):
                 for pid in self.talk_dict:
                     self.people[pid].state = self._reset_person[pid]
             '''
-            self.menu = Ordermenu(self)
-            self.add_menu(self.menu)
 
-        elif self.state in ['wand_type0','wand_type1','wand_type2','wand_type3',
-                            'wand_type4', 'wand_type5', 'wand_type6', 'wand_type7_confirm',
-                            'wand_type8', 'wand_type9']:
-            self.wand(self.avl)
-            pid = self.selected
-            valid = self._mapstate[0]
-            for (i, j) in self.cells.keys():
-                cell = self.cells[(i, j)]
-                if cell.state is 'in_self_wandrange':
-                    if (i, j) in valid[pid]:
-                        cell.state = 'in_self_moverange'
-                    else:
-                        cell.state = 'default'
-            self.item = None
-        self.state = 'valid_dst'
+
         self._repaint()
         pass
 
@@ -593,9 +572,11 @@ class Arena(Layer):
     def set_pos(self, menu):
         menu.position = self.menulayer.menu_back.position
 
-    def _set_areastate(self, area, state):
+    def _set_areastate(self, area, state, repaint=True):
         for i, j in area:
             self.cells[(i, j)].state = state
+        if repaint:
+            self._repaint()
 
     def _push_scene(self, layer, callback=None, **kwargs):
         if callback is None:
@@ -671,28 +652,29 @@ class Arena(Layer):
                 if pid in valid.keys():   # a valid person selected
                     self.state = 'valid_select'
                     area = self.map.get_attack_range(pid, valid)
-                    self._set_areastate(area[1], 'in_self_attackrange')
-                    self._set_areastate(area[2], 'uncross_inrange')
-                    self._set_areastate(valid[pid], 'in_self_moverange')
+                    self._set_areastate(area[1], 'in_attackrange', False)
+                    self._set_areastate(area[2], 'uncross_inrange', False)
+                    self._set_areastate(valid[pid], 'in_self_moverange', False)
                 else:
                     self.state = 'invalid_select'
+                    _area = set(), set(), set()
                     if pid in invalid.keys():
                         area = set()
                         self.people[pid].state = 'moved'
                     elif pid in ally.keys():
                         area = ally[pid]
                         _area = self.map.get_attack_range(pid, ally)
-                        self._set_areastate(_area[1], 'in_self_attackrange')
+                        self._set_areastate(_area[1], 'in_attackrange', False)
                     elif pid in enemy.keys():
                         area = enemy[pid]
                         _area = self.map.get_attack_range(pid, enemy)
-                        self._set_areastate(_area[1], 'in_self_attackrange')
+                        self._set_areastate(_area[1], 'in_attackrange', False)
                     else:
                         area = set()
                         pass
 
-                    self._set_areastate(_area[2], 'uncross_inrange')
-                    self._set_areastate(area, ctrl2map_moverange[self.map.person_container.controller[pid]])
+                    self._set_areastate(_area[2], 'uncross_inrange', False)
+                    self._set_areastate(area, ctrl2map_moverange[self.map.person_container.controller[pid]], False)
 
                 self._repaint()
             else:
@@ -727,7 +709,6 @@ class Arena(Layer):
                 self.state = 'valid_dst'
                 self.cells[self.target].person_on = self.selected
                 self.cells[self.origin_pos].person_on = None
-                self._repaint()
             else:
                 pass
         elif self.mouse_btn == 4:
@@ -1272,6 +1253,8 @@ class Arena(Layer):
                 for x, y in [(i + dx, j + dy), (i + dx, j - dy), (i - dx, j + dy), (i - dx, j - dy)]:
                     if x in range(self.w) and y in range(self.h):
                         area.append((x, y))
+                        self._reset_cell[(x, y)] = self.cells[(x, y)].state
+
         self._set_areastate(area, 'in_self_attackrange')
         self.state = 'choose_attack'
         self.item = item
@@ -1514,7 +1497,6 @@ class Arena(Layer):
 
     def set_turn(self, turn):
         # change the turn over the arena
-
         pass
 
     def can_exchange(self, pos):
@@ -1530,7 +1512,7 @@ class Arena(Layer):
 
     def exchange(self, exc):
         director.window.push_handlers(self)
-        self._set_areastate([self.target], 'target')
+        self._set_areastate([self.target], 'target', False)
         self.state = 'choose_exchange'
         for pid in exc:
             self._reset_person[pid] = self.people[pid].state
@@ -1686,9 +1668,11 @@ class Arena(Layer):
             _x, _y = (x * 2 + m - 1) / 2, (y * 2 + n - 1) / 2
             recon = Sprite(_rec['Pic'], position=coordinate(_x, _y, self.size))
             recon.scale_x, recon.scale_y = width / recon.width, height / recon.height
+            self.remove(self.cell_layer)
             self.remove(self.person_layer)
             self.add(recon)
             self.add(self.person_layer)
+            self.add(self.cell_layer)
         else:
             pass
 
