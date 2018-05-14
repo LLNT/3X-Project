@@ -206,6 +206,7 @@ class PerSpr(BatchableNode):
         self.blood = Blood()
         self.size = size
         self.icon = Sprite(image=person.icon, position=(size//2-14, -size//2+14))
+        self._opacity = 255
         super().__init__()
         try:
             self.img = Sprite(image=name)
@@ -244,6 +245,20 @@ class PerSpr(BatchableNode):
         self.blood.right.position = pos
         self.icon.position = (pos[0] + self.size//2-14, pos[1]-self.size//2+14)
         self.img.position = pos
+
+    def _get_opacity(self):
+        return self._opacity
+
+    def _set_opacity(self, opacity):
+        self._opacity = opacity
+        self.blood.blood_right.opacity = opacity
+        self.blood.blood_left.opacity = opacity
+        self.blood.left.opacity = opacity
+        self.blood.right.opacity = opacity
+        self.icon.opacity = opacity
+        self.img.opacity = opacity
+
+    opacity = property(_get_opacity, _set_opacity)
 
     def update_hp(self, set=True):
         self.hp = self.person.ability['HP']
