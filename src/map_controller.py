@@ -75,6 +75,53 @@ class Main:
                                               self.terrain_container.N)
         return unstablevalid
 
+    def move_and_attack_range(self,pid):
+        uncross=[]
+        p=self.global_vars.personBank[pid]
+        pos=self.person_container.position[p.pid]
+        mov=p.ability["MOV"]
+        for other in self.person_container.people:
+            if not p is other:
+                if self.person_container.controller[other.pid]%2 == self.person_container.controller[p.pid]%2:
+                    pass
+                else:
+                    uncross.append(self.person_container.position[other.pid])
+        movmap={}
+        for i in range(self.terrain_container.M):
+            for j in range(self.terrain_container.N):
+                movmap[(i, j)] = self.terrain_container.map[i][j].decay[self.global_vars.data.cls_clsgroup[p.cls]]
+        valid = move_range_person.calc_move([], uncross, movmap, pos, mov, self.terrain_container.M,
+                                              self.terrain_container.N)
+        mov_range=[]
+        att_range=set()
+        diff_range=[]
+        minr = 255
+        maxr = -255
+        for i in p.item:
+            if self.can_equip(pid, i):
+                if minr > i.itemtype.min_range:
+                    minr = i.itemtype.min_range
+                if maxr < i.itemtype.max_range:
+                    maxr = i.itemtype.max_range
+        for item in valid:
+            mov_range.append(item)
+        for i in range(self.terrain_container.M):
+            for j in range(self.terrain_container.N):
+                for item in mov_range:
+                    d=calc_dist((i,j),item)
+                    if d>=minr and d<=maxr:
+                        att_range.add((i,j))
+                        if not (i,j) in mov_range:
+                            diff_range.append((i,j))
+        return mov_range,att_range,diff_range
+
+    def collective_range(self):
+        range=set()
+        for p in self.person_container.position:
+            if self.person_container.controller[p]==1:
+                range=range|self.move_and_attack_range(p)[1]
+        return range
+
     def send_mapstate(self):
         valid={}                       #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
         invalid={}                     #type:Dict[str,Dict[Tuple[int,int],Tuple[float,List[Tuple[int,int]]]]]
