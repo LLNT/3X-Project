@@ -346,7 +346,7 @@ class Main:
         if command_type == "M":
             person_to_move = command[1].pid  # type:person.Person
             arena.focus(person_to_move)
-            arena.move(pid=person_to_move, dst=command[3], rng=valid[person_to_move])
+            arena.move(pid=person_to_move, dst=command[3], vld=valid)
         elif command_type == "E":
             self.reset_state(self.controller)
             self.controller += 1

@@ -102,7 +102,7 @@ class Arena(Layer):
         self.schedule(self.update)
 
         self.cursor = Cursor(size)
-        self.add(self.cursor)
+        self.cell_layer.add(self.cursor)
 
         self._clear_map()
 
@@ -452,7 +452,7 @@ class Arena(Layer):
                 cell.change_source('blue')
             elif cell.state in ['target', 'in_attackrange']:
                 cell.change_source('red')
-            elif cell.state in ['in_self_attackrange', 'execute_object', 'door']:
+            elif cell.state in ['in_self_attackrange', 'execute_object', 'door', 'in_self_wandrange']:
                 cell.change_source('green')
             else:
                 pass
@@ -659,20 +659,20 @@ class Arena(Layer):
                     self.state = 'invalid_select'
                     _area = set(), set(), set()
                     if pid in invalid.keys():
-                        area = set()
+                        area = invalid[pid]
                         self.people[pid].state = 'moved'
+                        _area = self.map.get_attack_range(pid, invalid)
                     elif pid in ally.keys():
                         area = ally[pid]
                         _area = self.map.get_attack_range(pid, ally)
-                        self._set_areastate(_area[1], 'in_attackrange', False)
                     elif pid in enemy.keys():
                         area = enemy[pid]
                         _area = self.map.get_attack_range(pid, enemy)
-                        self._set_areastate(_area[1], 'in_attackrange', False)
                     else:
                         area = set()
                         pass
 
+                    self._set_areastate(_area[1], 'in_attackrange', False)
                     self._set_areastate(_area[2], 'uncross_inrange', False)
                     self._set_areastate(area, ctrl2map_moverange[self.map.person_container.controller[pid]], False)
 
@@ -1400,8 +1400,12 @@ class Arena(Layer):
         else:
             pid = kwargs['pid']
             dst = kwargs['dst']
-            rng = kwargs['rng']
-            self._set_areastate(rng, 'in_enemy_moverange')
+            valid = kwargs['vld']
+            self._set_areastate(valid[pid], 'in_enemy_moverange', False)
+            _area = self.map.get_attack_range(pid, valid)
+            self._set_areastate(_area[1], 'in_attackrange', False)
+            self._set_areastate(_area[2], 'uncross_inrange', False)
+            self._repaint()
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
                  CallFunc(self._clear_map) + Delay(0.5) + CallFunc(self.get_next_to_delete)
         obj = self.people[pid]
