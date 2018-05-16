@@ -30,7 +30,7 @@ class Main:
         self.title=""
         self.reconstruct_log=[]
         self.leader="1"
-    def __init__(self,terrain_map,person_container,glb,reconstruct_log,eventlist={},pre=[],after=[],pic="",scene="",title="",leader="1"):
+    def __init__(self,terrain_map,person_container,glb,reconstruct_log=[],eventlist={},pre=[],after=[],pic="",scene="",title="",leader="1"):
         self.terrain_container=terrain_map
         self.person_container=person_container
         self.turn=0

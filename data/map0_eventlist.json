@@ -15,7 +15,7 @@
         "UT000-0121","UT000-0122","UT000-0123","UT000-0124","UT000-0125",
         "UT000-0126","UT000-0127","UT000-0128","UT000-0129","UT000-0130",
         "UT000-0131","UT000-0132","UT000-0133","UT000-0134"],
-        "Reconstruct":"terrain_map_0_varblock_1.json",
+        "Reconstruct":"map0_terrain_varblock_1.json",
         "Finish":[
         {
             "Condition":[[["T00003"],[]]],
