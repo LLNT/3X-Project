@@ -166,11 +166,10 @@ class Arena(Layer):
             cell.state = 'default'
         for person in self.people.values(): #type:PerSpr
             if not person.moved:
-                person.state = 'unmoved'
+                person.set_default()
             else:
-                person.state = 'moved'
+                person.set_moved()
             person.update_hp()
-
         self._repaint()
 
     def on_return(self, person, getitem=None, transtuple=None, finish=None, defeat=None):
@@ -415,6 +414,7 @@ class Arena(Layer):
         self.people[pid].pos = dst[-1]
         self.cells[dst[-1]].person_on = pid
         self.focus(pid)
+        self.people[pid].set_moved()
 
     def _transfer(self, pos, duration=2):
         x, y = pos
@@ -1380,13 +1380,14 @@ class Arena(Layer):
                 self.next_round()
             else:
                 self.map.controller = 2
-                obj = Turn('Enemy Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
+                obj = Turn('Ally Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
                 self.infolayer.add(obj)
                 obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,
-                                                                        callback=self.ai_turn))
-        obj = Turn('Enemy Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
-        self.infolayer.add(obj)
-        obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,
+                                                                         callback=self.ai_turn))
+        else:
+            obj = Turn('Enemy Phase', self.map.turn, self.windowsize[0], self.windowsize[1])
+            self.infolayer.add(obj)
+            obj.do(FadeIn(0.5) + Delay(1) + FadeOut(0.5) + CallFunc(self._residual, obj=obj,
                                                                 callback=self.ai_turn))
 
     def flag(self):

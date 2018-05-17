@@ -210,9 +210,10 @@ class PerSpr(BatchableNode):
         super().__init__()
         try:
             self.img = Sprite(image=name)
-
+            self.resource = True
         except:
             self.img = Sprite(image='sprite/Blood.png')
+            self.resource = False
         self.img.scale_y, self.img.scale_x = size / self.img.height, size / self.img.width
 
         self.add(self.img, z=0)
@@ -220,8 +221,8 @@ class PerSpr(BatchableNode):
         self.add(self.icon, z=2)
         self.position = position
         self.person = person
-        self.update_hp()
         self.controller = controller
+        self.update_hp()
         self.state = state
         self.moved = False
         self.pid = person.pid
@@ -268,6 +269,20 @@ class PerSpr(BatchableNode):
             self.blood.set_angle(prop)
         else:
             return prop
+
+    def set_moved(self):
+        if self.resource:
+            filename = 'cls/' + self.person.cls + '_moved.png'
+            self.img._set_texture(pyglet.resource.image(filename).get_texture())
+        else:
+            self.img.color = (0, 0, 0)
+
+    def set_default(self):
+        if self.resource:
+            filename = 'cls/' + self.person.cls + '_' + str(self.controller) + '.png'
+            self.img._set_texture(pyglet.resource.image(filename).get_texture())
+        else:
+            self.img.color = (255, 255, 255)
 
 if __name__ == '__main__':
     pyglet.resource.path = ['../../img']

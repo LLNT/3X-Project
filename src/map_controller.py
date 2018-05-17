@@ -401,8 +401,14 @@ class Main:
                 print('player phase')
                 arena.next_round()
             else:
-                print('ally phase')
-                arena.ai_phase()
+                count, armylist = self.count_army_population()
+                if count[2] == 0:
+                    self.send_mapstate()
+                    print('player phase')
+                    arena.next_round()
+                else:
+                    print('ally phase')
+                    arena.ai_phase()
 
         elif command_type == "A":
             person_to_move = command[1].pid
