@@ -408,7 +408,7 @@ class Main:
             person_to_move = command[1].pid
             arena.focus(person_to_move)
             battlelist = [command[1], command[4], command[5], self, command[3][-1]]
-            arena.attacking(pid=person_to_move, dst=command[3], rng=valid[person_to_move], battlelist=battlelist)
+            arena.attacking(pid=person_to_move, dst=command[3], vld=valid, battlelist=battlelist)
 
     def attackable(self, weapon):
         return weapon in self.global_vars.data.attackable_weapon_types

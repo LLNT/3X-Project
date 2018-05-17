@@ -578,6 +578,13 @@ class Arena(Layer):
         if repaint:
             self._repaint()
 
+    def _set_moverange(self, pid, valid):
+        _area = self.map.get_attack_range(pid, valid)
+        self._set_areastate(_area[1], 'in_attackrange', False)
+        self._set_areastate(_area[2], 'uncross_inrange', False)
+        self._repaint()
+        pass
+
     def _push_scene(self, layer, callback=None, **kwargs):
         if callback is None:
             callback_func = self._clear
@@ -651,10 +658,8 @@ class Arena(Layer):
                 valid, invalid, ally, enemy = self._mapstate
                 if pid in valid.keys():   # a valid person selected
                     self.state = 'valid_select'
-                    area = self.map.get_attack_range(pid, valid)
-                    self._set_areastate(area[1], 'in_attackrange', False)
-                    self._set_areastate(area[2], 'uncross_inrange', False)
                     self._set_areastate(valid[pid], 'in_self_moverange', False)
+                    self._set_moverange(pid, valid)
                 else:
                     self.state = 'invalid_select'
                     _area = set(), set(), set()
@@ -675,8 +680,7 @@ class Arena(Layer):
                     self._set_areastate(_area[1], 'in_attackrange', False)
                     self._set_areastate(_area[2], 'uncross_inrange', False)
                     self._set_areastate(area, ctrl2map_moverange[self.map.person_container.controller[pid]], False)
-
-                self._repaint()
+                    self._repaint()
             else:
                 self._clear_map()
                 pass
@@ -1337,9 +1341,10 @@ class Arena(Layer):
             # from ai movements
             pid = kwargs['pid']
             dst = kwargs['dst']
-            rng = kwargs['rng']
+            valid = kwargs['vld']
             self.battlelist = kwargs['battlelist']
-            self._set_areastate(rng, 'in_enemy_moverange')
+            self._set_areastate(valid[pid], 'in_enemy_moverange', False)
+            self._set_moverange(pid, valid)
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) \
                  + CallFunc(self._clear_map) + CallFunc(self._push_scene, Battlescene, callback=self._clear)
         obj = self.people[pid]
@@ -1402,10 +1407,7 @@ class Arena(Layer):
             dst = kwargs['dst']
             valid = kwargs['vld']
             self._set_areastate(valid[pid], 'in_enemy_moverange', False)
-            _area = self.map.get_attack_range(pid, valid)
-            self._set_areastate(_area[1], 'in_attackrange', False)
-            self._set_areastate(_area[2], 'uncross_inrange', False)
-            self._repaint()
+            self._set_moverange(pid, valid)
         action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
                  CallFunc(self._clear_map) + Delay(0.5) + CallFunc(self.get_next_to_delete)
         obj = self.people[pid]
