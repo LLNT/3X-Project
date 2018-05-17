@@ -201,7 +201,6 @@ class Blood(BatchableNode):
 class PerSpr(BatchableNode):
     def __init__(self, person, scale=1,size=50,pos=(0, 0),controller=0,state='unmoved'):
         position = coordinate(pos[0], pos[1], size)
-        scl = scale * size / 400
         name = 'cls/' + person.cls + '_' + str(controller) + '.png'
         self.blood = Blood()
         self.size = size
@@ -273,14 +272,22 @@ class PerSpr(BatchableNode):
     def set_moved(self):
         if self.resource:
             filename = 'cls/' + self.person.cls + '_moved.png'
-            self.img._set_texture(pyglet.resource.image(filename).get_texture())
+            self.remove(self.img)
+            self.img = Sprite(filename)
+            self.img.scale_y, self.img.scale_x = self.size / self.img.height, self.size / self.img.width
+            self.img.position = self.position
+            self.add(self.img)
         else:
             self.img.color = (0, 0, 0)
 
     def set_default(self):
         if self.resource:
             filename = 'cls/' + self.person.cls + '_' + str(self.controller) + '.png'
-            self.img._set_texture(pyglet.resource.image(filename).get_texture())
+            self.remove(self.img)
+            self.img = Sprite(filename)
+            self.img.scale_y, self.img.scale_x = self.size / self.img.height, self.size / self.img.width
+            self.img.position = self.position
+            self.add(self.img)
         else:
             self.img.color = (255, 255, 255)
 
