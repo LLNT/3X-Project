@@ -137,3 +137,4 @@ class Cursor(Sprite):
         super().__init__('sprite/cursor.png')
         self.scale_y, self.scale_x = size / self.height, size / self.width
         self.image_anchor = (0, 0)
+

@@ -43,5 +43,14 @@ if __name__ == '__main__':
     pyglet.resource.reindex()
     director.init(caption='3X-Project', width=1280, height=720)
     director.show_FPS = True
+
+    img = pyglet.resource.image('cursor/sword.png', flip_x=True) #type: pyglet.image.Texture
+
+    img.width, img.height = 40, 40
+    img.anchor_x, img.anchor_y = 20, 20
+
+    cursor = pyglet.window.ImageMouseCursor(img)
+    director.window.set_mouse_cursor(cursor)
+
     layer = Layer()
     director.run(Scene(layer, Main(map_init(), layer=layer)))
