@@ -277,6 +277,7 @@ class PerSpr(BatchableNode):
             self.img.scale_y, self.img.scale_x = self.size / self.img.height, self.size / self.img.width
             self.img.position = self.position
             self.add(self.img)
+            self.state = 'moved'
         else:
             self.img.color = (0, 0, 0)
 
@@ -288,6 +289,7 @@ class PerSpr(BatchableNode):
             self.img.scale_y, self.img.scale_x = self.size / self.img.height, self.size / self.img.width
             self.img.position = self.position
             self.add(self.img)
+            self.state = 'unmoved'
         else:
             self.img.color = (255, 255, 255)
 

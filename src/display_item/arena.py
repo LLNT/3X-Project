@@ -267,7 +267,6 @@ class Arena(Layer):
         self._mapstate = self.map.send_mapstate()
         self.show_infos(turn=self.map.turn, phase='Player Phase', callback=self.player_phase, reset=True)
 
-
     def _residual(self, obj, callback, **kwargs):
         self.infolayer.remove(obj)
         self.visible = True
