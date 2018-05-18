@@ -707,12 +707,15 @@ class Arena(Layer):
             valid = self._mapstate[0]
             if self.mouse_pos in valid[self.selected]:
                 self.target = self.mouse_pos
-                self._set_areastate([self.target], 'target')
-                self.menu = Ordermenu(self)
-                self.add_menu(self.menu)
+                pid = self.selected
+                dst = self._mapstate[0][pid][self.target][1]
+
                 self.state = 'valid_dst'
                 self.cells[self.target].person_on = self.selected
                 self.cells[self.origin_pos].person_on = None
+                self.menu = Ordermenu(self)
+
+                self.people[pid].do(self._sequential_move(dst) + CallFunc(self.add_menu, self.menu))
             else:
                 pass
         elif self.mouse_btn == 4:
@@ -739,7 +742,7 @@ class Arena(Layer):
         # move: execute action and turn to 0
         # cancel: turn to 1
         # attack: show menu of weapon select
-        # at present has nothing to do
+        # at present has nothing to do, all is handled by menu
         pass
 
     def _choose_attack(self):
@@ -1337,6 +1340,9 @@ class Arena(Layer):
             # this is from self movements
             pid = self.selected
             dst = self._mapstate[0][self.selected][self.target][1]
+            action = CallFunc(self._set_moved, pid, dst) \
+                 + CallFunc(self._clear_map) + CallFunc(self._push_scene, Battlescene, callback=self._clear)
+
         else:
             # from ai movements
             pid = kwargs['pid']
@@ -1345,7 +1351,7 @@ class Arena(Layer):
             self.battlelist = kwargs['battlelist']
             self._set_areastate(valid[pid], 'in_enemy_moverange', False)
             self._set_moverange(pid, valid)
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) \
+            action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) \
                  + CallFunc(self._clear_map) + CallFunc(self._push_scene, Battlescene, callback=self._clear)
         obj = self.people[pid]
         obj.do(action)
@@ -1403,14 +1409,16 @@ class Arena(Layer):
         if len(kwargs) is 0:
             pid = self.selected
             dst = self._mapstate[0][self.selected][self.target][1]
+            action = CallFunc(self._set_moved, pid, dst) + \
+                     CallFunc(self._clear_map) + Delay(0.5) + CallFunc(self.get_next_to_delete)
         else:
             pid = kwargs['pid']
             dst = kwargs['dst']
             valid = kwargs['vld']
             self._set_areastate(valid[pid], 'in_enemy_moverange', False)
             self._set_moverange(pid, valid)
-        action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
-                 CallFunc(self._clear_map) + Delay(0.5) + CallFunc(self.get_next_to_delete)
+            action = self._sequential_move(dst) + CallFunc(self._set_moved, pid, dst) + \
+                     CallFunc(self._clear_map) + Delay(0.5) + CallFunc(self.get_next_to_delete)
         obj = self.people[pid]
         obj.do(action)
         pass
@@ -1423,11 +1431,11 @@ class Arena(Layer):
 
     def cancel(self):
         director.window.push_handlers(self)
-        self._set_areastate([self.target], 'in_self_moverange')
         self.state = 'valid_select'
         self.menulayer.disapper()
         self.cells[self.target].person_on = None
         self.cells[self.origin_pos].person_on = self.selected
+        self.people[self.selected].position = coordinate(self.origin_pos[0], self.origin_pos[1], self.size)
         self.target = None
 
     def save(self):
