@@ -10,5 +10,6 @@
   "Preparation":null,
   "Afterscene":"map1_after.json",
   "Basement":null,
-  "Leader":"1"
+  "Leader":"1",
+  "Victory":"Defend 15 Turns"
 }

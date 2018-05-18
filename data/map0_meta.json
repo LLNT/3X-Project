@@ -10,5 +10,6 @@
   "Preparation":null,
   "Afterscene":"map0_after.json",
   "Basement":null,
-  "Leader":"1"
+  "Leader":"1",
+  "Victory":"Seize the Throne"
 }
