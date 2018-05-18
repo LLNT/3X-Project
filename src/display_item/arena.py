@@ -663,9 +663,10 @@ class Arena(Layer):
                     self.state = 'invalid_select'
                     _area = set(), set(), set()
                     if pid in invalid.keys():
-                        area = invalid[pid]
+                        tmp = self.map.move_and_attack_range(pid)
+                        area = set(tmp[0])
                         self.people[pid].state = 'moved'
-                        _area = self.map.get_attack_range(pid, invalid)
+                        _area = set(), tmp[2], set()
                     elif pid in ally.keys():
                         area = ally[pid]
                         _area = self.map.get_attack_range(pid, ally)
