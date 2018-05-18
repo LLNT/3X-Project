@@ -524,6 +524,7 @@ class Endturn(Menu):
         l.append(MenuItem('Quit', self.quit))
         l.append(MenuItem('Jump', self.jump))
         l.append(MenuItem('Settings', self.setting))
+        l.append(MenuItem('ShowAttackRange', self.showattrng))
         self.create_menu(l, zoom_in(), zoom_out())
         self.arena = arena
 
@@ -556,6 +557,10 @@ class Endturn(Menu):
 
     def jump(self):
         self.arena.jump()
+        self.parent.remove(self)
+
+    def showattrng(self):
+        self.arena.showattrng()
         self.parent.remove(self)
 
     def quit(self):

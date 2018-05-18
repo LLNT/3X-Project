@@ -629,6 +629,7 @@ class Arena(Layer):
             'choose_steal': self._choose_steal,
             'choose_door': self._choose_door,
             'choose_talk': self._choose_talk,
+            'show_rng': self._show_rng,
         }
 
     def _callback(self, **kwargs):
@@ -1181,6 +1182,12 @@ class Arena(Layer):
                                          w=self.windowsize[0], h=self.windowsize[1],
                                          callback=self._clear))
 
+            pass
+
+    def _show_rng(self):
+        if self.mouse_btn == 4:
+            self._clear_map()
+        elif self.mouse_btn == 1:
             pass
 
     def get_next_to_delete(self):
@@ -1744,6 +1751,14 @@ class Arena(Layer):
         director.window.push_handlers(self)
         self.map.global_vars.flags['VIC_FLAG00001'] = True
         self.state = 'default'
+
+    def showattrng(self):
+        self.menulayer.disapper()
+        area = self.map.collective_range()
+        self._set_areastate(area, 'in_attackrange')
+        self.state = 'show_rng'
+        director.window.push_handlers(self)
+        pass
 
     def setting(self):
         self.menulayer.disapper()
