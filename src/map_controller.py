@@ -967,6 +967,18 @@ class Main:
                 armylist[c][self.person_container.army[pid]]+=1
         return (count,armylist)
 
+    def get_thumbnail(self):
+        m=self.terrain_container.M
+        n=self.terrain_container.N
+        minimap={}
+        for i in range(m):
+            for j in range(n):
+                minimap[(m,n)]=-1
+        for p in self.person_container.position:
+            pos=self.person_container.position[p]
+            minimap[pos]=self.person_container.controller[p]
+        return minimap
+
     def map_save(self):
         return self.global_vars.map_save("game_0.sav",0)
 
