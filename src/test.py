@@ -1,10 +1,10 @@
-import move_range_person as mrp
-from global_vars import Main as Global
-from data_loader import Main as Data
-from terrain_container import Main as Terrain_Container
-from person_container import Main as Person_Container
-import map_controller
-import battle
+from . import move_range_person as mrp
+from .global_vars import Main as Global
+from .data_loader import Main as Data
+from .terrain_container import Main as Terrain_Container
+from .person_container import Main as Person_Container
+from . import map_controller
+from . import battle
 if __name__ == '__main__':
     data=Data()
     global_vars=Global(data)

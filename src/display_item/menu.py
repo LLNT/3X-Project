@@ -4,11 +4,11 @@
 @time: 2018/1/30 20:10
 '''
 from cocos.menu import Menu, MenuItem, zoom_in, zoom_out, ToggleMenuItem, shake
-from display_item.info import Info
+from .info import Info
 from cocos.director import director
 from cocos.layer import ColorLayer, Layer
 from cocos.actions import Delay, CallFunc
-import map_controller
+from .. import map_controller
 from cocos.layer import PythonInterpreterLayer
 
 class Menulayer(Layer):

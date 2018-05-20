@@ -1,16 +1,6 @@
 from typing import Dict, List
-import time
-import terrain
-import cls
-import person
-import ai_controller
-import itemtype
-import item
-import data_loader
-import terrain_container
-import person_container
-import map_controller
-import pickle
+import time,pickle
+from . import terrain,cls,person,ai_controller,itemtype,item,data_loader,terrain_container,person_container,map_controller
 
 class Main:
     def __init__(self):

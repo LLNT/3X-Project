@@ -7,7 +7,7 @@ from cocos.layer import Layer
 from cocos.menu import MenuItem, Menu, zoom_out, zoom_in
 from cocos.director import director
 from cocos.actions import Delay, CallFunc
-from display_item.info import Info
+from .info import Info
 
 class Getitem(Layer):
     is_event_handler = True

@@ -1,12 +1,12 @@
-from display_item.bar import Bar, Scale_to
-from person import Person
+from .bar import Bar, Scale_to
+from ..person import Person
 from cocos.sprite import Sprite
 from cocos.director import director
 from cocos.layer import ColorLayer, Layer
-from display_item.text import layout, layout_multiply
+from .text import layout, layout_multiply
 from cocos.actions import CallFunc, Delay
-from battle import Battle
-from utility import get_weapon_rank
+from ..battle import Battle
+from ..utility import get_weapon_rank
 
 class Info(ColorLayer):
     is_event_handler = True

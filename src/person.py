@@ -1,7 +1,7 @@
-import item
+from . import item
 import random
 from typing import List,Dict,Tuple
-from utility import *
+from .utility import *
 class Person:
     def __init__(self):
         self.pid = ""        #type:str

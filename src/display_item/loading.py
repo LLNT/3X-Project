@@ -4,8 +4,8 @@
 @time: 2018/2/1 12:35
 '''
 from cocos.layer import Layer
-from display_item.text import layout
-from display_item.info import Info
+from .text import layout
+from .info import Info
 
 class Loading(Layer):
     def __init__(self):

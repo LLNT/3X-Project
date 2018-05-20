@@ -9,8 +9,8 @@ from cocos.sprite import Sprite
 from cocos.director import director
 from cocos.actions import Delay, CallFunc
 from typing import List, Dict
-from map_controller import Main
-from display_item.text import Text
+from ..map_controller import Main
+from .text import Text
 from cocos.text import RichLabel
 from cocos.menu import Menu, MenuItem
 

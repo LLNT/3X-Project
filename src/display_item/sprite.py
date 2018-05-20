@@ -5,7 +5,7 @@
 '''
 from cocos.sprite import Sprite
 from cocos.text import RichLabel
-from utility import coordinate
+from ..utility import coordinate
 from cocos.director import director
 import pyglet
 

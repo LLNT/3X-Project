@@ -1,5 +1,5 @@
 from typing import List
-import terrain
+from . import terrain
 class Main:
     def __init__(self):
         self.name="" #type:string

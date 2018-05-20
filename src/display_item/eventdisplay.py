@@ -5,10 +5,10 @@
 """
 from cocos.layer import Layer
 from cocos.scene import Scene
-import map_controller
-from display_item.dialog import *
-from display_item.getitem import Getitem
-from utility import check_condition
+from .. import map_controller
+from .dialog import *
+from .getitem import Getitem
+from ..utility import check_condition
 from cocos.actions import CallFunc, Delay
 
 class Eventdisplay(Layer):
