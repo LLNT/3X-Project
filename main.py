@@ -27,7 +27,7 @@ class Main(Menu):
     def new_game(self):
         new_game(self.map)
 
-    def load_game(self):
+    def load_game(self, layer):
         sl = Saveload(1280,720,None,'load')
         layer.add(sl)
         self.kill()

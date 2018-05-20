@@ -117,8 +117,8 @@ class Save(ColorLayer):
             if self.arena is not None:
                 director.window.push_handlers(self.arena)
             else:
-                from main_display import Main
-                from display_item.arena import map_init
+                import main.Main
+                from .arena import map_init
                 layer = Layer()
                 director.replace(Scene(layer, Main(map_init(), layer)))
             pass
