@@ -23,6 +23,7 @@ from display_item.animation import Turn, Chapter
 from display_item.action_control import Sequencial, Graphic
 from display_item.saveload import Main as Saveload
 from display_item.eventdisplay import *
+from display_item.thumb import Thumb
 import map_controller
 from global_vars import Main as Global
 from data_loader import Main as Data
@@ -630,6 +631,7 @@ class Arena(Layer):
             'choose_door': self._choose_door,
             'choose_talk': self._choose_talk,
             'show_rng': self._show_rng,
+            'show_thumb': self._show_thumb,
         }
 
     def _callback(self, **kwargs):
@@ -1187,6 +1189,14 @@ class Arena(Layer):
     def _show_rng(self):
         if self.mouse_btn == 4:
             self._clear_map()
+        elif self.mouse_btn == 1:
+            pass
+
+    def _show_thumb(self):
+        if self.mouse_btn == 4:
+            self.infolayer.remove(self.thumb)
+            del self.thumb
+            self.state = 'default'
         elif self.mouse_btn == 1:
             pass
 
@@ -1760,6 +1770,17 @@ class Arena(Layer):
         director.window.push_handlers(self)
         pass
 
+    def showthumb(self):
+        self.menulayer.disapper()
+        self.state = 'show_thumb'
+        director.window.push_handlers(self)
+        minimap = self.map.get_thumbnail()
+        self.thumb = Thumb(minimap, self.w, self.h)
+        self.infolayer.add(self.thumb)
+        self.thumb.position = (self.windowsize[0] - 10*self.w)//2 , \
+                              (self.windowsize[1] - 10*self.h)//2
+
+
     def setting(self):
         self.menulayer.disapper()
         director.window.push_handlers(self)
@@ -1810,6 +1831,8 @@ class Arena(Layer):
                 y1 = 0
             self.position = self.position[0] + x1, \
                             self.position[1] + y1
+            if hasattr(self, 'thumb'):
+                self.thumb.update(x0, y0)
 
     def _coordinate(self,x, y):
         return ((x - self.anchor_x - self.position[0]) // self.scale + self.anchor_x) ,\

@@ -119,7 +119,7 @@ class Personinfo(Info):
             content.append(str(p.ability[ability]))
 
         content_map = layout_multiply(content, row=5, column=4, pos_range=(
-            (self.width // 2, self.height * 2 // 3), (self.width * 17 // 18, self.height)))
+            (self.width // 2, self.height * 2 // 3), (self.width * 17 // 18, self.height)), color=(0,0,0,255))
         for column in content_map:
             for item in column:
                 self.layer1.add(item)
@@ -134,7 +134,7 @@ class Personinfo(Info):
             content.append(str(get_weapon_rank(p.weapon_rank[wp_type])))
 
         content_map = layout_multiply(content, row=5, column=4, pos_range=(
-            (self.width // 2, self.height // 3), (self.width * 17 // 18, self.height * 2 // 3)))
+            (self.width // 2, self.height // 3), (self.width * 17 // 18, self.height * 2 // 3)), color=(0,0,0,255))
         for column in content_map:
             for item in column:
                 self.layer1.add(item)
