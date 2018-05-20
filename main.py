@@ -19,7 +19,7 @@ class Main(Menu):
 
         l = []
         l.append(MenuItem('New_game', self.new_game))
-        l.append(MenuItem('Load_game', self.load_game,layer))
+        l.append(MenuItem('Load_game', self._load_game,layer))
         l.append(MenuItem('Quit', self.quit))
 
         self.create_menu(l, zoom_in(), zoom_out())
@@ -27,7 +27,7 @@ class Main(Menu):
     def new_game(self):
         new_game(self.map)
 
-    def load_game(self, layer):
+    def _load_game(self, layer):
         sl = Saveload(1280,720,None,'load')
         layer.add(sl)
         self.kill()
