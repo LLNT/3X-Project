@@ -12,23 +12,23 @@ from cocos.actions import CallFunc, MoveTo, Delay, FadeTo, FadeIn, FadeOut, Plac
 from cocos.cocosnode import CocosNode
 from cocos.scenes import FadeTransition
 from cocos.batch import BatchNode
-from display_item.sprite import Charactor, Cell, Cursor
-from display_item.state2color import *
-from display_item.info import Personinfo, Battleinfo, Experience2
-from display_item.menu import *
-from display_item.background import Background
-from display_item.battle_scene import *
-from display_item.ring import PerSpr, Blood
-from display_item.animation import Turn, Chapter
-from display_item.action_control import Sequencial, Graphic
-from display_item.saveload import Main as Saveload
-from display_item.eventdisplay import *
-import map_controller
-from global_vars import Main as Global
-from data_loader import Main as Data
-from person_container import Main as Person_Container
-from terrain_container import Main as Terrain_Container
-from wand import Type1, Type3, Type5
+from .sprite import Charactor, Cell, Cursor
+from .state2color import *
+from .info import Personinfo, Battleinfo, Experience2
+from .menu import *
+from .background import Background
+from .battle_scene import *
+from .ring import PerSpr, Blood
+from .animation import Turn, Chapter
+from .action_control import Sequencial, Graphic
+from .saveload import Main as Saveload
+from .eventdisplay import *
+from .. import map_controller
+from ..global_vars import Main as Global
+from ..data_loader import Main as Data
+from ..person_container import Main as Person_Container
+from ..terrain_container import Main as Terrain_Container
+from ..wand import Type1, Type3, Type5
 from typing import Dict
 from pyglet.window import key, mouse
 

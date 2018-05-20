@@ -1,6 +1,6 @@
 from typing import Dict
-import itemtype
-import person
+from . import itemtype
+from . import person
 class Item:
     def __init__(self):
         self.itemid=None      #type:int

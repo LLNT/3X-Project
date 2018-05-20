@@ -1,7 +1,7 @@
-import person,map_controller,item
+from . import person,map_controller,item
 import random
 from typing import List,Tuple
-from utility import *
+from .utility import *
 
 class Wand:
     def __init__(self):

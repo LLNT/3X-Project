@@ -4,7 +4,7 @@
 @time: 2018/5/3 22:24
 """
 from cocos.layer import ColorLayer
-from display_item.text import Text
+from .text import Text
 
 class Turn(ColorLayer):
 

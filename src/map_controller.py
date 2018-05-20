@@ -1,10 +1,10 @@
 from typing import List,Dict,Tuple
-import terrain_container
-import person_container
-import move_range_person
-import global_vars
-import person
-from utility import *
+from . import terrain_container
+from . import person_container
+from . import move_range_person
+from . import global_vars
+from . import person
+from .utility import *
 
 def execute(valid,invalid,ally,enemy):
     for item in valid:

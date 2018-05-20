@@ -6,10 +6,10 @@
 from cocos.batch import BatchableNode
 from cocos.actions import RotateTo, RotateBy, Delay, CallFunc
 from cocos.sprite import Sprite
-from display_item.text import Text
-from utility import *
+from .text import Text
+from ..utility import *
 from cocos.director import director
-from display_item.action_control import Sequencial
+from .action_control import Sequencial
 import pyglet
 
 class Ring(BatchableNode):

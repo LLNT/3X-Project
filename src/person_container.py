@@ -1,5 +1,5 @@
 from typing import Dict,List,Tuple
-import person
+from . import person
 class Main:
     def __init__(self):
         self.name="" #type:str

@@ -9,15 +9,15 @@ from cocos.layer import ColorLayer, Layer
 from cocos.scenes import FadeTransition
 from cocos.scene import Scene
 from cocos.sprite import Sprite
-from display_item.text import Text
-from battle import Battle
-from display_item.ring import Scoreboard
+from .text import Text
+from ..battle import Battle
+from .ring import Scoreboard
 from cocos.actions import Delay, CallFunc, MoveBy, MoveTo, FadeIn, FadeOut
 from queue import Queue
-from display_item.info import Experience
-from wand import *
-from utility import check_condition
-from display_item.eventdisplay import Eventdisplay
+from .info import Experience
+from ..wand import *
+from ..utility import check_condition
+from .eventdisplay import Eventdisplay
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)

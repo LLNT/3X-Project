@@ -7,11 +7,11 @@ from cocos.layer import ColorLayer, Layer
 from cocos.scene import Scene
 from cocos.scenes import FadeTransition
 from cocos.director import director
-from global_vars import Main as Global
-from display_item.menu import Menulayer
-from display_item import arena
-from person import Person
-from display_item.text import layout_multiply, layout
+from ..global_vars import Main as Global
+from .menu import Menulayer
+from . import arena
+from ..person import Person
+from .text import layout_multiply, layout
 from cocos.menu import Menu, MenuItem
 
 

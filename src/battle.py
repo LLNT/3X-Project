@@ -1,9 +1,9 @@
 import collections
-import person
-import item
-import map_controller
+from . import person
+from . import item
+from . import map_controller
 import random
-from utility import *
+from .utility import *
 from typing import List,Set,Dict
 
 def wp_buf_count(wpa,wpd):
