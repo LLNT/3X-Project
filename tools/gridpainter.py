@@ -1,6 +1,7 @@
 import numpy
 import cv2
-c=(255,0,0)
+c=(64,64,255,180)
+b=(0,0,0,0)
 m=100
 n=100
 m1=(m-1)/2
@@ -13,11 +14,13 @@ if n%2==0:
     n2=n1+1
 else:
     n2=n1
-grid=numpy.zeros((m,n,3),dtype="uint8")
+grid=numpy.zeros((m,n,4),dtype="uint8")
 for i in range(m):
     for j in range(n):
         if min(abs(i-m1),abs(i-m2))+min(abs(j-n1),abs(j-n2))<min(m1,m2):
             #print(i,j)
             grid[i,j]=c
+        else:
+            grid[i,j]=b
 #print(grid)
-cv2.imwrite("grid_0.jpg",grid)
+cv2.imwrite("grid_1.png",grid)
