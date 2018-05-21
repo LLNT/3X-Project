@@ -155,12 +155,12 @@ class Arena(Layer):
         self.allow_cancel = True
         self.transtuple = None
         self.dialog_info = {}
-        self.wpinfo = CocosNode()
         try:
             self.infolayer.remove(self.info)
             self.remove(self.wpinfo)
         except:
             pass
+        self.wpinfo = CocosNode()
 
         self._mapstate = self.map.send_mapstate()
         for cell in self.cells.values():
@@ -1779,6 +1779,24 @@ class Arena(Layer):
         self.infolayer.add(self.thumb)
         self.thumb.position = (self.windowsize[0] - 10*self.w)//2 , \
                               (self.windowsize[1] - 10*self.h)//2
+
+    def status(self):
+        self.menulayer.disapper()
+        self.state = 'person_info'
+        self.info = Info()
+        content = []
+        content.append(self.map.vic)
+        content.append('Turn %d'%self.map.turn)
+        count = self.map.count_army_population()[1] #type:List[Dict]
+        for dic in count:
+            for name in dic:
+                num = dic[name]
+                content.append(name + ': %d'%num)
+
+        self.info.display(content, font_color=(0,0,0,255), back=True)
+        print(content)
+        self.infolayer.add(self.info)
+        director.window.push_handlers(self)
 
 
     def setting(self):

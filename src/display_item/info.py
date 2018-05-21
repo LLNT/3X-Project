@@ -34,18 +34,25 @@ class Info(ColorLayer):
                 self.position = 0, 0
         self.contents = {}
 
-    def display(self, content, pos_range=None, font_size=30, contentid=None):
+    def display(self, content, pos_range=None, font_size=30, font_color=(127, 255, 170, 255),
+                contentid=None):
         if pos_range is None:
             items = layout(content, ((0, 0),
-                                          (self.width, self.height)), font_size=font_size)
+                                          (self.width, self.height)), font_size=font_size, color=font_color)
+            w, d = self.width, self.height
+            pos = (0, 0)
         else:
-            items = layout(content, pos_range, font_size=font_size)
+            items = layout(content, pos_range, font_size=font_size, color=font_color)
+            w, d = pos_range[1][0] - pos_range[0][0], pos_range[1][1] - pos_range[0][1]
+            pos = pos_range[0][0], pos_range[0][1]
         for item in items:
             self.add(item)
         if contentid:
             self.contents[contentid] = items
         else:
             self.contents[len(self.contents)] = items
+
+
 
     def info_clear(self, contentid=None):
         if contentid:
